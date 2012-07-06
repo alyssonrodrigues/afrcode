@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>afrcode.poms</groupId>
+	<artifactId>fw_arquitetura_parent_pom</artifactId>
+	<name>fw_arquitetura_parent_pom</name>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<skipTests>true</skipTests>
+	</properties>
+
+	<build>
+		<plugins>
+			<!-- Enconding de resources, arquivos em geral. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<encoding>ISO-8859-1</encoding>
+				</configuration>
+			</plugin>
+			<!-- Enconding de código fonte java e definições de JVM. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<encoding>ISO-8859-1</encoding>
+					<debug>false</debug>
+					<optimize>true</optimize>
+					<source>1.6</source>
+					<target>1.6</target>
+					<fork>true</fork>
+					<meminitial>256m</meminitial>
+					<maxmem>1024m</maxmem>
+				</configuration>
+			</plugin>
+			<!-- Informações a incluir em MANIFEST de arquivos .JAR. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+						</manifest>
+						<manifestEntries>
+							<Maven-Build-Timestamp>${maven.build.timestamp}</Maven-Build-Timestamp>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<!-- Informações a incluir em MANIFEST de arquivos .WAR. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+						</manifest>
+						<manifestEntries>
+							<Maven-Build-Timestamp>${maven.build.timestamp}</Maven-Build-Timestamp>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<!-- Configurações para execução de testes JUnit. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>${skipTests}</skipTests>
+				</configuration>
+			</plugin>
+			<!-- Configurações para execução de classes Java via Maven. -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+			</plugin>
+			<!-- Configurações para geração do site Maven. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>2.3</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+    <repository>
+      <id>repo1</id>
+      <url>http://repo1.maven.org/maven2</url>
+    </repository>
+		<repository>
+			<id>jbooss.nexus</id>
+			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>jboss.org</id>
+			<url>http://repository.jboss.com/maven2/</url>
+		</repository>
+		<repository>
+			<id>ibiblio.org</id>
+			<url>http://mirrors.ibiblio.org/pub/mirrors/maven2</url>
+		</repository>
+		<repository>
+			<snapshots />
+			<id>snapshots.jboss.org</id>
+			<name>JBoss Snapshot Repository</name>
+			<url>http://snapshots.jboss.org/maven2</url>
+		</repository>
+	</repositories>
+
+</project>
