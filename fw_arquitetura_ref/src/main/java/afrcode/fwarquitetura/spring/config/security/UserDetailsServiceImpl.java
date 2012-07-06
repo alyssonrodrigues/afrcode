@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Extensão responsável por obter dados de usuário para validação diante de credenciais informadas no processo de
  * autenticação.
  * 
- * @author eldontc
+ * @author alyssonfr
  * 
  */
 
