@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>servlet</display-name>
+  
+  <servlet>
+    <servlet-name>simplesHelloWorld</servlet-name>
+    <servlet-class>demo.servlet.SimplesHelloWorldServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>simplesHelloWorld</servlet-name>
+    <url-pattern>/simplesHelloWorld.html</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>helloWorldJSP</servlet-name>
+    <servlet-class>demo.servlet.HelloWorldJSPServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>helloWorldJSP</servlet-name>
+    <url-pattern>/helloWorldJSP.html</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>helloUsuario</servlet-name>
+    <servlet-class>demo.servlet.HelloUsuarioServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>helloUsuario</servlet-name>
+    <url-pattern>/helloUsuario.html</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>somarServlet</servlet-name>
+    <servlet-class>demo.servlet.SomarServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>somarServlet</servlet-name>
+    <url-pattern>/somar.html</url-pattern>
+  </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+</web-app>
