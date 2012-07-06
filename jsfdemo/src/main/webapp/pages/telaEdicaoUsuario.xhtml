@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/layout/template.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:define name="body">
+		<f:view id="acaoEdicaoUsuarioView">
+		
+		<!-- Cursor usado pelo painel drag and drop ... -->
+		<rich:dragIndicator id="indicator" />
+			<h:form id="acaoEdicaoUsuarioForm">
+
+        <!-- Painel de dados ... -->
+				<rich:panel style="width:600px;">
+					<f:facet name="header">Cadastro de usuário:</f:facet>
+					<s:decorate id="campoNome" template="/layout/edit.xhtml">
+						<ui:define name="label">Nome:</ui:define>
+						<h:inputText value="#{usuarioAGerir.nome}" id="nomeUsuario"
+						  required="true" />
+					</s:decorate>
+          <s:decorate id="campoDataNascimento" template="/layout/edit.xhtml">
+            <ui:define name="label">Data de nascimento:</ui:define>
+            <rich:calendar value="#{usuarioAGerir.dataNascimento}"
+              popup="true" datePattern="d/MM/yyyy" id="dataNascimentoUsuario"
+              required="true">
+            </rich:calendar>
+          </s:decorate>
+          <s:decorate id="campoSexo" template="/layout/edit.xhtml">
+            <ui:define name="label">Sexo:</ui:define>
+            <h:selectOneListbox id="sexoUsuario" size="1"
+              value="#{usuarioAGerir.sexo}" required="true">
+              <s:selectItems value="#{acaoGestaoUsuarios.opcoesSexo}" 
+                var = "sexo" label="#{sexo.descricao}" 
+                noSelectionLabel=""/>
+              <s:convertEnum/>
+            </h:selectOneListbox>
+          </s:decorate>
+          <s:decorate id="campoTelefone" template="/layout/edit.xhtml">
+            <ui:define name="label">Telefone:</ui:define>
+            <h:inputText value="#{usuarioAGerir.telefone}"
+              id="telefoneUsuario" required="true" />
+          </s:decorate>
+          <s:decorate id="campoEmail" template="/layout/edit.xhtml">
+            <ui:define name="label">Email:</ui:define>
+            <h:inputText value="#{usuarioAGerir.email}" id="emailUsuario" />
+          </s:decorate>
+          <s:decorate id="campoLogin" template="/layout/edit.xhtml">
+            <ui:define name="label">Login:</ui:define>
+            <h:inputText value="#{usuarioAGerir.login}" id="loginUsuario"
+              required="true" />
+          </s:decorate>
+          <s:decorate id="campoSenha" template="/layout/edit.xhtml">
+            <ui:define name="label">Senha:</ui:define>
+            <h:inputSecret value="#{usuarioAGerir.senha}" id="senhaUsuario" 
+            required="true" redisplay="true" />
+          </s:decorate>
+  				
+  				<div style="clear:both">
+          <table>
+            <tr>
+            <td valign="top">
+              <!-- Painel de listagem dos papeis do usuário ... -->
+              <rich:panel style="width:255px;">
+                <f:facet name="header">
+                <h:outputText value="Papéis a atribuir:" />
+                </f:facet>
+                
+                <!-- Suporte ao drop para área de Papeis a atribuir ... -->                
+                <rich:dropSupport id="dropPapeisUsuario"
+                  acceptedTypes="papel" immediate="true"
+                  dropListener="#{acaoGestaoUsuarios.associarPapelAoUsuarioAGerir}"
+                  reRender="papeisUsuario, papeisCadastrados">
+                </rich:dropSupport>
+                
+                <h:dataTable id="papeisUsuario" columns="1" columnClasses="panelc" 
+                  value="#{acaoGestaoUsuarios.papeisUsuario}" var="papel">
+                  <h:column>
+                    <a4j:outputPanel layout="block"
+                      style="width:150px;border:1px solid gray;padding:2px;font-size:11;">
+                      
+                      <!-- Suporte ao drag para a área de Papeis a atribuir ... -->
+                      <rich:dragSupport dragIndicator=":indicator"
+                        dragValue="#{papel}"
+                        dragListener="#{acaoGestaoUsuarios.desassociarPapelAoUsuarioAGerir}"
+                        dragType="papel" immediate="true"
+                        id="dragPapeisUsuario">
+                        <rich:dndParam name="label" 
+                          value="#{papel.descricao}" />
+                      </rich:dragSupport>
+
+                      <h:outputText value="#{papel.descricao}" />
+                    </a4j:outputPanel>
+                  </h:column>
+                </h:dataTable>
+              </rich:panel>
+            </td>
+            <td valign="top">
+              <!-- Painel de listagem dos papeis cadastrados ... -->
+              <rich:panel style="width:255px;">
+                <f:facet name="header">
+                  <h:outputText value="Papeis disponíveis:" />
+                </f:facet>
+                
+                <!-- Suporte ao drop para área de Papeis disponíveis ... -->
+                <rich:dropSupport id="dropPapeisCadastrados" 
+                  acceptedTypes="papel" immediate="true"
+                  dropListener="#{acaoGestaoUsuarios.atualizarPapeisCadastrados}"
+                  reRender="papeisUsuario, papeisCadastrados">
+                </rich:dropSupport>
+                
+                <h:dataTable id="papeisCadastrados" columns="1" 
+                  value="#{acaoGestaoUsuarios.papeisCadastrados}" 
+                  var="papelCadastrado">
+                  <h:column>
+                    <a4j:outputPanel layout="block"
+                      style="width:150px;border:1px solid gray;padding:2px;font-size:11;">
+                      
+                      <!-- Suporte ao drag área de Papeis disponíveis ... -->
+                      <rich:dragSupport dragIndicator=":indicator"
+                        dragValue="#{papelCadastrado}"
+                        dragListener="#{acaoGestaoUsuarios.atualizarPapeisCadastrados}"
+                        dragType="papel" immediate="true"
+                        id="dragPapeisCadastrados">
+                        <rich:dndParam name="label" 
+                          value="#{papelCadastrado.descricao}" />
+                      </rich:dragSupport>
+
+                      <h:outputText value="#{papelCadastrado.descricao}" />
+                    </a4j:outputPanel>
+                  </h:column>
+                </h:dataTable>
+              </rich:panel>
+            </td></tr>
+          </table>
+  				</div>
+
+				</rich:panel>
+
+        <!-- Painel de comandos ... -->
+				<div class="actionButtons">
+          <h:commandButton id="comandoSalvar" value="Salvar"
+            action="#{acaoGestaoUsuarios.salvar}"/>
+          <s:button id="comandoCancelar"
+            action="#{acaoGestaoUsuarios.cancelar}" 
+            value="Cancelar"/>
+				</div>
+				
+				<rich:jQuery selector="#telefoneUsuario" 
+				  query="mask('99-99-9999-9999')" />
+				
+			</h:form>
+		</f:view>
+	</ui:define>
+</ui:composition>

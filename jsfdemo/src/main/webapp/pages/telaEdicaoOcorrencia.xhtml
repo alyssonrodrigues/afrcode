@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/layout/template.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:define name="body">
+		<f:view id="acaoEdicaoOcorrenciaView">
+      <h:form id="acaoEdicaoOcorrenciaForm">
+
+        <!-- Painel de dados ... -->
+				<rich:panel style="width:445px;">
+					<f:facet name="header">Responsáveis pelo atendimento:</f:facet>
+
+          <rich:pickList value="#{acaoGestaoChamados.responsaveisAAssociar}"
+            showButtonsLabel="true" id="seletorResponsaveis"
+            copyAllControlLabel="Adicionar todos"
+            copyControlLabel="Adicionar"
+            removeAllControlLabel="Remover todos"
+            removeControlLabel="Remover">
+            <s:selectItems value="#{acaoGestaoChamados.responsaveis}"
+              var = "resp" label="#{resp.descricao}" />
+            <s:convertEntity />
+          </rich:pickList>
+  				
+				</rich:panel>
+
+        <!-- Painel de comandos ... -->
+				<div class="actionButtons">
+          <h:commandButton id="comandoSalvar" value="Salvar"
+            action="#{acaoGestaoChamados.salvar}"/>
+          <s:button id="comandoCancelar"
+            action="#{acaoGestaoChamados.cancelar}" 
+            value="Cancelar"/>
+				</div>
+				
+			</h:form>
+		</f:view>
+	</ui:define>
+</ui:composition>

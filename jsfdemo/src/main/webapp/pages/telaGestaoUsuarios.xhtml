@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/layout/template.xhtml"
+  xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:define name="body">
+	<f:view id="acaoGestaoUsuariosView">
+		<h:form id="acaoGestaoUsuariosForm">
+
+      <div class="actionButtons">
+        <a4j:commandButton action="#{acaoGestaoUsuarios.exibirTodos}" 
+          reRender="tabelaListagemUsuarios,scrollerListagemUsuarios,painelPesquisa" 
+          value="Exibir todos" 
+          id="comandoExibirTodos">
+        </a4j:commandButton>
+      </div>
+
+		  <!-- Painel de pesquisa ... -->
+			<rich:panel style="width:60%" id="painelPesquisa">
+			  <f:facet name="header">Pesquisar por usuários:</f:facet>
+        <s:decorate id="campoNome" template="/layout/edit.xhtml">
+          <ui:define name="label">Nome:</ui:define>
+            <h:inputText value="#{usuarioAPesquisar.nome}"
+              id="nomeUsuario"/>
+        </s:decorate>
+        <s:decorate id="campoEmail" template="/layout/edit.xhtml">
+          <ui:define name="label">Email:</ui:define>
+            <h:inputText value="#{usuarioAPesquisar.email}"
+              id="emailUsuario"/>
+        </s:decorate>
+        <s:decorate id="campoDataNascimento" template="/layout/edit.xhtml">
+          <ui:define name="label">Data de nascimento:</ui:define>
+            <rich:calendar 
+              value="#{usuarioAPesquisar.dataNascimento}" 
+              popup="true" datePattern="d/MM/yyyy"
+              id="dataNascimentoUsuario">             
+            </rich:calendar>
+        </s:decorate>
+        <s:decorate id="campoSexo" template="/layout/edit.xhtml">
+          <ui:define name="label">Sexo:</ui:define>
+            <h:selectOneListbox id="sexoUsuario" size="1"
+              value="#{usuarioAPesquisar.sexo}">
+              <s:selectItems value="#{acaoGestaoUsuarios.opcoesSexo}" 
+                var = "sexo" label="#{sexo.descricao}" 
+                noSelectionLabel=""/>
+              <s:convertEnum/>
+            </h:selectOneListbox>
+        </s:decorate>
+        <s:decorate id="campoLogin" template="/layout/edit.xhtml">
+          <ui:define name="label">Login:</ui:define>
+            <h:inputText value="#{usuarioAPesquisar.login}"
+              id="loginUsuario"/>
+        </s:decorate>
+        <div style="clear:both"/>
+			</rich:panel>
+      <div class="actionButtons">
+        <a4j:commandButton action="#{acaoGestaoUsuarios.pesquisar}" 
+          reRender="tabelaListagemUsuarios,scrollerListagemUsuarios" 
+          value="Pesquisar" 
+          id="comandoPesquisar">
+        </a4j:commandButton>
+      </div>
+			<br/>
+      <div class="actionButtons">
+        <!-- O comando só será exibido se o usuário possuir o papel 'admin'. -->
+        <h:commandButton action="#{acaoGestaoUsuarios.inserir}" 
+          value="Inserir" rendered="#{s:hasRole('admin')}" />
+      </div>
+
+      <!-- Painel de listagem de usuários ... -->
+      <h:panelGrid columns="1" width="60%">
+			<rich:dataTable value="#{acaoGestaoUsuarios.usuarios}" 
+			  var="usuario" id="tabelaListagemUsuarios" rows="5">
+ 			  <f:facet name="header">
+ 			    <h:outputText styleClass="headerText" value="Usuários cadastrados"/>
+ 			  </f:facet>
+				<rich:column id="colunaNome" sortBy="#{usuario.nome}">
+				  <f:facet name="header">
+				    <h:outputText styleClass="headerText" value="Nome"/>
+				  </f:facet>
+					<h:outputText value="#{usuario.nome}"/>
+				</rich:column>
+        <rich:column id="colunaLogin" sortBy="#{usuario.login}">
+          <f:facet name="header">
+            <h:outputText styleClass="headerText" value="Login"/>
+          </f:facet>
+          <h:outputText value="#{usuario.login}"/>
+        </rich:column>
+				<rich:column id="colunaDataNascimento" sortBy="#{usuario.dataNascimento}">
+				  <f:facet name="header">
+				    <h:outputText styleClass="headerText" value="Data de nascimento"/>
+				  </f:facet>
+					<h:outputText value="#{usuario.dataNascimento}">
+					  <f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</rich:column>
+				<rich:column id="colunaSexo">
+				  <f:facet name="header">
+				    <h:outputText styleClass="headerText" value="Sexo"/>
+				  </f:facet>
+					<h:outputText value="#{usuario.sexo}"/>
+				</rich:column>
+				<rich:column id="colunaEmail">
+				  <f:facet name="header">
+				    <h:outputText styleClass="headerText" value="Email"/>
+				  </f:facet>
+					<h:outputText value="#{usuario.email}"/>
+				</rich:column>
+				<!-- Coluna para comandos de edição ... -->
+				<rich:column id="colunaComandos">
+          <f:facet name="header">
+            <h:outputText styleClass="headerText" value=""/>
+          </f:facet>
+          <!-- O comando só será exibido se o usuário possuir o papel 'admin'. -->
+          <a4j:commandLink action="#{acaoGestaoUsuarios.alterar}" 
+            reRender="tabelaListagemUsuarios" value="Alterar"
+            id="comandoAlterar" rendered="#{s:hasRole('admin')}">
+            <a4j:actionparam id="paramIdAAlterar" name="id"
+              value="#{usuario.id}" assignTo="#{acaoGestaoUsuarios.idAGerir}">
+            </a4j:actionparam>
+          </a4j:commandLink>
+          <rich:spacer width="1" height="1"></rich:spacer>
+          <!-- O comando só será exibido se o usuário possuir o papel 'admin'. -->
+          <a4j:commandLink action="#{acaoGestaoUsuarios.excluir}" 
+            reRender="tabelaListagemUsuarios,scrollerListagemUsuarios" 
+            value="Excluir"
+            id="comandoExcluir" rendered="#{s:hasRole('admin')}">
+            <a4j:actionparam id="paramIdAExcluir" name="id"
+              value="#{usuario.id}" assignTo="#{acaoGestaoUsuarios.idAGerir}">
+            </a4j:actionparam>
+          </a4j:commandLink>
+				</rich:column>
+			</rich:dataTable>
+			
+			<!-- Scroller da listagem de usuários ... -->
+			<rich:datascroller for="tabelaListagemUsuarios" 
+			  id="scrollerListagemUsuarios"
+			  align="center">
+			</rich:datascroller>
+			
+			</h:panelGrid>
+		</h:form>
+	</f:view>
+	</ui:define>
+</ui:composition>

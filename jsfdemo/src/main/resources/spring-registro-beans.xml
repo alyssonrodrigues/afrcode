@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:seam="http://jboss.com/products/seam/spring-seam"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://jboss.com/products/seam/spring-seam http://jboss.com/products/seam/spring-seam-2.1.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+  default-autowire="byName">
+
+  <!-- Configuração dos beans CommonAnnotationBeanPostProcessor,
+    AutowiredAnnotationBeanPostProcessor para uso de Java Annotations 
+    em declarações de beans e autowire (segundo declarção de default-autowire 
+    acima)! -->
+  <context:annotation-config/>
+  <!-- Classes com esterótipos @Component, @Repository, @Controller
+    ou @Service serão automaticamente declaradas como beans pelo Spring. -->
+  <context:component-scan base-package="cursojsf.modelo" />
+
+  <!-- Iniciando ScopeTypes do Seam para uso em componentes híbridos 
+    Seam-Spring ... (Opção ao <seam:component/>.) -->
+  <!-- <seam:configure-scopes default-auto-create="true"/> -->
+
+  <!-- Registro de beans em uso na aplicação ... -->
+  <bean id="executor.geradorChamados"
+    class="org.springframework.scheduling.timer.ScheduledTimerTask">
+    <property name="timerTask" ref="geradorChamados"></property>
+    <property name="period" value="120000"></property>
+    <property name="delay" value="60000"></property>
+  </bean>
+  
+  <bean id="agendador"
+    class="org.springframework.scheduling.timer.TimerFactoryBean">
+    <property name="scheduledTimerTasks">
+      <list>
+        <ref bean="executor.geradorChamados"/>
+      </list>
+    </property>
+  </bean>
+
+</beans>

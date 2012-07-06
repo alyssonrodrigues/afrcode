@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<f:view contentType="text/html"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:a="http://richfaces.org/a4j"
+        xmlns:s="http://jboss.com/products/seam/taglib"
+        locale="pt_BR">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>jsfdemo</title>
+    <link rel="shortcut icon" href="#{request.contextPath}/favicon.ico"/>
+    <a:loadStyle src="resource:///stylesheet/theme.xcss"/>
+    <a:loadStyle src="/stylesheet/theme.css"/>
+    <a:loadScript src="/js/jquery.maskedinput-1.2.2.js"></a:loadScript>
+    <ui:insert name="head"/>
+</head>
+
+<body>
+
+    <ui:include src="menu.xhtml">
+        <ui:param name="projectName" value="jsfdemo"/>
+    </ui:include>
+
+  <div class="body">
+    <h:messages id="messages" globalOnly="true" styleClass="message"
+        errorClass="errormsg" infoClass="infomsg" warnClass="warnmsg"
+        rendered="#{showGlobalMessages != 'false'}"/>
+    <ui:insert name="body"/>
+  </div>
+
+  <div class="footer">
+    Desenvolvido por Alysson Félix Rodrigues {
+      <u><font style="COLOR: #0000ff;">alysson@dcc.ufmg.br</font></u>}.
+  </div>
+
+</body>
+</html>
+</f:view>

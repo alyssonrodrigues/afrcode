@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:jee="http://www.springframework.org/schema/jee"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+  <!-- Configurações para uso de transações declarativas (@Transaction)
+    e não declarativas. -->  
+  <tx:annotation-driven proxy-target-class="true"
+    transaction-manager="transactionManager"/>
+  <bean id="jotm"
+    class="org.springframework.transaction.jta.JotmFactoryBean">
+    <property name="defaultTimeout" value="180"></property>
+  </bean>
+  <bean id="transactionManager"
+    class="org.springframework.transaction.jta.JtaTransactionManager">
+    <property name="userTransaction">
+      <ref local="jotm"/>
+    </property>
+  </bean>
+
+</beans>
