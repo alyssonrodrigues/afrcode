@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition template="/Web/templates/template.xhtml">
+    <ui:define name="title">Ordens de Serviço</ui:define>
+	<ui:define name="body">
+    <f:view id="telaGestaoOrdensServicoView">
+    <h:form id="telaGestaoOrdensServicoForm">
+
+        <h:commandLink action="#{mBeanGestaoOrdensServico.inserir}" value="Inserir" />
+        &nbsp;
+		<rich:dataTable value="#{mBeanGestaoOrdensServico.beansOrdensServicoAListar}" 
+		    var="beanOrdemServico" id="tabelaListagemOrdens">
+		    <f:facet name="header">
+		        <h:outputText styleClass="headerText" value="Ordens de serviço cadastradas"/>
+		    </f:facet>
+            <rich:column>
+                <f:facet name="header">
+                    <h:outputText styleClass="headerText" value="Número"/>
+                </f:facet>
+                <h:outputText value="#{beanOrdemServico.numero}" />
+            </rich:column>
+		    <rich:column>
+                <f:facet name="header">
+                    <h:outputText styleClass="headerText" value="Descrição"/>
+                </f:facet>
+		        <h:outputText value="#{beanOrdemServico.descricao}" />
+		    </rich:column>
+            <rich:column>
+                <h:commandLink action="#{mBeanGestaoOrdensServico.alterar}" value="Alterar">
+            	    <a4j:param name="id" value="#{beanOrdemServico.id}" 
+            	        assignTo="#{mBeanGestaoOrdensServico.idEmEdicao}" />
+                </h:commandLink>
+                &nbsp;
+                <h:commandLink action="#{mBeanGestaoOrdensServico.excluir}" value="Excluir">
+                    <a4j:param name="id" value="#{beanOrdemServico.id}" 
+                        assignTo="#{mBeanGestaoOrdensServico.idEmEdicao}" />
+                </h:commandLink>
+            </rich:column>
+		</rich:dataTable>
+		
+    </h:form>
+    </f:view>
+
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,152 @@
+Este projeto faz uso do HSQLDB.
+
+**** Para rodar este projeto no TOMCAT, em testes, é necessário:
+
+1) Abrir os projeto libs-tcu/arquitetura_ref_8, libs-tcu/arquitetura_ref_tu_8, libs-tcu/arquitetura_ref_is_8;
+2) Descompactar em d:\desv o arquivo hsqldb-2.2.8.zip e rodar o hsqldb/bin/runServer.bat;
+3) Adicionar este projeto ao Tomcat e iniciá-lo.
+
+**** Para rodar este projeto no JBoss AS 7.1, em testes, é necessário:
+
+1) Abrir os projeto libs-tcu/arquitetura_ref_8, libs-tcu/arquitetura_ref_tu_8, libs-tcu/arquitetura_ref_is_8;
+2) Descompactar em d:\desv o arquivo hsqldb-2.2.8.zip e rodar o hsqldb/bin/runServer.bat;
+3) Descompactar o arquivo hsqldb2JBossModule.zip em D:\desv\jboss-as-7.1.0.Final\modules\;
+4) Incluir o fragmento de configuração abaixo no arquivo D:\desv\jboss-as-7.1.0.Final\standalone\configuration\standalone.xml:
+
+<subsystem xmlns="urn:jboss:domain:datasources:1.0">
+<datasources>
+...
+    <xa-datasource jndi-name="java:jboss/datasources/BancoDadosCorporativo" pool-name="corporativoDS" enabled="true" use-java-context="true">
+        <xa-datasource-property name="URL">
+            jdbc:oracle:thin:@10.1.1.212:1521:dese
+        </xa-datasource-property>
+        <driver>oracleXA</driver>
+        <xa-pool>
+            <is-same-rm-override>false</is-same-rm-override>
+            <interleaving>false</interleaving>
+            <pad-xid>false</pad-xid>
+            <wrap-xa-resource>true</wrap-xa-resource>
+         </xa-pool>
+         <security>
+             <user-name>WEBUSER</user-name>
+             <password>FACHADA</password>
+         </security>
+         <recovery>
+             <recover-credential>
+                 <user-name>TCU</user-name>
+                 <password>MALHADA</password>
+             </recover-credential>
+         </recovery>
+         <validation>
+             <validate-on-match>false</validate-on-match>
+             <background-validation>false</background-validation>
+             <background-validation-millis>0</background-validation-millis>
+         </validation>
+         <statement>
+             <prepared-statement-cache-size>0</prepared-statement-cache-size>
+             <share-prepared-statements>false</share-prepared-statements>
+         </statement>
+    </xa-datasource>
+    <datasource jndi-name="java:jboss/datasources/dataSourceDefault" pool-name="dataSourceDefault" enabled="true" use-java-context="true">
+        <connection-url>jdbc:hsqldb:hsql://localhost/testdb</connection-url>
+        <driver>hsqldb2</driver>
+        <security>
+            <user-name>sa</user-name>
+        </security>
+    </datasource>
+...
+    <drivers>
+        ...
+        <driver name="oracleXA" module="com.oracle.ojdbc6">
+            <xa-datasource-class>oracle.jdbc.xa.client.OracleXADataSource</xa-datasource-class>
+        </driver>
+        <driver name="hsqldb2" module="org.hsqldb.hsqldb2">
+            <driver-class>org.hsqldb.jdbc.JDBCDriver</driver-class>
+            <xa-datasource-class>org.hsqldb.jdbc.pool.JDBCXADataSource</xa-datasource-class>
+        </driver>
+        ...
+    </drivers>
+</datasources>
+</subsystem>
+
+5) Se desejar personalizar a saída de log do JBoss AS 7.1 adicione o trecho abaixo (subsystem logging) e altere para o nível de log 
+desejado:
+
+<subsystem xmlns="urn:jboss:domain:logging:1.1">
+            <console-handler name="CONSOLE">
+                <level name="INFO"/> <!-- ALTERE AQUI O NÍVEL DE LOG SE DESEJAR -->
+                <formatter>
+                    <pattern-formatter pattern="%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n"/>
+                </formatter>
+            </console-handler>
+...
+            <logger category="org.hibernate">
+                <level name="TRACE"/>
+            </logger>
+            <logger category="org.hibernate.ejb.Ejb3Configuration">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.hibernate.cfg.annotations.EntityBinder">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.hibernate.cfg.AnnotationBinder">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.hibernate.cfg.annotations.CollectionBinder">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.hibernate.tool.hbm2ddl.TableMetadata">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.hibernate.engine.jdbc.internal.proxy.AbstractResultSetProxyHandler">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.hibernate.type.descriptor.sql.BasicExtractor">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.hibernate.type.BasicTypeRegistry">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.hibernate.ejb.metamodel.AttributeFactory">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.springframework">
+                <level name="TRACE"/>
+            </logger>
+            <logger category="org.springframework.beans.factory.support.DefaultListableBeanFactory">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.springframework.test">
+                <level name="DEBUG"/>
+            </logger>
+            <logger category="org.springframework.jms.connection">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.springframework.transaction.support.TransactionSynchronizationManager">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.springframework.jms.listener">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.springframework.beans.CachedIntrospectionResults">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.springframework.core.env.PropertySourcesPropertyResolver">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.springframework.core.env.SystemEnvironmentPropertySource">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.springframework.context.annotation.ClassPathBeanDefinitionScanner">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.springframework.core.io.support.PathMatchingResourcePatternResolver">
+                <level name="OFF"/>
+            </logger>
+            <logger category="org.springframework.util.PropertyPlaceholderHelper">
+                <level name="TRACE"/>
+            </logger>
+...
+</subsystem>
+
+6) Adicionar este projeto ao JBoss e iniciá-lo.

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+        http://java.sun.com/xml/ns/persistence
+        http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+  version="2.0">
+
+  <!-- Definições sobre a persistenceUnit -->
+  <persistence-unit name="persistenceUnit" transaction-type="JTA">
+      <jta-data-source>java:jboss/datasources/dataSourceDefault</jta-data-source>
+      <properties>
+          <property name="jboss.entity.manager.factory.jndi.name" value="java:comp/env/persistence/EntityManagerFactory"/>
+          <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+          <property name="hibernate.transaction.factory_class" value="org.hibernate.engine.transaction.internal.jta.CMTTransactionFactory"/>
+          <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform"/>
+          <property name="hibernate.current_session_context_class" value="jta"/>
+          <!-- TODO: rever quando em produção! -->
+          <property name="hibernate.show_sql" value="true"/>
+          <property name="hibernate.format_sql" value="true"/>
+          <property name="hibernate.use_sql_comments" value="true"/>
+          <!-- TODO: rever quando em produção! -->
+          <property name="hibernate.hbm2ddl.auto" value="update"/>
+      </properties>
+  </persistence-unit>
+
+</persistence>
+
