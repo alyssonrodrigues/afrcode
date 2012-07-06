@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:s="http://jboss.com/products/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:rich="http://richfaces.org/rich"
+  template="/layout/template.xhtml"
+  xmlns:a4j="http://richfaces.org/a4j">
+
+  <ui:define name="body">
+  <f:view id="acaoGestaoChamadosView">
+    <h:form id="acaoGestaoChamadosForm">
+    
+      <rich:modalPanel id="modalPanelEdicaoOcorrencia"
+        width="465" height="240">
+
+        <rich:panel style="width:445px;">
+          <f:facet name="header">Responsáveis pelo atendimento:</f:facet>
+          
+          <rich:pickList value="#{acaoGestaoChamados.responsaveisAAssociar}"
+            showButtonsLabel="true" id="seletorResponsaveis"
+            copyAllControlLabel="Adicionar todos"
+            copyControlLabel="Adicionar"
+            removeAllControlLabel="Remover todos"
+            removeControlLabel="Remover">
+            <s:selectItems value="#{acaoGestaoChamados.responsaveis}"
+              var = "resp" label="#{resp.descricao}" />
+            <s:convertEntity />
+          </rich:pickList>
+          
+        </rich:panel>
+
+        <!-- Painel de comandos ... -->
+        <div class="actionButtons">
+          <h:commandButton id="comandoSalvar" value="Salvar"
+            action="#{acaoGestaoChamados.salvar}"
+            onclick="#{rich:component('modalPanelEdicaoOcorrencia')}.hide()"/>
+          <s:button id="comandoCancelar"
+            action="#{acaoGestaoChamados.cancelar}" 
+            value="Cancelar"
+            onclick="#{rich:component('modalPanelEdicaoOcorrencia')}.hide()"/>
+        </div>
+        
+      </rich:modalPanel>
+
+      <a4j:poll id="poll" limitToList="true" 
+        reRender="poll,tabelaListagemChamados" 
+        interval="10000" />
+
+      <!-- Painel de listagem de chamados ... -->
+      <h:panelGrid columns="1" width="60%">
+      <rich:dataTable value="#{acaoGestaoChamados.chamados}" 
+        var="chamado" id="tabelaListagemChamados">
+        <f:facet name="header">
+          <h:outputText styleClass="headerText" value="Chamados não atendidos"/>
+        </f:facet>
+        <rich:column id="colunaCodigo" sortBy="#{chamado.codigo}">
+          <f:facet name="header">
+            <h:outputText styleClass="headerText" value="Código"/>
+          </f:facet>
+          <h:outputText value="#{chamado.codigo}"/>
+        </rich:column>
+        <rich:column id="colunaEmAtendimento">
+          <f:facet name="header">
+            <h:outputText styleClass="headerText" value="Em atendimento?"/>
+          </f:facet>
+          <h:outputText value="#{chamado.emAtendimento}"/>
+        </rich:column>
+        <rich:column id="colunaDataHora" sortBy="#{chamado.dataHora}">
+          <f:facet name="header">
+            <h:outputText styleClass="headerText" value="Data"/>
+          </f:facet>
+          <h:outputText value="#{chamado.dataHora.time}">
+            <s:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+          </h:outputText>
+        </rich:column>
+        <rich:column id="colunaUrgente" sortBy="#{chamado.urgente}">
+          <f:facet name="header">
+            <h:outputText styleClass="headerText" value="Urgente?"/>
+          </f:facet>
+          <h:outputText value="#{chamado.urgente}" />
+        </rich:column>
+        <rich:column id="colunaDescricao" sortBy="#{chamado.descricao}">
+          <f:facet name="header">
+            <h:outputText styleClass="headerText" value="Descrição"/>
+          </f:facet>
+          <h:outputText value="#{chamado.descricao}"/>
+        </rich:column>
+        <rich:column id="colunaComandos">
+          <f:facet name="header">
+            <h:outputText styleClass="headerText" value=""/>
+          </f:facet>
+          <a4j:commandLink action="#{acaoGestaoChamados.atender}" 
+            value="Atender" id="comandoAtender" 
+            rendered="#{s:hasRole('admin')}"
+            reRender="seletorResponsaveis"
+            oncomplete="#{rich:component('modalPanelEdicaoOcorrencia')}.show()">
+            <a4j:actionparam id="paramIdAAtender" name="id"
+              value="#{chamado.id}" assignTo="#{acaoGestaoChamados.idAAtender}">
+            </a4j:actionparam>
+          </a4j:commandLink>
+        </rich:column>
+      </rich:dataTable>
+      </h:panelGrid>
+
+    </h:form>
+  </f:view>
+  </ui:define>
+</ui:composition>

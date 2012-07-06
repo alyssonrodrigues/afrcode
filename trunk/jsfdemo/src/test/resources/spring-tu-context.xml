@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- Arquivo principal de configuração do Spring para TU ... -->
+  <import resource="classpath:spring-context-beans-tu.xml"/>
+  <import resource="classpath:spring-datasource-beans-tu.xml"/>
+  <import resource="classpath:spring-transactionManager-beans.xml"/>
+  <import resource="classpath:spring-entityManagerFactory-beans-tu.xml"/>
+  <import resource="classpath:spring-template-beans.xml"/>
+  <import resource="classpath:spring-registro-beans-tu.xml"/>
+  <import resource="classpath:spring-jms-beans-tu.xml"/>
+
+</beans>

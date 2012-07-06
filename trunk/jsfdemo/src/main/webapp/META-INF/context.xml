@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Context override="false" reloadable="false">
+
+	<!-- Configurações do pool de conexões acessível via JNDI ... -->
+	<Resource type="org.hsqldb.jdbc.jdbcDataSource"
+		name="jdbc/jsfdemo"
+		factory="org.hsqldb.jdbc.jdbcDataSourceFactory"
+		database="jdbc:hsqldb:hsql://localhost/testdb"
+		user="sa" password=""/>
+
+</Context>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+
+  <application>
+    <locale-config>
+      <default-locale>pt</default-locale>
+    </locale-config>
+
+    <!-- Integração JSF e Facelets. -->
+    <view-handler>
+      com.sun.facelets.FaceletViewHandler
+    </view-handler>
+    
+    <!-- Integração JSF e Spring para obtenção de beans JSF e Spring. -->
+    <el-resolver>
+      org.springframework.web.jsf.el.SpringBeanFacesELResolver
+    </el-resolver>
+    
+  </application>
+  
+  <lifecycle>
+    <phase-listener>
+      cursojsf.fronteira.MyJSFPhaseListener
+    </phase-listener>
+  </lifecycle>
+  
+</faces-config>

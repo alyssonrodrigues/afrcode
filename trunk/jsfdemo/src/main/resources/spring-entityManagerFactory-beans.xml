@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:jee="http://www.springframework.org/schema/jee"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+  <!-- Integração Spring e Hibernate (JPA) ... -->
+  <bean id="entityManagerFactorySpring"
+    class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+    autowire-candidate="false">
+    <property name="dataSource" ref="dataSource"></property>
+    <property name="persistenceUnitName" value="persistenceUnit"></property>
+    <property name="jpaVendorAdapter">
+      <bean 
+        class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+      </bean>
+    </property>
+    <property name="jpaPropertyMap">
+      <props>
+        <!-- Configuração específica ao SGBD em uso ... -->
+        <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+        <!-- Configurações independentes de SGBD em uso ... -->
+        <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+        <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+        <prop key="hibernate.use_sql_comments">
+          ${hibernate.use_sql_comments}
+        </prop>
+        <prop key="hibernate.hbm2ddl.auto">
+          ${hibernate.hbm2ddl.auto}
+        </prop>
+        <!-- Configuração do JTA com JOTM -->
+        <prop key="hibernate.transaction.factory_class">
+          org.hibernate.ejb.transaction.JoinableCMTTransactionFactory
+        </prop>
+        <prop key="hibernate.transaction.manager_lookup_class">
+          org.hibernate.transaction.JOTMTransactionManagerLookup
+        </prop>
+      </props>
+    </property>
+  </bean>
+  
+  <!-- Integração Seam e Spring para contexto transacional comum ... 
+    Wrapper Seam para o entityManagerFactory do Spring. Ver components.xml! -->
+  <bean id="entityManagerFactory" 
+    class="org.jboss.seam.ioc.spring.SeamManagedEntityManagerFactoryBean">
+    <property name="persistenceContextName" value="entityManager"/>
+    <property name="persistenceUnitName" value="persistenceUnit:seam"></property>
+  </bean>
+
+  <!-- Permite a injeção de EntityManagers através da anotação @PersistenceContext
+    informando o persistenceUnit desejado ... -->
+  <bean 
+    class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor">
+    <property name="defaultPersistenceUnitName" value="persistenceUnit:seam"></property>
+  </bean>
+
+</beans>

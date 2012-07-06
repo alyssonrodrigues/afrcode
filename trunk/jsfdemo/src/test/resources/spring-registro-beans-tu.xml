@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+  default-autowire="byName">
+  
+  <!-- Configuração dos beans CommonAnnotationBeanPostProcessor,
+    AutowiredAnnotationBeanPostProcessor para uso de Java Annotations 
+    em declarações de beans e autowire (segundo declarção de default-autowire 
+    acima)! -->
+  <context:annotation-config/>
+  <!-- Classes com esterótipos @Component, @Repository, @Controller
+    ou @Service serão automaticamente declaradas como beans pelo Spring. -->
+  <context:component-scan base-package="cursojsf.modelo,cursojsf.test.modelo" />
+
+  <!-- Registro de beans em uso na aplicação ... -->
+
+</beans>
