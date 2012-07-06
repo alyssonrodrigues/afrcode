@@ -71,7 +71,7 @@
     <!-- Lista de pacotes onde o PrettyFaces irá procurar por anotações de mapeamentos de URL. -->
     <context-param>
         <param-name>com.ocpsoft.pretty.BASE_PACKAGES</param-name>
-        <param-value>br.gov.tcu</param-value>
+        <param-value>afrcode</param-value>
     </context-param>
     <!--context-param>
         <param-name>com.ocpsoft.pretty.SCAN_LIB_DIRECTORY</param-name>
@@ -99,7 +99,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <!--param-value>/WEB-INF/spring-webapp-context.xml</param-value-->
-        <param-value>br.gov.tcu.arquitetura.spring.config.SpringAppConfig</param-value>
+        <param-value>afrcode.fwarquitetura.spring.config.SpringAppConfig</param-value>
     </context-param>
     
     <!-- Configuraçao do profile Spring padrao para producao. Ou seja, somente beans Spring com profile prod serao geridos. -->
