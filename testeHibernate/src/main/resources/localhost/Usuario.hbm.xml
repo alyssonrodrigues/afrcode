@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/09/2011 10:38:52 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="localhost.Usuario" table="USUARIO">
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="sequence">
+                <param name="sequence">SEQ_USUARIO</param>
+            </generator>
+        </id>
+        <!--
+            <version name="versao" column="VERSAO" type="long" /> 
+         -->
+        <property name="datanascimento" type="date">
+            <column name="DATANASCIMENTO" length="0" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="256" />
+        </property>
+        <property name="login" type="string">
+            <column name="LOGIN" length="16" not-null="true" />
+        </property>
+        <property name="nome" type="string">
+            <column name="NOME" length="256" not-null="true" />
+        </property>
+        <property name="senha" type="string">
+            <column name="SENHA" length="16" not-null="true" />
+        </property>
+        <property name="sexo" type="int">
+            <column name="SEXO" not-null="true" />
+        </property>
+        <property name="telefone" type="string">
+            <column name="TELEFONE" length="15" not-null="true" />
+        </property>
+        <!-- 
+        <bag name="papeis" inverse="true" table="ASSOCUSUARIOPAPEL">
+            <key column="USUARIO_ID" />
+            <many-to-many class="localhost.Papel" column="PAPEL_ID" />
+        </bag>
+        -->
+    </class>
+</hibernate-mapping>
