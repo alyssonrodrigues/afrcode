@@ -150,4 +150,9 @@
 	<build>
 		<finalName>projetomvc</finalName>
 	</build>
+	<parent>
+		<groupId>afrcode.poms</groupId>
+		<artifactId>fw_arquitetura_parent_pom</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
 </project>
