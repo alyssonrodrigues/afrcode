@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+    <!-- Integração entre o JSF e o Spring! -->
+    <application>
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+    </application>
+
+    <!-- Configurações para uso do tratador de exceções implementado. -->
+    <factory>
+        <exception-handler-factory>
+            br.gov.tcu.arquitetura.jsf.excecao.JSF2ExceptionHandlerFactory
+        </exception-handler-factory>
+    </factory>
+    
+    <lifecycle>
+        <phase-listener>br.gov.tcu.arquitetura.jsf.logging.JSFRestoreViewLoggingListener</phase-listener>
+        <phase-listener>br.gov.tcu.arquitetura.jsf.logging.JSFRenderResponseLoggingListener</phase-listener>
+    </lifecycle>
+
+</faces-config>
