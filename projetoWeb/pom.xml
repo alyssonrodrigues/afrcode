@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o contexto! -->
+	<name>projetoWeb</name>
+	<groupId>afrcode.apps</groupId>
+	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o contexto! -->
+	<artifactId>projetoWeb</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<!-- TODO: REVER SCOPE <scope>${depsCentraisScope}</scope> EM FUNCAO DO 
+		JBOSS! -->
+
+	<parent>
+		<artifactId>fw_arquitetura_parent_pom</artifactId>
+		<groupId>afrcode.poms</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<!-- ALTERE AQUI => ATENCAO: Alterar para instancia adequada para o servico! -->
+		<srv.instancia.desenvol>Sepas_desenvol</srv.instancia.desenvol>
+		<srv.diretorio.desenvol>apps</srv.diretorio.desenvol>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>afrcode.libs</groupId>
+			<artifactId>fw_arquitetura_ref</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>afrcode.libs</groupId>
+			<artifactId>fw_arquitetura_is</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>afrcode.libs</groupId>
+			<artifactId>fw_arquitetura_ref</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>afrcode.libs</groupId>
+			<artifactId>fw_arquitetura_tu</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o contexto! -->
+		<finalName>projetoWeb</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<packagingExcludes>META-INF/context.xml</packagingExcludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
