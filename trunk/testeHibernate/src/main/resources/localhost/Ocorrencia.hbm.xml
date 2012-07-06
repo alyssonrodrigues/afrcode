@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/09/2011 12:33:46 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="localhost.Ocorrencia" table="OCORRENCIA">
+		<id name="id" type="long">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">SEQ_OCORRENCIA</param>
+			</generator>
+		</id>
+		<version name="versao" column="VERSAO" type="long" />
+		<property generated="never" lazy="false" name="codigo" type="long">
+			<column name="CODIGO" not-null="true" />
+		</property>
+
+		<many-to-one column="CHAMADO_ID" name="chamado" unique="true"
+			lazy="false" fetch="join" />
+
+	</class>
+</hibernate-mapping>
