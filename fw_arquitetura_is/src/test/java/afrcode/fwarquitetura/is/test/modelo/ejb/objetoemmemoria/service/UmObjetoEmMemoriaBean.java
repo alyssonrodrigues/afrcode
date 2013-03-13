@@ -13,7 +13,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 import afrcode.fwarquitetura.is.test.util.junit.logging.EJB3LoggingInterceptor;
 
 /**
- * Stateless session bean para exposição dos serviços definidos em {@link ISEjb3UmObjetoEmMemoria} via EJB3.1.
+ * Stateless session bean para exposição dos serviços definidos em {@link IServicoUmObjetoEmMemoriaBean} via EJB3.1.
  * 
  * TODO: Mover esta classe para src/test/java assim que for possível usar o jboss as embedded!
  * 
@@ -21,10 +21,10 @@ import afrcode.fwarquitetura.is.test.util.junit.logging.EJB3LoggingInterceptor;
  * 
  */
 @Stateless
-@Remote(ISEjb3UmObjetoEmMemoria.class)
+@Remote(IServicoUmObjetoEmMemoriaBean.class)
 // Cool stuff (Integração EJB3/Spring): basta incluir um interceptor para usar DI de beans Springs (@Autowired).
 @Interceptors({SpringBeanAutowiringInterceptor.class, EJB3LoggingInterceptor.class})
-public class UmObjetoEmMemoriaBean implements ISEjb3UmObjetoEmMemoria {
+public class UmObjetoEmMemoriaBean implements IServicoUmObjetoEmMemoriaBean {
     private static final Logger LOG = Logger.getLogger(UmObjetoEmMemoriaBean.class);
 
     @Autowired

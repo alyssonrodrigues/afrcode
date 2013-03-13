@@ -10,7 +10,7 @@ import java.util.Collection;
  * @author alyssonfr
  * 
  */
-public interface ISEjb3UmObjetoEmMemoria {
+public interface IServicoUmObjetoEmMemoriaBean {
 
     public Collection<UmObjetoEmMemoria> listar();
 
