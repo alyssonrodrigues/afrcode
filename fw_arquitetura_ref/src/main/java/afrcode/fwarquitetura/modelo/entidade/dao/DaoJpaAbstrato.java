@@ -20,7 +20,7 @@ import afrcode.fwarquitetura.modelo.entidade.IEntidade;
  * @param <TIPOID> Tipo do ID (Long, Integer, String, etc.)
  * @param <TIPOENTIDADE> Subtipo de {@link IEntidade}
  */
-public abstract class DaoJpaAbstrato<TIPOID, TIPOENTIDADE extends IEntidade<TIPOID>> implements IDao<TIPOID, TIPOENTIDADE> {
+public abstract class DaoJpaAbstrato<TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>> implements IDao<TIPOID, TIPOENTIDADE> {
 
     protected static final Logger LOG = Logger.getLogger(DaoJpaAbstrato.class);
 
@@ -29,7 +29,7 @@ public abstract class DaoJpaAbstrato<TIPOID, TIPOENTIDADE extends IEntidade<TIPO
 
     private Class<TIPOENTIDADE> classeEntidade;
 
-    private Object classeId;
+    private Class<TIPOID> classeId;
 
     public DaoJpaAbstrato() {
         iniciar();
@@ -49,7 +49,7 @@ public abstract class DaoJpaAbstrato<TIPOID, TIPOENTIDADE extends IEntidade<TIPO
         }
         ParameterizedType tipoParametrizado = (ParameterizedType) superClazz;
         Type[] params = tipoParametrizado.getActualTypeArguments();
-        classeId = params[0];
+        classeId = (Class<TIPOID>) params[0];
         classeEntidade = (Class<TIPOENTIDADE>) params[1];
     }
 
@@ -119,7 +119,7 @@ public abstract class DaoJpaAbstrato<TIPOID, TIPOENTIDADE extends IEntidade<TIPO
     /**
      * @return the classeId
      */
-    public Object getClasseId() {
+    public Class<TIPOID> getClasseId() {
         return classeId;
     }
 

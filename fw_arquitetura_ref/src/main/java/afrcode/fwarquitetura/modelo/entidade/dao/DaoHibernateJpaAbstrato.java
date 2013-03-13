@@ -15,7 +15,7 @@ import afrcode.fwarquitetura.modelo.entidade.IEntidade;
  * @param <TIPOID> Tipo do ID (Long, Integer, String, etc.)
  * @param <TIPOENTIDADE> Subtipo de {@link IEntidade}
  */
-public abstract class DaoHibernateJpaAbstrato<TIPOID, TIPOENTIDADE extends IEntidade<TIPOID>> extends DaoJpaAbstrato<TIPOID, TIPOENTIDADE> {
+public abstract class DaoHibernateJpaAbstrato<TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>> extends DaoJpaAbstrato<TIPOID, TIPOENTIDADE> {
 
     /**
      * Método de acesso ao HibernateEntityManager associado ao DAO via injeção de dependência.

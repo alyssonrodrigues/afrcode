@@ -28,7 +28,7 @@ import afrcode.fwarquitetura.tu.util.junit.CasoTesteEmMemoria;
  * @param <TIPOID> Tipo do ID (Long, Integer, String, etc.)
  * @param Subtipo de {@link IEntidade}
  */
-public abstract class TesteDaoObjetoPersistenteAbstrato<TIPOID, TIPOENTIDADE extends IEntidade<TIPOID>>
+public abstract class TesteDaoObjetoPersistenteAbstrato<TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>>
         extends CasoTesteEmMemoria {
 
     protected abstract DaoJpaAbstrato<TIPOID, TIPOENTIDADE> getDao();

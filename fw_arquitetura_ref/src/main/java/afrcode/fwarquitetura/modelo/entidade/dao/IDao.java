@@ -12,7 +12,7 @@ import afrcode.fwarquitetura.modelo.entidade.IEntidade;
  * @param <TIPOID> Tipo do ID (Long, Integer, String, etc.)
  * @param <TIPOENTIDADE> Subtipo de {@link IEntidade}
  */
-public interface IDao<TIPOID, TIPOENTIDADE extends IEntidade<TIPOID>> {
+public interface IDao<TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>> {
 
     /**
      * Método responsável por procurar por um objeto cujo id seja o id

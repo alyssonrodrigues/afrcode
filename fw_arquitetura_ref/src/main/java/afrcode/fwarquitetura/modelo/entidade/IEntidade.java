@@ -17,7 +17,7 @@ import afrcode.fwarquitetura.util.excecao.ExcecaoNegocio;
  * 
  * @param <TIPOID> Tipo do ID (Long, Integer, String, etc.)
  */
-public interface IEntidade<TIPOID> extends Serializable {
+public interface IEntidade<TIPOID extends Comparable<TIPOID>> extends Serializable {
 
     /**
      * Método de obtenção da propriedade id.
