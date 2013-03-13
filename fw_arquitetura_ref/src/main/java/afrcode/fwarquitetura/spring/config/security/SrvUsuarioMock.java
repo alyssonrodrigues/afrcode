@@ -5,15 +5,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-@Service("srvUsuarioMock")
+@Service
 public class SrvUsuarioMock {
 
-    public List<String> recuperaFuncoesComputacionaisLiberadasParaUsuario(String login) {
+    public List<String> recuperarRolesPorUsuario(String login) {
 
-        ArrayList<String> funcoesLiberadas = new ArrayList<String>();
-        funcoesLiberadas.add(0, "ROLE_TESTE");
-        funcoesLiberadas.add(1, "ROLE_USER");
-        return funcoesLiberadas;
+        ArrayList<String> roles = new ArrayList<String>();
+        roles.add(0, "ROLE_TESTE");
+        roles.add(1, "ROLE_USER");
+        return roles;
     }
 
 }
