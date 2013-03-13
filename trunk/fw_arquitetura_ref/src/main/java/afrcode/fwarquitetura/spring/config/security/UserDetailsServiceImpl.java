@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 
  */
 
-@Service("userDetailsService")
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -32,23 +32,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
 
-        User user = null;
-        // Substituir a linha abaixo por uma chamada ao serviço que recupera uma instância de tcu.util.seguranca.Usuario
-        UsuarioMock usuarioTCU = new UsuarioMock("admin");
-        String login = usuarioTCU.getLogin();
-        String password = usuarioTCU.getSenha();
-        boolean enabled = usuarioTCU.getSeUsuarioAtivo();
-        boolean accountNonExpired = usuarioTCU.getSeContaExpirada();
-        boolean credentialsNonExpired = usuarioTCU.getSeSenhaExpirada();
-        boolean accountNonLocked = usuarioTCU.getSeContaBloqueada();
-        // Substituir a linha abaixo por uma chama ao serviço que recupera as funções computacionais liberdas para o usuario
-        List<String> funcoesLiberadas = srvUsuarioMock.recuperaFuncoesComputacionaisLiberadasParaUsuario(login);
-        funcoesLiberadas.toArray(new String[funcoesLiberadas.size()]);
+        UsuarioMock usuarioMock = new UsuarioMock("admin");
+        String login = usuarioMock.getLogin();
+        String password = usuarioMock.getSenha();
+        boolean enabled = usuarioMock.getSeUsuarioAtivo();
+        boolean accountNonExpired = usuarioMock.getSeContaExpirada();
+        boolean credentialsNonExpired = usuarioMock.getSeSenhaExpirada();
+        boolean accountNonLocked = usuarioMock.getSeContaBloqueada();
 
+        List<String> funcoesLiberadas = srvUsuarioMock.recuperarRolesPorUsuario(login);
         Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         authorities = AuthorityUtils.createAuthorityList(funcoesLiberadas.toArray(new String[funcoesLiberadas.size()]));
 
-        user = new User(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
+        User user = new User(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 
         return user;
 

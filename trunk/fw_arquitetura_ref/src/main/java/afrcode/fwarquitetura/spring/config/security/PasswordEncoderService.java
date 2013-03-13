@@ -3,7 +3,7 @@ package afrcode.fwarquitetura.spring.config.security;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Service("passwordEncoderService")
+@Service
 public class PasswordEncoderService extends ShaPasswordEncoder {
 
     public PasswordEncoderService() {
@@ -12,7 +12,6 @@ public class PasswordEncoderService extends ShaPasswordEncoder {
 
     @Override
     public String encodePassword(String rawPass, Object salt) {
-
         rawPass = rawPass.toUpperCase().trim();
         super.setEncodeHashAsBase64(true);
         String pwdEncoded = super.encodePassword(rawPass, salt);
