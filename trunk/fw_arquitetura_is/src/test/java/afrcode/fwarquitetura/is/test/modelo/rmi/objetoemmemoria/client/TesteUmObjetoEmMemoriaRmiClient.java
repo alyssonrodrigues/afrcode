@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import afrcode.fwarquitetura.is.test.modelo.ejb.objetoemmemoria.service.UmObjetoEmMemoria;
-import afrcode.fwarquitetura.is.test.modelo.rmi.objetoemmemoria.service.ISRmiUmObjetoEmMemoria;
+import afrcode.fwarquitetura.is.test.modelo.rmi.objetoemmemoria.service.IServicoUmObjetoEmMemoriaRMI;
 import afrcode.fwarquitetura.tu.util.junit.CasoTesteSemTransacao;
 
 /**
@@ -31,7 +31,7 @@ public class TesteUmObjetoEmMemoriaRmiClient extends CasoTesteSemTransacao {
      */
     @Autowired
     @Qualifier("umObjetoEmMemoriaRmiClient")
-    private ISRmiUmObjetoEmMemoria umObjetoEmMemoriaRmiClient;
+    private IServicoUmObjetoEmMemoriaRMI umObjetoEmMemoriaRmiClient;
 
     @Autowired
     private StopWatch stopWatch;

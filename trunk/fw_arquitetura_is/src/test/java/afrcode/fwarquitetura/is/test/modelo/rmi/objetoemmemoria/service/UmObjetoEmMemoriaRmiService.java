@@ -11,13 +11,13 @@ import afrcode.fwarquitetura.is.test.modelo.ejb.objetoemmemoria.service.DaoUmObj
 import afrcode.fwarquitetura.is.test.modelo.ejb.objetoemmemoria.service.UmObjetoEmMemoria;
 
 /**
- * Implementação de serviço exposto ({@link ISRmiUmObjetoEmMemoria}) via RMI para fins de testes sobre o Spring remoting.
+ * Implementação de serviço exposto ({@link IServicoUmObjetoEmMemoriaRMI}) via RMI para fins de testes sobre o Spring remoting.
  * 
  * @author alyssonfr
  * 
  */
 @Component
-public class UmObjetoEmMemoriaRmiService implements ISRmiUmObjetoEmMemoria {
+public class UmObjetoEmMemoriaRmiService implements IServicoUmObjetoEmMemoriaRMI {
     private static final Logger LOG = Logger.getLogger(UmObjetoEmMemoriaRmiService.class);
 
     @Autowired

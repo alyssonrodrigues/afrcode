@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.remoting.rmi.RmiServiceExporter;
 
-import afrcode.fwarquitetura.is.test.modelo.rmi.objetoemmemoria.service.ISRmiUmObjetoEmMemoria;
+import afrcode.fwarquitetura.is.test.modelo.rmi.objetoemmemoria.service.IServicoUmObjetoEmMemoriaRMI;
 
 /**
  * Configurações Spring para exposição de serviços via RMI.
@@ -25,7 +25,7 @@ public class RMIServiceExporterBeansTUConfig {
      */
     @Autowired
     @Qualifier("umObjetoEmMemoriaRmiService")
-    private ISRmiUmObjetoEmMemoria umObjetoEmMemoriaRmiService;
+    private IServicoUmObjetoEmMemoriaRMI umObjetoEmMemoriaRmiService;
 
     /**
      * Configurações para expor serviço via RMI.
@@ -56,7 +56,7 @@ public class RMIServiceExporterBeansTUConfig {
         RmiServiceExporter umObjetoPersistenteRmiServiceExporter = new RmiServiceExporter();
         umObjetoPersistenteRmiServiceExporter.setServiceName("umObjetoEmMemoriaRmiService");
         umObjetoPersistenteRmiServiceExporter.setService(umObjetoEmMemoriaRmiService);
-        umObjetoPersistenteRmiServiceExporter.setServiceInterface(ISRmiUmObjetoEmMemoria.class);
+        umObjetoPersistenteRmiServiceExporter.setServiceInterface(IServicoUmObjetoEmMemoriaRMI.class);
         return umObjetoPersistenteRmiServiceExporter;
     }
 

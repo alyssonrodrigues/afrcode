@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import afrcode.fwarquitetura.is.test.modelo.ejb.objetoemmemoria.service.ISEjb3UmObjetoEmMemoria;
+import afrcode.fwarquitetura.is.test.modelo.ejb.objetoemmemoria.service.IServicoUmObjetoEmMemoriaBean;
 import afrcode.fwarquitetura.is.test.modelo.ejb.objetoemmemoria.service.UmObjetoEmMemoria;
 import afrcode.fwarquitetura.tu.util.junit.CasoTesteSemTransacao;
 
@@ -24,7 +24,7 @@ public class TesteUmObjetoEmMemoriaBeanRemote extends CasoTesteSemTransacao {
     private StopWatch stopWatch;
 
     @EJB
-    private ISEjb3UmObjetoEmMemoria umObjetoEmMemoriaBeanRemote;
+    private IServicoUmObjetoEmMemoriaBean umObjetoEmMemoriaBeanRemote;
 
     @Test
     public void testarListar() {

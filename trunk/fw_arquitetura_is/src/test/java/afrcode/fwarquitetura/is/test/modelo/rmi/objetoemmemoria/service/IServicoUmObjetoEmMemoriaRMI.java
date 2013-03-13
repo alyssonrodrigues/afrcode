@@ -10,7 +10,7 @@ import afrcode.fwarquitetura.is.test.modelo.ejb.objetoemmemoria.service.UmObjeto
  * @author alyssonfr
  * 
  */
-public interface ISRmiUmObjetoEmMemoria {
+public interface IServicoUmObjetoEmMemoriaRMI {
 
     public Collection<UmObjetoEmMemoria> listar();
 
