@@ -7,7 +7,6 @@
            http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
     <http>
-        <!-- TODO: Adequar para uso do SIGA! -->
         <intercept-url pattern="/Web/login.xhtml*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/Web/templates/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/javax.faces.resource/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
@@ -15,8 +14,7 @@
         
         <intercept-url pattern="/**" access="ROLE_USER" />
         
-        <!-- TODO: Adequar para uso do SIGA! -->
-        <!-- TODO: Implementar authentication-failure-handler-ref  para uso com o SIGA!-->
+        <!-- TODO: Implementar authentication-failure-handler-ref  para uso de página de erro padrão!-->
         <form-login login-page="/Web/login.xhtml" login-processing-url="/Web/efetuarLogin"
             default-target-url="/Web/index.xhtml" always-use-default-target="false" 
             username-parameter="usernameParameter" password-parameter="passwordParameter" />            
@@ -32,25 +30,12 @@
         </session-management>
     </http>
     
-    
     <!-- Extensao para uso de um AuthenticationProvider especifico que provavelmente ira consumir informacoes do SIGA. -->  
     <authentication-manager>
         <authentication-provider ref="daoAuthenticationProvider"/>
     </authentication-manager>
     
-    <!--  Esta configuração habilita o uso das anotações @RolesAllowed da JSR 250 - JEE -->
-    <!--  <global-method-security jsr250-annotations="enabled" /> --> 
-    
-    <!--  Esta configuração habilita o uso das anotações @Secured do Spring Security, similar a @RolesAllowed -->
-    <!--  As anotações @Secured não funcionam em ManagedBeans já que estes objetos são gerenciados pelo JSF e não
-          pelo Spring. Caso, no futuro, a segurança tenha que ser feita em @ManagedBeans, há que se fazer implementação 
-          na super-classe de ManagedBeans, para após a construção do mesmo seja disparada a chamada a segurança Spring
-          As anotações @Secured devem ser feitas nas Controladoras, isto faz sentido, desde que não sejam implementadas
-          regras de negócio nas ManagedBeans, o que é esperado pela ARQREF 8.0.
-          Para se utilizar parâmetros nas anotações de segurança com spEL, a anotação utilizada deve ser @PreAuthorize. 
-          A anotação @PreAuthorize é habilitada por default pelo SpringSecurity.  --> 
-    <global-method-security secured-annotations="enabled" />
-    
-    
-    
+    <!-- Anotação @RolesAllowed disponível para beans Spring (@Component, etc.) -->
+    <global-method-security jsr250-annotations="enabled" />
+
 </beans:beans>
