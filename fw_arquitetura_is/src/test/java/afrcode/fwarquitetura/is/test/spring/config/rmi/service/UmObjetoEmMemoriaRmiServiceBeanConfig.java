@@ -19,7 +19,7 @@ import afrcode.fwarquitetura.is.test.modelo.rmi.objetoemmemoria.service.IServico
  */
 @Configuration
 @Profile({PROFILE_TESTES})
-public class RMIServiceExporterBeansTUConfig {
+public class UmObjetoEmMemoriaRmiServiceBeanConfig {
     /**
      * Instância local do serviço a ser exposto.
      */
