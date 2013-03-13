@@ -7,6 +7,7 @@ import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.apache.log4j.Logger;
 
@@ -62,7 +63,8 @@ public abstract class DaoJpaAbstrato<TIPOID extends Comparable<TIPOID>, TIPOENTI
     @Override
     public Collection<TIPOENTIDADE> recuperarTodos() {
         String qlString = "from " + getClasseEntidade().getName();
-        Query query = entityManager.createQuery(qlString);
+        TypedQuery<TIPOENTIDADE> query = entityManager.createQuery(qlString, 
+        		getClasseEntidade());
         Collection<TIPOENTIDADE> resultList = query.getResultList();
         return resultList;
     }
