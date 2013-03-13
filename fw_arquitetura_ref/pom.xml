@@ -234,12 +234,12 @@
 			<version>2.2.8</version>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
+		<!--dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.20</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency-->
 		<!-- FIM Dependências para drivers JDBC. TODO: Rever -->
 		<dependency>
 			<groupId>log4j</groupId>

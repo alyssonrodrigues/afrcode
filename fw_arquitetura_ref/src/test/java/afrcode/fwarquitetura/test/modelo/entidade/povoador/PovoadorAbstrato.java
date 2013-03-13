@@ -59,6 +59,7 @@ public abstract class PovoadorAbstrato {
      */
     protected void init() {
         Validate.notNull(classePovoador, "Povoador sem classe concreta informada!");
+        System.setProperty("spring.profiles.active", PROFILE_TESTES);
         AnnotationConfigApplicationContext annAppCtx = new AnnotationConfigApplicationContext();
         annAppCtx.register(SpringTestConfig.class);
         annAppCtx.getEnvironment().setActiveProfiles(PROFILE_TESTES);
