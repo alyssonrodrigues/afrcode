@@ -13,7 +13,8 @@ import javax.persistence.Version;
  * 
  */
 @MappedSuperclass
-public abstract class ObjetoPersistenteAbstrato<TIPOID> extends EntidadeAbstrata<TIPOID> {
+public abstract class ObjetoPersistenteAbstrato<TIPOID extends Comparable<TIPOID>> 
+   extends EntidadeAbstrata<TIPOID> {
 
     @Version
     // TODO: usar @Column

@@ -1,5 +1,7 @@
 package afrcode.fwarquitetura.modelo.entidade;
 
+import org.apache.commons.lang.ObjectUtils;
+
 /**
  * Superclasse abstrata para entidades segundo definição de entidade em {@link IEntidade}.
  * 
@@ -9,7 +11,8 @@ package afrcode.fwarquitetura.modelo.entidade;
  * 
  * @param <TIPOID> Tipo do ID (Long, Integer, String, etc.)
  */
-public abstract class EntidadeAbstrata<TIPOID> implements IEntidade<TIPOID> {
+public abstract class EntidadeAbstrata<TIPOID extends Comparable<TIPOID>>
+    implements IEntidade<TIPOID>, Comparable<IEntidade<TIPOID>> {
 
     @Override
     public boolean equals(Object obj) {
@@ -17,13 +20,9 @@ public abstract class EntidadeAbstrata<TIPOID> implements IEntidade<TIPOID> {
             return true;
         } else if (obj == null) {
             return false;
-        }
-        EntidadeAbstrata ent = (EntidadeAbstrata) obj;
-        if (getId() != null) {
-            return getId().equals(ent.getId());
-        }
-        else {
-            return false;
+        } else {
+        	EntidadeAbstrata ent = (EntidadeAbstrata) obj;
+        	return ObjectUtils.equals(getId(), ent.getId());
         }
     }
 
@@ -34,6 +33,17 @@ public abstract class EntidadeAbstrata<TIPOID> implements IEntidade<TIPOID> {
             return aux.hashCode();
         }
         return super.hashCode();
+    }
+    
+    @Override
+    public int compareTo(IEntidade<TIPOID> obj) {
+        if (this == obj) {
+            return 0;
+        } else if (obj == null) {
+            return -1;
+        } else {
+        	return ObjectUtils.compare(getId(), obj.getId());
+        }
     }
 
 }
