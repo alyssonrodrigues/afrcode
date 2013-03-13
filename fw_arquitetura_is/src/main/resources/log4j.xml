@@ -10,9 +10,9 @@
 	</appender>
 
 	<appender name="file" class="org.apache.log4j.RollingFileAppender">
-		<param name="file" value="arquitetura_ref_tu_8.log" />
+		<param name="file" value="fw_arquitetura_is.log" />
 		<param name="MaxFileSize" value="5120KB" />
-		<param name="MaxBackupIndex" value="20" />
+		<param name="MaxBackupIndex" value="1" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %X{usuario} %5p %c - %m [%t] %n" />
 		</layout>
