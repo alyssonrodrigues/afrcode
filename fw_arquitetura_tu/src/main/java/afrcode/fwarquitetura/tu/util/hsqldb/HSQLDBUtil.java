@@ -1,7 +1,14 @@
 package afrcode.fwarquitetura.tu.util.hsqldb;
 
+import static afrcode.fwarquitetura.tu.spring.config.util.ProfilesTU.PROFILE_TESTES;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.apache.log4j.Logger;
 import org.hsqldb.Server;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 /**
  * Classe utilitária para startup e shutdown do SGBD HSQLDB.
@@ -9,35 +16,25 @@ import org.hsqldb.Server;
  * @author alyssonfr
  * 
  */
+@Component
+@Profile(PROFILE_TESTES)
 public class HSQLDBUtil {
     private static final Logger LOG = Logger.getLogger(HSQLDBUtil.class);
 
     private static Server hsqldbServer;
 
-    private static HSQLDBUtil instancia = null;
+	private void configurarHSQLDBServer() {
+		hsqldbServer = new Server();
+		hsqldbServer.setLogWriter(null);
+		hsqldbServer.setDatabaseName(0, "testdb");
+		hsqldbServer.setDatabasePath(0, "mem:testdb");
+	}
 
-    public static final HSQLDBUtil getInstancia() {
-        if (instancia == null) {
-            synchronized (HSQLDBUtil.class) {
-                if (instancia == null) {
-                    instancia = new HSQLDBUtil();
-                    hsqldbServer = new Server();
-                    hsqldbServer.setLogWriter(null);
-                    hsqldbServer.setDatabaseName(0, "testdb");
-                    hsqldbServer.setDatabasePath(0, "mem:testdb");
-                }
-            }
-        }
-        return instancia;
-    }
-
-    private HSQLDBUtil() {
-
-    }
-
-    public void iniciarHSQLDB() {
+    @PostConstruct
+    protected void iniciarHSQLDB() {
         try {
             LOG.info("Iniciando HSQLDB...");
+            configurarHSQLDBServer();
             hsqldbServer.start();
             LOG.info("HSQLDB em execução...");
         } catch (Throwable e) {
@@ -46,7 +43,8 @@ public class HSQLDBUtil {
         }
     }
 
-    public void pararHSQLDB() {
+    @PreDestroy
+    protected void pararHSQLDB() {
         LOG.info("Finalizando HSQLDB...");
         hsqldbServer.stop();
         LOG.info("HSQLDB finalizado.");
