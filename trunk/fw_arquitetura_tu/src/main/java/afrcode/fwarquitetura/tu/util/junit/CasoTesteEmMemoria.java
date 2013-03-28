@@ -45,16 +45,6 @@ public abstract class CasoTesteEmMemoria {
         System.setProperty("spring.profiles.active", PROFILE_TESTES);
     }
 
-    @BeforeClass
-    public static void iniciarHSQLDB() {
-        HSQLDBUtil.getInstancia().iniciarHSQLDB();
-    }
-
-    @AfterClass
-    public static void pararHSQLDB() {
-        HSQLDBUtil.getInstancia().pararHSQLDB();
-    }
-
     /**
      * Metodo de pre-configuracao para um metodo de TU. Deve ser sobrescrito
      * quando necessario.
