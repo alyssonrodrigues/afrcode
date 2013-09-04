@@ -59,6 +59,14 @@
 						</manifestEntries>
 					</archive>
 				</configuration>
+				<executions>
+				    <execution>
+				        <id>generate-test-jat</id>
+				        <goals>
+				            <goal>test-jar</goal>
+				        </goals>
+				    </execution>
+				</executions>
 			</plugin>
 			<!-- Informações a incluir em MANIFEST de arquivos .WAR. -->
 			<plugin>
