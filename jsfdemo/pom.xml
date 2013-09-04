@@ -13,10 +13,10 @@
 			<id>jbooss.nexus</id>
 			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
 		</repository>
-		<repository>
+		<!--repository>
 			<id>jboss.org</id>
 			<url>http://repository.jboss.com/maven2/</url>
-		</repository>
+		</repository-->
     <repository>
       <id>ibiblio.org</id>
       <url>http://mirrors.ibiblio.org/pub/mirrors/maven2</url>
@@ -224,6 +224,12 @@
 			<groupId>jotm</groupId>
 			<artifactId>jotm</artifactId>
 			<version>2.0.10</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>connector</artifactId>
+					<groupId>javax.resource</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>javax.resource</groupId>
