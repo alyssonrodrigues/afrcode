@@ -61,7 +61,7 @@
 				</configuration>
 				<executions>
 				    <execution>
-				        <id>generate-test-jat</id>
+				        <id>generate-test-jar</id>
 				        <goals>
 				            <goal>test-jar</goal>
 				        </goals>
