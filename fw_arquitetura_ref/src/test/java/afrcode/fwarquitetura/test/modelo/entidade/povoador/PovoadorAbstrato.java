@@ -59,6 +59,9 @@ public abstract class PovoadorAbstrato {
      */
     protected void init() {
         Validate.notNull(classePovoador, "Povoador sem classe concreta informada!");
+        // Sinalizador de execução de povoador standAlone (via método main de um povoador concreto).
+        // Sinalizador em uso por HSQLDBUtil.
+        System.setProperty("executandoPovoadorStandAlone", "true");
         System.setProperty("spring.profiles.active", PROFILE_TESTES);
         AnnotationConfigApplicationContext annAppCtx = new AnnotationConfigApplicationContext();
         annAppCtx.register(SpringTestConfig.class);
