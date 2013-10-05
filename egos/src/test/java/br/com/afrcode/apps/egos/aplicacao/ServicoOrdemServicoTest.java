@@ -13,10 +13,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import br.com.afrcode.apps.egos.dominio.OrdemServico;
 import br.com.afrcode.apps.egos.dominio.dao.DaoOrdemServico;
-import br.com.afrcode.apps.egos.spring.config.BeansSpringConfig;
+import br.com.afrcode.apps.egos.spring.config.BeansSpringTestesConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = BeansSpringConfig.class)
+@ContextConfiguration(classes = BeansSpringTestesConfig.class)
 public class ServicoOrdemServicoTest {
 	
 	@Autowired

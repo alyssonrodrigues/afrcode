@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import br.com.afrcode.apps.egos.dominio.OrdemServico;
 
 @Repository
-public class DaoOrdemServicoStub implements DaoOrdemServico {
+public class DaoStubOrdemServico implements DaoOrdemServico {
 	private static final Map<Long, OrdemServico> ordensServico =
 			new ConcurrentHashMap<Long, OrdemServico>();
 
