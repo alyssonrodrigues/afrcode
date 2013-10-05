@@ -7,17 +7,21 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import br.com.afrcode.apps.egos.dominio.OrdemServico;
-import br.com.afrcode.apps.egos.spring.config.BeansSpringConfig;
+import br.com.afrcode.apps.egos.spring.config.BeansSpringTestesConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = BeansSpringConfig.class)
+@ContextConfiguration(classes = BeansSpringTestesConfig.class)
+@ActiveProfiles("TESTES")
 public class DaoOrdemServicoTest {
 	
 	@Autowired
+	@Qualifier("daoStubOrdemServico")
 	private DaoOrdemServico daoOrdemServico;
 	
 	@Test
