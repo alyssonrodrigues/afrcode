@@ -7,7 +7,6 @@ import java.util.Date;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import br.com.afrcode.apps.egos.dominio.OrdemServico;
@@ -17,7 +16,6 @@ import br.com.afrcode.apps.egos.dominio.dao.DaoOrdemServico;
 public class ServicoOrdemServico {
 
 	@Autowired
-	@Qualifier("daoStubOrdemServico")
 	private DaoOrdemServico daoOrdemServico;
 	
 	public Collection<OrdemServico> recuperarOrdensServicoEmAtraso(
