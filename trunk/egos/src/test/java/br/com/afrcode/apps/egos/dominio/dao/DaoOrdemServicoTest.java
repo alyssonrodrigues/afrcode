@@ -29,7 +29,7 @@ public class DaoOrdemServicoTest {
 		OrdemServico ordemServico = new OrdemServico();
 		ordemServico.setConcluida(false);
 		ordemServico.setDataEntregaEmContrato(
-				Calendar.getInstance());
+				Calendar.getInstance().getTime());
 		ordemServico.setDescricao("Descrição qualquer");
 		ordemServico.setValor(BigDecimal.ONE);
 		daoOrdemServico.salvar(ordemServico);

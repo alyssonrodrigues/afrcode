@@ -3,11 +3,15 @@ package br.com.afrcode.apps.egos.aplicacao;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -17,26 +21,29 @@ import br.com.afrcode.apps.egos.spring.config.BeansSpringTestesConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = BeansSpringTestesConfig.class)
+@ActiveProfiles("TESTES")
 public class ServicoOrdemServicoTest {
 	
 	@Autowired
 	private ServicoOrdemServico servicoOrdemServico;
 	
 	@Autowired
+	@Qualifier("daoStubOrdemServico")
 	private DaoOrdemServico daoOrdemServico;
 	
 	@Test
 	public void testarRecuperarOrdensServicoEmAtraso() {
 		OrdemServico ordemServico = new OrdemServico();
 		ordemServico.setConcluida(true);
-		Calendar dataEntregaPrevistaEmContrato = Calendar.getInstance();
+		Date dataEntregaPrevistaEmContrato = 
+				Calendar.getInstance().getTime();
 		ordemServico.setDataEntregaEmContrato(
 				dataEntregaPrevistaEmContrato);
 		ordemServico.setDescricao("Descrição qualquer");
 		ordemServico.setValor(BigDecimal.ONE);
 		daoOrdemServico.salvar(ordemServico);
 		
-		dataEntregaPrevistaEmContrato.add(Calendar.DAY_OF_MONTH, -1);
+		DateUtils.addDays(dataEntregaPrevistaEmContrato, -1);
 		OrdemServico ordemServicoNaoConcluida = new OrdemServico();
 		ordemServicoNaoConcluida.setConcluida(false);
 		ordemServicoNaoConcluida.setDataEntregaEmContrato(
