@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Profile("TESTES")
-public class HSQLDBUtil {
+public class HsqldbUtil {
 
 	@Value("${datasource.connection.url}")
 	private String dataSourceUrl;
