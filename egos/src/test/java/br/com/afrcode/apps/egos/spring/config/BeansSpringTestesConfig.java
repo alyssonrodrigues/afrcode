@@ -9,8 +9,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @ComponentScan(basePackages = "br.com.afrcode")
@@ -18,14 +21,21 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 @Profile("TESTES")
 public class BeansSpringTestesConfig {
 	
-	@Value("datasource.driverClassName")
+	@Value("${datasource.driverClassName}")
 	private String dataSourceDriverName;
-	@Value("datasource.connection.url")
+	@Value("${datasource.connection.url}")
 	private String dataSourceUrl;
-	@Value("datasource.connection.username")
+	@Value("${datasource.connection.username}")
 	private String dataSourceUsername;
-	@Value("datasource.connection.password")
+	@Value("${datasource.connection.password}")
 	private String dataSourcePassword;
+	
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertiesConfigurer() {
+		PropertySourcesPlaceholderConfigurer propertiesConfigurer =
+				new PropertySourcesPlaceholderConfigurer();
+		return propertiesConfigurer;
+	}
 	
 	@Bean
 	public DataSource dataSource() {
@@ -42,5 +52,12 @@ public class BeansSpringTestesConfig {
 		NamedParameterJdbcOperations jdbcTemplate =
 				new NamedParameterJdbcTemplate(dataSource());
 		return jdbcTemplate;
+	}
+
+	@Bean
+	public PlatformTransactionManager transactionManager() {
+		DataSourceTransactionManager transactionManager =
+				new DataSourceTransactionManager(dataSource());
+		return transactionManager;
 	}
 }

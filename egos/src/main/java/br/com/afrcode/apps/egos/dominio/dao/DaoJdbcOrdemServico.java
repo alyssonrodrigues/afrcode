@@ -18,15 +18,15 @@ public class DaoJdbcOrdemServico implements DaoOrdemServico {
 
 	private static final String CREATE_SQL = 
 			"insert into ORDEM_SERVICO (descricao, valor, "
-			+ "dataEntregaContrato, concluida) "
+			+ "dataEntregaEmContrato, concluida) "
 			+ "values (:descricao, :valor, "
-			+ ":dataEntregaContrato, :concluida)";
+			+ ":dataEntregaEmContrato, :concluida)";
 	
 	private static final String UPDATE_SQL =
 			"update ORDEM_SERVICO "
 			+ "set descricao = :descricao, "
 			+ "valor = :valor, "
-			+ "dataEntregaContrato = :dataEntregaContrato, "
+			+ "dataEntregaEmContrato = :dataEntregaEmContrato, "
 			+ "concluida = :concluida "
 			+ "where id = :id";
 	
@@ -35,12 +35,12 @@ public class DaoJdbcOrdemServico implements DaoOrdemServico {
 			+ "where id = :id";
 
 	private static final String FIND_BY_ID_SQL =
-			"select id, descricao, valor, dataEntregaContrato, "
+			"select id, descricao, valor, dataEntregaEmContrato, "
 			+ "concluida from ORDEM_SERVICO "
 			+ "where id = :id";
 	
 	private static final String FIND_ALL_SQL =
-			"select id, descricao, valor, dataEntregaContrato, "
+			"select id, descricao, valor, dataEntregaEmContrato, "
 			+ "concluida from ORDEM_SERVICO";
 	
 	@Autowired
