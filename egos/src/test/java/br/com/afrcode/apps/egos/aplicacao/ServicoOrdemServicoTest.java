@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.afrcode.apps.egos.dominio.OrdemServico;
 import br.com.afrcode.apps.egos.dominio.dao.DaoOrdemServico;
@@ -22,6 +24,8 @@ import br.com.afrcode.apps.egos.spring.config.BeansSpringTestesConfig;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = BeansSpringTestesConfig.class)
 @ActiveProfiles("TESTES")
+@Transactional
+@TransactionConfiguration(defaultRollback = true)
 public class ServicoOrdemServicoTest {
 	
 	@Autowired
