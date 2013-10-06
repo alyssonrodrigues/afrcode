@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.test.context.ActiveProfiles;
@@ -36,6 +37,7 @@ public class DaoJdbcOrdemServicoTest {
 	private NamedParameterJdbcOperations jdbcTemplate;
 	
 	@Autowired
+	@Qualifier("daoJdbcOrdemServico")
 	private DaoOrdemServico daoOrdemServico;
 	
 	private OrdemServico criarOS() {
