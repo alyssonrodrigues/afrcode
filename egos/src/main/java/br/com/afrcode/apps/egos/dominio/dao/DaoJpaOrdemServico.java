@@ -8,10 +8,12 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.afrcode.apps.egos.dominio.OrdemServico;
 
 @Repository
+@Transactional
 @Primary
 public class DaoJpaOrdemServico implements DaoOrdemServico {
 	
