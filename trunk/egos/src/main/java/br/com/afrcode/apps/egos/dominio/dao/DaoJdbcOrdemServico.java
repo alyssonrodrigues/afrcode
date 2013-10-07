@@ -8,10 +8,12 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.afrcode.apps.egos.dominio.OrdemServico;
 
 @Repository
+@Transactional
 public class DaoJdbcOrdemServico implements DaoOrdemServico {
 
 	private static final String CREATE_SQL = 
