@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-
 <Context privileged="true" 
          antiResourceLocking="false" 
          antiJARLocking="false"
@@ -7,7 +6,6 @@
          reloadable="true"
          crossContext="true">
 
-    <!-- Configuracos do pool de conexoes acessivel via JNDI ... -->
     <Resource type="org.hsqldb.jdbc.JDBCDataSource"
         name="datasources/egosdatasource"
         factory="org.hsqldb.jdbc.JDBCDataSourceFactory"
