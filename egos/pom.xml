@@ -5,7 +5,7 @@
 	<groupId>br.com.afrcode.apps</groupId>
 	<artifactId>egos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>egos</name>
 	<url>http://maven.apache.org</url>
@@ -154,13 +154,6 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.spec</groupId>
-			<artifactId>jboss-javaee-6.0</artifactId>
-			<version>3.0.1.Final</version>
-			<type>pom</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>2.2.8</version>
@@ -211,6 +204,7 @@
 	</dependencies>
 
 	<build>
+	    <finalName>egos</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<testSourceDirectory>src/test/java</testSourceDirectory>
 		<resources>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/web/login.xhtml*" access="isAnonymous()"/>
+        <intercept-url pattern="/**" access="ROLE_USER" />
+        
+        <form-login login-page="/web/login.xhtml" login-processing-url="/web/efetuarLogin"
+            default-target-url="/web/index.xhtml" always-use-default-target="false" 
+            username-parameter="usernameParameter" password-parameter="passwordParameter" />            
+
+        <logout logout-url="/web/efetuarLogout" logout-success-url="/web/login.xhtml" />
+        
+        <session-management>
+            <concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+        </session-management>
+    </http>
+    
+    <!-- Extensao para uso de um AuthenticationProvider especifico. -->  
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="admin" password="admin" authorities="ROLE_USER" />
+                <user name="visitor" password="visitor" authorities="ROLE_USER" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+    
+    <!-- Anotação @RolesAllowed disponível para beans Spring (@Component, etc.) -->
+    <global-method-security jsr250-annotations="enabled" />
+
+</beans:beans>
