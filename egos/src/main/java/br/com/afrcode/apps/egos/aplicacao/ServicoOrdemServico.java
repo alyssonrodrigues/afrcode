@@ -8,11 +8,13 @@ import java.util.Date;
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.afrcode.apps.egos.dominio.OrdemServico;
 import br.com.afrcode.apps.egos.dominio.dao.DaoOrdemServico;
 
 @Service
+@Transactional
 public class ServicoOrdemServico {
 
 	@Autowired
