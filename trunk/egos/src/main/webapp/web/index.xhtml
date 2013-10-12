@@ -4,14 +4,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Bem vindos</title>
+<style>
+fieldset {border:1px solid #888;border-right:1px solid #666;
+border-bottom:1px solid #666;width:600px;margin:0px auto;}
+legend {font-weight:bold;border:1px solid #888;
+border-right:1px solid #666;border-bottom:1px solid #666;
+padding: 0.5em;background-color:#666;color:#fff;
+text-shadow:0 -1px 0 #333;letter-spacing: 0.1em;
+text-transform:none;font-style:italic;}
+input {display:block;width:175px;float:left;margin-bottom:10px;}
+label {display:block;text-align:right;float:left;
+width:75px;padding-right: 20px;font-style:italic;}
+.checkbox {width: 1em;}
+br {clear:left;}
+.buttonsubmit {width: 75px;margin-left:595px;}
+</style>
 </head>
 <body>
-
-    <div style="margin:0px auto;">
-        <span>Hello World!</span>
-        <br/>
-        <a href="/egos/web/efetuarLogout">Logout</a>
-    </div>
-
+    <form action="/egos/web/efetuarLogout" method="post">
+        <fieldset>
+            <legend>Bem vindos ao eGOS</legend>
+            <span style="font-style:italic;">Em construção...</span><br/>
+            <input type="submit" name="submit" value="Sair" 
+                class="buttonsubmit" />
+        </fieldset>
+    </form>
 </body>
 </html>

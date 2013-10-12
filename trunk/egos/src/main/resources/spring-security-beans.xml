@@ -12,7 +12,9 @@
         
         <form-login login-page="/web/login.xhtml" login-processing-url="/web/efetuarLogin"
             default-target-url="/web/index.xhtml" always-use-default-target="false" 
-            username-parameter="usernameParameter" password-parameter="passwordParameter" />            
+            username-parameter="usernameParameter" password-parameter="passwordParameter" />
+        
+        <remember-me key="lembreSeDeMin" />            
 
         <logout logout-url="/web/efetuarLogout" logout-success-url="/web/login.xhtml" />
         
