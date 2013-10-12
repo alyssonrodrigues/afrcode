@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    id="WebApp_ID" version="3.0">
+
+	<display-name>egos</display-name>
+
+    <!-- ########## 
+    #    SECAO: Configuracoes para uso do SPRING 
+    ########## -->
+
+    <!-- Configuracoes para o ContextLoaderListener Spring usar AnnotationConfigWebApplicationContext
+       ao inves de XmlWebApplicationContext. -->
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>
+            org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+        </param-value>
+    </context-param>
+
+    <!-- Configuracoes para o contexto Spring. -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>br.com.afrcode.apps.egos.spring.config.BeansSpringConfig</param-value>
+    </context-param>
+    
+    <!-- Configuracao do profile Spring padrao para producao. -->
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>APLICACAO</param-value>
+    </context-param>
+
+    <!-- Bootstrap do Spring. -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!-- FIM Bootstrap do Spring. -->
+
+    <!-- Context Listener para uso de escopos (request, session, global) no Spring. -->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
+    <!-- FIM Context Listener para uso de escopos (request, session, global) no Spring. -->
+    
+    <!-- Context Listener do Spring Security para controle de acesso concorrente a sessao do usuario.
+      Permite configurar quantas sessoes concorrentes um usuario pode ter. -->
+    <listener>
+        <listener-class>
+            org.springframework.security.web.session.HttpSessionEventPublisher
+        </listener-class>
+    </listener>
+    <!-- FIM Context Listener do Spring Security para controle de acesso concorrente a sessao do usuario. -->
+
+    <!-- ########## 
+    #    FIM SECAO: Configuracoes para uso do SPRING 
+    ########## -->
+
+    <!-- ########## 
+    #    SECAO: FILTROS 
+    ########## -->
+
+    <!-- Filtro de configuracao do Spring Security. -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+ 
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- ########## 
+    #    FIM SECAO: FILTROS 
+    ########## -->
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>web/index.xhtml</welcome-file>
+    </welcome-file-list>
+
+    <login-config>
+        <auth-method>BASIC</auth-method>
+    </login-config>
+    
+</web-app>

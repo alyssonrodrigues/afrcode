@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
@@ -23,6 +26,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 @ComponentScan(basePackages = "br.com.afrcode")
 @PropertySource({"classpath:acessoadados.properties"})
+@ImportResource({"classpath:spring-security-beans.xml"})
 @Profile("APLICACAO")
 public class BeansSpringConfig {
 
@@ -41,12 +45,20 @@ public class BeansSpringConfig {
 	private String hibernateHbm2ddlAuto;
 
 	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertiesConfigurer() {
+		PropertySourcesPlaceholderConfigurer propertiesConfigurer = 
+				new PropertySourcesPlaceholderConfigurer();
+		return propertiesConfigurer;
+	}
+
+	@Bean
+	@DependsOn("hsqldbUtil")
 	public DataSource jndiDataSource() {
 		JndiDataSourceLookup jndiDataSourceLookup = 
 				new JndiDataSourceLookup();
 		DataSource jndiDataSource = 
 				jndiDataSourceLookup.getDataSource(
-						"java:/datasources/egosdatasource");
+						"datasources/egosdatasource");
 		return jndiDataSource;
 	}
 
