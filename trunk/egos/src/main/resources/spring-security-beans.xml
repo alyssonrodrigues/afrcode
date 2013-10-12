@@ -23,7 +23,6 @@
         </session-management>
     </http>
     
-    <!-- Extensao para uso de um AuthenticationProvider especifico. -->  
     <authentication-manager>
         <authentication-provider>
             <user-service>
@@ -33,7 +32,6 @@
         </authentication-provider>
     </authentication-manager>
     
-    <!-- Anotação @RolesAllowed disponível para beans Spring (@Component, etc.) -->
     <global-method-security jsr250-annotations="enabled" />
 
 </beans:beans>
