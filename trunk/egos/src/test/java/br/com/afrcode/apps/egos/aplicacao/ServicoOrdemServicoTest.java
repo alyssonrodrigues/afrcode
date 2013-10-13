@@ -7,9 +7,16 @@ import java.util.Date;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.TestingAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,6 +33,9 @@ import br.com.afrcode.apps.egos.spring.config.BeansSpringTestesConfig;
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
 public class ServicoOrdemServicoTest {
+	@Rule
+	public ExpectedException expectedException = 
+			ExpectedException.none();
 	
 	@Autowired
 	private ServicoOrdemServico servicoOrdemServico;
@@ -33,8 +43,32 @@ public class ServicoOrdemServicoTest {
 	@Autowired
 	private DaoOrdemServico daoOrdemServico;
 	
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	
+	private void autenticarUsuario(String... roles) {
+		Authentication authentication = new TestingAuthenticationToken(
+				"USER_TU", "PASSWD", roles);
+		authentication = authenticationManager.authenticate(
+				authentication);
+		SecurityContextHolder.getContext().setAuthentication(
+				authentication);
+	}
+	
+	@Test
+	public void testarAcessoNegadoAoServicoOrdemServico() {
+		autenticarUsuario("ROLE_USER");
+		
+		expectedException.expect(AccessDeniedException.class);
+		servicoOrdemServico.recuperarOrdensServicoEmAtraso(
+				Calendar.getInstance());
+		Assert.fail("Deveria ter ocorrido AccessDeniedException!");
+	}
+
 	@Test
 	public void testarRecuperarOrdensServicoEmAtraso() {
+		autenticarUsuario("ROLE_MANAGER");
+		
 		OrdemServico ordemServico = new OrdemServico();
 		ordemServico.setConcluida(true);
 		Date dataEntregaPrevistaEmContrato = 
@@ -61,5 +95,4 @@ public class ServicoOrdemServicoTest {
 		Assert.assertEquals(ordemServicoNaoConcluida.getId(), 
 				ordemRecuperada.getId());
 	}
-
 }

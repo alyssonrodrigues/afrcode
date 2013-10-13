@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -20,11 +21,13 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.security.authentication.TestingAuthenticationProvider;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @ComponentScan(basePackages = "br.com.afrcode")
 @PropertySource({"classpath:acessoadados.properties"})
+@ImportResource({"classpath:spring-security-testes-beans.xml"})
 @Profile("TESTES")
 public class BeansSpringTestesConfig {
 
@@ -108,5 +111,12 @@ public class BeansSpringTestesConfig {
 
 		entityManagerFactoryBean.setJpaPropertyMap(jpaProperties);
 		return entityManagerFactoryBean;
+	}
+	
+	@Bean
+	public TestingAuthenticationProvider testingAuthenticationProvider() {
+		TestingAuthenticationProvider testingAuthenticationProvider =
+				new TestingAuthenticationProvider();
+		return testingAuthenticationProvider;
 	}
 }
