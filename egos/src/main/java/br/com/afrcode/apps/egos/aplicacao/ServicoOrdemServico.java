@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import br.com.afrcode.apps.egos.dominio.dao.DaoOrdemServico;
 
 @Service
 @Transactional
+@RolesAllowed("ROLE_MANAGER")
 public class ServicoOrdemServico {
 
 	@Autowired
