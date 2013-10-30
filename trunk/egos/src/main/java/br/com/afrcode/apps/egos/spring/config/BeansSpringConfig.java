@@ -73,7 +73,8 @@ public class BeansSpringConfig {
 	public PlatformTransactionManager transactionManager() {
 		JpaTransactionManager transactionManager = 
 				new JpaTransactionManager();
-		transactionManager.setDataSource(jndiDataSource());
+		transactionManager.setEntityManagerFactory(
+				entityManagerFactory().getObject());
 		return transactionManager;
 	}
 
@@ -100,6 +101,7 @@ public class BeansSpringConfig {
 		jpaProperties.put("hibernate.hbm2ddl.auto", hibernateHbm2ddlAuto);
 
 		entityManagerFactoryBean.setJpaPropertyMap(jpaProperties);
+		entityManagerFactoryBean.afterPropertiesSet();
 		return entityManagerFactoryBean;
 	}
 }

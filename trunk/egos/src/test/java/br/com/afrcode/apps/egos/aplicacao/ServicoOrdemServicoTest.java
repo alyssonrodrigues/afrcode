@@ -79,7 +79,8 @@ public class ServicoOrdemServicoTest {
 		ordemServico.setValor(BigDecimal.ONE);
 		daoOrdemServico.salvar(ordemServico);
 		
-		DateUtils.addDays(dataEntregaPrevistaEmContrato, -1);
+		dataEntregaPrevistaEmContrato = DateUtils.addDays(
+				dataEntregaPrevistaEmContrato, -1);
 		OrdemServico ordemServicoNaoConcluida = new OrdemServico();
 		ordemServicoNaoConcluida.setConcluida(false);
 		ordemServicoNaoConcluida.setDataEntregaEmContrato(
