@@ -66,7 +66,7 @@ public class DaoJdbcOrdemServicoTest {
 
 	@Test
 	public void testarSalvarRecuperarEExcluirOrdemServico() {
-		executarDDLOrdemServico();
+		// executarDDLOrdemServico();
 		OrdemServico ordemServico = criarOS();
 		daoOrdemServico.salvar(ordemServico);
 		
