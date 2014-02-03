@@ -55,6 +55,18 @@
 			<scope>compile</scope>
 		</dependency>
 		<!-- FIM Dependencias Richfaces -->
+        <!-- Dependencias Primefaces -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>glass-x</artifactId>
+            <version>1.0.9</version>
+        </dependency>
+        <!-- FIM Dependencias Primefaces -->
 		<!-- Dependencias Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
