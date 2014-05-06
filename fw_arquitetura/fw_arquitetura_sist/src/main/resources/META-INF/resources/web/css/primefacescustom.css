@@ -1,0 +1,10 @@
+.noBorders tr, .noBorders td {
+    background: none !important;
+    border: none !important;
+}
+
+.ui-growl {
+    position:fixed;
+    top:100px;
+    right:20px;
+}

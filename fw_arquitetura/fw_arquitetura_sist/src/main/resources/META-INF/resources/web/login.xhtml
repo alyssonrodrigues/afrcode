@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Login</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <h:outputStylesheet library="web/css" name="login.css"  />
+	<h:outputStylesheet library="web/css" name="primefacesbotoes.css" />
+	<h:outputStylesheet library="web/css" name="primefacescustom.css" />
+
+	<h:outputScript library="web/js" name="primefaceslocales.js" />
+	<h:outputScript library="web/js" name="navegadorutil.js" />
+</h:head>
+
+<h:body>
+    <ui:include src="painelnavegadornaosuportado.xhtml" />
+    <div id="dialog-login">
+        <f:view id="telaLogin">
+            <div id="form-login">                            
+	            <form action="#{request.contextPath}/web/efetuarLogin" method="post"  id="telaLoginForm">
+	                <p:panel id="login-panel" header="#{mBeanContextoWeb.contextoAplicacaoWeb.nomeContextoWeb}">
+	                    <h:panelGrid columns="2">
+		                    <h:outputLabel value="Usuário: " for="usernameParameter" />
+		                    <h:inputText id="usernameParameter"/>		                    	                    
+		                    <h:outputLabel value="Senha: " for="passwordParameter" />
+		                    <h:inputSecret id="passwordParameter" />		                    
+	                    </h:panelGrid>
+	                    <h:outputText id="msgErroLogin" styleClass="msgExplicaErro" value="#{param['erroLogin']}" />
+	                    <br/>
+	                    <br/>
+	                    <input id="btnSubmit" type="submit" value="Entrar" />	                    
+	                </p:panel>    
+	            </form>	            
+            </div>
+        </f:view>
+    </div>
+</h:body>
+
+</html>
