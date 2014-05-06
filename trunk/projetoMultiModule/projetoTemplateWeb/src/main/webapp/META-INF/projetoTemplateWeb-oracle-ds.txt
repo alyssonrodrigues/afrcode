@@ -1,0 +1,39 @@
+<!-- ATENCAO: Apos fase inicial de desenvolvimento, usando HSQLDB (ver arquivo projetoTemplate-hsqldb-ds.xml), 
+renomeie este arquivo para extensao .XML para uso do SGBD Oracle. -->
+<datasources>
+    <!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado de datasource para o projeto! -->
+    <xa-datasource jndi-name="java:/xadatasources/projetoTemplateWebDatasource"
+        pool-name="projetoTemplateWebDatasource" enabled="true" use-java-context="true">
+        <xa-datasource-property name="URL">
+            jdbc:oracle:thin:@10.1.1.212:1521:dese
+        </xa-datasource-property>
+        <driver>oracle</driver>
+        <xa-pool>
+            <is-same-rm-override>false</is-same-rm-override>
+            <interleaving>false</interleaving>
+            <pad-xid>false</pad-xid>
+            <wrap-xa-resource>true</wrap-xa-resource>
+        </xa-pool>
+        <!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado de usuario para o projeto! -->
+        <security>
+            <user-name>TCU</user-name>
+            <password>ARARA</password>
+        </security>
+        <recovery>
+            <recover-credential>
+                <!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado de usuario para o projeto! -->
+                <user-name>TCU</user-name>
+                <password>ARARA</password>
+            </recover-credential>
+        </recovery>
+        <validation>
+            <validate-on-match>false</validate-on-match>
+            <background-validation>false</background-validation>
+            <background-validation-millis>1</background-validation-millis>
+        </validation>
+        <statement>
+            <prepared-statement-cache-size>0</prepared-statement-cache-size>
+            <share-prepared-statements>false</share-prepared-statements>
+        </statement>
+    </xa-datasource>
+</datasources>
