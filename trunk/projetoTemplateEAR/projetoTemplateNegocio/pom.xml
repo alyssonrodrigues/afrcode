@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de negocio! -->
+	<name>projetoTemplateNegocio</name>
+	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de negocio! -->
+	<artifactId>projetoTemplateNegocio</artifactId>
+	<packaging>jar</packaging>
+
+	<parent>
+	    <!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto! -->
+		<artifactId>projetoTemplateEAR</artifactId>
+		<groupId>br.com.afrcode.app</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+        <dependency>
+            <groupId>br.com.afrcode.lib</groupId>
+            <artifactId>fw_arquitetura_sist</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!-- Dependências para testes. -->
+        <dependency>
+            <groupId>br.com.afrcode.lib</groupId>
+            <artifactId>fw_arquitetura_sist</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>br.com.afrcode.lib</groupId>
+            <artifactId>fw_arquitetura_sist_teste</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>br.com.afrcode.lib</groupId>
+            <artifactId>fw_arquitetura_sist_is</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.openejb</groupId>
+            <artifactId>openejb-core</artifactId>
+            <version>4.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- FIM Dependências para testes. -->
+	</dependencies>
+
+	<build>
+		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de negocio! -->
+		<finalName>projetoTemplateNegocio</finalName>
+		<!-- Plugins configurados no projeto agregador em uso. -->
+		<plugins>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.m2e</groupId>
+				<artifactId>lifecycle-mapping</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

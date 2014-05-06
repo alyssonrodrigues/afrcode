@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<jee:jboss xmlns="http://www.jboss.com/xml/ns/javaee"
+       xmlns:jee="http://java.sun.com/xml/ns/javaee"
+       xmlns:ci ="urn:container-interceptors:1.0"
+       xmlns:s="urn:security:1.1">
+    <!-- OBS.: Este arquivo requer versao EAP 6.1 do JBoss.  Quando o upgrade for feito nas maquinas de desenvolvimento, 
+    mover este arquivo para src/main/webapp/WEB-INF. -->
+    <jee:assembly-descriptor>
+        <ci:container-interceptors>
+            <!-- Default interceptor -->
+            <jee:interceptor-binding>
+                <ejb-name>*</ejb-name>
+                <!-- Interceptador responsavel por garantir a propagacao do contexto de seguranca, tanto para EJBs invocados localmente como remotamente. -->
+                <interceptor-class>br.gov.tcu.util.jboss.ejb.seguranca.ServerSecurityInterceptor</interceptor-class>
+            </jee:interceptor-binding>            
+        </ci:container-interceptors>
+        <s:security>                
+			<jee:ejb-name>*</jee:ejb-name>			
+			<!-- Equivale a anotacao org.jboss.ejb3.annotation.SecurityDomain. -->
+			<s:security-domain>SPRINGSECURITY</s:security-domain>
+			<!-- Equivale a anotacao @PermitAll.  Configuracao inicial.  No futuro, remover esta configuracao para encorajar o uso de regras de autorizacao no servicos. -->
+			<s:missing-method-permissions-deny-access>false</s:missing-method-permissions-deny-access>
+		</s:security>
+    </jee:assembly-descriptor>
+</jee:jboss>
