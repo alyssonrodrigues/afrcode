@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projetoIS! -->
+	<name>projetoTemplateIS</name>
+	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projetoIS! -->
+	<artifactId>projetoTemplateIS</artifactId>
+	<packaging>pom</packaging>
+
+	<parent>
+		<artifactId>projetoTemplateEAR</artifactId>
+		<groupId>br.com.afrcode.app</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>br.com.afrcode.app</groupId>
+			<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projetoIS-api! -->
+			<artifactId>projetoTemplateIS-api</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.afrcode.app</groupId>
+			<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projetoIS-impl! -->
+			<artifactId>projetoTemplateIS-impl</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.afrcode.app</groupId>
+			<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projetoNegocio! -->
+			<artifactId>projetoTemplateNegocio</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+	    <!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projetoTemplateIS! -->
+	    <finalName>projetoTemplateIS</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<version>2.7</version>
+				<configuration>
+					<version>6</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<modules>
+						<ejbModule>
+							<groupId>br.com.afrcode.app</groupId>
+							<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projetoIS-impl! -->
+							<artifactId>projetoTemplateIS-impl</artifactId>
+							<bundleFileName>projetoTemplateIS-impl.jar</bundleFileName>
+						</ejbModule>
+					</modules>
+				</configuration>
+			</plugin>
+			<!-- The JBoss AS plugin deploys your ear to a local JBoss AS container -->
+			<!-- Due to Maven's lack of intelligence with EARs we need to configure 
+				the jboss-as maven plugin to skip deployment for all modules. We then enable 
+				it specifically in the ear module. -->
+			<plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<version>7.1.1.Final</version>
+				<inherited>true</inherited>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
