@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    id="WebApp_ID" version="3.0">
+
+	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de contexto web! -->
+	<display-name>projetoTemplateWeb</display-name>
+
+    <!-- ########## 
+    #    SECAO: Configuracoes para uso do JSF 
+    ########## -->
+
+    <!--context-param>
+        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+        <param-value>.xhtml</param-value>
+    </context-param-->
+
+    <!-- Parametro para controle de nivel de informacoes de depuracao, deve ser alterado em producao. -->
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Production</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>javax.faces.SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <!-- Faces Servlet -->
+    <servlet>
+        <servlet-name>facesServlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>facesServlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Filter para o componente FileUpload do Primefaces - deve ser o primeiro apos a declaracao do facesServlet. -->
+    <filter>
+        <filter-name>primeFacesFileUploadFilter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>primeFacesFileUploadFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- FIM Faces Servlet -->
+
+    <!--  Tema utilizado pelo Primefaces. --> 
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>glass-x</param-value>
+   </context-param>
+
+    <!-- Faces Resource Servlet - para recursos estaticos (js, css, jpg, etc.) do proprio Richfaces.
+    <servlet>
+        <servlet-name>resourceServlet</servlet-name>
+        <servlet-class>org.richfaces.webapp.ResourceServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>resourceServlet</servlet-name>
+        <url-pattern>/org.richfaces.resources/*</url-pattern>
+    </servlet-mapping-->
+    <!--  Skin do Richfaces
+    <context-param>
+        <param-name>org.richfaces.skin</param-name>
+        <param-value>blueSky</param-value>
+     </context-param-->    
+    <!-- FIM Faces Resource Servlet - para recursos estaticos (js, css, jpg, etc.) do proprio Richfaces.-->
+
+    <!-- Resource Mapping - para recursos compactados em producao.
+    <context-param>
+        <param-name>org.richfaces.resourceMapping.enabled</param-name>
+        <param-value>true</param-value>
+    </context-param-->
+    <!-- FIM Resource Mapping - para recursos compactados em producao. -->
+   
+    <!-- ########## 
+    #    FIM SECAO: Configuracoes para uso do JSF 
+    ########## -->
+
+    <!-- ########## 
+    #    SECAO: Configuracoes para uso do PrettyFaces. 
+    #    Documentacao de uso em : http://ocpsoft.org/docs/prettyfaces/3.3.2/en-US/html/
+    ########## -->
+
+    <!-- Lista de pacotes onde o PrettyFaces ira procurar por anotacoes de mapeamentos de URL. -->
+    <context-param>
+        <param-name>com.ocpsoft.pretty.BASE_PACKAGES</param-name>
+        <param-value>br.com.afrcode</param-value>
+    </context-param>
+    <!--context-param>
+        <param-name>com.ocpsoft.pretty.SCAN_LIB_DIRECTORY</param-name>
+        <param-value>true</param-value>
+    </context-param-->
+
+    <!-- ########## 
+    #    FIM SECAO: Configuracoes para uso do PrettyFaces. 
+    ########## -->
+
+    <!-- ########## 
+    #    SECAO: Configuracoes para uso do SPRING 
+    ########## -->
+
+    <!-- Configuracoes para o ContextLoaderListener Spring usar AnnotationConfigWebApplicationContext
+       ao inves de XmlWebApplicationContext. -->
+    <context-param>
+        <param-name>contextId</param-name>
+		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de contexto web! -->
+        <param-value>projetoTemplateWeb</param-value>
+    </context-param>
+    
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>
+            org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+        </param-value>
+    </context-param>
+
+    <!-- Configuracoes para o contexto Spring: xml OU (EXCLUSIVO) nomes qualificados de classes ou pacotes separados por virgula. -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>br.com.afrcode.arquitetura.spring.config.SpringAppConfig</param-value>
+    </context-param>
+    
+
+    <!-- Bootstrap do Spring. -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!-- FIM Bootstrap do Spring. -->
+
+    <!-- Context Listener para uso de escopos (request, session, global) no Spring. -->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
+    <!-- FIM Context Listener para uso de escopos (request, session, global) no Spring. -->
+    
+    <!-- Context Listener do Spring Security para controle de acesso concorrente a sessao do usuario.
+      Permite configurar quantas sessoes concorrentes um usuario pode ter. -->
+    <listener>
+        <listener-class>
+            org.springframework.security.web.session.HttpSessionEventPublisher
+        </listener-class>
+    </listener>
+    <!-- FIM Context Listener do Spring Security para controle de acesso concorrente a sessao do usuario. -->
+
+    <!-- ########## 
+    #    FIM SECAO: Configuracoes para uso do SPRING 
+    ########## -->
+
+    <!-- ########## 
+    #    SECAO: FILTROS 
+    ########## -->
+
+    <!-- Filtro de configuracao de open Entity Manager in view do Spring p/ JPA2.
+         O uso deste filtro permite que entidades sejam usadas em MBeans JSF, EM UMA MESMA REQUISICAO, sem ocorrencia de excecoes
+         de detached object e/ou lazy exceptions. Para maiores informacoes consulte o javadoc da classe OpenEntityManagerInViewFilter. -->
+    <filter>
+        <filter-name>springOpenEntityManagerInViewFilter</filter-name>
+        <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>springOpenEntityManagerInViewFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Filtro de configuracao do Spring Security. -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+ 
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Filter p/ reescrita de URLs bookmark-able - REST-ful URLS!!! 
+         Documentacao de uso em : http://ocpsoft.org/docs/prettyfaces/3.3.2/en-US/html/ -->
+    <filter>
+        <filter-name>prettyFilter</filter-name>
+        <filter-class>com.ocpsoft.pretty.PrettyFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>prettyFilter</filter-name> 
+        <url-pattern>/*</url-pattern> 
+        <dispatcher>FORWARD</dispatcher> 
+        <dispatcher>REQUEST</dispatcher> 
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+    <!-- FIM Filter p/ reescrita de URLs bookmark-able - REST-ful URLS!!!. -->
+
+    <!-- ########## 
+    #    FIM SECAO: FILTROS 
+    ########## -->
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>web/index.xhtml</welcome-file>
+    </welcome-file-list>
+
+    <login-config>
+        <auth-method>BASIC</auth-method>
+    </login-config>
+
+</web-app>

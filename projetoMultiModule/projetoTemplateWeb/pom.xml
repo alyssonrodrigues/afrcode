@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de contexto web! -->
+	<name>projetoTemplateWeb</name>
+	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de contexto web! -->
+	<artifactId>projetoTemplateWeb</artifactId>
+	<packaging>war</packaging>
+
+	<parent>
+	    <!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto! -->
+		<artifactId>projetoMultiModule</artifactId>
+		<groupId>br.com.afrcode.app</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<!-- Redefinição de diretório de report para testes de integração jacoco 
+			unificado com testes unitários (de MBeans). -->
+		<sonar.jacoco.itReportPath>${sonar.jacoco.reportPath}</sonar.jacoco.itReportPath>
+		<jvm.args.jacoco>
+			-javaagent:${env.M2_REPO}/org/jacoco/org.jacoco.agent/${jacoco-maven-plugin.version}/org.jacoco.agent-${jacoco-maven-plugin.version}-runtime.jar=destfile=${sonar.jacoco.itReportPath},includes=*,excludes=org.jboss.as.test.*,append=true,output=file
+		</jvm.args.jacoco>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>br.com.afrcode.app</groupId>
+			<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de negocio! -->
+			<artifactId>projetoTemplateNegocio</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>br.com.afrcode.app</groupId>
+            <!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de implementação de serviços! -->
+            <artifactId>projetoTemplateIS-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- Dependências para testes. -->
+		<dependency>
+			<groupId>br.com.afrcode.app</groupId>
+			<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de negocio! -->
+			<artifactId>projetoTemplateNegocio</artifactId>
+			<version>${project.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>br.com.afrcode.app</groupId>
+            <!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de implementação de serviços! -->
+            <artifactId>projetoTemplateIS-impl</artifactId>
+            <version>${project.version}</version>
+            <classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>br.com.afrcode.lib</groupId>
+            <artifactId>fw_arquitetura_sist</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>br.com.afrcode.lib</groupId>
+            <artifactId>fw_arquitetura_sist_teste</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>br.com.afrcode.lib</groupId>
+            <artifactId>fw_arquitetura_sist_is</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.openejb</groupId>
+            <artifactId>openejb-core</artifactId>
+            <version>4.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- FIM Dependências para testes. -->
+
+		<!-- DEPENDÊNCIAS de runtime do atospessoal, ou seja, outros sistemas (WAR/EAR) 
+			necessários à execução deste projeto PARA TESTES FUNCIONAIS.
+		<dependency>
+			<groupId>br.com.afrcode.app</groupId>
+			<artifactId>outroProjetoQualquer</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>ear</type>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		 FIM DPENDÊNCIAS de runtime do atospessoal, ou seja, outros sistemas 
+			(WAR/EAR) necessários à execução deste projeto PARA TESTES FUNCIONAIS. -->
+	</dependencies>
+
+	<build>
+		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de contexto web! -->
+		<finalName>projetoTemplateWeb</finalName>
+		<!-- Plugins configurados no projeto agregador em uso. -->
+		<plugins>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.m2e</groupId>
+				<artifactId>lifecycle-mapping</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- PROFILE de execução DE TESTES DE INTEGRAÇÃO abaixo do JBoss. Para acioná-lo use o comando mvn com indicação de profile,
+	     exemplo: 
+	     
+	     mvn clean install -DexecutandoTesteIntegracao=true -U -e
+	     
+	     ATENÇÃO: É importante acionar o PROFILE maven via parâmetro de JVM (-DexecutandoTesteIntegracao=true) pois este parâmetro
+	     irá habilitar o PROFILE E também as classes de testes de integração diante do Spring. Isto é necessário para impedir que
+	     as classes de testes de integração sejam acionadas em execuções de testes unitários em isolado. -->
+    <profiles>
+        <profile>
+            <id>ambiente.testesfuncionais.jboss</id>
+            <activation>
+                <property>
+                    <name>executandoTesteFuncional</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- Configurações para deploy abaixo do JBoss para testes de integração. -->
+                    <plugin>
+                        <groupId>org.jboss.as.plugins</groupId>
+                        <artifactId>jboss-as-maven-plugin</artifactId>
+                        <version>7.4.Final</version>
+                        <executions>
+                            <!-- Startup do JBoss para execuçao de testes de integração. -->
+                            <execution>
+                                <id>startup-jboss</id>
+                                <phase>pre-clean</phase>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+                                <configuration>
+                                    <jbossHome>${env.JBOSS_HOME}</jbossHome>
+                                    <jvmArgs>-Xms64m -Xmx512m -XX:MaxPermSize=256m -Djava.net.preferIPv4Stack=true 
+									${jvm.args.jacoco} 
+                                    -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 
+                                    -Dsun.rmi.dgc.server.gcInterval=3600000
+                                    -Dspring.profiles.default=aplicacao -Dspring.profiles.active=aplicacao</jvmArgs>
+                                </configuration>
+                            </execution>
+                            <!-- Configurações para deploy de outroProjetoQualquer em runtime para testes de integração. 
+                            <execution>
+                                <id>clean-undeploy-outroProjetoQualquer</id>
+                                <phase>clean</phase>
+                                <goals>
+                                    <goal>undeploy</goal>
+                                </goals>
+                                <configuration>
+                                    <filename>outroProjetoQualquer.ear</filename>
+                                    <ignoreMissingDeployment>true</ignoreMissingDeployment>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>deploy-outroProjetoQualquer</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>deploy-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <groupId>br.com.afrcode.app</groupId>
+                                    <artifactId>outroProjetoQualquer</artifactId>
+                                    <version>0.0.1-SNAPSHOT</version>
+                                    <name>outroProjetoQualquer.ear</name>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>install-undeploy-outroProjetoQualquer</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>undeploy</goal>
+                                </goals>
+                                <configuration>
+                                    <filename>outroProjetoQualquer.ear</filename>
+                                    <ignoreMissingDeployment>true</ignoreMissingDeployment>
+                                </configuration>
+                            </execution>-->
+                            <!-- Configurações para deploy do projetoTeampleteWeb em runtime para testes de integração. -->
+                            <execution>
+                                <id>clean-undeploy-war</id>
+                                <phase>clean</phase>
+                                <goals>
+                                    <goal>undeploy</goal>
+                                </goals>
+                                <configuration>
+                                   <ignoreMissingDeployment>true</ignoreMissingDeployment>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>deploy-war</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>install-undeploy-war</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>undeploy</goal>
+                                </goals>
+                                <configuration>
+                                   <ignoreMissingDeployment>true</ignoreMissingDeployment>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>
