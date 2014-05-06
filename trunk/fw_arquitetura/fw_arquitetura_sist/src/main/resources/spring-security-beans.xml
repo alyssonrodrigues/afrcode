@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <!-- O atributo jaas-api-provision="true" indica ao Spring para incluir o org.springframework.security.web.jaasapi.JaasApiIntegrationFilter 
+         na cadeia de execução de requests! Este filtro iniciará o Subject e executará a requisição via Subject.doAs...
+         O atributo use-expressions="true" indica ao Spring o uso de expressions Spring nos atributos access das tags intercept-url.
+         Veja a lista de possíveis expressões para uso em: http://static.springsource.org/spring-security/site/docs/3.1.x/reference/el-access.html. -->
+    <http jaas-api-provision="true" use-expressions="true">
+    
+        <intercept-url pattern="/web/login.xhtml*" access="isAnonymous() or isAuthenticated()"/>
+        <intercept-url pattern="/web/templates/**" access="isAnonymous() or isAuthenticated()"/>
+        <intercept-url pattern="/javax.faces.resource/**" access="isAnonymous() or isAuthenticated()"/>
+        <intercept-url pattern="/org.richfaces.resources/**" access="isAnonymous() or isAuthenticated()"/>
+        <intercept-url pattern="/web/acessonegado.xhtml" access="isAnonymous() or isAuthenticated()"/>
+        
+        <intercept-url pattern="/**" access="isAuthenticated()" />
+
+        <anonymous enabled="true" />
+
+        <form-login login-page="/web/login.xhtml" login-processing-url="/web/efetuarLogin"
+            default-target-url="/web/index.xhtml" always-use-default-target="false" 
+            username-parameter="usernameParameter" password-parameter="passwordParameter"
+            authentication-failure-handler-ref="authenticationFailureHandlerImpl" />            
+        
+        <http-basic />
+        
+        <logout logout-url="/web/efetuarLogout" success-handler-ref="logoutSuccessHandlerImpl" invalidate-session="true" />
+        
+        <!-- Configuracao de numero maximo de sessoes concorrentes de um usuario.
+             Desabilitado até que se avalie melhor o uso deste recurso (TODO: Alysson)-->
+        <!--session-management>
+            <concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+        </session-management-->
+
+        <!-- Referência ao bean responsável por tratar erros de acesso negado (erros de autorização), configurado em
+             SpringSecurityConfig. -->        
+        <access-denied-handler ref="accessDeniedHandlerImpl"/>
+        
+    </http>
+    
+    <!-- Configurações para definição de provider de autenticação para o Spring. Faz-se uso do suporte Spring ao JAAS - veja em
+         br.com.afrcode.arquitetura.spring.config.security.SpringSecurityConfig a documentação a respeito. -->
+    <authentication-manager>
+        <authentication-provider ref="authenticationProviderImpl"/>
+    </authentication-manager>
+    
+    <!--  Esta configuração habilita o uso das anotações @RoleAllowed do JAAS, similares as @Secured do Spring Security. 
+          Todo e qualquer @Component Spring é candidato a usar estas anotações para controle de acesso (autorização). -->
+    <global-method-security jsr250-annotations="enabled" />
+    
+</beans:beans>

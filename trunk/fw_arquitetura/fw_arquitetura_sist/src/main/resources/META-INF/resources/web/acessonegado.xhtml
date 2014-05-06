@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Acesso negado</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</h:head>
+
+<h:body>
+
+	<div id="page">
+		<div id="header">
+			<ui:include src="templates/header.xhtml" />
+		</div>
+		<div id="content">
+			<br />
+			<br />
+
+            <h:panelGrid 
+                style="margin:0px auto;width:60%;text-align:left;color:#b94a48;background-color:#f2dede;border-color:#eed3d7;font-weight:bold;font-size:13pt">
+                <h:outputText value="Você não possui permissão para executar a operação solicitada. Solicite a concessão do perfil necessário ao administrador do sistema." />
+            </h:panelGrid>
+
+            <br/>
+            <br/>
+
+            <h:panelGrid header="Erro de autorização"
+                style="margin:0px auto;width:80%;text-align:left;"
+                rendered="#{true}">
+            
+                <h:outputText value="#{excecaoAcessoNegado}" escape="false" />
+        
+            </h:panelGrid>
+
+		</div>
+		<div id="footer">
+			<ui:include src="templates/footer.xhtml" />
+		</div>
+	</div>
+
+</h:body>
+
+</html>

@@ -1,0 +1,17 @@
+@CHARSET "ISO-8859-1";
+
+.ui-widget, .ui-widget .ui-widget {
+    font-size: 11px;
+}
+
+.ui-botaoVisualizar {
+	background-image: url("#{request.scheme}://#{request.serverName}:#{request.serverPort}/#{request.contextPath}/javax.faces.resource/imgBotaoVisualizar.png.xhtml?ln=web/imagens") !important;
+}
+
+.ui-botaoAlterar {
+    background-image: url("#{request.scheme}://#{request.serverName}:#{request.serverPort}/#{request.contextPath}/javax.faces.resource/imgBotaoAlterar.png.xhtml?ln=web/imagens") !important;
+}
+
+.ui-botaoExcluir {
+    background-image: url("#{request.scheme}://#{request.serverName}:#{request.serverPort}/#{request.contextPath}/javax.faces.resource/imgBotaoExcluir.png.xhtml?ln=web/imagens") !important;
+}

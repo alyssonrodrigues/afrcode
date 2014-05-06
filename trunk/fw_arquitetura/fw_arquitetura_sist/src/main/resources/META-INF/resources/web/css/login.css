@@ -1,0 +1,18 @@
+@CHARSET "ISO-8859-1";
+
+#dialog-login {
+  margin:0px auto;
+  width:60%;
+}
+
+
+#form-login {
+  margin:0px auto;
+  width:70%;    
+}
+
+.msgExplicaErro {
+font-family: Verdana; 
+font-size: 9px; 
+color: #ff0000; 
+}
