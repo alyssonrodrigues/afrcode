@@ -8,6 +8,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
@@ -25,6 +26,9 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 // proxyTargetClass = true => Devemos usar CGLIB e não javaassist para que o
 // autowiring por tipo do Spring continue funcional.
 @EnableAspectJAutoProxy(proxyTargetClass = true)
+// Configuracoes para uso do Spring TaskScheduler para execução de rotinas
+// em background.
+@EnableScheduling
 @Profile(Profiles.PROFILE_APLICACAO)
 public class SpringAppConfig {
 
