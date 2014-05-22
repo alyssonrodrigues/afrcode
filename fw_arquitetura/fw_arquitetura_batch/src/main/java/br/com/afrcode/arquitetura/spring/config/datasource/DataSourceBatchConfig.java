@@ -2,6 +2,7 @@ package br.com.afrcode.arquitetura.spring.config.datasource;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 import br.com.afrcode.arquitetura.util.hsqldb.HsqldbUtil;
@@ -41,6 +41,12 @@ public class DataSourceBatchConfig {
 	@Value("${hibernate.connection.driver_class}")
 	private String driverClassName;
 
+	@Value("${hibernate.connection.minIdle}")
+	private String minIdleConnections;
+
+	@Value("${hibernate.connection.maxActive}")
+	private String maxActiveConnections;
+
 	@Autowired
 	private HsqldbUtil hsqldbUtil;
 
@@ -50,9 +56,14 @@ public class DataSourceBatchConfig {
 
 		alterarUrlParaTUSeNecessario();
 
-		DriverManagerDataSource dataSource = new DriverManagerDataSource(url,
-				username, password);
+		BasicDataSource dataSource = new BasicDataSource();
+		dataSource.setUrl(url);
+		dataSource.setUsername(username);
+		dataSource.setPassword(password);
 		dataSource.setDriverClassName(driverClassName);
+		dataSource.setMinIdle(Integer.valueOf(minIdleConnections));
+		dataSource.setMaxActive(Integer.valueOf(maxActiveConnections));
+
 		return dataSource;
 	}
 
