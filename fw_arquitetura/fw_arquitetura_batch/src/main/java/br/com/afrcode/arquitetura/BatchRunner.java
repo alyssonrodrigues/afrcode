@@ -15,6 +15,9 @@ import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration
 import org.springframework.boot.autoconfigure.web.HttpMessageConvertersAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+
+import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 @Configuration
 @EnableAutoConfiguration(exclude = {
@@ -27,6 +30,7 @@ import org.springframework.context.annotation.Configuration;
 		JmsTemplateAutoConfiguration.class, JmxAutoConfiguration.class,
 		SecurityAutoConfiguration.class })
 @ComponentScan(basePackages = { "br.com.afrcode" })
+@Profile(Profiles.PROFILE_APLICACAO_BATCH)
 public class BatchRunner {
 
 	public static void main(String[] args) {
