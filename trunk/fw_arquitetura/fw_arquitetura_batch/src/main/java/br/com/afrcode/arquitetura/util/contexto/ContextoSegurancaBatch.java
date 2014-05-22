@@ -17,8 +17,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
 import br.com.afrcode.arquitetura.spring.anotacoes.Componente;
-import br.com.afrcode.arquitetura.spring.config.security.AuthorityGranterParaTU;
-import br.com.afrcode.arquitetura.spring.config.security.LoginModuleParaTU;
+import br.com.afrcode.arquitetura.spring.config.security.AuthorityGranterParaBatch;
+import br.com.afrcode.arquitetura.spring.config.security.LoginModuleParaBatch;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
@@ -47,7 +47,7 @@ public class ContextoSegurancaBatch extends ContextoSegurancaAbstrato {
 	@PostConstruct
 	void iniciar() {
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-				LoginModuleParaTU.USER, LoginModuleParaTU.PASSWD);
+				LoginModuleParaBatch.USER, LoginModuleParaBatch.PASSWD);
 		Authentication auth = defaultJaasAuthenticationProvider
 				.authenticate(token);
 		Validate.isTrue(auth.isAuthenticated(),
@@ -63,7 +63,7 @@ public class ContextoSegurancaBatch extends ContextoSegurancaAbstrato {
 		String password = String.class.cast(jaasAuthenticationToken
 				.getCredentials());
 		List<GrantedAuthority> authorities = AuthorityUtils
-				.createAuthorityList(AuthorityGranterParaTU.ROLE_USER);
+				.createAuthorityList(AuthorityGranterParaBatch.ROLE_USER);
 
 		User usuario = new User(username, password, authorities);
 		return usuario;
