@@ -22,8 +22,8 @@
 		<sonar.jacoco.itReportPath>${project.build.directory}/jacoco-it.exec</sonar.jacoco.itReportPath>
 		<jacoco-maven-plugin.version>0.6.3.201306030806</jacoco-maven-plugin.version>
 
-		<springVersion>3.2.4.RELEASE</springVersion>
-		<springSecurityVersion>3.1.4.RELEASE</springSecurityVersion>
+		<springVersion>4.0.5.RELEASE</springVersion>
+		<springSecurityVersion>3.2.4.RELEASE</springSecurityVersion>
 	</properties>
 
 	<modules>

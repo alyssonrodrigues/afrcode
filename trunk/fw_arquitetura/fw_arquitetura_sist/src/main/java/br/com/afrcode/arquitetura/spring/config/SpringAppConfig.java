@@ -29,7 +29,7 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 // Configuracoes para uso do Spring TaskScheduler para execução de rotinas
 // em background.
 @EnableScheduling
-@Profile(Profiles.PROFILE_APLICACAO)
+@Profile({ Profiles.PROFILE_APLICACAO, Profiles.PROFILE_APLICACAO_BATCH })
 public class SpringAppConfig {
 
 	// Configuracao p/ uso de ${...} obtidas via @PropertySource em anotacoes
