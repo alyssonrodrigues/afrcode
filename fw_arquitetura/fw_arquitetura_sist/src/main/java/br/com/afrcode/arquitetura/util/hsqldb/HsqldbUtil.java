@@ -227,7 +227,8 @@ public class HsqldbUtil {
 	private boolean isProfileAplicacaoAtivo() {
 		List<String> activeProfiles = Arrays.asList(applicationContext
 				.getEnvironment().getActiveProfiles());
-		return activeProfiles.contains(Profiles.PROFILE_APLICACAO);
+		return activeProfiles.contains(Profiles.PROFILE_APLICACAO)
+				|| activeProfiles.contains(Profiles.PROFILE_APLICACAO_BATCH);
 	}
 
 	private boolean isProfileTUAtivo() {

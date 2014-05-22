@@ -16,7 +16,7 @@ import br.com.afrcode.arquitetura.is.spring.config.util.ProfilesIS;
 import br.com.afrcode.arquitetura.is.util.jms.QueueListener;
 
 @Configuration
-@Profile({ ProfilesIS.PROFILE_APLICACAO })
+@Profile({ ProfilesIS.PROFILE_APLICACAO, ProfilesIS.PROFILE_APLICACAO_BATCH })
 public class JMSBeansConfig {
 	@Autowired
 	private QueueListener queueListener;

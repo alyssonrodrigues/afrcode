@@ -21,7 +21,8 @@ import br.com.afrcode.arquitetura.is.util.jms.JmsExceptionListener;
  * 
  */
 @Configuration
-@Profile({ ProfilesIS.PROFILE_APLICACAO, ProfilesIS.PROFILE_TU })
+@Profile({ ProfilesIS.PROFILE_APLICACAO, ProfilesIS.PROFILE_APLICACAO_BATCH,
+		ProfilesIS.PROFILE_TU })
 @ImportResource({ "classpath:spring-jms-broker-beans.xml" })
 public class JMSBrokerConfig {
 	@Autowired

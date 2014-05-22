@@ -32,7 +32,7 @@ import br.com.afrcode.arquitetura.util.contexto.ApplicationContextUtils;
  * 
  */
 @Configuration
-@PropertySource({ "classpath:hibernate-jpaProperties-batch.properties" })
+@PropertySource({ "classpath:hibernate-jpaProperties.properties" })
 @Profile(Profiles.PROFILE_APLICACAO_BATCH)
 public class EntityManagerFactoryBatchConfig {
 
