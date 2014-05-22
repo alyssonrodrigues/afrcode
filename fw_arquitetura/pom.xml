@@ -30,6 +30,7 @@
 		<module>fw_arquitetura_sist_teste</module>
 		<module>fw_arquitetura_sist_is</module>
 		<module>fw_arquitetura_sist</module>
+		<module>fw_arquitetura_batch</module>
 	</modules>
 
 	<build>
