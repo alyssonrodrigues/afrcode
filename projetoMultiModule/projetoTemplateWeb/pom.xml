@@ -139,7 +139,7 @@
             <id>ambiente.testesfuncionais.jboss</id>
             <activation>
                 <property>
-                    <name>executandoTesteFuncional</name>
+                    <name>executandoTesteIntegracao</name>
                     <value>true</value>
                 </property>
             </activation>
@@ -164,7 +164,8 @@
 									${jvm.args.jacoco} 
                                     -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 
                                     -Dsun.rmi.dgc.server.gcInterval=3600000
-                                    -Dspring.profiles.default=aplicacao -Dspring.profiles.active=aplicacao</jvmArgs>
+                                    -Dspring.profiles.default=aplicacao -Dspring.profiles.active=aplicacao
+                                    -DexecutandoTesteIntegracao</jvmArgs>
                                 </configuration>
                             </execution>
                             <!-- Configurações para deploy de outroProjetoQualquer em runtime para testes de integração. 
