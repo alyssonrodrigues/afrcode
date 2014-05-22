@@ -308,8 +308,6 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- FIM Dependências para testes -->
-		<!-- Dependências Dozer -->
-		<!-- FIM Dependências Dozer -->
 	</dependencies>
 
 	<build>
