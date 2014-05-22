@@ -38,6 +38,12 @@
 		    </exclusions>
 		</dependency>
 		<!-- FIM Dependencias Spring Boot-->
+		<dependency>
+		    <groupId>commons-dbcp</groupId>
+		    <artifactId>commons-dbcp</artifactId>
+		    <version>1.4</version>
+		    <scope>compile</scope>
+		</dependency>
 		<!-- Dependências para testes -->
 		<dependency>
 			<groupId>br.com.afrcode.lib</groupId>
