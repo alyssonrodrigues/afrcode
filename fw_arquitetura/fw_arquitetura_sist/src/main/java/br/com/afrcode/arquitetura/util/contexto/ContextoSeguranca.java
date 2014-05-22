@@ -19,7 +19,7 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
  * 
  */
 @Componente
-@Profile({ Profiles.PROFILE_APLICACAO })
+@Profile(Profiles.PROFILE_APLICACAO)
 public class ContextoSeguranca extends ContextoSegurancaAbstrato {
 
 	@Override
