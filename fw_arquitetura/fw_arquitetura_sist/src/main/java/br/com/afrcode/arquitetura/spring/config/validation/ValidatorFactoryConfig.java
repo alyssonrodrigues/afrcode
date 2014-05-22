@@ -14,7 +14,8 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
  * 
  */
 @Configuration
-@Profile({ Profiles.PROFILE_TU, Profiles.PROFILE_APLICACAO })
+@Profile({ Profiles.PROFILE_TU, Profiles.PROFILE_APLICACAO,
+		Profiles.PROFILE_APLICACAO_BATCH })
 public class ValidatorFactoryConfig {
 
 	@Bean

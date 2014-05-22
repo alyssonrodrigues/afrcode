@@ -14,4 +14,5 @@ public class Profiles {
 	// Profiles gerais de aplicação e testes unitários.
 	public static final String PROFILE_TU = "tu";
 	public static final String PROFILE_APLICACAO = "aplicacao";
+	public static final String PROFILE_APLICACAO_BATCH = "batch";
 }
