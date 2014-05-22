@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 import br.com.afrcode.arquitetura.util.hsqldb.HsqldbUtil;
@@ -80,6 +81,12 @@ public class DataSourceBatchConfig {
 			url = url.replaceFirst("localhost", replacement);
 			LOG.info("Nova url para o HSQLDB iniciado em nova porta: " + url);
 		}
+	}
+
+	@Bean
+	@Primary
+	public JdbcTemplate jdbcTemplate() {
+		return new JdbcTemplate(dataSource());
 	}
 
 }
