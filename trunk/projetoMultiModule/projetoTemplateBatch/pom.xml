@@ -14,7 +14,7 @@
 		<groupId>br.com.afrcode.app</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-
+	
 	<dependencies>
         <dependency>
             <groupId>br.com.afrcode.lib</groupId>
@@ -100,6 +100,20 @@
 			<plugin>
 				<groupId>org.eclipse.m2e</groupId>
 				<artifactId>lifecycle-mapping</artifactId>
+			</plugin>
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-jar-plugin</artifactId>
+			    <version>2.4</version>
+			    <configuration>
+			        <archive>
+			            <manifest>
+			                <addClasspath>true</addClasspath>
+			                <classpathPrefix>lib/</classpathPrefix>
+			                <mainClass>br.com.afrcode.main.Executor</mainClass>
+			            </manifest>
+			        </archive>
+			    </configuration>
 			</plugin>
 		</plugins>
 	</build>
