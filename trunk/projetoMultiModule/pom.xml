@@ -31,6 +31,9 @@
 			de negocio! -->
 		<module>projetoTemplateNegocio</module>
 		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto 
+			de negocio! -->
+		<module>projetoTemplateBatch</module>
+		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto 
 			de definição de serviços! -->
 		<module>projetoTemplateIS-api</module>
 		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto 
