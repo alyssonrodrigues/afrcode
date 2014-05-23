@@ -9,79 +9,86 @@
 	<packaging>jar</packaging>
 
 	<parent>
-	    <!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto! -->
+		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto! -->
 		<artifactId>projetoMultiModule</artifactId>
 		<groupId>br.com.afrcode.app</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
+	<properties>
+	    <skipTests>true</skipTests>
+	</properties>
+
 	<dependencies>
-        <dependency>
-            <groupId>br.com.afrcode.lib</groupId>
-            <artifactId>fw_arquitetura_batch</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+		<dependency>
+			<groupId>br.com.afrcode.lib</groupId>
+			<artifactId>fw_arquitetura_batch</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
-        </dependency>
-		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de negocio! -->
-        <dependency>
-            <groupId>br.com.afrcode.app</groupId>
-            <artifactId>projetoTemplateNegocio</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto 
+			de negocio! -->
+		<dependency>
+			<groupId>br.com.afrcode.app</groupId>
+			<artifactId>projetoTemplateNegocio</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
-        </dependency>
-        <!-- Dependências para testes. -->
-		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de negocio! -->
-        <dependency>
-            <groupId>br.com.afrcode.app</groupId>
-            <artifactId>projetoTemplateNegocio</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <classifier>tests</classifier>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>br.com.afrcode.lib</groupId>
-            <artifactId>fw_arquitetura_batch</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <classifier>tests</classifier>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>br.com.afrcode.lib</groupId>
-            <artifactId>fw_arquitetura_sist</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <classifier>tests</classifier>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>br.com.afrcode.lib</groupId>
-            <artifactId>fw_arquitetura_sist_teste</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>br.com.afrcode.lib</groupId>
-            <artifactId>fw_arquitetura_sist_is</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <classifier>tests</classifier>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.openejb</groupId>
-            <artifactId>openejb-core</artifactId>
-            <version>4.0.0</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- FIM Dependências para testes. -->
+		</dependency>
+		<!-- Dependências para testes. -->
+		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto 
+			de negocio! -->
+		<dependency>
+			<groupId>br.com.afrcode.app</groupId>
+			<artifactId>projetoTemplateNegocio</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.afrcode.lib</groupId>
+			<artifactId>fw_arquitetura_batch</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.afrcode.lib</groupId>
+			<artifactId>fw_arquitetura_sist</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.afrcode.lib</groupId>
+			<artifactId>fw_arquitetura_sist_teste</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.afrcode.lib</groupId>
+			<artifactId>fw_arquitetura_sist_is</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.openejb</groupId>
+			<artifactId>openejb-core</artifactId>
+			<version>4.0.0</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- FIM Dependências para testes. -->
 	</dependencies>
 
 	<build>
-		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto batch! -->
+		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto 
+			batch! -->
 		<finalName>projetoTemplateBatch</finalName>
 		<!-- Plugins configurados no projeto agregador em uso. -->
 		<plugins>
@@ -101,21 +108,107 @@
 				<groupId>org.eclipse.m2e</groupId>
 				<artifactId>lifecycle-mapping</artifactId>
 			</plugin>
+			<!-- Configuracoes para MANIFEST a ser gerado. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>br.com.afrcode.main.Executor</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<!-- Configuracoes para copia de dependencias para deploy/lib -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.8</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.basedir}/deploy/lib</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
-			    <artifactId>maven-jar-plugin</artifactId>
-			    <version>2.4</version>
-			    <configuration>
-			        <archive>
-			            <manifest>
-			                <addClasspath>true</addClasspath>
-			                <classpathPrefix>lib/</classpathPrefix>
-			                <mainClass>br.com.afrcode.main.Executor</mainClass>
-			            </manifest>
-			        </archive>
-			    </configuration>
+			    <artifactId>maven-antrun-plugin</artifactId>
+			    <version>1.6</version>
+			    <executions>
+			        <execution>
+			            <id>copy-project-jar</id>
+			            <phase>install</phase>
+			            <configuration>
+			              <target>
+			                  <typedef resource="net/sf/antcontrib/antlib.xml"
+			                      classpath="maven.plugin.classpath" />
+			                  <copy todir="${project.basedir}/deploy"
+			                      file="${project.build.directory}/${project.build.finalName}.${project.packaging}" />
+			              </target>
+			            </configuration>
+			            <goals>
+			                <goal>run</goal>
+			            </goals>
+			        </execution>
+			    </executions>
+			    <dependencies>
+			        <dependency>
+			            <groupId>ant-contrib</groupId>
+			            <artifactId>ant-contrib</artifactId>
+			            <version>1.0b3</version>
+			            <exclusions>
+			                <exclusion>
+			                    <groupId>ant</groupId>
+			                    <artifactId>ant</artifactId>
+			                </exclusion>
+			            </exclusions>
+			        </dependency>
+			    </dependencies>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<!-- copy-dependency plugin -->
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<versionRange>[1.0.0,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 </project>
