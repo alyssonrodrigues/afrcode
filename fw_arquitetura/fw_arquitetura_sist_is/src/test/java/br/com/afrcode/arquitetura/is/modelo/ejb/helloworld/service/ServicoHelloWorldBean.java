@@ -3,13 +3,14 @@ package br.com.afrcode.arquitetura.is.modelo.ejb.helloworld.service;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 
-import br.com.afrcode.arquitetura.is.util.ejb.AbstractServicoEJB;
+import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 @Stateless
 @Remote(IServicoHelloWorld.class)
-public class ServicoHelloWorldBean extends AbstractServicoEJB implements
-		IServicoHelloWorld {
+@Interceptors({ SpringBeanAutowiringInterceptor.class })
+public class ServicoHelloWorldBean implements IServicoHelloWorld {
 
 	@Override
 	@RolesAllowed("FUNCAO_QUALQUER_A_SER_IGNORADA_EM_TU")

@@ -4,10 +4,10 @@ import java.util.Collection;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import br.com.afrcode.arquitetura.is.util.ejb.AbstractServicoEJB;
+import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 /**
  * Stateless session bean para exposição dos serviços definidos em
@@ -17,8 +17,9 @@ import br.com.afrcode.arquitetura.is.util.ejb.AbstractServicoEJB;
  */
 @Stateless
 @Remote(IServicoConsultaUmObjetoEmMemoria.class)
-public class ServicoConsultaUmObjetoEmMemoriaBean extends AbstractServicoEJB
-		implements IServicoConsultaUmObjetoEmMemoria {
+@Interceptors({ SpringBeanAutowiringInterceptor.class })
+public class ServicoConsultaUmObjetoEmMemoriaBean implements
+		IServicoConsultaUmObjetoEmMemoria {
 
 	@Autowired
 	private DaoUmObjetoEmMemoria daoUmObjetoEmMemoria;
