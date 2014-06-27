@@ -10,6 +10,8 @@ import org.springframework.ejb.access.SimpleRemoteStatelessSessionProxyFactoryBe
 
 public class OpenEJB3ConfigUtil {
 
+	private static final String OPENEJB_LOGGER_EXTERNAL = "openejb.logger.external";
+	private static final String OPENEJB_LOCALCOPY = "openejb.localcopy";
 	private static final String MSG_DEP_ARQ_SIST_IS_TESTS = "Vefique em seu pom.xml a dependência ADICIONAL para "
 			+ "fw_arquitetura_sist_is, scope test, classifier tests!";
 	private static final String OPENEJB_CONF_FILE = "openejb.conf.file";
@@ -41,10 +43,12 @@ public class OpenEJB3ConfigUtil {
 		// O OpenEJB será iniciado preguiçosamente no primeiro acesso ao context
 		// factory JNDI informado.
 		// Para uso real em aplicações não é necessário informar o context
-		// factory JNDI, pois o mesmo será obtido via JBoss EJB Module.
+		// factory JNDI, pois o mesmo será obtido via JBoss EJB
+		// Module.
 		props.put(Context.INITIAL_CONTEXT_FACTORY,
-				"org.apache.openejb.client.LocalInitialContextFactory");
-		System.setProperty("openejb.logger.external", "true");
+				"org.apache.openejb.core.LocalInitialContextFactory");
+		System.setProperty(OPENEJB_LOGGER_EXTERNAL, Boolean.TRUE.toString());
+		props.put(OPENEJB_LOGGER_EXTERNAL, Boolean.TRUE.toString());
 		final ClassLoader ctxCl = Thread.currentThread()
 				.getContextClassLoader();
 		Validate.notNull(ctxCl, "ContextClassLoader null!");
@@ -53,6 +57,8 @@ public class OpenEJB3ConfigUtil {
 		String urlOpenEjbConfigStr = resource.toExternalForm();
 		System.setProperty(OPENEJB_CONF_FILE, urlOpenEjbConfigStr);
 		props.put(OPENEJB_CONF_FILE, urlOpenEjbConfigStr);
+		System.setProperty(OPENEJB_LOCALCOPY, Boolean.FALSE.toString());
+		props.put(OPENEJB_LOCALCOPY, Boolean.FALSE.toString());
 	}
 
 	private static void configurarLoginModule(Properties props) {
