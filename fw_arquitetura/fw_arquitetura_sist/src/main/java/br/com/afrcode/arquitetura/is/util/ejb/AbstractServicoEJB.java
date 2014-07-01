@@ -9,7 +9,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
  * 
  */
 @Interceptors({ SpringBeanAutowiringInterceptor.class,
-		ExcecoesInterceptor.class })
+		ExcecoesInterceptor.class, AutenticadorInterceptor.class })
 public abstract class AbstractServicoEJB {
 
 }

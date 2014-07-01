@@ -16,6 +16,10 @@ import org.springframework.context.access.ContextSingletonBeanFactoryLocator;
  */
 public class EJBSpringApplicationContextUtils {
 
+	public static <T> T getBean(Class<T> tipoBean) {
+		return getApplicationContext().getBean(tipoBean);
+	}
+
 	public static BeanFactory getBeanFactory() {
 		BeanFactoryLocator beanFactoryLocator = ContextSingletonBeanFactoryLocator
 				.getInstance();

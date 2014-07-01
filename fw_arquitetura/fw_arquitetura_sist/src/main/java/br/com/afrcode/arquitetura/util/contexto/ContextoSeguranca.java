@@ -26,6 +26,7 @@ public class ContextoSeguranca extends ContextoSegurancaAbstrato {
 	public User getUsuarioAutenticado() {
 		User usuario = null;
 		Authentication auth = getAuthentication();
+		Validate.notNull(auth);
 		Object principal = auth.getPrincipal();
 		Validate.notNull(principal, "Deveria existir um usuário autenticado!");
 
