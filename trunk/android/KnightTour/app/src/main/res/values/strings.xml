@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">KnightTour</string>
+    <string name="greetings_msg">Welcome to Knight\'s tour app. Click somewhere on the chessboard to start.</string>
+    <string name="action_restart">Restart</string>
+    <string name="done_msg">Done</string>
+
+</resources>
