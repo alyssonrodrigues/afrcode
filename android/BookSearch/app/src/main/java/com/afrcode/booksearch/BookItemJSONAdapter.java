@@ -18,7 +18,6 @@ import org.json.JSONObject;
  */
 public class BookItemJSONAdapter extends BaseAdapter {
     public static final String IMAGE_URL_BASE = "http://covers.openlibrary.org/b/id/";
-
     private Context mContext;
     private LayoutInflater mInflater;
     private JSONArray mJsonArray;
