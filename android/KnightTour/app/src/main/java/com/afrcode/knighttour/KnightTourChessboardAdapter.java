@@ -1,12 +1,10 @@
 package com.afrcode.knighttour;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -16,9 +14,11 @@ public class KnightTourChessboardAdapter extends BaseAdapter {
     public static final int CHESSBOARD_POSITIONS = 64;
     public static final int CHESSBOARD_COLUMNS_X_LINES = 8;
     private Context context;
+    private LayoutInflater inflater;
 
-    public KnightTourChessboardAdapter(Context context) {
+    public KnightTourChessboardAdapter(Context context, LayoutInflater inflater) {
         this.context = context;
+        this.inflater = inflater;
     }
 
     @Override
@@ -40,16 +40,10 @@ public class KnightTourChessboardAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView chessboardPositionTxtView = null;
         if (convertView == null) {
-            ImageView chessboardPositionImgView = new ImageView(context);
-            chessboardPositionImgView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            chessboardPositionImgView.setPadding(0, 0, 0, 0);
-            int imgId = getImgId(position);
-            chessboardPositionImgView.setImageResource(imgId);
-
-            chessboardPositionTxtView = new TextView(context);
-            chessboardPositionTxtView.setGravity(Gravity.CENTER);
-            chessboardPositionTxtView.setTextColor(Color.BLUE);
-            chessboardPositionTxtView.setBackground(chessboardPositionImgView.getDrawable());
+            convertView = inflater.inflate(R.layout.chessboard_position, null);
+            chessboardPositionTxtView = TextView.class.cast(convertView.findViewById(
+                    R.id.chessboardPositionTxtView));
+            chessboardPositionTxtView.setBackgroundResource(getImgId(position));
             chessboardPositionTxtView.setOnClickListener(
                     new ChessboardPositionTxtViewOnItemClickListener(position));
         } else {

@@ -22,7 +22,7 @@ public class KnightTourFragment extends Fragment {
 
         GridView chessboardGridView = GridView.class.cast(
                 rootView.findViewById(R.id.chessboardGridView));
-        chessboardGridView.setAdapter(new KnightTourChessboardAdapter(getActivity()));
+        chessboardGridView.setAdapter(new KnightTourChessboardAdapter(getActivity(), inflater));
 
         return rootView;
     }
