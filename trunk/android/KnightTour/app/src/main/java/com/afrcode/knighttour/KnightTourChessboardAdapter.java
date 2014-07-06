@@ -38,19 +38,21 @@ public class KnightTourChessboardAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView chessboardPositionTxtView = null;
+        ViewHolder holder;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.chessboard_position, null);
-            chessboardPositionTxtView = TextView.class.cast(convertView.findViewById(
+            holder = new ViewHolder();
+            holder.chessboardPositionTxtView = TextView.class.cast(convertView.findViewById(
                     R.id.chessboardPositionTxtView));
-            chessboardPositionTxtView.setBackgroundResource(getImgId(position));
-            chessboardPositionTxtView.setOnClickListener(
+            holder.chessboardPositionTxtView.setBackgroundResource(getImgId(position));
+            holder.chessboardPositionTxtView.setOnClickListener(
                     new ChessboardPositionTxtViewOnItemClickListener(position));
+            convertView.setTag(holder);
         } else {
-            chessboardPositionTxtView = TextView.class.cast(convertView);
+            holder = ViewHolder.class.cast(convertView.getTag());
         }
-        chessboardPositionTxtView.setText("");
-        return chessboardPositionTxtView;
+        holder.chessboardPositionTxtView.setText("");
+        return convertView;
     }
 
     private int getImgId(int position) {
@@ -81,5 +83,10 @@ public class KnightTourChessboardAdapter extends BaseAdapter {
     public void restart() {
         notifyDataSetChanged();
     }
+
+    private static class ViewHolder {
+        public TextView chessboardPositionTxtView;
+    }
+
 }
 
