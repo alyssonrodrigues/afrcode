@@ -29,13 +29,13 @@ public class ServicoTransactionBean extends AbstractServicoEJB implements
 			@Override
 			public V doInTransaction(TransactionStatus status) {
 				try {
-          // Chamada ao código cliente de TU.
+            // Chamada ao código cliente de TU.
 					return callable.call();
 				} catch (Exception e) {
 					throw new ExcecaoNaoPrevistaRemota(e);
         } finally {
-          // Demarcação de rollback por padrão para TU.
-          status.setRollbackOnly();
+        // Demarcação de rollback por padrão para TU.
+        status.setRollbackOnly();
 			  }
 		});
 	}
