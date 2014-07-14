@@ -13,7 +13,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import br.com.afrcode.arquitetura.is.util.excecao.ExcecaoNaoPrevistaRemota;
 
 /**
- * EJB utilit·rio para execuÁ„o de TUs de EJBs segundo documentaÁ„o
+ * EJB utilit√°rio para execu√ß√£o de TUs de EJBs segundo documenta√ß√£o
  * http://tomee.apache.org/unit-testing-transactions.html.
  */
 @Stateless
@@ -29,11 +29,14 @@ public class ServicoTransactionBean extends AbstractServicoEJB implements
 			@Override
 			public V doInTransaction(TransactionStatus status) {
 				try {
+          // Chamada ao c√≥digo cliente de TU.
 					return callable.call();
 				} catch (Exception e) {
 					throw new ExcecaoNaoPrevistaRemota(e);
-				}
-			}
+        } finally {
+          // Demarca√ß√£o de rollback por padr√£o para TU.
+          status.setRollbackOnly();
+			  }
 		});
 	}
 
