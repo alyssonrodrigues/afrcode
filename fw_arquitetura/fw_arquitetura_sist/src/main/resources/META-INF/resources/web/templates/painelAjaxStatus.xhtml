@@ -6,15 +6,16 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:ajaxStatus style="width:16px;height:16px;" id="ajaxStatusPanel">
-		<f:facet name="start">
-			<h:graphicImage
-				url="#{request.scheme}://#{request.serverName}:#{request.serverPort}/#{request.contextPath}/javax.faces.resource/ajaxloading.gif.xhtml?ln=web/imagens" />
-		</f:facet>
-		<f:facet name="complete">
-			<h:outputText value="" />
-		</f:facet>
-	</p:ajaxStatus>
+	<p:ajaxStatus id="ajaxStatusPanel" 
+	    onstart="PF('widgetVarStatusDialog').show()"
+	    onsuccess="PF('widgetVarStatusDialog').hide()" />
+
+	<p:dialog widgetVar="widgetVarStatusDialog" modal="true" draggable="false" closable="false" 
+	    resizable="false" 
+	    showHeader="false">
+		<h:graphicImage
+			url="#{request.scheme}://#{request.serverName}:#{request.serverPort}/#{request.contextPath}/javax.faces.resource/ajaxloading.gif.xhtml?ln=web/imagens" />
+	</p:dialog>
 
 </ui:composition>
 
