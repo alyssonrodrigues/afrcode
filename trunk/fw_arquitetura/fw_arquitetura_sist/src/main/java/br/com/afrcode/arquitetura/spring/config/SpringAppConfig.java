@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * Classe central de configuraÁ„o do contexto Spring para aplicaÁ„o.
+ * Classe central de configura√ß√£o do contexto Spring para aplica√ß√£o.
  * 
  * 
  */
@@ -23,10 +23,10 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 // Spring.
 @ComponentScan(basePackages = { "br.com.afrcode" })
 // Configuracoes para uso do AspectJ support do Spring com CGLIB.
-// proxyTargetClass = true => Devemos usar CGLIB e n„o javaassist para que o
+// proxyTargetClass = true => Devemos usar CGLIB e n√£o javaassist para que o
 // autowiring por tipo do Spring continue funcional.
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-// Configuracoes para uso do Spring TaskScheduler para execuÁ„o de rotinas
+// Configuracoes para uso do Spring TaskScheduler para execu√ß√£o de rotinas
 // em background.
 @EnableScheduling
 @Profile({ Profiles.PROFILE_APLICACAO, Profiles.PROFILE_APLICACAO_BATCH })
@@ -40,10 +40,10 @@ public class SpringAppConfig {
 	}
 
 	/**
-	 * Bean respons·vel por obter mensagens atravÈs de seus cÛdigos via arquivos
+	 * Bean respons√°vel por obter mensagens atrav√©s de seus c√≥digos via arquivos
 	 * de messages resources (.properties).
 	 * 
-	 * TODO: rever se este bean n„o deveria estar presente no profile de TUs.
+	 * TODO: rever se este bean n√£o deveria estar presente no profile de TUs.
 	 * 
 	 * @return
 	 */
@@ -59,5 +59,12 @@ public class SpringAppConfig {
 		messageSource.setBasenames(messagesResources);
 		return messageSource;
 	}
+
+    @Bean
+    public TaskScheduler taskScheduler() {
+        ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+        return new ConcurrentTaskScheduler(scheduledExecutorService);
+
+    }
 
 }
