@@ -13,9 +13,9 @@
 	</parent>
 
 	<properties>
-		<hibernateVersion>4.1.7.Final</hibernateVersion>
-		<hibernateValidatorVersion>4.3.0.Final</hibernateValidatorVersion>
-		<primefacesVersion>4.0</primefacesVersion>
+		<hibernateVersion>4.2.15.Final</hibernateVersion>
+		<hibernateValidatorVersion>4.3.2.Final</hibernateValidatorVersion>
+		<primefacesVersion>5.0</primefacesVersion>
 		<joda-time.version>2.2</joda-time.version>
 		<usertype.core.version>3.1.0.CR6</usertype.core.version>
 		<springMailVersion>4.0.0.RELEASE</springMailVersion>
@@ -225,6 +225,12 @@
 			<version>1.6.4</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.18.2-GA</version>
+			<scope>compile</scope>
+		</dependency>
 		<!-- FIM Depedencias Hibernate -->
 		<!-- Dependencias Java EE JBoss -->
 		<dependency>
@@ -234,8 +240,8 @@
 			<type>pom</type>
 			<scope>compile</scope>
 		</dependency>
-		<!-- Até o momento presente a dependência abaixo só é necessária para acesso 
-			ao código fonte de implementação do JSF. Ou seja, se for necessário é possível 
+		<!-- AtÃ© o momento presente a dependÃªncia abaixo sÃ³ Ã© necessÃ¡ria para acesso 
+			ao cÃ³digo fonte de implementaÃ§Ã£o do JSF. Ou seja, se for necessÃ¡rio Ã© possÃ­vel 
 			ter acesso ao fonte via Maven Download Sources. -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
@@ -244,14 +250,14 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- FIM Dependencias Java EE JBoss -->
-		<!-- Dependências para drivers JDBC. -->
+		<!-- DependÃªncias para drivers JDBC. -->
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>2.2.9</version>
 			<scope>compile</scope>
 		</dependency>
-		<!-- FIM Dependências para drivers JDBC. -->
+		<!-- FIM DependÃªncias para drivers JDBC. -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -288,7 +294,7 @@
 			<version>3.2.1</version>
 			<scope>compile</scope>
 		</dependency>
-		<!-- Dependências Jodatime -->
+		<!-- DependÃªncias Jodatime -->
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
@@ -299,8 +305,8 @@
 			<artifactId>usertype.core</artifactId>
 			<version>${usertype.core.version}</version>
 		</dependency>
-		<!-- FIM Dependências Jodatime -->
-		<!-- Dependências para testes -->
+		<!-- FIM DependÃªncias Jodatime -->
+		<!-- DependÃªncias para testes -->
 		<dependency>
 			<groupId>br.com.afrcode.lib</groupId>
 			<artifactId>fw_arquitetura_sist_teste</artifactId>
@@ -326,7 +332,7 @@
 			<version>4.0.0</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- FIM Dependências para testes -->
+		<!-- FIM DependÃªncias para testes -->
 	</dependencies>
 
 	<build>
