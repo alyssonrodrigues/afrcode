@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>br.com.afrcode.lib</groupId>
 			<artifactId>fw_arquitetura_batch</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${fwarquitetura.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto 
@@ -47,27 +47,27 @@
 		<dependency>
 			<groupId>br.com.afrcode.lib</groupId>
 			<artifactId>fw_arquitetura_batch</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${fwarquitetura.version}</version>
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>br.com.afrcode.lib</groupId>
 			<artifactId>fw_arquitetura_sist</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${fwarquitetura.version}</version>
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>br.com.afrcode.lib</groupId>
 			<artifactId>fw_arquitetura_sist_teste</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${fwarquitetura.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>br.com.afrcode.lib</groupId>
 			<artifactId>fw_arquitetura_sist_is</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${fwarquitetura.version}</version>
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>

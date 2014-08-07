@@ -11,6 +11,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
+	    <fwarquitetura.version>0.0.1-SNAPSHOT</fwarquitetura.version>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<skipTests>false</skipTests>
 		<maven-resources-plugin.version>2.6</maven-resources-plugin.version>
