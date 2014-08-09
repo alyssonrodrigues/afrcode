@@ -31,9 +31,13 @@ public class AutenticadorInterceptor {
 	@Resource
 	private EJBContext ejbContext;
 
+	@Resource(name = "java:app/AppName")
+	private String appName;
+
 	private AuthenticationProviderImpl getAuthenticationProviderImpl() {
-		AuthenticationProviderImpl authenticationProviderImpl = EJBSpringApplicationContextUtils
-				.getBean(AuthenticationProviderImpl.class);
+		AuthenticationProviderImpl authenticationProviderImpl =
+				EJBSpringApplicationContextUtils
+						.getBean(AuthenticationProviderImpl.class);
 		return authenticationProviderImpl;
 	}
 
@@ -45,8 +49,8 @@ public class AutenticadorInterceptor {
 	}
 
 	private void repassarCredenciais(String username) {
-		Environment environment = EJBSpringApplicationContextUtils
-				.getBean(Environment.class);
+		Environment environment =
+				EJBSpringApplicationContextUtils.getBean(Environment.class);
 		if (!Arrays.asList(environment.getActiveProfiles()).contains(
 				Profiles.PROFILE_TU)) {
 			repassarCredenciaisParaAplicacao(username);
@@ -55,16 +59,19 @@ public class AutenticadorInterceptor {
 
 	private void repassarCredenciaisParaAplicacao(String username) {
 		// Obtém credenciais via UserDetailsService.
-		UserDetailsServiceImpl userDetailsServiceImpl = EJBSpringApplicationContextUtils
-				.getBean(UserDetailsServiceImpl.class);
+		UserDetailsServiceImpl userDetailsServiceImpl =
+				EJBSpringApplicationContextUtils
+						.getBean(UserDetailsServiceImpl.class);
 		UserDetails user = userDetailsServiceImpl.loadUserByUsername(username);
-		UsernamePasswordAuthenticationToken usrPasswdToken = new UsernamePasswordAuthenticationToken(
-				user.getUsername(), user.getPassword(), user.getAuthorities());
+		UsernamePasswordAuthenticationToken usrPasswdToken =
+				new UsernamePasswordAuthenticationToken(user.getUsername(),
+						user.getPassword(), user.getAuthorities());
 
 		// Repassando credenciais ao Spring Security.
-		AuthenticationProviderImpl authenticationProviderImpl = getAuthenticationProviderImpl();
-		Authentication authentication = authenticationProviderImpl
-				.authenticate(usrPasswdToken);
+		AuthenticationProviderImpl authenticationProviderImpl =
+				getAuthenticationProviderImpl();
+		Authentication authentication =
+				authenticationProviderImpl.authenticate(usrPasswdToken);
 		Validate.notNull(
 				authentication,
 				"Houve falha no repasse via EjbContext de credenciais de usuário ao Spring Security!");
