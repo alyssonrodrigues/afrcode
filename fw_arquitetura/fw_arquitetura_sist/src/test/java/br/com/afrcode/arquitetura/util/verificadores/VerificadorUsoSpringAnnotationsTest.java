@@ -27,6 +27,7 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmM
 import br.com.afrcode.arquitetura.teste.unitario.util.logging.ComponentLoggingAspect;
 import br.com.afrcode.arquitetura.util.contexto.ApplicationContextUtils;
 import br.com.afrcode.arquitetura.util.dao.ExecutorTUCRUDDaoUtil;
+import br.com.afrcode.arquitetura.util.hsqldb.HsqldbSchemaUtil;
 import br.com.afrcode.arquitetura.util.hsqldb.HsqldbUtil;
 
 public class VerificadorUsoSpringAnnotationsTest extends
@@ -42,23 +43,28 @@ public class VerificadorUsoSpringAnnotationsTest extends
 	 */
 	@Test
 	public void verificarTodoBeanSpringUsaAnotacaoPrevistaSpring() {
-		Set<BeanDefinition> beansSpring = springAnnotationsClasspathScanner
-				.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
+		Set<BeanDefinition> beansSpring =
+				springAnnotationsClasspathScanner
+						.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
 
-		List<String> anotacoesSpring = Arrays.asList(new String[] {
-				Componente.class.getSimpleName(),
-				Servico.class.getSimpleName(), Dao.class.getSimpleName(),
-				Povoador.class.getSimpleName() });
+		List<String> anotacoesSpring =
+				Arrays.asList(new String[] { Componente.class.getSimpleName(),
+						Servico.class.getSimpleName(),
+						Dao.class.getSimpleName(),
+						Povoador.class.getSimpleName() });
 
-		List<String> excecoesARegra = Arrays.asList(new String[] {
-				ServicoConsultaUmObjetoEmMemoriaRmi.class.getName(),
-				HsqldbUtil.class.getName(),
-				DaoUmObjetoEmMemoria.class.getName(),
-				ComponentLoggingAspect.class.getName(),
-				ApplicationContextUtils.class.getName(),
-				ExecutorTUCRUDDaoUtil.class.getName(),
-				QueueSender.class.getName(), QueueListener.class.getName(),
-				JmsExceptionListener.class.getName() });
+		List<String> excecoesARegra =
+				Arrays.asList(new String[] {
+						ServicoConsultaUmObjetoEmMemoriaRmi.class.getName(),
+						HsqldbUtil.class.getName(),
+						HsqldbSchemaUtil.class.getName(),
+						DaoUmObjetoEmMemoria.class.getName(),
+						ComponentLoggingAspect.class.getName(),
+						ApplicationContextUtils.class.getName(),
+						ExecutorTUCRUDDaoUtil.class.getName(),
+						QueueSender.class.getName(),
+						QueueListener.class.getName(),
+						JmsExceptionListener.class.getName() });
 
 		Set<String> beansSpringSemAnotacao = new HashSet<String>();
 		for (BeanDefinition beanSpring : beansSpring) {
