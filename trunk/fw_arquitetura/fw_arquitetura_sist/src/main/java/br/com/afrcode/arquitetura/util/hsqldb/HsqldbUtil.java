@@ -1,8 +1,6 @@
 package br.com.afrcode.arquitetura.util.hsqldb;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
@@ -40,13 +38,17 @@ import br.com.afrcode.arquitetura.util.excecao.ExcecaoNaoPrevista;
  */
 @Component
 public class HsqldbUtil {
-	private static final String MSG_FALHA_STARTUP_HSQLDB_DEVIDO_A_OUTRA_INSTANCIA_EM_EXECUCAO = "Possível falha de startup de HSQLDB devido a outra instância de HSQLDB já em execução!";
+	private static final String MSG_FALHA_STARTUP_HSQLDB_DEVIDO_A_OUTRA_INSTANCIA_EM_EXECUCAO =
+			"Possível falha de startup de HSQLDB devido a outra instância de HSQLDB já em execução!";
 
-	private static final String PROP_EXECUTANDO_TESTE_FUNCIONAL = "executandoTesteFuncional";
+	private static final String PROP_EXECUTANDO_TESTE_FUNCIONAL =
+			"executandoTesteFuncional";
 
-	private static final String PROP_EXECUTANDO_TESTE_INTEGRACAO = "executandoTesteIntegracao";
+	private static final String PROP_EXECUTANDO_TESTE_INTEGRACAO =
+			"executandoTesteIntegracao";
 
-	private static final String PROP_EXECUTANDO_POVOADOR_STAND_ALONE = "executandoPovoadorStandAlone";
+	private static final String PROP_EXECUTANDO_POVOADOR_STAND_ALONE =
+			"executandoPovoadorStandAlone";
 
 	private static final String DATABASE_NAME_PADRAO = "testdb";
 
@@ -122,13 +124,15 @@ public class HsqldbUtil {
 	private String getDatabaseName() {
 		String databaseName = DATABASE_NAME_PADRAO;
 		try {
-			Resource resource = applicationContext
-					.getResource("classpath:hibernate-jpaProperties.properties");
+			Resource resource =
+					applicationContext
+							.getResource("classpath:hibernate-jpaProperties.properties");
 			if (resource != null) {
-				Properties hibernateProperties = PropertiesLoaderUtils
-						.loadProperties(resource);
-				String url = (String) hibernateProperties
-						.get("hibernate.connection.url");
+				Properties hibernateProperties =
+						PropertiesLoaderUtils.loadProperties(resource);
+				String url =
+						(String) hibernateProperties
+								.get("hibernate.connection.url");
 				if (url != null) {
 					databaseName = url.substring(url.lastIndexOf("/") + 1);
 				}
@@ -173,8 +177,9 @@ public class HsqldbUtil {
 			// Nova porta = 9001 + (1,2,3..., 100)
 			final int cem = 100;
 			final int um = 1;
-			int port = ServerConstants.SC_DEFAULT_HSQL_SERVER_PORT
-					+ random.nextInt(cem) + um;
+			int port =
+					ServerConstants.SC_DEFAULT_HSQL_SERVER_PORT
+							+ random.nextInt(cem) + um;
 
 			LOG.info("Nova tentativa de startup de HSQLDB em nova porta: "
 					+ port);
@@ -191,8 +196,8 @@ public class HsqldbUtil {
 	}
 
 	public Boolean isExecutandoPovoadorStandAlone() {
-		String property = System
-				.getProperty(PROP_EXECUTANDO_POVOADOR_STAND_ALONE);
+		String property =
+				System.getProperty(PROP_EXECUTANDO_POVOADOR_STAND_ALONE);
 		return StringUtils.isNotBlank(property) ? Boolean.valueOf(property)
 				: false;
 	}
@@ -209,32 +214,29 @@ public class HsqldbUtil {
 				: false;
 	}
 
-	private boolean isHsqldbEmUsoParaAplicacao() {
+	public boolean isHsqldbEmUsoParaAplicacao() {
 		final String HSQLDB_DIALECT = "org.hibernate.dialect.HSQLDialect";
-		boolean hsqldbEmUsoParaAplicacao = StringUtils
-				.isNotBlank(hibernateDialect) ? hibernateDialect
-				.equals(HSQLDB_DIALECT) : false;
+		boolean hsqldbEmUsoParaAplicacao =
+				StringUtils.isNotBlank(hibernateDialect) ? hibernateDialect
+						.equals(HSQLDB_DIALECT) : false;
 		return isProfileAplicacaoAtivo() && hsqldbEmUsoParaAplicacao;
 	}
 
 	public boolean isHsqldbEmUsoParaTU() {
 		final String HSQLDB_DIALECT = "org.hibernate.dialect.HSQLDialect";
-		boolean hsqldbEmUsoParaTU = StringUtils.isNotBlank(hibernateDialectTU) ? hibernateDialectTU
-				.equals(HSQLDB_DIALECT) : false;
+		boolean hsqldbEmUsoParaTU =
+				StringUtils.isNotBlank(hibernateDialectTU) ? hibernateDialectTU
+						.equals(HSQLDB_DIALECT) : false;
 		return isProfileTUAtivo() && hsqldbEmUsoParaTU;
 	}
 
 	private boolean isProfileAplicacaoAtivo() {
-		List<String> activeProfiles = Arrays.asList(applicationContext
-				.getEnvironment().getActiveProfiles());
-		return activeProfiles.contains(Profiles.PROFILE_APLICACAO)
-				|| activeProfiles.contains(Profiles.PROFILE_APLICACAO_BATCH);
+		return Profiles.isProfileAplicacaoAtivo(applicationContext
+				.getEnvironment());
 	}
 
 	private boolean isProfileTUAtivo() {
-		List<String> activeProfiles = Arrays.asList(applicationContext
-				.getEnvironment().getActiveProfiles());
-		return activeProfiles.contains(Profiles.PROFILE_TU);
+		return Profiles.isProfileTUAtivo(applicationContext.getEnvironment());
 	}
 
 	public boolean isServerPortDefault() {
