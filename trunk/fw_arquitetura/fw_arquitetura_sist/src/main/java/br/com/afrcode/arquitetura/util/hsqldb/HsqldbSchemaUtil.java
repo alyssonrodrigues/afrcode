@@ -30,7 +30,7 @@ public class HsqldbSchemaUtil {
 	@Autowired
 	private HsqldbUtil hsqldbUtil;
 
-	protected void criarDefaultSchemaSeNecessario(String nomePropriedade) {
+	private void criarDefaultSchemaSeNecessario(String nomePropriedade) {
 		String nome =
 				applicationContext.getEnvironment()
 						.getProperty(nomePropriedade);
@@ -50,7 +50,7 @@ public class HsqldbSchemaUtil {
 	}
 
 	@PostConstruct
-	public void criarDefaultSchemaSeTUOuAplicacaoComHsqldb() {
+	protected void criarDefaultSchemaSeTUOuAplicacaoComHsqldb() {
 		if (!hsqldbUtil.isEjbSpringApplicationContext()
 				&& !hsqldbUtil.isExecutandoPovoadorStandAlone()
 				&& !hsqldbUtil.isExecutandoTesteFuncional()
