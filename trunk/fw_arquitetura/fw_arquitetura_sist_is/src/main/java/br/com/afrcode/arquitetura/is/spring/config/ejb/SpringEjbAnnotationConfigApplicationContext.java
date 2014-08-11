@@ -1,15 +1,16 @@
 package br.com.afrcode.arquitetura.is.spring.config.ejb;
 
+import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
+
+import br.com.afrcode.arquitetura.util.contexto.ApplicationContextUtils;
 
 /**
- * Subclasse de AnnotationConfigApplicationContext com classificador de contexto
- * para EJBs.
- * 
- * 
+ * Subclasse de GenericApplicationContext com classificador de contexto para EJBs.
  */
-public class SpringEjbAnnotationConfigApplicationContext extends
-		AnnotationConfigApplicationContext {
+public class SpringEjbAnnotationConfigApplicationContext extends GenericApplicationContext {
     private static final Logger LOG = Logger.getLogger(SpringEjbAnnotationConfigApplicationContext.class);
 
     public SpringEjbAnnotationConfigApplicationContext(String... basePackages) {
