@@ -8,8 +8,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
  * Classe base para definição de EJBs.
  * 
  */
-@Interceptors({ SpringBeanAutowiringInterceptor.class,
-		ExcecoesInterceptor.class, AutenticadorInterceptor.class })
+@Interceptors({ SpringBeanAutowiringInterceptor.class, ExcecoesInterceptor.class, AutenticadorInterceptor.class })
 public abstract class AbstractServicoEJB {
 
 }

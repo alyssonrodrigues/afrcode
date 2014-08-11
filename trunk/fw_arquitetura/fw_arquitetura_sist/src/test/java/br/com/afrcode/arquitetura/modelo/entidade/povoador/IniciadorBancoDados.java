@@ -3,10 +3,13 @@ package br.com.afrcode.arquitetura.modelo.entidade.povoador;
 import br.com.afrcode.arquitetura.spring.anotacoes.Povoador;
 
 /**
- * Classe cuja responsabilidade é iniciar o banco de dados com um schema inicial sem dados.
+ * Classe cuja responsabilidade é iniciar o banco de dados com um schema inicial
+ * sem dados.
  * 
- * Via configurações de TESTES presentes em projeto/src/main/resources/hibernate-jpaProperties.properties é executado um
- * schema drop-create via Hibernate tools com base nas entidades encontradas em classpath.
+ * Via configurações de TESTES presentes em
+ * projeto/src/main/resources/hibernate-jpaProperties.properties é executado um
+ * schema drop-create via Hibernate tools com base nas entidades encontradas em
+ * classpath.
  * 
  * 
  */

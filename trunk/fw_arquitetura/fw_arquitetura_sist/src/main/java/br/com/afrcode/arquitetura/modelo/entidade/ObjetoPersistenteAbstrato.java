@@ -8,11 +8,12 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
 /**
- * Superclasse dos objetos persistentes MappedSuperclass.
- * Definição da estratégia de controle de lock otimista através do campo versao.
+ * Superclasse dos objetos persistentes MappedSuperclass. Definição da
+ * estratégia de controle de lock otimista através do campo versao.
  * 
  * 
- * @param <TIPOID> Tipo do ID (Long, Integer, String, etc.)
+ * @param <TIPOID>
+ *            Tipo do ID (Long, Integer, String, etc.)
  * 
  */
 @MappedSuperclass
@@ -24,7 +25,8 @@ public abstract class ObjetoPersistenteAbstrato extends EntidadeAbstrata<Long> {
 
     public static final String JODA_TIME_TYPE = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime";
 
-    public static final String JODA_YEAR_MONTH_TYPE = "org.jadira.usertype.dateandtime.joda.PersistentYearMonthAsString";
+    public static final String JODA_YEAR_MONTH_TYPE =
+            "org.jadira.usertype.dateandtime.joda.PersistentYearMonthAsString";
 
     private static final long serialVersionUID = 1L;
 
@@ -52,14 +54,16 @@ public abstract class ObjetoPersistenteAbstrato extends EntidadeAbstrata<Long> {
     }
 
     /**
-     * @param id the id to set
+     * @param id
+     *            the id to set
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * @param versao the versao to set
+     * @param versao
+     *            the versao to set
      */
     public void setVersao(Long versao) {
         this.versao = versao;

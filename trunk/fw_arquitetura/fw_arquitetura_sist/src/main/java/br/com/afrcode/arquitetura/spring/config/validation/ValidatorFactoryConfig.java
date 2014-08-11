@@ -14,13 +14,12 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
  * 
  */
 @Configuration
-@Profile({ Profiles.PROFILE_TU, Profiles.PROFILE_APLICACAO,
-		Profiles.PROFILE_APLICACAO_BATCH })
+@Profile({ Profiles.PROFILE_TU, Profiles.PROFILE_APLICACAO, Profiles.PROFILE_APLICACAO_BATCH })
 public class ValidatorFactoryConfig {
 
-	@Bean
-	public LocalValidatorFactoryBean validatorFactory() {
-		return new LocalValidatorFactoryBean();
-	}
+    @Bean
+    public LocalValidatorFactoryBean validatorFactory() {
+        return new LocalValidatorFactoryBean();
+    }
 
 }

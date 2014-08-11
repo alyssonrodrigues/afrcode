@@ -9,8 +9,8 @@ import java.util.Collection;
  */
 public interface IServicoConsultaUmObjetoEmMemoria {
 
-	public Collection<UmObjetoEmMemoria> listar();
+    public Collection<UmObjetoEmMemoria> listar();
 
-	public UmObjetoEmMemoria recuperarPorId(Long id);
+    public UmObjetoEmMemoria recuperarPorId(Long id);
 
 }

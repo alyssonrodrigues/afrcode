@@ -21,15 +21,15 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Configuration
 public class ManagedBeanTesteClasspathScannerConfig {
 
-	@Bean
-	public ClassPathScanningCandidateComponentScanner managedBeanTesteClasspathScanner() {
-		ClassPathScanningCandidateComponentScanner managedBeanTesteClasspathScanner = new ClassPathScanningCandidateComponentScanner();
-		for (String regExpInclude : ConstantesPadroes.REGS_EXP_TESTES_MBEAN) {
-			managedBeanTesteClasspathScanner
-					.addIncludeFilter(new RegexPatternTypeFilter(Pattern
-							.compile(regExpInclude)));
-		}
-		return managedBeanTesteClasspathScanner;
-	}
+    @Bean
+    public ClassPathScanningCandidateComponentScanner managedBeanTesteClasspathScanner() {
+        ClassPathScanningCandidateComponentScanner managedBeanTesteClasspathScanner =
+                new ClassPathScanningCandidateComponentScanner();
+        for (String regExpInclude : ConstantesPadroes.REGS_EXP_TESTES_MBEAN) {
+            managedBeanTesteClasspathScanner
+                    .addIncludeFilter(new RegexPatternTypeFilter(Pattern.compile(regExpInclude)));
+        }
+        return managedBeanTesteClasspathScanner;
+    }
 
 }

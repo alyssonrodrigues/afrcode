@@ -7,7 +7,8 @@ import javax.faces.context.FacesContext;
 import br.com.afrcode.arquitetura.util.mensagem.TratadorMensagemAbstrato;
 
 /**
- * Classe de implementação do tratador de mensagens do tipo MensagemAlertaNegocio.
+ * Classe de implementação do tratador de mensagens do tipo
+ * MensagemAlertaNegocio.
  * 
  * 
  */

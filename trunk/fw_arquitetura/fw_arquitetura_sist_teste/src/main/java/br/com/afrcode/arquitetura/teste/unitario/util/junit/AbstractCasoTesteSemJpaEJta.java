@@ -35,36 +35,36 @@ import br.com.afrcode.arquitetura.teste.unitario.spring.config.util.ProfilesTU;
 @ActiveProfiles(ProfilesTU.PROFILE_TU)
 public abstract class AbstractCasoTesteSemJpaEJta {
 
-	/**
-	 * Existindo EJBs 3 no classpath com Interceptors
-	 * SpringBeanAutowiringInterceptor um novo contexto Spring será iniciado.
-	 * Este por sua vez será distinto e independete do contexto Spring inicial
-	 * de testes. Portanto, faz necessário a configuração do profile Spring a
-	 * usar. Isto é feito programaticamente por este método.
-	 */
-	@BeforeClass
-	public static void iniciarSpringProfilesParaContextosEJB() {
-		System.setProperty("spring.profiles.active", ProfilesTU.PROFILE_TU);
-		// Para evitar que o OpenEJB reconfigure o log4j conflitando com threads
-		// já em execução (Spring Threads, por exemplo).
-		System.setProperty("openejb.logger.external", "true");
-	}
+    /**
+     * Existindo EJBs 3 no classpath com Interceptors
+     * SpringBeanAutowiringInterceptor um novo contexto Spring será iniciado.
+     * Este por sua vez será distinto e independete do contexto Spring inicial
+     * de testes. Portanto, faz necessário a configuração do profile Spring a
+     * usar. Isto é feito programaticamente por este método.
+     */
+    @BeforeClass
+    public static void iniciarSpringProfilesParaContextosEJB() {
+        System.setProperty("spring.profiles.active", ProfilesTU.PROFILE_TU);
+        // Para evitar que o OpenEJB reconfigure o log4j conflitando com threads
+        // já em execução (Spring Threads, por exemplo).
+        System.setProperty("openejb.logger.external", "true");
+    }
 
-	/**
-	 * Metodo de pre-configuracao para um metodo de TU. Deve ser sobrescrito
-	 * quando necessario.
-	 */
-	@Before
-	public void antesDeExecutarMetodoTU() {
-		// Pré-condições de execução de métodos de TU.
-	}
+    /**
+     * Metodo de pre-configuracao para um metodo de TU. Deve ser sobrescrito
+     * quando necessario.
+     */
+    @Before
+    public void antesDeExecutarMetodoTU() {
+        // Pré-condições de execução de métodos de TU.
+    }
 
-	/**
-	 * Metodo de configuracao pre-execucao de um metodo de TU.
-	 */
-	@After
-	public void aposExecutarMetodoTU() {
-		// Pós-condições de execução de métodos de TU.
-	}
+    /**
+     * Metodo de configuracao pre-execucao de um metodo de TU.
+     */
+    @After
+    public void aposExecutarMetodoTU() {
+        // Pós-condições de execução de métodos de TU.
+    }
 
 }

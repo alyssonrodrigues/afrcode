@@ -7,11 +7,10 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmM
 
 public class MBeanContextoWebTest extends AbstractCasoTesteEmMemoria {
 
-	@Test
-	public void testarMBeanContextoWeb() {
-		// Nada faz.
-		Assert.assertTrue("Algum teste deve ser implementado a posteriore!",
-				true);
-	}
+    @Test
+    public void testarMBeanContextoWeb() {
+        // Nada faz.
+        Assert.assertTrue("Algum teste deve ser implementado a posteriore!", true);
+    }
 
 }

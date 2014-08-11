@@ -11,21 +11,21 @@ import org.junit.rules.ExpectedException;
 import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmMemoria;
 
 public class ServicoTransactionBeanTest extends AbstractCasoTesteEmMemoria {
-	@Rule
-	public ExpectedException exception = ExpectedException.none();
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
-	@EJB
-	private Caller caller;
+    @EJB
+    private Caller caller;
 
-	@Test
-	public void testar() throws Exception {
-		caller.call(new Callable<Object>() {
-			@Override
-			public Object call() throws Exception {
-				// Nada faz.
-				return null;
-			}
-		});
-	}
+    @Test
+    public void testar() throws Exception {
+        caller.call(new Callable<Object>() {
+            @Override
+            public Object call() throws Exception {
+                // Nada faz.
+                return null;
+            }
+        });
+    }
 
 }

@@ -22,73 +22,71 @@ import javax.security.auth.spi.LoginModule;
  * 
  */
 public class LoginModuleParaBatch implements LoginModule {
-	public static final String USER = "SEGURANCA";
-	public static final String PASSWD = "teste";
-	public static final String PRINCIPAL = "SEGURANCA_PRINCIPAL";
+    public static final String USER = "SEGURANCA";
+    public static final String PASSWD = "teste";
+    public static final String PRINCIPAL = "SEGURANCA_PRINCIPAL";
 
-	private String password;
+    private String password;
 
-	private String user;
+    private String user;
 
-	private Subject subject;
+    private Subject subject;
 
-	@Override
-	public void initialize(Subject subject, CallbackHandler callbackHandler,
-			Map<String, ?> sharedState, Map<String, ?> options) {
-		this.subject = subject;
+    @Override
+    public void initialize(Subject subject, CallbackHandler callbackHandler, Map<String, ?> sharedState,
+            Map<String, ?> options) {
+        this.subject = subject;
 
-		try {
-			TextInputCallback textCallback = new TextInputCallback("prompt");
-			NameCallback nameCallback = new NameCallback("prompt");
-			PasswordCallback passwordCallback = new PasswordCallback("prompt",
-					false);
+        try {
+            TextInputCallback textCallback = new TextInputCallback("prompt");
+            NameCallback nameCallback = new NameCallback("prompt");
+            PasswordCallback passwordCallback = new PasswordCallback("prompt", false);
 
-			callbackHandler.handle(new Callback[] { textCallback, nameCallback,
-					passwordCallback });
+            callbackHandler.handle(new Callback[] { textCallback, nameCallback, passwordCallback });
 
-			password = new String(passwordCallback.getPassword());
+            password = new String(passwordCallback.getPassword());
 
-			user = nameCallback.getName();
+            user = nameCallback.getName();
 
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-	}
+    }
 
-	@Override
-	public boolean login() throws LoginException {
+    @Override
+    public boolean login() throws LoginException {
 
-		if (!user.equals(USER)) {
-			throw new LoginException("Usuário inválido. Use: \"" + USER + "\".");
-		}
+        if (!user.equals(USER)) {
+            throw new LoginException("Usuário inválido. Use: \"" + USER + "\".");
+        }
 
-		if (!password.equals(PASSWD)) {
-			throw new LoginException("Senha inválida. Use: \"" + PASSWD + "\".");
-		}
+        if (!password.equals(PASSWD)) {
+            throw new LoginException("Senha inválida. Use: \"" + PASSWD + "\".");
+        }
 
-		subject.getPrincipals().add(new Principal() {
-			public String getName() {
-				return PRINCIPAL;
-			}
-		});
+        subject.getPrincipals().add(new Principal() {
+            public String getName() {
+                return PRINCIPAL;
+            }
+        });
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public boolean commit() throws LoginException {
-		return true;
-	}
+    @Override
+    public boolean commit() throws LoginException {
+        return true;
+    }
 
-	@Override
-	public boolean abort() throws LoginException {
-		return true;
-	}
+    @Override
+    public boolean abort() throws LoginException {
+        return true;
+    }
 
-	@Override
-	public boolean logout() throws LoginException {
-		return true;
-	}
+    @Override
+    public boolean logout() throws LoginException {
+        return true;
+    }
 
 }

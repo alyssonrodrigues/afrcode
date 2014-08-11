@@ -4,7 +4,7 @@ import javax.servlet.annotation.WebFilter;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 
-@WebFilter(servletNames = {"facesServlet"})
+@WebFilter(servletNames = { "facesServlet" })
 public class CharacterEncodingFilter3 extends CharacterEncodingFilter {
 
     private static final String ISO_8859_1 = "ISO-8859-1";

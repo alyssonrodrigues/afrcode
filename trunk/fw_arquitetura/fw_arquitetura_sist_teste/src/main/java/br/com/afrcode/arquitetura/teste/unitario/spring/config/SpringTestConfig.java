@@ -28,25 +28,25 @@ import br.com.afrcode.arquitetura.teste.unitario.spring.config.util.ProfilesTU;
 @Profile({ ProfilesTU.PROFILE_TU })
 public class SpringTestConfig {
 
-	// Configuracao p/ uso de ${...} obtidas via @PropertySource em anotacoes
-	// @Value.
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
+    // Configuracao p/ uso de ${...} obtidas via @PropertySource em anotacoes
+    // @Value.
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
 
-	/**
-	 * Stowath para medições em tarefas para avaliação de desempenho.
-	 * 
-	 * As demarcações de início e fim de cada tarefa ficam a carga de cada
-	 * cliente de medição.
-	 * 
-	 * @return
-	 */
-	@Bean
-	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-	public StopWatch stopWatch() {
-		return new StopWatch();
-	}
+    /**
+     * Stowath para medições em tarefas para avaliação de desempenho.
+     * 
+     * As demarcações de início e fim de cada tarefa ficam a carga de cada
+     * cliente de medição.
+     * 
+     * @return
+     */
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public StopWatch stopWatch() {
+        return new StopWatch();
+    }
 
 }

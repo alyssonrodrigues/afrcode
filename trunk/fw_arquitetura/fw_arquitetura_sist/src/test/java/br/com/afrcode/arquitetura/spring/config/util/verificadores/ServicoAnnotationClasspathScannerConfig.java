@@ -19,12 +19,12 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Configuration
 public class ServicoAnnotationClasspathScannerConfig {
 
-	@Bean
-	public ClassPathScanningCandidateComponentScanner servicoAnnotationClasspathScanner() {
-		ClassPathScanningCandidateComponentScanner servicoAnnotationClasspathScanner = new ClassPathScanningCandidateComponentScanner();
-		servicoAnnotationClasspathScanner
-				.addIncludeFilter(new AnnotationTypeFilter(Servico.class, false));
-		return servicoAnnotationClasspathScanner;
-	}
+    @Bean
+    public ClassPathScanningCandidateComponentScanner servicoAnnotationClasspathScanner() {
+        ClassPathScanningCandidateComponentScanner servicoAnnotationClasspathScanner =
+                new ClassPathScanningCandidateComponentScanner();
+        servicoAnnotationClasspathScanner.addIncludeFilter(new AnnotationTypeFilter(Servico.class, false));
+        return servicoAnnotationClasspathScanner;
+    }
 
 }

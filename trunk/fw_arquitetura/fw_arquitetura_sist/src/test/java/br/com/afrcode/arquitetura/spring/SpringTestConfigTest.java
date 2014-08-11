@@ -22,22 +22,18 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmM
  * 
  */
 public class SpringTestConfigTest extends AbstractCasoTesteEmMemoria {
-	@PersistenceUnit
-	private EntityManagerFactory entityManagerFactory;
+    @PersistenceUnit
+    private EntityManagerFactory entityManagerFactory;
 
-	@EJB
-	private IServicoHelloWorld servicoHelloWorld;
+    @EJB
+    private IServicoHelloWorld servicoHelloWorld;
 
-	@Test
-	public void testarSpringTestContext() {
-		Assert.assertNotNull(
-				"Um EntityManagerFactory deveria ter sido obtido com sucesso!",
-				entityManagerFactory);
-		Assert.assertNotNull(
-				"Um IServicoHelloWorld deveria ter sido obtido com sucesso!",
-				servicoHelloWorld);
-		Assert.assertEquals("Mensagem de boas vindas diferente do esperado!",
-				"Hello Alysson", servicoHelloWorld.sayHello("Alysson"));
-	}
+    @Test
+    public void testarSpringTestContext() {
+        Assert.assertNotNull("Um EntityManagerFactory deveria ter sido obtido com sucesso!", entityManagerFactory);
+        Assert.assertNotNull("Um IServicoHelloWorld deveria ter sido obtido com sucesso!", servicoHelloWorld);
+        Assert.assertEquals("Mensagem de boas vindas diferente do esperado!", "Hello Alysson",
+                servicoHelloWorld.sayHello("Alysson"));
+    }
 
 }

@@ -21,77 +21,69 @@ import org.springframework.security.core.AuthenticationException;
  * 
  * 
  */
-public class AuthenticationProviderImpl implements AuthenticationProvider,
-		InitializingBean {
-	private static final Logger LOG = Logger
-			.getLogger(AuthenticationProviderImpl.class);
+public class AuthenticationProviderImpl implements AuthenticationProvider, InitializingBean {
+    private static final Logger LOG = Logger.getLogger(AuthenticationProviderImpl.class);
 
-	private DaoAuthenticationProvider daoAuthenticationProvider;
+    private DaoAuthenticationProvider daoAuthenticationProvider;
 
-	private DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider;
+    private DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider;
 
-	@Override
-	public Authentication authenticate(Authentication authentication)
-			throws AuthenticationException {
-		Authentication auth = null;
-		try {
-			auth = daoAuthenticationProvider.authenticate(authentication);
-			auth = defaultJaasAuthenticationProvider.authenticate(auth);
-			registrarLogin(auth);
-			return auth;
-		} catch (AuthenticationException ae) {
-			LOG.warn(ae);
-			throw ae;
-		}
-	}
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        Authentication auth = null;
+        try {
+            auth = daoAuthenticationProvider.authenticate(authentication);
+            auth = defaultJaasAuthenticationProvider.authenticate(auth);
+            registrarLogin(auth);
+            return auth;
+        } catch (AuthenticationException ae) {
+            LOG.warn(ae);
+            throw ae;
+        }
+    }
 
-	private void registrarLogin(Authentication auth) {
-		if (auth == null) {
-			return;
-		}
-		if (auth.isAuthenticated()) {
-			Calendar dataHoraLogin = Calendar.getInstance();
-			if (UsernamePasswordAuthenticationToken.class.isAssignableFrom(auth
-					.getClass())) {
-				// Armazenando dataHoraLogin no objeto container de autenticação
-				// para uso porterior - no processo de logout, por
-				// exemplo.
-				UsernamePasswordAuthenticationToken userPassWdToken = (UsernamePasswordAuthenticationToken) auth;
-				userPassWdToken.setDetails(dataHoraLogin);
-			}
-		}
-	}
+    private void registrarLogin(Authentication auth) {
+        if (auth == null) {
+            return;
+        }
+        if (auth.isAuthenticated()) {
+            Calendar dataHoraLogin = Calendar.getInstance();
+            if (UsernamePasswordAuthenticationToken.class.isAssignableFrom(auth.getClass())) {
+                // Armazenando dataHoraLogin no objeto container de autenticação
+                // para uso porterior - no processo de logout, por
+                // exemplo.
+                UsernamePasswordAuthenticationToken userPassWdToken = (UsernamePasswordAuthenticationToken) auth;
+                userPassWdToken.setDetails(dataHoraLogin);
+            }
+        }
+    }
 
-	@Override
-	public boolean supports(Class<?> authentication) {
-		return UsernamePasswordAuthenticationToken.class
-				.isAssignableFrom(authentication);
-	}
+    @Override
+    public boolean supports(Class<?> authentication) {
+        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
+    }
 
-	/**
-	 * @param daoAuthenticationProvider
-	 *            the daoAuthenticationProvider to set
-	 */
-	public void setDaoAuthenticationProvider(
-			DaoAuthenticationProvider daoAuthenticationProvider) {
-		this.daoAuthenticationProvider = daoAuthenticationProvider;
-	}
+    /**
+     * @param daoAuthenticationProvider
+     *            the daoAuthenticationProvider to set
+     */
+    public void setDaoAuthenticationProvider(DaoAuthenticationProvider daoAuthenticationProvider) {
+        this.daoAuthenticationProvider = daoAuthenticationProvider;
+    }
 
-	/**
-	 * @param defaultJaasAuthenticationProvider
-	 *            the defaultJaasAuthenticationProvider to set
-	 */
-	public void setDefaultJaasAuthenticationProvider(
-			DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider) {
-		this.defaultJaasAuthenticationProvider = defaultJaasAuthenticationProvider;
-	}
+    /**
+     * @param defaultJaasAuthenticationProvider
+     *            the defaultJaasAuthenticationProvider to set
+     */
+    public void
+            setDefaultJaasAuthenticationProvider(DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider) {
+        this.defaultJaasAuthenticationProvider = defaultJaasAuthenticationProvider;
+    }
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		Validate.notNull(daoAuthenticationProvider,
-				"daoAuthenticationProvider não informado!");
-		Validate.notNull(defaultJaasAuthenticationProvider,
-				"defaultJaasAuthenticationProvider não informado!");
-	}
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        Validate.notNull(daoAuthenticationProvider, "daoAuthenticationProvider não informado!");
+        Validate.notNull(defaultJaasAuthenticationProvider, "defaultJaasAuthenticationProvider não informado!");
+    }
 
 }

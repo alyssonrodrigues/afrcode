@@ -10,8 +10,8 @@ import org.junit.runners.Suite.SuiteClasses;
  * 
  */
 @RunWith(Suite.class)
-@SuiteClasses({VerificadorComponenteComTUTest.class, VerificadorManagedBeanComTUTest.class,
-        VerificadorSuperclasseClassesTUTest.class, VerificadorUsoSpringAnnotationsTest.class})
+@SuiteClasses({ VerificadorComponenteComTUTest.class, VerificadorManagedBeanComTUTest.class,
+        VerificadorSuperclasseClassesTUTest.class, VerificadorUsoSpringAnnotationsTest.class })
 public class SuiteVerificadoresWebArqSist {
 
 }

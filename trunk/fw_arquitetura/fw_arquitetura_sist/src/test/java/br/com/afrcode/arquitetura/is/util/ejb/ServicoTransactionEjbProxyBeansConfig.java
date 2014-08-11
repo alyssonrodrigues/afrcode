@@ -12,13 +12,12 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 @Configuration
 @Profile(Profiles.PROFILE_TU)
-public class ServicoTransactionEjbProxyBeansConfig extends
-		AbstractEjbProxyBeansConfig<Caller> {
+public class ServicoTransactionEjbProxyBeansConfig extends AbstractEjbProxyBeansConfig<Caller> {
 
-	@Bean
-	@Lazy
-	public Caller servicoTransactionBeanRemote() throws NamingException {
-		return criarEjb3RemoteStatelessSessionProxy("ServicoTransactionBeanRemote");
-	}
+    @Bean
+    @Lazy
+    public Caller servicoTransactionBeanRemote() throws NamingException {
+        return criarEjb3RemoteStatelessSessionProxy("ServicoTransactionBeanRemote");
+    }
 
 }

@@ -3,16 +3,17 @@ package br.com.afrcode.arquitetura.modelo.entidade;
 import org.apache.commons.lang.ObjectUtils;
 
 /**
- * Superclasse abstrata para entidades segundo definição de entidade em IEntidade.
+ * Superclasse abstrata para entidades segundo definição de entidade em
+ * IEntidade.
  * 
- * Responsável por uniformizar a implementação dos métodos equals(Object), hashCode() e
- * compareTo(IEntidade).
+ * Responsável por uniformizar a implementação dos métodos equals(Object),
+ * hashCode() e compareTo(IEntidade).
  * 
  * 
- * @param <T> Tipo do ID (Long, Integer, String, etc.)
+ * @param <T>
+ *            Tipo do ID (Long, Integer, String, etc.)
  */
-public abstract class EntidadeAbstrata<T extends Comparable<T>>
-        implements IEntidade<T>, Comparable<IEntidade<T>> {
+public abstract class EntidadeAbstrata<T extends Comparable<T>> implements IEntidade<T>, Comparable<IEntidade<T>> {
 
     @Override
     public boolean equals(Object obj) {
@@ -26,8 +27,7 @@ public abstract class EntidadeAbstrata<T extends Comparable<T>>
         EntidadeAbstrata ent = (EntidadeAbstrata) obj;
         if (getId() == null) {
             return false;
-        }
-        else {
+        } else {
             return getId().equals(ent.getId());
         }
     }
@@ -42,7 +42,8 @@ public abstract class EntidadeAbstrata<T extends Comparable<T>>
     }
 
     /**
-     * Null safe comparison of Comparables. {@code null} is assumed to be less than a non-{@code null} value.
+     * Null safe comparison of Comparables. {@code null} is assumed to be less
+     * than a non-{@code null} value.
      * 
      * Veja ObjectUtils#compare(Comparable, Comparable).
      */

@@ -15,46 +15,45 @@ import br.com.afrcode.arquitetura.util.excecao.ExcecaoNaoPrevista;
  * 
  */
 public abstract class MensagemNegocioAbstrata implements IMensagem {
-	private static Properties msgsResourceBundle = null;
+    private static Properties msgsResourceBundle = null;
 
-	private String codMensagem;
+    private String codMensagem;
 
-	private String mensagem;
+    private String mensagem;
 
-	static {
-		InputStream isMsgsResourceBundle = Thread.currentThread()
-				.getContextClassLoader()
-				.getResourceAsStream("Mensagens.properties");
-		if (isMsgsResourceBundle != null) {
-			msgsResourceBundle = new Properties();
-			try {
-				msgsResourceBundle.load(isMsgsResourceBundle);
-			} catch (IOException e) {
-				throw new ExcecaoNaoPrevista(e);
-			}
-		}
-	}
+    static {
+        InputStream isMsgsResourceBundle =
+                Thread.currentThread().getContextClassLoader().getResourceAsStream("Mensagens.properties");
+        if (isMsgsResourceBundle != null) {
+            msgsResourceBundle = new Properties();
+            try {
+                msgsResourceBundle.load(isMsgsResourceBundle);
+            } catch (IOException e) {
+                throw new ExcecaoNaoPrevista(e);
+            }
+        }
+    }
 
-	@Override
-	public String getCodMensagem() {
-		return codMensagem;
-	}
+    @Override
+    public String getCodMensagem() {
+        return codMensagem;
+    }
 
-	@Override
-	public void setCodMensagem(String codMensagem) {
-		this.codMensagem = codMensagem;
-	}
+    @Override
+    public void setCodMensagem(String codMensagem) {
+        this.codMensagem = codMensagem;
+    }
 
-	@Override
-	public String getMensagem() {
-		if (StringUtils.isBlank(mensagem)) {
-			mensagem = MensagensUtil.recuperarMensagem(getCodMensagem());
-		}
-		return mensagem;
-	}
+    @Override
+    public String getMensagem() {
+        if (StringUtils.isBlank(mensagem)) {
+            mensagem = MensagensUtil.recuperarMensagem(getCodMensagem());
+        }
+        return mensagem;
+    }
 
-	@Override
-	public void setMensagem(String mensagem) {
-		this.mensagem = mensagem;
-	}
+    @Override
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
 }

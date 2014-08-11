@@ -12,10 +12,10 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 @Interceptors({ SpringBeanAutowiringInterceptor.class })
 public class ServicoHelloWorldBean implements IServicoHelloWorld {
 
-	@Override
-	@RolesAllowed("FUNCAO_QUALQUER_A_SER_IGNORADA_EM_TU")
-	public String sayHello(String name) {
-		return "Hello " + name;
-	}
+    @Override
+    @RolesAllowed("FUNCAO_QUALQUER_A_SER_IGNORADA_EM_TU")
+    public String sayHello(String name) {
+        return "Hello " + name;
+    }
 
 }

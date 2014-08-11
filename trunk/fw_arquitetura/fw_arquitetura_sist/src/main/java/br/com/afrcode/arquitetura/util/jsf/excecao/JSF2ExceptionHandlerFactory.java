@@ -4,7 +4,8 @@ import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExceptionHandlerFactory;
 
 /**
- * Factory para obtenção do tratador de exceções JSF 2 implementado em JSF2ExceptionHandler.
+ * Factory para obtenção do tratador de exceções JSF 2 implementado em
+ * JSF2ExceptionHandler.
  * 
  * 
  */

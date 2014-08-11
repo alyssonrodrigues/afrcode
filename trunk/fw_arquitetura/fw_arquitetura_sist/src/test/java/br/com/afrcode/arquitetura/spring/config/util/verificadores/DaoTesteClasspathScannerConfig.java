@@ -20,15 +20,14 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Configuration
 public class DaoTesteClasspathScannerConfig {
 
-	@Bean
-	public ClassPathScanningCandidateComponentScanner daoTesteClasspathScanner() {
-		ClassPathScanningCandidateComponentScanner daoTesteClasspathScanner = new ClassPathScanningCandidateComponentScanner();
-		for (String regExpInclude : ConstantesPadroes.REGS_EXP_TESTES_DAO) {
-			daoTesteClasspathScanner
-					.addIncludeFilter(new RegexPatternTypeFilter(Pattern
-							.compile(regExpInclude)));
-		}
-		return daoTesteClasspathScanner;
-	}
+    @Bean
+    public ClassPathScanningCandidateComponentScanner daoTesteClasspathScanner() {
+        ClassPathScanningCandidateComponentScanner daoTesteClasspathScanner =
+                new ClassPathScanningCandidateComponentScanner();
+        for (String regExpInclude : ConstantesPadroes.REGS_EXP_TESTES_DAO) {
+            daoTesteClasspathScanner.addIncludeFilter(new RegexPatternTypeFilter(Pattern.compile(regExpInclude)));
+        }
+        return daoTesteClasspathScanner;
+    }
 
 }

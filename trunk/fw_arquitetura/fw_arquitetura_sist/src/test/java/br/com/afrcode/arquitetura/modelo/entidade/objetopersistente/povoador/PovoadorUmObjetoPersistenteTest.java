@@ -11,21 +11,18 @@ import br.com.afrcode.arquitetura.modelo.entidade.objetopersistente.dao.DaoUmObj
 import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmMemoria;
 
 public class PovoadorUmObjetoPersistenteTest extends AbstractCasoTesteEmMemoria {
-	@Autowired
-	private PovoadorUmObjetoPersistente povoadorUmObjetoPersistente;
+    @Autowired
+    private PovoadorUmObjetoPersistente povoadorUmObjetoPersistente;
 
-	@Autowired
-	private DaoUmObjetoPersistente daoUmObjetoPersistente;
+    @Autowired
+    private DaoUmObjetoPersistente daoUmObjetoPersistente;
 
-	@Test
-	public void testarPovoadorUmObjetoPersistente() {
-		povoadorUmObjetoPersistente.povoar();
-		Collection<UmObjetoPersistente> objs = daoUmObjetoPersistente
-				.recuperarTodos();
-		Assert.assertEquals("Deveriam ter sido criados "
-				+ PovoadorUmObjetoPersistente.NUM_MAX_OBJS_CRIADOS
-				+ " objetos persistentes!",
-				PovoadorUmObjetoPersistente.NUM_MAX_OBJS_CRIADOS, objs.size());
-	}
+    @Test
+    public void testarPovoadorUmObjetoPersistente() {
+        povoadorUmObjetoPersistente.povoar();
+        Collection<UmObjetoPersistente> objs = daoUmObjetoPersistente.recuperarTodos();
+        Assert.assertEquals("Deveriam ter sido criados " + PovoadorUmObjetoPersistente.NUM_MAX_OBJS_CRIADOS
+                + " objetos persistentes!", PovoadorUmObjetoPersistente.NUM_MAX_OBJS_CRIADOS, objs.size());
+    }
 
 }

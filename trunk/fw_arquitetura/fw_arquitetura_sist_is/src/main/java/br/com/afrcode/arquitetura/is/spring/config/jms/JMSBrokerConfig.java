@@ -21,39 +21,37 @@ import br.com.afrcode.arquitetura.is.util.jms.JmsExceptionListener;
  * 
  */
 @Configuration
-@Profile({ ProfilesIS.PROFILE_APLICACAO, ProfilesIS.PROFILE_APLICACAO_BATCH,
-		ProfilesIS.PROFILE_TU })
+@Profile({ ProfilesIS.PROFILE_APLICACAO, ProfilesIS.PROFILE_APLICACAO_BATCH, ProfilesIS.PROFILE_TU })
 @ImportResource({ "classpath:spring-jms-broker-beans.xml" })
 public class JMSBrokerConfig {
-	@Autowired
-	private ActiveMQConnectionFactory amqConnectionFactory;
+    @Autowired
+    private ActiveMQConnectionFactory amqConnectionFactory;
 
-	@Autowired
-	private JmsExceptionListener jmsExceptionListener;
+    @Autowired
+    private JmsExceptionListener jmsExceptionListener;
 
-	/**
-	 * CachingConnectionFactory definition, sessionCacheSize property is the
-	 * number of sessions to cache.
-	 * 
-	 * @return
-	 */
-	@Bean
-	public CachingConnectionFactory cachingConnectionFactory() {
-		CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory(
-				amqConnectionFactory);
-		cachingConnectionFactory.setSessionCacheSize(100);
-		cachingConnectionFactory.setExceptionListener(jmsExceptionListener);
-		return cachingConnectionFactory;
-	}
+    /**
+     * CachingConnectionFactory definition, sessionCacheSize property is the
+     * number of sessions to cache.
+     * 
+     * @return
+     */
+    @Bean
+    public CachingConnectionFactory cachingConnectionFactory() {
+        CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory(amqConnectionFactory);
+        cachingConnectionFactory.setSessionCacheSize(100);
+        cachingConnectionFactory.setExceptionListener(jmsExceptionListener);
+        return cachingConnectionFactory;
+    }
 
-	/**
-	 * JmsTemplate PRODUCER padrão independente de fila.
-	 * 
-	 * @return
-	 */
-	@Bean
-	public JmsTemplate jmsTemplate() {
-		return new JmsTemplate(cachingConnectionFactory());
-	}
+    /**
+     * JmsTemplate PRODUCER padrão independente de fila.
+     * 
+     * @return
+     */
+    @Bean
+    public JmsTemplate jmsTemplate() {
+        return new JmsTemplate(cachingConnectionFactory());
+    }
 
 }

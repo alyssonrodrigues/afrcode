@@ -25,22 +25,21 @@ import br.com.afrcode.arquitetura.is.spring.config.util.ProfilesIS;
 // proxyTargetClass = true => Devemos usar CGLIB e não javaassist para que o
 // autowiring por tipo do Spring continue funcional.
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@Profile({ ProfilesIS.PROFILE_APLICACAO, ProfilesIS.PROFILE_APLICACAO_BATCH,
-		ProfilesIS.PROFILE_TU })
+@Profile({ ProfilesIS.PROFILE_APLICACAO, ProfilesIS.PROFILE_APLICACAO_BATCH, ProfilesIS.PROFILE_TU })
 public class SpringISConfig {
 
-	/**
-	 * Stowath para medições em tarefas para avaliação de desempenho.
-	 * 
-	 * As demarcações de início e fim de cada tarefa ficam a carga de cada
-	 * cliente de medição.
-	 * 
-	 * @return
-	 */
-	@Bean
-	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-	public StopWatch stopWatch() {
-		return new StopWatch();
-	}
+    /**
+     * Stowath para medições em tarefas para avaliação de desempenho.
+     * 
+     * As demarcações de início e fim de cada tarefa ficam a carga de cada
+     * cliente de medição.
+     * 
+     * @return
+     */
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public StopWatch stopWatch() {
+        return new StopWatch();
+    }
 
 }

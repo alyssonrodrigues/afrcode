@@ -34,7 +34,8 @@ public class AuthenticationFailureHandlerImpl extends SimpleUrlAuthenticationFai
 
         LOG.error("Erro ao efetuar login: ", exception);
 
-        // TODO: Obter msg de um resource bundle ou criar arquivos de mensagens para o Spring!!!
+        // TODO: Obter msg de um resource bundle ou criar arquivos de mensagens
+        // para o Spring!!!
         String msgSummary = exception.getMessage();
         String msg = msgSummary;
 

@@ -12,8 +12,8 @@ import br.com.afrcode.arquitetura.is.modelo.ejb.objetoemmemoria.service.UmObjeto
  */
 public interface IServicoConsultaUmObjetoEmMemoriaRmi {
 
-	public Collection<UmObjetoEmMemoria> listar();
+    public Collection<UmObjetoEmMemoria> listar();
 
-	public UmObjetoEmMemoria recuperarPorId(Long id);
+    public UmObjetoEmMemoria recuperarPorId(Long id);
 
 }

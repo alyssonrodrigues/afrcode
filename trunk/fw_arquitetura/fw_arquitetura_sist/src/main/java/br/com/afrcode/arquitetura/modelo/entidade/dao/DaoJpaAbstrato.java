@@ -19,21 +19,25 @@ import br.com.afrcode.arquitetura.modelo.entidade.IEntidade;
  * Implementação padrão da interface IDao.
  * 
  * 
- * @param <T> Tipo do ID (Long, Integer, String, etc.)
- * @param <E> Subtipo de IEntidade
+ * @param <T>
+ *            Tipo do ID (Long, Integer, String, etc.)
+ * @param <E>
+ *            Subtipo de IEntidade
  */
-public abstract class DaoJpaAbstrato<T extends Comparable<T>, E extends IEntidade<T>>
-        implements IDao<T, E> {
+public abstract class DaoJpaAbstrato<T extends Comparable<T>, E extends IEntidade<T>> implements IDao<T, E> {
 
     protected static final Logger LOG = Logger.getLogger(DaoJpaAbstrato.class);
 
     /**
-     * Contexto de persistência transacional, onde ao final de uma transação os recursos envolvidos (EntityManager,
-     * Session, Connection, etc.) são descartados.
+     * Contexto de persistência transacional, onde ao final de uma transação os
+     * recursos envolvidos (EntityManager, Session, Connection, etc.) são
+     * descartados.
      * 
-     * O uso do padrão OpenEntityManagerInViewFilter adia o descarte dos recursos envolvidos até o final do processamento
-     * da camada View. O uso deste padrão permite que entidades sejam usadas em MBeans JSF, EM UMA MESMA REQUISIÇÃO, sem
-     * ocorrência de exceções de detached object e/ou lazy exceptions.
+     * O uso do padrão OpenEntityManagerInViewFilter adia o descarte dos
+     * recursos envolvidos até o final do processamento da camada View. O uso
+     * deste padrão permite que entidades sejam usadas em MBeans JSF, EM UMA
+     * MESMA REQUISIÇÃO, sem ocorrência de exceções de detached object e/ou lazy
+     * exceptions.
      */
     @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     private EntityManager entityManager;
@@ -52,7 +56,8 @@ public abstract class DaoJpaAbstrato<T extends Comparable<T>, E extends IEntidad
     private void iniciar() {
         Class<?> clazz = this.getClass();
         Type superClazz = clazz.getGenericSuperclass();
-        // Em geral um DAO contém apenas um supertipo genérico, porém mais de um supertipo genérico pode surgir na presença de
+        // Em geral um DAO contém apenas um supertipo genérico, porém mais de um
+        // supertipo genérico pode surgir na presença de
         // aspectos associados ao DAO.
         while (!ParameterizedType.class.isAssignableFrom(superClazz.getClass())) {
             clazz = clazz.getSuperclass();
@@ -89,8 +94,8 @@ public abstract class DaoJpaAbstrato<T extends Comparable<T>, E extends IEntidad
     }
 
     @Override
-    public Collection<E> recuperarObjetos(String qlString, Map<String, Object> params, int pagina,
-            int quantidadeDeItens) {
+    public Collection<E>
+            recuperarObjetos(String qlString, Map<String, Object> params, int pagina, int quantidadeDeItens) {
         TypedQuery<E> query = entityManager.createQuery(qlString, getClasseEntidade());
 
         int startPosition = pagina == 0 ? 0 : (pagina * quantidadeDeItens);
@@ -198,7 +203,8 @@ public abstract class DaoJpaAbstrato<T extends Comparable<T>, E extends IEntidad
     }
 
     /**
-     * Método de acesso ao EntityManager associado ao DAO via injeção de dependência.
+     * Método de acesso ao EntityManager associado ao DAO via injeção de
+     * dependência.
      * 
      * @return
      */

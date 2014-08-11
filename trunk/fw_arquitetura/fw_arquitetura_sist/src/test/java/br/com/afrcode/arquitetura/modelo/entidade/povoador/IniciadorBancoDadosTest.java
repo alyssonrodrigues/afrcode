@@ -8,20 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmMemoria;
 
 public class IniciadorBancoDadosTest extends AbstractCasoTesteEmMemoria {
-	private static final Logger LOG = Logger
-			.getLogger(IniciadorBancoDadosTest.class);
+    private static final Logger LOG = Logger.getLogger(IniciadorBancoDadosTest.class);
 
-	@Autowired
-	private IniciadorBancoDados iniciadorBancoDados;
+    @Autowired
+    private IniciadorBancoDados iniciadorBancoDados;
 
-	@Test
-	public void testarIniciadorBancoDados() {
-		try {
-			iniciadorBancoDados.povoar();
-		} catch (Exception e) {
-			LOG.error(e);
-			Assert.fail(e.getMessage());
-		}
-	}
+    @Test
+    public void testarIniciadorBancoDados() {
+        try {
+            iniciadorBancoDados.povoar();
+        } catch (Exception e) {
+            LOG.error(e);
+            Assert.fail(e.getMessage());
+        }
+    }
 
 }

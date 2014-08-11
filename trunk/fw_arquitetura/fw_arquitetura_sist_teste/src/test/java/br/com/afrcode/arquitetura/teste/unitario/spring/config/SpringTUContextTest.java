@@ -18,25 +18,22 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteSem
  */
 public class SpringTUContextTest extends AbstractCasoTesteSemJpaEJta {
 
-	@Autowired
-	private StopWatch stopWatch;
+    @Autowired
+    private StopWatch stopWatch;
 
-	@Autowired
-	private ApplicationContext applicationContext;
+    @Autowired
+    private ApplicationContext applicationContext;
 
-	@Test
-	public void testarSpringTUContext() {
-		try {
-			Assert.assertNotNull(
-					"Spring applicationContext não deveria ser nulo!",
-					applicationContext);
-			Assert.assertEquals("PROFILE_TU deveria ser o profile ativo!",
-					ProfilesTU.PROFILE_TU, applicationContext.getEnvironment()
-							.getActiveProfiles()[0]);
-			Assert.assertNotNull("stopWatch não deveria ser nulo!", stopWatch);
-		} catch (Throwable e) {
-			Assert.fail("Erro ao iniciar contexto Spring!");
-		}
-	}
+    @Test
+    public void testarSpringTUContext() {
+        try {
+            Assert.assertNotNull("Spring applicationContext não deveria ser nulo!", applicationContext);
+            Assert.assertEquals("PROFILE_TU deveria ser o profile ativo!", ProfilesTU.PROFILE_TU, applicationContext
+                    .getEnvironment().getActiveProfiles()[0]);
+            Assert.assertNotNull("stopWatch não deveria ser nulo!", stopWatch);
+        } catch (Throwable e) {
+            Assert.fail("Erro ao iniciar contexto Spring!");
+        }
+    }
 
 }

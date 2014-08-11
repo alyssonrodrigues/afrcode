@@ -14,12 +14,12 @@ import org.springframework.stereotype.Component;
 import br.com.afrcode.arquitetura.is.spring.config.util.ProfilesIS;
 
 /**
- * Classe utilitaria para uso do ApplicationContext Spring em classes onde nao e
- * possivel fazer injecao declarativa (via anotacao Autowired).
+ * Classe utilitária para uso do ApplicationContext Spring em classes onde não é
+ * possível fazer injeção declarativa (via anotação Autowired).
  * 
- * Cenario de uso:
- * Classes nao geridas pelo Spring, instanciadas pelo programador ou por outro framework qualquer,
- * que necessitem usar beans geridos pelo Spring.
+ * Cenário de uso: Classes nao geridas pelo Spring, instanciadas pelo
+ * programador ou por outro framework qualquer, que necessitem usar beans
+ * geridos pelo Spring.
  * 
  * 
  */
@@ -49,8 +49,8 @@ public class ApplicationContextUtils implements ApplicationContextAware {
 
     private void log() {
         String nomeAplicacao = getNomeAplicacao();
-        LOG.info("Spring ApplicationContext iniciado hashcode[" + applicationContext.hashCode() + "] para " + nomeAplicacao +
-                "...");
+        LOG.info("Spring ApplicationContext iniciado hashcode[" + applicationContext.hashCode() + "] para "
+                + nomeAplicacao + "...");
     }
 
     public static String getNomeAplicacao() {

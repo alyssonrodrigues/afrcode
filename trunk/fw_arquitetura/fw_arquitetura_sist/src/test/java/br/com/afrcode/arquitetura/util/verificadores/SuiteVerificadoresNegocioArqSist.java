@@ -10,11 +10,9 @@ import org.junit.runners.Suite.SuiteClasses;
  * 
  */
 @RunWith(Suite.class)
-@SuiteClasses({ VerificadorComponenteComTUTest.class,
-		VerificadorDaoComTUTest.class, VerificadorEntityComDaoTest.class,
-		VerificadorServicoComTUTest.class,
-		VerificadorSuperclasseClassesTUTest.class,
-		VerificadorUsoSpringAnnotationsTest.class })
+@SuiteClasses({ VerificadorComponenteComTUTest.class, VerificadorDaoComTUTest.class, VerificadorEntityComDaoTest.class,
+        VerificadorServicoComTUTest.class, VerificadorSuperclasseClassesTUTest.class,
+        VerificadorUsoSpringAnnotationsTest.class })
 public class SuiteVerificadoresNegocioArqSist {
 
 }

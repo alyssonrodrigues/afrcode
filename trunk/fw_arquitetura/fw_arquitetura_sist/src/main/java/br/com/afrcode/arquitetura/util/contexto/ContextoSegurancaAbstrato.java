@@ -16,7 +16,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
- * Classe base de implementação de IContextoSeguranca para uso em PROFILE_APLICACAO e PROFILE_TU.
+ * Classe base de implementação de IContextoSeguranca para uso em
+ * PROFILE_APLICACAO e PROFILE_TU.
  * 
  * 
  */

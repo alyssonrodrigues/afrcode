@@ -7,8 +7,9 @@ import br.com.afrcode.arquitetura.spring.anotacoes.Dao;
 /**
  * Dao para teste e validação inicial do frameworkarquitetura.
  * 
- * ATENÇÃO: Este Dao encontra-se em src/test/java pois é um Dao para TESTE inicial do frameworkarquitetura e somente por isto!
- * Daos da aplicação devem estar em src/main/java!
+ * ATENÇÃO: Este Dao encontra-se em src/test/java pois é um Dao para TESTE
+ * inicial do frameworkarquitetura e somente por isto! Daos da aplicação devem
+ * estar em src/main/java!
  * 
  * 
  */

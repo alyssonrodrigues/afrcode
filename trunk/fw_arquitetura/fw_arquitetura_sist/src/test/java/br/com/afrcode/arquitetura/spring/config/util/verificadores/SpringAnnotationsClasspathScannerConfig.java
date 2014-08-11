@@ -23,20 +23,14 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Configuration
 public class SpringAnnotationsClasspathScannerConfig {
 
-	@Bean
-	public ClassPathScanningCandidateComponentScanner springAnnotationsClasspathScanner() {
-		ClassPathScanningCandidateComponentScanner springAnnotationsClasspathScanner = new ClassPathScanningCandidateComponentScanner();
-		springAnnotationsClasspathScanner
-				.addIncludeFilter(new AnnotationTypeFilter(Component.class,
-						false));
-		springAnnotationsClasspathScanner
-				.addIncludeFilter(new AnnotationTypeFilter(Controller.class,
-						false));
-		springAnnotationsClasspathScanner
-				.addIncludeFilter(new AnnotationTypeFilter(Repository.class,
-						false));
-		springAnnotationsClasspathScanner
-				.addIncludeFilter(new AnnotationTypeFilter(Service.class, false));
-		return springAnnotationsClasspathScanner;
-	}
+    @Bean
+    public ClassPathScanningCandidateComponentScanner springAnnotationsClasspathScanner() {
+        ClassPathScanningCandidateComponentScanner springAnnotationsClasspathScanner =
+                new ClassPathScanningCandidateComponentScanner();
+        springAnnotationsClasspathScanner.addIncludeFilter(new AnnotationTypeFilter(Component.class, false));
+        springAnnotationsClasspathScanner.addIncludeFilter(new AnnotationTypeFilter(Controller.class, false));
+        springAnnotationsClasspathScanner.addIncludeFilter(new AnnotationTypeFilter(Repository.class, false));
+        springAnnotationsClasspathScanner.addIncludeFilter(new AnnotationTypeFilter(Service.class, false));
+        return springAnnotationsClasspathScanner;
+    }
 }

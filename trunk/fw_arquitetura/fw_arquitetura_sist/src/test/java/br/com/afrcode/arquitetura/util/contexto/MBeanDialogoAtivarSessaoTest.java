@@ -7,11 +7,10 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmM
 
 public class MBeanDialogoAtivarSessaoTest extends AbstractCasoTesteEmMemoria {
 
-	@Test
-	public void testarMBeanDialogoAtivarSessao() {
-		// Nada faz.
-		Assert.assertTrue("Algum teste deve ser implementado a posteriore!",
-				true);
-	}
+    @Test
+    public void testarMBeanDialogoAtivarSessao() {
+        // Nada faz.
+        Assert.assertTrue("Algum teste deve ser implementado a posteriore!", true);
+    }
 
 }

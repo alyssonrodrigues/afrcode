@@ -34,39 +34,34 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Profile({ Profiles.PROFILE_TU })
 public class ContextoSegurancaTU extends ContextoSegurancaAbstrato {
 
-	/**
-	 * Ver SpringSecurityTUConfig para maiores informações acerca do
-	 * DefaultJaasAuthenticationProvider em uso por TUs.
-	 */
-	@Autowired
-	private DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider;
+    /**
+     * Ver SpringSecurityTUConfig para maiores informações acerca do
+     * DefaultJaasAuthenticationProvider em uso por TUs.
+     */
+    @Autowired
+    private DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider;
 
-	/**
-	 * Método responsável por criar autenticação para o PROFILE_TU.
-	 */
-	@PostConstruct
-	void iniciar() {
-		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-				LoginModuleParaTU.USER, LoginModuleParaTU.PASSWD);
-		Authentication auth = defaultJaasAuthenticationProvider
-				.authenticate(token);
-		Validate.isTrue(auth.isAuthenticated(),
-				"O usuário deveria ter sido autenticado com sucesso para TUs!");
-		SecurityContextHolder.getContext().setAuthentication(auth);
-	}
+    /**
+     * Método responsável por criar autenticação para o PROFILE_TU.
+     */
+    @PostConstruct
+    void iniciar() {
+        UsernamePasswordAuthenticationToken token =
+                new UsernamePasswordAuthenticationToken(LoginModuleParaTU.USER, LoginModuleParaTU.PASSWD);
+        Authentication auth = defaultJaasAuthenticationProvider.authenticate(token);
+        Validate.isTrue(auth.isAuthenticated(), "O usuário deveria ter sido autenticado com sucesso para TUs!");
+        SecurityContextHolder.getContext().setAuthentication(auth);
+    }
 
-	@Override
-	public User getUsuarioAutenticado() {
-		JaasAuthenticationToken jaasAuthenticationToken = JaasAuthenticationToken.class
-				.cast(getAuthentication());
-		String username = jaasAuthenticationToken.getName();
-		String password = String.class.cast(jaasAuthenticationToken
-				.getCredentials());
-		List<GrantedAuthority> authorities = AuthorityUtils
-				.createAuthorityList(AuthorityGranterParaTU.ROLE_USER);
+    @Override
+    public User getUsuarioAutenticado() {
+        JaasAuthenticationToken jaasAuthenticationToken = JaasAuthenticationToken.class.cast(getAuthentication());
+        String username = jaasAuthenticationToken.getName();
+        String password = String.class.cast(jaasAuthenticationToken.getCredentials());
+        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(AuthorityGranterParaTU.ROLE_USER);
 
-		User usuario = new User(username, password, authorities);
-		return usuario;
-	}
+        User usuario = new User(username, password, authorities);
+        return usuario;
+    }
 
 }

@@ -19,91 +19,87 @@ import br.com.afrcode.arquitetura.is.spring.config.util.ProfilesIS;
  * 
  * 
  */
-public abstract class AbstractRMIClientProxyBeansConfig<T> implements
-		ApplicationContextAware {
+public abstract class AbstractRMIClientProxyBeansConfig<T> implements ApplicationContextAware {
 
-	private ApplicationContext applicationContext;
+    private ApplicationContext applicationContext;
 
-	private Class<T> classeProxy;
+    private Class<T> classeProxy;
 
-	public AbstractRMIClientProxyBeansConfig() {
-		iniciar();
-	}
+    public AbstractRMIClientProxyBeansConfig() {
+        iniciar();
+    }
 
-	public void setApplicationContext(ApplicationContext applicationContext) {
-		this.applicationContext = applicationContext;
-	}
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
 
-	/**
-	 * Método de obtenção do tipo associado ao proxy.
-	 */
-	private void iniciar() {
-		Class<?> clazz = this.getClass();
-		Type superClazz = clazz.getGenericSuperclass();
-		// Em geral uma classe de configuração de proxy contém apenas um
-		// supertipo genérico, porém mais de um supertipo genérico
-		// pode surgir na presença de aspectos associados a esta classe.
-		while (!ParameterizedType.class.isAssignableFrom(superClazz.getClass())) {
-			clazz = clazz.getSuperclass();
-			superClazz = clazz.getGenericSuperclass();
-		}
-		ParameterizedType tipoParametrizado = (ParameterizedType) superClazz;
-		Type[] params = tipoParametrizado.getActualTypeArguments();
-		classeProxy = (Class<T>) params[0];
-	}
+    /**
+     * Método de obtenção do tipo associado ao proxy.
+     */
+    private void iniciar() {
+        Class<?> clazz = this.getClass();
+        Type superClazz = clazz.getGenericSuperclass();
+        // Em geral uma classe de configuração de proxy contém apenas um
+        // supertipo genérico, porém mais de um supertipo genérico
+        // pode surgir na presença de aspectos associados a esta classe.
+        while (!ParameterizedType.class.isAssignableFrom(superClazz.getClass())) {
+            clazz = clazz.getSuperclass();
+            superClazz = clazz.getGenericSuperclass();
+        }
+        ParameterizedType tipoParametrizado = (ParameterizedType) superClazz;
+        Type[] params = tipoParametrizado.getActualTypeArguments();
+        classeProxy = (Class<T>) params[0];
+    }
 
-	protected boolean isProfileTUAtivo() {
-		boolean profileTUAtivo = false;
+    protected boolean isProfileTUAtivo() {
+        boolean profileTUAtivo = false;
 
-		List<String> profilesAtivos = Arrays.asList(applicationContext
-				.getEnvironment().getActiveProfiles());
-		profileTUAtivo = profilesAtivos.contains(ProfilesIS.PROFILE_TU);
+        List<String> profilesAtivos = Arrays.asList(applicationContext.getEnvironment().getActiveProfiles());
+        profileTUAtivo = profilesAtivos.contains(ProfilesIS.PROFILE_TU);
 
-		return profileTUAtivo;
-	}
+        return profileTUAtivo;
+    }
 
-	protected T criarRmiProxy(String serviceName) {
-		RmiProxyFactoryBean rmiProxyFactory = new RmiProxyFactoryBean();
+    protected T criarRmiProxy(String serviceName) {
+        RmiProxyFactoryBean rmiProxyFactory = new RmiProxyFactoryBean();
 
-		// Configuração para Proxy com alvo lazy, ou seja, o alvo do proxy (RMI
-		// service) só será verificado quando do primeiro
-		// acesso ao proxy; e não no startup do contexto
-		// (setLookupStubOnStartup).
-		// Esta configuração é importante pois permite que um cliente de RMI
-		// services (usuário de proxies) seja iniciado em
-		// parelelo ou anteriormente ao hospedeiro dos EJBs (alvos).
-		rmiProxyFactory.setLookupStubOnStartup(false);
+        // Configuração para Proxy com alvo lazy, ou seja, o alvo do proxy (RMI
+        // service) só será verificado quando do primeiro
+        // acesso ao proxy; e não no startup do contexto
+        // (setLookupStubOnStartup).
+        // Esta configuração é importante pois permite que um cliente de RMI
+        // services (usuário de proxies) seja iniciado em
+        // parelelo ou anteriormente ao hospedeiro dos EJBs (alvos).
+        rmiProxyFactory.setLookupStubOnStartup(false);
 
-		rmiProxyFactory.setServiceUrl("rmi://localhost/" + serviceName);
-		rmiProxyFactory.setServiceInterface(getClasseProxy());
-		/**
-		 * Integração com o Spring Security para propagação do SecurityContext.
-		 * Ver {@code ContextPropagatingRemoteInvocation}.
-		 */
-		rmiProxyFactory
-				.setRemoteInvocationFactory(new ContextPropagatingRemoteInvocationFactory());
+        rmiProxyFactory.setServiceUrl("rmi://localhost/" + serviceName);
+        rmiProxyFactory.setServiceInterface(getClasseProxy());
+        /**
+         * Integração com o Spring Security para propagação do SecurityContext.
+         * Ver {@code ContextPropagatingRemoteInvocation}.
+         */
+        rmiProxyFactory.setRemoteInvocationFactory(new ContextPropagatingRemoteInvocationFactory());
 
-		configurarParaTUsSeNecessario(rmiProxyFactory);
+        configurarParaTUsSeNecessario(rmiProxyFactory);
 
-		T rmiProxy = (T) rmiProxyFactory.getObject();
+        T rmiProxy = (T) rmiProxyFactory.getObject();
 
-		return rmiProxy;
-	}
+        return rmiProxy;
+    }
 
-	private void configurarParaTUsSeNecessario(
-			RmiProxyFactoryBean rmiProxyFactory) {
+    private void configurarParaTUsSeNecessario(RmiProxyFactoryBean rmiProxyFactory) {
 
-		if (!isProfileTUAtivo()) {
-			return;
-		}
+        if (!isProfileTUAtivo()) {
+            return;
+        }
 
-		// A Factory de RMI proxies deve ser iniciada previamente para já prover
-		// instâncias do proxy alvo.
-		rmiProxyFactory.afterPropertiesSet();
-	}
+        // A Factory de RMI proxies deve ser iniciada previamente para já prover
+        // instâncias do proxy alvo.
+        rmiProxyFactory.afterPropertiesSet();
+    }
 
-	protected Class<T> getClasseProxy() {
-		return classeProxy;
-	}
+    protected Class<T> getClasseProxy() {
+        return classeProxy;
+    }
 
 }

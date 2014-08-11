@@ -13,10 +13,11 @@ import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
 
 /**
- * Classe responsável por prover autenticação de usuário no profile de TUs. Por padrão os TUs serão executados com um usuário
- * fixo definido abaixo.
+ * Classe responsável por prover autenticação de usuário no profile de TUs. Por
+ * padrão os TUs serão executados com um usuário fixo definido abaixo.
  * 
- * {usuário, senha, principal, role} = {SEGURANCA, teste, SEGURANCA_PRINCIPAL, ROLE_USER}.
+ * {usuário, senha, principal, role} = {SEGURANCA, teste, SEGURANCA_PRINCIPAL,
+ * ROLE_USER}.
  * 
  * 
  */
@@ -32,7 +33,8 @@ public class LoginModuleParaTU implements LoginModule {
     private Subject subject;
 
     @Override
-    public void initialize(Subject subject, CallbackHandler callbackHandler, Map<String, ?> sharedState, Map<String, ?> options) {
+    public void initialize(Subject subject, CallbackHandler callbackHandler, Map<String, ?> sharedState,
+            Map<String, ?> options) {
         this.subject = subject;
 
         try {
@@ -40,7 +42,7 @@ public class LoginModuleParaTU implements LoginModule {
             NameCallback nameCallback = new NameCallback("prompt");
             PasswordCallback passwordCallback = new PasswordCallback("prompt", false);
 
-            callbackHandler.handle(new Callback[] {textCallback, nameCallback, passwordCallback});
+            callbackHandler.handle(new Callback[] { textCallback, nameCallback, passwordCallback });
 
             password = new String(passwordCallback.getPassword());
 

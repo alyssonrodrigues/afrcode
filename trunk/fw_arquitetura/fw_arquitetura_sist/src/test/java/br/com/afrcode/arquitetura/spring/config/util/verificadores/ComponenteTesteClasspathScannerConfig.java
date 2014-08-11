@@ -24,26 +24,23 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Configuration
 public class ComponenteTesteClasspathScannerConfig {
 
-	@Bean
-	public ClassPathScanningCandidateComponentScanner componenteTesteClasspathScanner() {
-		ClassPathScanningCandidateComponentScanner componenteTesteClasspathScanner = new ClassPathScanningCandidateComponentScanner();
-		for (String regExpInclude : ConstantesPadroes.REGS_EXP_TESTES_COMPONENTE) {
-			componenteTesteClasspathScanner
-					.addIncludeFilter(new RegexPatternTypeFilter(Pattern
-							.compile(regExpInclude)));
-		}
-		List<String> regsExpExclude = new ArrayList<String>();
-		regsExpExclude.addAll(Arrays
-				.asList(ConstantesPadroes.REGS_EXP_TESTES_DAO));
-		regsExpExclude.addAll(Arrays
-				.asList(ConstantesPadroes.REGS_EXP_TESTES_SERVICO));
-		for (String regExpExclude : regsExpExclude) {
-			componenteTesteClasspathScanner
-					.addExcludeFilter(new RegexPatternTypeFilter(Pattern
-							.compile(regExpExclude)));
-		}
+    @Bean
+    public ClassPathScanningCandidateComponentScanner componenteTesteClasspathScanner() {
+        ClassPathScanningCandidateComponentScanner componenteTesteClasspathScanner =
+                new ClassPathScanningCandidateComponentScanner();
+        for (String regExpInclude : ConstantesPadroes.REGS_EXP_TESTES_COMPONENTE) {
+            componenteTesteClasspathScanner
+                    .addIncludeFilter(new RegexPatternTypeFilter(Pattern.compile(regExpInclude)));
+        }
+        List<String> regsExpExclude = new ArrayList<String>();
+        regsExpExclude.addAll(Arrays.asList(ConstantesPadroes.REGS_EXP_TESTES_DAO));
+        regsExpExclude.addAll(Arrays.asList(ConstantesPadroes.REGS_EXP_TESTES_SERVICO));
+        for (String regExpExclude : regsExpExclude) {
+            componenteTesteClasspathScanner
+                    .addExcludeFilter(new RegexPatternTypeFilter(Pattern.compile(regExpExclude)));
+        }
 
-		return componenteTesteClasspathScanner;
-	}
+        return componenteTesteClasspathScanner;
+    }
 
 }

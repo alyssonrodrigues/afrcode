@@ -44,29 +44,29 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.SpringJUnit4ClassRun
 @TransactionConfiguration(defaultRollback = false)
 public abstract class AbstractCasoTesteIntegracao {
 
-	@BeforeClass
-	public static void iniciarSpringProfilesParaWebDriver() {
-		// SystemProperty para inibir startup/shutdown do HSQLDB. Ver
-		// HsqldbUtil.
-		System.setProperty("executandoTesteIntegracao", "true");
-		System.setProperty("spring.profiles.active", Profiles.PROFILE_TU);
-	}
+    @BeforeClass
+    public static void iniciarSpringProfilesParaWebDriver() {
+        // SystemProperty para inibir startup/shutdown do HSQLDB. Ver
+        // HsqldbUtil.
+        System.setProperty("executandoTesteIntegracao", "true");
+        System.setProperty("spring.profiles.active", Profiles.PROFILE_TU);
+    }
 
-	/**
-	 * Metodo de pre-configuracao para um metodo de TU. Deve ser sobrescrito
-	 * quando necessario.
-	 */
-	@Before
-	public void antesDeExecutarMetodoTU() {
+    /**
+     * Metodo de pre-configuracao para um metodo de TU. Deve ser sobrescrito
+     * quando necessario.
+     */
+    @Before
+    public void antesDeExecutarMetodoTU() {
 
-	}
+    }
 
-	/**
-	 * Metodo de configuracao pre-execucao de um metodo de TU.
-	 */
-	@After
-	public void aposExecutarMetodoTU() {
+    /**
+     * Metodo de configuracao pre-execucao de um metodo de TU.
+     */
+    @After
+    public void aposExecutarMetodoTU() {
 
-	}
+    }
 
 }
