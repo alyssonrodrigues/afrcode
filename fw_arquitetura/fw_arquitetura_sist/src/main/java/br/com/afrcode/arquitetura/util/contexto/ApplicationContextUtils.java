@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.stereotype.Component;
 
-import br.gov.tcu.arquitetura.is.spring.config.util.ProfilesIS;
+import br.com.afrcode.arquitetura.is.spring.config.util.ProfilesIS;
 
 /**
  * Classe utilitaria para uso do ApplicationContext Spring em classes onde nao e
