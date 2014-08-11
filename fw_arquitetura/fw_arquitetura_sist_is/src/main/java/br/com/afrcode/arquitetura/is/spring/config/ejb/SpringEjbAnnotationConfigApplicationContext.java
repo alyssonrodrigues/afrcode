@@ -18,9 +18,9 @@ public class SpringEjbAnnotationConfigApplicationContext extends GenericApplicat
         ApplicationContext appCtx = ApplicationContextUtils.getApplicationContext();
         if (appCtx == null) {
             appCtx = new AnnotationConfigApplicationContext(basePackages);
-            LOG.warn("ATENÇÃO: Um ApplicationContext Spring será iniciado especificamente para EJBs da aplicação [" +
+            LOG.warn("ATENCAO: Um ApplicationContext Spring sera iniciado especificamente para EJBs da aplicacao [" +
                     ApplicationContextUtils.getNomeAplicacao() + "] " +
-                    "Não foi possível recuperar um ApplicationContext Spring já iniciado para compartilhar com EJBs!");
+                    "Nao foi possivel recuperar um ApplicationContext Spring ja iniciado para compartilhar com EJBs!");
         }
         setParent(appCtx);
         refresh();
