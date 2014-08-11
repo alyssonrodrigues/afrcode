@@ -24,22 +24,22 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteSem
  */
 public class JMSTest extends AbstractCasoTesteSemJpaEJta {
 
-	@Autowired
-	private QueueSender queueSender;
+    @Autowired
+    private QueueSender queueSender;
 
-	@Autowired
-	@Qualifier("queueTest")
-	private Queue queueTest;
+    @Autowired
+    @Qualifier("queueTest")
+    private Queue queueTest;
 
-	@Test
-	public void testarSendReceiveJms() {
-		final String umaMsg = "Uma mensagem de texto via JMS!";
-		try {
-			queueSender.send(umaMsg, queueTest);
-			Assert.assertTrue(true);
-		} catch (Throwable e) {
-			Assert.fail(e.getMessage());
-		}
-	}
+    @Test
+    public void testarSendReceiveJms() {
+        final String umaMsg = "Uma mensagem de texto via JMS!";
+        try {
+            queueSender.send(umaMsg, queueTest);
+            Assert.assertTrue(true);
+        } catch (Throwable e) {
+            Assert.fail(e.getMessage());
+        }
+    }
 
 }

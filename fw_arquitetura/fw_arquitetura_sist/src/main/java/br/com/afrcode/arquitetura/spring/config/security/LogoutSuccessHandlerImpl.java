@@ -16,19 +16,18 @@ import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuc
  * 
  * 
  */
-public class LogoutSuccessHandlerImpl extends SimpleUrlLogoutSuccessHandler
-		implements InitializingBean {
+public class LogoutSuccessHandlerImpl extends SimpleUrlLogoutSuccessHandler implements InitializingBean {
 
-	@Override
-	public void onLogoutSuccess(HttpServletRequest request,
-			HttpServletResponse response, Authentication authentication)
-			throws IOException, ServletException {
-		super.onLogoutSuccess(request, response, authentication);
-	}
+    @Override
+    public void
+            onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+                    throws IOException, ServletException {
+        super.onLogoutSuccess(request, response, authentication);
+    }
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
+    @Override
+    public void afterPropertiesSet() throws Exception {
 
-	}
+    }
 
 }

@@ -9,7 +9,8 @@ import br.com.afrcode.arquitetura.util.mensagem.MensagemNegocioAbstrata;
  * 
  * Ver MensagemNegocioAbstrata e seus subtipos.
  * 
- * Em geral estas exceções são conhecidas e tratadas gerando informações e mensagens exibidas ou enviadas ao usuário final.
+ * Em geral estas exceções são conhecidas e tratadas gerando informações e
+ * mensagens exibidas ou enviadas ao usuário final.
  * 
  * 
  */
@@ -26,7 +27,8 @@ public class ExcecaoNegocio extends RuntimeException implements IExcecao<Mensage
     }
 
     /**
-     * Construtor padrão onde deve ser informada a chave de mensagem a exibir ao usuário final.
+     * Construtor padrão onde deve ser informada a chave de mensagem a exibir ao
+     * usuário final.
      * 
      * @param msg
      */

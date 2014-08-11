@@ -8,7 +8,8 @@ import org.springframework.context.support.GenericApplicationContext;
 import br.com.afrcode.arquitetura.util.contexto.ApplicationContextUtils;
 
 /**
- * Subclasse de GenericApplicationContext com classificador de contexto para EJBs.
+ * Subclasse de GenericApplicationContext com classificador de contexto para
+ * EJBs.
  */
 public class SpringEjbAnnotationConfigApplicationContext extends GenericApplicationContext {
     private static final Logger LOG = Logger.getLogger(SpringEjbAnnotationConfigApplicationContext.class);
@@ -18,9 +19,9 @@ public class SpringEjbAnnotationConfigApplicationContext extends GenericApplicat
         ApplicationContext appCtx = ApplicationContextUtils.getApplicationContext();
         if (appCtx == null) {
             appCtx = new AnnotationConfigApplicationContext(basePackages);
-            LOG.warn("ATENCAO: Um ApplicationContext Spring sera iniciado especificamente para EJBs da aplicacao [" +
-                    ApplicationContextUtils.getNomeAplicacao() + "] " +
-                    "Nao foi possivel recuperar um ApplicationContext Spring ja iniciado para compartilhar com EJBs!");
+            LOG.warn("ATENCAO: Um ApplicationContext Spring será iniciado especificamente para EJBs da aplicação ["
+                    + ApplicationContextUtils.getNomeAplicacao() + "] "
+                    + "Não foi possível recuperar um ApplicationContext Spring já iniciado para compartilhar com EJBs!");
         }
         setParent(appCtx);
         refresh();

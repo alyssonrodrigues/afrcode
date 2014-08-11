@@ -25,16 +25,16 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTeste;
  *            Subtipo de IEntidade
  */
 public abstract class AbstractDaoObjetoPersistenteSomenteLeituraAbstratoTest<T extends Comparable<T>, E extends IEntidade<T>>
-		extends AbstractCasoTeste {
+        extends AbstractCasoTeste {
 
-	protected abstract DaoJpaAbstrato<T, E> getDao();
+    protected abstract DaoJpaAbstrato<T, E> getDao();
 
-	@Autowired
-	private ExecutorTUCRUDDaoUtil testadorDaoUtil;
+    @Autowired
+    private ExecutorTUCRUDDaoUtil testadorDaoUtil;
 
-	@Test
-	public void testarRecuperarTodosJaCadastradosComPaginacao() {
-		testadorDaoUtil.testarRecuperarTodosJaCadastradosComPaginacao(getDao());
-	}
+    @Test
+    public void testarRecuperarTodosJaCadastradosComPaginacao() {
+        testadorDaoUtil.testarRecuperarTodosJaCadastradosComPaginacao(getDao());
+    }
 
 }

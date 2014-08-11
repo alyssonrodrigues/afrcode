@@ -8,7 +8,8 @@ import br.com.afrcode.arquitetura.util.mensagem.erro.TratadorMensagemErroNegocio
  * Superclasse para implementações de ITratadorMensagem.
  * 
  * 
- * @param <T> Subtipo de IMensagem
+ * @param <T>
+ *            Subtipo de IMensagem
  */
 public abstract class TratadorMensagemAbstrato<T extends IMensagem> implements ITratadorMensagem<T> {
     protected static final Logger LOG = Logger.getLogger(TratadorMensagemErroNegocio.class);

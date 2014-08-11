@@ -20,24 +20,19 @@ import org.springframework.context.annotation.Profile;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 @Configuration
-@EnableAutoConfiguration(exclude = {
-		HttpMessageConvertersAutoConfiguration.class,
-		MessageSourceAutoConfiguration.class,
-		PropertyPlaceholderAutoConfiguration.class, AopAutoConfiguration.class,
-		HibernateJpaAutoConfiguration.class, JpaBaseConfiguration.class,
-		DataSourceAutoConfiguration.class,
-		DataSourceTransactionManagerAutoConfiguration.class,
-		JmsTemplateAutoConfiguration.class, JmxAutoConfiguration.class,
-		SecurityAutoConfiguration.class })
+@EnableAutoConfiguration(exclude = { HttpMessageConvertersAutoConfiguration.class,
+        MessageSourceAutoConfiguration.class, PropertyPlaceholderAutoConfiguration.class, AopAutoConfiguration.class,
+        HibernateJpaAutoConfiguration.class, JpaBaseConfiguration.class, DataSourceAutoConfiguration.class,
+        DataSourceTransactionManagerAutoConfiguration.class, JmsTemplateAutoConfiguration.class,
+        JmxAutoConfiguration.class, SecurityAutoConfiguration.class })
 @ComponentScan(basePackages = { "br.com.afrcode" })
 @Profile(Profiles.PROFILE_APLICACAO_BATCH)
 public class BatchRunner {
 
-	public static void main(String[] args) {
-		SpringApplication springApplication = new SpringApplication(
-				BatchRunner.class);
-		springApplication.setWebEnvironment(false);
-		springApplication.run("--debug", "--spring.profiles.active=batch");
-	}
+    public static void main(String[] args) {
+        SpringApplication springApplication = new SpringApplication(BatchRunner.class);
+        springApplication.setWebEnvironment(false);
+        springApplication.run("--debug", "--spring.profiles.active=batch");
+    }
 
 }

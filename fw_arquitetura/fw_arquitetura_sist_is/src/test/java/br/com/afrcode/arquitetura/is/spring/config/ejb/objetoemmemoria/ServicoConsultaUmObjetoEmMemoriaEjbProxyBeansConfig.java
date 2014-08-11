@@ -21,13 +21,12 @@ import br.com.afrcode.arquitetura.is.spring.config.util.ProfilesIS;
 @Configuration
 @Profile(ProfilesIS.PROFILE_TU)
 public class ServicoConsultaUmObjetoEmMemoriaEjbProxyBeansConfig extends
-		AbstractEjbProxyBeansConfig<IServicoConsultaUmObjetoEmMemoria> {
+        AbstractEjbProxyBeansConfig<IServicoConsultaUmObjetoEmMemoria> {
 
-	@Bean
-	@Lazy
-	public IServicoConsultaUmObjetoEmMemoria servicoConsultaUmObjetoEmMemoriaBeanRemote()
-			throws NamingException {
-		return criarEjb3RemoteStatelessSessionProxy("ServicoConsultaUmObjetoEmMemoriaBeanRemote");
-	}
+    @Bean
+    @Lazy
+    public IServicoConsultaUmObjetoEmMemoria servicoConsultaUmObjetoEmMemoriaBeanRemote() throws NamingException {
+        return criarEjb3RemoteStatelessSessionProxy("ServicoConsultaUmObjetoEmMemoriaBeanRemote");
+    }
 
 }

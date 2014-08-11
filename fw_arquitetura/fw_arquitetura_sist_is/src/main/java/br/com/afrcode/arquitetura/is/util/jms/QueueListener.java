@@ -18,21 +18,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class QueueListener implements MessageListener {
 
-	private static final Logger LOG = Logger.getLogger(QueueListener.class);
+    private static final Logger LOG = Logger.getLogger(QueueListener.class);
 
-	public QueueListener() {
-	}
+    public QueueListener() {
+    }
 
-	@Override
-	public void onMessage(Message message) {
-		LOG.info("Mensagem recebida via JMS...");
-		final TextMessage textMessage = (TextMessage) message;
-		try {
-			String text = textMessage.getText();
-			LOG.info("Conteúdo: " + text);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+    @Override
+    public void onMessage(Message message) {
+        LOG.info("Mensagem recebida via JMS...");
+        final TextMessage textMessage = (TextMessage) message;
+        try {
+            String text = textMessage.getText();
+            LOG.info("Conteúdo: " + text);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

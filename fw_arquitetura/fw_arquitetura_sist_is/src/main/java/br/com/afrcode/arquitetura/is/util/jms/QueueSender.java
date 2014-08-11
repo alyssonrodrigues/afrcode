@@ -17,20 +17,20 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class QueueSender {
-	private static final Logger LOG = Logger.getLogger(QueueSender.class);
+    private static final Logger LOG = Logger.getLogger(QueueSender.class);
 
-	private JmsTemplate jmsTemplate;
+    private JmsTemplate jmsTemplate;
 
-	public QueueSender() {
-	}
+    public QueueSender() {
+    }
 
-	@Autowired
-	public QueueSender(final JmsTemplate jmsTemplate) {
-		this.jmsTemplate = jmsTemplate;
-	}
+    @Autowired
+    public QueueSender(final JmsTemplate jmsTemplate) {
+        this.jmsTemplate = jmsTemplate;
+    }
 
-	public void send(final String message, Queue queue) {
-		LOG.info("Enviando mensagem via JMS...");
-		jmsTemplate.convertAndSend(queue, message);
-	}
+    public void send(final String message, Queue queue) {
+        LOG.info("Enviando mensagem via JMS...");
+        jmsTemplate.convertAndSend(queue, message);
+    }
 }

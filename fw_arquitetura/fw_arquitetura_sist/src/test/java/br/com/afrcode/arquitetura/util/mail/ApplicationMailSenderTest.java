@@ -8,12 +8,11 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmM
 
 public class ApplicationMailSenderTest extends AbstractCasoTesteEmMemoria {
 
-	@Autowired
-	private ApplicationMailSender applicationMailSender;
+    @Autowired
+    private ApplicationMailSender applicationMailSender;
 
-	@Test
-	public void testarEnviarEmail() {
-		Assert.assertNotNull("MailSender não configurado!",
-				applicationMailSender);
-	}
+    @Test
+    public void testarEnviarEmail() {
+        Assert.assertNotNull("MailSender não configurado!", applicationMailSender);
+    }
 }

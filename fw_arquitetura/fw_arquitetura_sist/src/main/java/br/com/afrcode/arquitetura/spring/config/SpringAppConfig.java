@@ -37,43 +37,39 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Profile({ Profiles.PROFILE_APLICACAO, Profiles.PROFILE_APLICACAO_BATCH })
 public class SpringAppConfig {
 
-	// Configuracao p/ uso de ${...} obtidas via @PropertySource em anotacoes
-	// @Value.
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer
-			propertySourcesPlaceholderConfigurer() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
+    // Configuracao p/ uso de ${...} obtidas via @PropertySource em anotacoes
+    // @Value.
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
 
-	/**
-	 * Bean responsável por obter mensagens através de seus códigos via arquivos
-	 * de messages resources (.properties).
-	 * 
-	 * TODO: rever se este bean não deveria estar presente no profile de TUs.
-	 * 
-	 * @return
-	 */
-	@Bean
-	public MessageSource messageSource() {
-		ResourceBundleMessageSource messageSource =
-				new ResourceBundleMessageSource();
+    /**
+     * Bean responsável por obter mensagens através de seus códigos via arquivos
+     * de messages resources (.properties).
+     * 
+     * TODO: rever se este bean não deveria estar presente no profile de TUs.
+     * 
+     * @return
+     */
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
 
-		// Resource bundle de mensages do Spring Security, locale pt_BR.
-		String springSecurityMessages =
-				"org.springframework.security.messages_pt_BR";
+        // Resource bundle de mensages do Spring Security, locale pt_BR.
+        String springSecurityMessages = "org.springframework.security.messages_pt_BR";
 
-		// TODO: adicionar demais messages resources sob demanda!
-		String[] messagesResources = new String[] { springSecurityMessages };
-		messageSource.setBasenames(messagesResources);
-		return messageSource;
-	}
+        // TODO: adicionar demais messages resources sob demanda!
+        String[] messagesResources = new String[] { springSecurityMessages };
+        messageSource.setBasenames(messagesResources);
+        return messageSource;
+    }
 
-	@Bean
-	public TaskScheduler taskScheduler() {
-		ScheduledExecutorService scheduledExecutorService =
-				Executors.newSingleThreadScheduledExecutor();
-		return new ConcurrentTaskScheduler(scheduledExecutorService);
+    @Bean
+    public TaskScheduler taskScheduler() {
+        ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+        return new ConcurrentTaskScheduler(scheduledExecutorService);
 
-	}
+    }
 
 }

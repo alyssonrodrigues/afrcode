@@ -20,32 +20,32 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTeste;
  * @param <E>
  *            Subtipo de IEntidade
  */
-public abstract class AbstractDaoObjetoPersistenteAbstratoTest<T extends Comparable<T>, E extends IEntidade<T>>
-		extends AbstractCasoTeste {
+public abstract class AbstractDaoObjetoPersistenteAbstratoTest<T extends Comparable<T>, E extends IEntidade<T>> extends
+        AbstractCasoTeste {
 
-	protected abstract DaoJpaAbstrato<T, E> getDao();
+    protected abstract DaoJpaAbstrato<T, E> getDao();
 
-	@Autowired
-	private ExecutorTUCRUDDaoUtil testadorDaoUtil;
+    @Autowired
+    private ExecutorTUCRUDDaoUtil testadorDaoUtil;
 
-	@Test
-	public void testarSalvarEProcurar() {
-		testadorDaoUtil.testarSalvarEProcurar(getDao());
-	}
+    @Test
+    public void testarSalvarEProcurar() {
+        testadorDaoUtil.testarSalvarEProcurar(getDao());
+    }
 
-	@Test
-	public void testarExcluir() {
-		testadorDaoUtil.testarExcluir(getDao());
-	}
+    @Test
+    public void testarExcluir() {
+        testadorDaoUtil.testarExcluir(getDao());
+    }
 
-	@Test
-	public void testarProcurarPorId() {
-		testadorDaoUtil.testarProcurarPorId(getDao());
-	}
+    @Test
+    public void testarProcurarPorId() {
+        testadorDaoUtil.testarProcurarPorId(getDao());
+    }
 
-	@Test
-	public void testarRecuperarObjetosComPaginacao() {
-		testadorDaoUtil.testarRecuperarObjetosComPaginacao(getDao());
-	}
+    @Test
+    public void testarRecuperarObjetosComPaginacao() {
+        testadorDaoUtil.testarRecuperarObjetosComPaginacao(getDao());
+    }
 
 }

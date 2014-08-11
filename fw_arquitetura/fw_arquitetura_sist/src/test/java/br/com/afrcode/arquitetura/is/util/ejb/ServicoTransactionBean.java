@@ -18,27 +18,26 @@ import br.com.afrcode.arquitetura.is.util.excecao.ExcecaoNaoPrevistaRemota;
  */
 @Stateless
 @Remote(Caller.class)
-public class ServicoTransactionBean extends AbstractServicoEJB implements
-		Caller {
-	@Autowired
-	private TransactionTemplate transactionTemplate;
+public class ServicoTransactionBean extends AbstractServicoEJB implements Caller {
+    @Autowired
+    private TransactionTemplate transactionTemplate;
 
-	@Override
-	public <V> V call(final Callable<V> callable) throws Exception {
-		return transactionTemplate.execute(new TransactionCallback<V>() {
-			@Override
-			public V doInTransaction(TransactionStatus status) {
-				try {
-					// Chamada ao código cliente de TU.
-					return callable.call();
-				} catch (Exception e) {
-					throw new ExcecaoNaoPrevistaRemota(e);
-				} finally {
-					// Demarcação de rollback por padrão para TU.
-					status.setRollbackOnly();
-				}
-			}
-		});
-	}
+    @Override
+    public <V> V call(final Callable<V> callable) throws Exception {
+        return transactionTemplate.execute(new TransactionCallback<V>() {
+            @Override
+            public V doInTransaction(TransactionStatus status) {
+                try {
+                    // Chamada ao código cliente de TU.
+                    return callable.call();
+                } catch (Exception e) {
+                    throw new ExcecaoNaoPrevistaRemota(e);
+                } finally {
+                    // Demarcação de rollback por padrão para TU.
+                    status.setRollbackOnly();
+                }
+            }
+        });
+    }
 
 }

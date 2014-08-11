@@ -20,12 +20,12 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Configuration
 public class EntityAnnotationClasspathScannerConfig {
 
-	@Bean
-	public ClassPathScanningCandidateComponentScanner entityAnnotationClasspathScanner() {
-		ClassPathScanningCandidateComponentScanner entityAnnotationClasspathScanner = new ClassPathScanningCandidateComponentScanner();
-		entityAnnotationClasspathScanner
-				.addIncludeFilter(new AnnotationTypeFilter(Entity.class, false));
-		return entityAnnotationClasspathScanner;
-	}
+    @Bean
+    public ClassPathScanningCandidateComponentScanner entityAnnotationClasspathScanner() {
+        ClassPathScanningCandidateComponentScanner entityAnnotationClasspathScanner =
+                new ClassPathScanningCandidateComponentScanner();
+        entityAnnotationClasspathScanner.addIncludeFilter(new AnnotationTypeFilter(Entity.class, false));
+        return entityAnnotationClasspathScanner;
+    }
 
 }

@@ -20,14 +20,12 @@ import br.com.afrcode.arquitetura.is.spring.config.util.ProfilesIS;
  */
 @Configuration
 @Profile(ProfilesIS.PROFILE_TU)
-public class ServicoHelloWorldEjbProxyBeansConfig extends
-		AbstractEjbProxyBeansConfig<IServicoHelloWorld> {
+public class ServicoHelloWorldEjbProxyBeansConfig extends AbstractEjbProxyBeansConfig<IServicoHelloWorld> {
 
-	@Bean
-	@Lazy
-	public IServicoHelloWorld servicoHelloWorldBeanRemote()
-			throws NamingException {
-		return criarEjb3RemoteStatelessSessionProxy("ServicoHelloWorldBeanRemote");
-	}
+    @Bean
+    @Lazy
+    public IServicoHelloWorld servicoHelloWorldBeanRemote() throws NamingException {
+        return criarEjb3RemoteStatelessSessionProxy("ServicoHelloWorldBeanRemote");
+    }
 
 }

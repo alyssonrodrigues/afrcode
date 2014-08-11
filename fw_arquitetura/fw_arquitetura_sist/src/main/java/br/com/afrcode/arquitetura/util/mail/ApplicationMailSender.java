@@ -9,18 +9,17 @@ import br.com.afrcode.arquitetura.spring.anotacoes.Componente;
 @Componente
 public class ApplicationMailSender {
 
-	@Autowired
-	private MailSender mailSender;
+    @Autowired
+    private MailSender mailSender;
 
-	public void enviarEmail(String from, String to, String[] cc,
-			String subject, String text) {
-		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-		simpleMailMessage.setFrom(from);
-		simpleMailMessage.setTo(to);
-		simpleMailMessage.setCc(cc);
-		simpleMailMessage.setSubject(subject);
-		simpleMailMessage.setText(text);
-		mailSender.send(simpleMailMessage);
-	}
+    public void enviarEmail(String from, String to, String[] cc, String subject, String text) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom(from);
+        simpleMailMessage.setTo(to);
+        simpleMailMessage.setCc(cc);
+        simpleMailMessage.setSubject(subject);
+        simpleMailMessage.setText(text);
+        mailSender.send(simpleMailMessage);
+    }
 
 }

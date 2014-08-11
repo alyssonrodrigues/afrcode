@@ -10,16 +10,14 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteSem
 
 public class ServicoHelloWorldBeanTest extends AbstractCasoTesteSemJpaEJta {
 
-	@EJB
-	private IServicoHelloWorld servicoHelloWorld;
+    @EJB
+    private IServicoHelloWorld servicoHelloWorld;
 
-	@Test
-	public void testarSrvHelloWorld() {
-		Assert.assertNotNull(
-				"Deveria ter sido obtido um proxy EJB3 via autowiring!",
-				servicoHelloWorld);
-		Assert.assertEquals("Mensagem de Hello World diferente do esperado!",
-				"Hello Alysson", servicoHelloWorld.sayHello("Alysson"));
-	}
+    @Test
+    public void testarSrvHelloWorld() {
+        Assert.assertNotNull("Deveria ter sido obtido um proxy EJB3 via autowiring!", servicoHelloWorld);
+        Assert.assertEquals("Mensagem de Hello World diferente do esperado!", "Hello Alysson",
+                servicoHelloWorld.sayHello("Alysson"));
+    }
 
 }

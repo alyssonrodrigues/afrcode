@@ -18,23 +18,21 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 @Stateless
 @Remote(IServicoConsultaUmObjetoEmMemoria.class)
 @Interceptors({ SpringBeanAutowiringInterceptor.class })
-public class ServicoConsultaUmObjetoEmMemoriaBean implements
-		IServicoConsultaUmObjetoEmMemoria {
+public class ServicoConsultaUmObjetoEmMemoriaBean implements IServicoConsultaUmObjetoEmMemoria {
 
-	@Autowired
-	private DaoUmObjetoEmMemoria daoUmObjetoEmMemoria;
+    @Autowired
+    private DaoUmObjetoEmMemoria daoUmObjetoEmMemoria;
 
-	@Override
-	public Collection<UmObjetoEmMemoria> listar() {
-		Collection<UmObjetoEmMemoria> objs = daoUmObjetoEmMemoria
-				.recuperarTodos();
-		return objs;
-	}
+    @Override
+    public Collection<UmObjetoEmMemoria> listar() {
+        Collection<UmObjetoEmMemoria> objs = daoUmObjetoEmMemoria.recuperarTodos();
+        return objs;
+    }
 
-	@Override
-	public UmObjetoEmMemoria recuperarPorId(Long id) {
-		UmObjetoEmMemoria obj = daoUmObjetoEmMemoria.procurarPorId(id);
-		return obj;
-	}
+    @Override
+    public UmObjetoEmMemoria recuperarPorId(Long id) {
+        UmObjetoEmMemoria obj = daoUmObjetoEmMemoria.procurarPorId(id);
+        return obj;
+    }
 
 }

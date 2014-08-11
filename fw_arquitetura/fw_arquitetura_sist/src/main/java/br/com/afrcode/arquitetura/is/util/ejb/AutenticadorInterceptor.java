@@ -22,49 +22,43 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
  * usuário presentes no EjbContext.
  */
 public class AutenticadorInterceptor {
-	private static final Logger LOG = Logger
-			.getLogger(AutenticadorInterceptor.class);
+    private static final Logger LOG = Logger.getLogger(AutenticadorInterceptor.class);
 
-	@Resource
-	private EJBContext ejbContext;
+    @Resource
+    private EJBContext ejbContext;
 
-	@Resource(name = "java:app/AppName")
-	private String appName;
+    @Resource(name = "java:app/AppName")
+    private String appName;
 
-	@AroundInvoke
-	public Object repassarCredenciais(InvocationContext ctx) throws Exception {
-		if (SecurityContextHolder.getContext().getAuthentication() == null) {
-			String username = EjbContextUtils.obterCredencial(ejbContext);
-			repassarCredenciais(username);
-		}
-		return ctx.proceed();
-	}
+    @AroundInvoke
+    public Object repassarCredenciais(InvocationContext ctx) throws Exception {
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
+            String username = EjbContextUtils.obterCredencial(ejbContext);
+            repassarCredenciais(username);
+        }
+        return ctx.proceed();
+    }
 
-	private void repassarCredenciais(String username) {
-		Environment environment =
-				EJBSpringApplicationContextUtils.getBean(Environment.class);
-		if (!Arrays.asList(environment.getActiveProfiles()).contains(
-				Profiles.PROFILE_TU)) {
-			repassarCredenciaisParaAplicacao(username);
-		} // Para TUs as credenciais são criadas via ContextoSegurancaTU.
-	}
+    private void repassarCredenciais(String username) {
+        Environment environment = EJBSpringApplicationContextUtils.getBean(Environment.class);
+        if (!Arrays.asList(environment.getActiveProfiles()).contains(Profiles.PROFILE_TU)) {
+            repassarCredenciaisParaAplicacao(username);
+        } // Para TUs as credenciais são criadas via ContextoSegurancaTU.
+    }
 
-	private void repassarCredenciaisParaAplicacao(String username) {
-		// Obtém credenciais via UserDetailsService.
-		UserDetailsServiceImpl userDetailsServiceImpl =
-				EJBSpringApplicationContextUtils
-						.getBean(UserDetailsServiceImpl.class);
-		UserDetails user = userDetailsServiceImpl.loadUserByUsername(username);
-		UsernamePasswordAuthenticationToken usrPasswdToken =
-				new UsernamePasswordAuthenticationToken(user.getUsername(),
-						user.getPassword(), user.getAuthorities());
+    private void repassarCredenciaisParaAplicacao(String username) {
+        // Obtém credenciais via UserDetailsService.
+        UserDetailsServiceImpl userDetailsServiceImpl =
+                EJBSpringApplicationContextUtils.getBean(UserDetailsServiceImpl.class);
+        UserDetails user = userDetailsServiceImpl.loadUserByUsername(username);
+        UsernamePasswordAuthenticationToken usrPasswdToken =
+                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), user.getAuthorities());
 
-		// Repassando credenciais ao Spring Security.
-		SecurityContextHolder.getContext().setAuthentication(usrPasswdToken);
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Usuário obtido via EjbContext repassado ao Spring Security: "
-					+ usrPasswdToken.getName());
-		}
-	}
+        // Repassando credenciais ao Spring Security.
+        SecurityContextHolder.getContext().setAuthentication(usrPasswdToken);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Usuário obtido via EjbContext repassado ao Spring Security: " + usrPasswdToken.getName());
+        }
+    }
 
 }

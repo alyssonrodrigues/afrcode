@@ -35,50 +35,47 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @ImportResource({ "classpath:spring-security-beans-tu.xml" })
 public class SpringSecurityTUConfig {
 
-	/**
-	 * Bean provedor de autenticação Spring. Responsável por validar as
-	 * credenciais de um usuário via JAAS LoginModule.
-	 * 
-	 * O LoginModule é configurado via AppConfigurationEntry e repassado ao
-	 * DefaultJaasAuthenticationProvider.
-	 * 
-	 * O provider JAAS em uso para testes é o LoginModuleParaTU.
-	 * 
-	 * @return
-	 */
-	@Bean
-	public DefaultJaasAuthenticationProvider authenticationProviderImpl() {
-		DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider = new DefaultJaasAuthenticationProvider();
+    /**
+     * Bean provedor de autenticação Spring. Responsável por validar as
+     * credenciais de um usuário via JAAS LoginModule.
+     * 
+     * O LoginModule é configurado via AppConfigurationEntry e repassado ao
+     * DefaultJaasAuthenticationProvider.
+     * 
+     * O provider JAAS em uso para testes é o LoginModuleParaTU.
+     * 
+     * @return
+     */
+    @Bean
+    public DefaultJaasAuthenticationProvider authenticationProviderImpl() {
+        DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider = new DefaultJaasAuthenticationProvider();
 
-		// Configurações do provider JAAS. Integração Spring Security com o JAAS
-		// provider para Autenticação.
-		Map<String, AppConfigurationEntry[]> appCofEntries = new HashMap<String, AppConfigurationEntry[]>();
-		AppConfigurationEntry appConfigurationEntry = new AppConfigurationEntry(
-				LoginModuleParaTU.class.getName(),
-				LoginModuleControlFlag.REQUIRED, Collections.EMPTY_MAP);
-		appCofEntries.put("SPRINGSECURITY",
-				new AppConfigurationEntry[] { appConfigurationEntry });
-		defaultJaasAuthenticationProvider
-				.setConfiguration(new InMemoryConfiguration(appCofEntries));
+        // Configurações do provider JAAS. Integração Spring Security com o JAAS
+        // provider para Autenticação.
+        Map<String, AppConfigurationEntry[]> appCofEntries = new HashMap<String, AppConfigurationEntry[]>();
+        AppConfigurationEntry appConfigurationEntry =
+                new AppConfigurationEntry(LoginModuleParaTU.class.getName(), LoginModuleControlFlag.REQUIRED,
+                        Collections.EMPTY_MAP);
+        appCofEntries.put("SPRINGSECURITY", new AppConfigurationEntry[] { appConfigurationEntry });
+        defaultJaasAuthenticationProvider.setConfiguration(new InMemoryConfiguration(appCofEntries));
 
-		// Configurações do provider JAAS. Integração Spring Security com o JAAS
-		// provider para Autorização.
-		AuthorityGranter authorityGranter = authorityGranter();
-		defaultJaasAuthenticationProvider
-				.setAuthorityGranters(new AuthorityGranter[] { authorityGranter });
+        // Configurações do provider JAAS. Integração Spring Security com o JAAS
+        // provider para Autorização.
+        AuthorityGranter authorityGranter = authorityGranter();
+        defaultJaasAuthenticationProvider.setAuthorityGranters(new AuthorityGranter[] { authorityGranter });
 
-		return defaultJaasAuthenticationProvider;
-	}
+        return defaultJaasAuthenticationProvider;
+    }
 
-	/**
-	 * Adaptador responsável por fazer o DE-PARA entre credenciais do principal
-	 * (Subject JAAS) e GrantedAuthority do Spring Security.
-	 * 
-	 * @return
-	 */
-	private AuthorityGranter authorityGranter() {
-		AuthorityGranter authorityGranter = new AuthorityGranterParaTU();
-		return authorityGranter;
-	}
+    /**
+     * Adaptador responsável por fazer o DE-PARA entre credenciais do principal
+     * (Subject JAAS) e GrantedAuthority do Spring Security.
+     * 
+     * @return
+     */
+    private AuthorityGranter authorityGranter() {
+        AuthorityGranter authorityGranter = new AuthorityGranterParaTU();
+        return authorityGranter;
+    }
 
 }

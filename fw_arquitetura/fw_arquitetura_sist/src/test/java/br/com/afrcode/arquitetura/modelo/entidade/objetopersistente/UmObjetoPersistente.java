@@ -15,8 +15,9 @@ import br.com.afrcode.arquitetura.modelo.entidade.ObjetoPersistenteAbstrato;
 /**
  * Classe de entidade para teste e validação inicial do frameworkarquitetura.
  * 
- * ATENÇÃO: Esta entidade encontra-se em src/test/java pois é uma Entidade para TESTE inicial do frameworkarquitetura e somente
- * por isto! Entidades da aplicação devem estar em src/main/java!
+ * ATENÇÃO: Esta entidade encontra-se em src/test/java pois é uma Entidade para
+ * TESTE inicial do frameworkarquitetura e somente por isto! Entidades da
+ * aplicação devem estar em src/main/java!
  * 
  * 
  */
@@ -47,7 +48,8 @@ public class UmObjetoPersistente extends ObjetoPersistenteAbstrato {
     }
 
     /**
-     * @param descricao the descricao to set
+     * @param descricao
+     *            the descricao to set
      */
     public void setDescricao(String descricao) {
         this.descricao = descricao;

@@ -16,7 +16,8 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import br.com.afrcode.arquitetura.util.excecao.ExcecaoNaoPrevista;
 
 /**
- * Componente responsável por tratar erros de acesso negado (erros de autorização).
+ * Componente responsável por tratar erros de acesso negado (erros de
+ * autorização).
  * 
  * 
  */
@@ -25,17 +26,17 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
 
     private static final String ATRIBUTO_EXCECAO_ACESSO_NEGADO = "excecaoAcessoNegado";
 
-    private static final String MSG_ERRO_AO_REDIRECIONAR = "Não foi possível redirecionar para a página de acesso negado, " +
-            "pois já houve envio de reposta HTML ao usuário!";
+    private static final String MSG_ERRO_AO_REDIRECIONAR =
+            "Não foi possível redirecionar para a página de acesso negado, "
+                    + "pois já houve envio de reposta HTML ao usuário!";
 
     private String errorPage;
 
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException)
-            throws IOException, ServletException {
+    public void handle(HttpServletRequest request, HttpServletResponse response,
+            AccessDeniedException accessDeniedException) throws IOException, ServletException {
         FacesContext facesContext = FacesContext.getCurrentInstance();
 
-        if (facesContext != null
-                && facesContext.getPartialViewContext() != null
+        if (facesContext != null && facesContext.getPartialViewContext() != null
                 && facesContext.getPartialViewContext().isAjaxRequest()) {
             handleRequisicaoAjax(request, response, accessDeniedException);
         } else {
@@ -82,11 +83,14 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
     }
 
     /**
-     * The error page to use. Must begin with a "/" and is interpreted relative to the current context root.
+     * The error page to use. Must begin with a "/" and is interpreted relative
+     * to the current context root.
      * 
-     * @param errorPage the dispatcher path to display
+     * @param errorPage
+     *            the dispatcher path to display
      * 
-     * @throws IllegalArgumentException if the argument doesn't comply with the above limitations
+     * @throws IllegalArgumentException
+     *             if the argument doesn't comply with the above limitations
      */
     public void setErrorPage(String errorPage) {
         if ((errorPage != null) && !errorPage.startsWith("/")) {

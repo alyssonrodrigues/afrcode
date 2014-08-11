@@ -38,121 +38,116 @@ import br.com.afrcode.arquitetura.util.excecao.TratadorExcecoesNaoPrevistas;
  * 
  */
 public class JSF2ExceptionHandler extends ExceptionHandlerWrapper {
-	private static Logger LOG = Logger.getLogger(JSF2ExceptionHandler.class);
+    private static Logger LOG = Logger.getLogger(JSF2ExceptionHandler.class);
 
-	private ExceptionHandler wrapped;
+    private ExceptionHandler wrapped;
 
-	public JSF2ExceptionHandler(ExceptionHandler wrapped) {
-		this.wrapped = wrapped;
-	}
+    public JSF2ExceptionHandler(ExceptionHandler wrapped) {
+        this.wrapped = wrapped;
+    }
 
-	@Override
-	public ExceptionHandler getWrapped() {
-		return wrapped;
-	}
+    @Override
+    public ExceptionHandler getWrapped() {
+        return wrapped;
+    }
 
-	@Override
-	public void handle() throws FacesException {
-		List<ExcecaoNaoPrevista> excecoesNaoPrevistas = new ArrayList<ExcecaoNaoPrevista>();
+    @Override
+    public void handle() throws FacesException {
+        List<ExcecaoNaoPrevista> excecoesNaoPrevistas = new ArrayList<ExcecaoNaoPrevista>();
 
-		for (Iterator<ExceptionQueuedEvent> it = getUnhandledExceptionQueuedEvents()
-				.iterator(); it.hasNext();) {
-			ExceptionQueuedEvent event = it.next();
-			ExceptionQueuedEventContext ctx = event.getContext();
+        for (Iterator<ExceptionQueuedEvent> it = getUnhandledExceptionQueuedEvents().iterator(); it.hasNext();) {
+            ExceptionQueuedEvent event = it.next();
+            ExceptionQueuedEventContext ctx = event.getContext();
 
-			if (ctx.getException() instanceof AbortProcessingException) {
-				// Exceções internas ao ciclo de vida do JSF serão tratadas por
-				// ele mesmo, não é necessário prosseguir na cadeia
-				// de exceções.
-				super.handle();
-				return;
-			}
+            if (ctx.getException() instanceof AbortProcessingException) {
+                // Exceções internas ao ciclo de vida do JSF serão tratadas por
+                // ele mesmo, não é necessário prosseguir na cadeia
+                // de exceções.
+                super.handle();
+                return;
+            }
 
-			Throwable te = obterExpcetionCause(ctx.getException());
-			boolean houveAccessDeniedException = te instanceof AccessDeniedException;
-			boolean excecaoTratada = false;
-			try {
-				excecaoTratada = tratarExcecaoSeExcecaoConhecida(te);
-			} finally {
-				if (excecaoTratada) {
-					// Indicando ao JSF 2 que houve erro de validação.
-					FacesContext.getCurrentInstance().validationFailed();
-					it.remove();
-				} else {
-					if (houveAccessDeniedException) {
-						// Houve AccessDeniedException que será tratada pelo
-						// AccessDeniedHandlerImpl posteriormente.
-						LOG.warn(te.getMessage());
-						super.handle();
-					} else {
-						excecoesNaoPrevistas.add(new ExcecaoNaoPrevista(te));
-						it.remove();
-					}
-				}
-			}
+            Throwable te = obterExpcetionCause(ctx.getException());
+            boolean houveAccessDeniedException = te instanceof AccessDeniedException;
+            boolean excecaoTratada = false;
+            try {
+                excecaoTratada = tratarExcecaoSeExcecaoConhecida(te);
+            } finally {
+                if (excecaoTratada) {
+                    // Indicando ao JSF 2 que houve erro de validação.
+                    FacesContext.getCurrentInstance().validationFailed();
+                    it.remove();
+                } else {
+                    if (houveAccessDeniedException) {
+                        // Houve AccessDeniedException que será tratada pelo
+                        // AccessDeniedHandlerImpl posteriormente.
+                        LOG.warn(te.getMessage());
+                        super.handle();
+                    } else {
+                        excecoesNaoPrevistas.add(new ExcecaoNaoPrevista(te));
+                        it.remove();
+                    }
+                }
+            }
 
-			if (houveAccessDeniedException) {
-				// Exceção tratada pelo Spring, não é necessário prosseguir na
-				// cadeia de exceções.
-				return;
-			}
-		}
+            if (houveAccessDeniedException) {
+                // Exceção tratada pelo Spring, não é necessário prosseguir na
+                // cadeia de exceções.
+                return;
+            }
+        }
 
-		tratarExcecoesNaoPrevistas(FacesContext.getCurrentInstance(),
-				excecoesNaoPrevistas);
-	}
+        tratarExcecoesNaoPrevistas(FacesContext.getCurrentInstance(), excecoesNaoPrevistas);
+    }
 
-	private Throwable obterExpcetionCause(Throwable exception) {
-		Throwable te = exception;
-		while (te.getCause() != null) {
-			te = te.getCause();
-		}
-		return te;
-	}
+    private Throwable obterExpcetionCause(Throwable exception) {
+        Throwable te = exception;
+        while (te.getCause() != null) {
+            te = te.getCause();
+        }
+        return te;
+    }
 
-	private void tratarConstraintViolationException(
-			ConstraintViolationException cve) {
-		new TratadorConstraintViolationException().tratarExcecao(cve);
-	}
+    private void tratarConstraintViolationException(ConstraintViolationException cve) {
+        new TratadorConstraintViolationException().tratarExcecao(cve);
+    }
 
-	private boolean tratarExcecaoSeExcecaoConhecida(Throwable te) {
-		boolean excecaoTratada = false;
+    private boolean tratarExcecaoSeExcecaoConhecida(Throwable te) {
+        boolean excecaoTratada = false;
 
-		if (te instanceof ConstraintViolationException) {
-			ConstraintViolationException cve = (ConstraintViolationException) te;
-			tratarConstraintViolationException(cve);
-			excecaoTratada = true;
-		} else if (te instanceof ExcecaoNegocio) {
-			ExcecaoNegocio exn = (ExcecaoNegocio) te;
-			tratarExcecaoNegocio(exn);
-			excecaoTratada = true;
-		} else if (te instanceof AccessDeniedException) {
-			// Não é necessário nenhum tratamento adicional a partir deste ponto
-			// pois o próprio Spring irá tratar a exceção
-			// através do AccessDeniedHandlerImpl configurado no
-			// SpringSecurityConfig e em spring-security-beans.xml.
-			excecaoTratada = false;
-		} else if (te instanceof ExcecaoNegocioRemota) {
-			ExcecaoNegocioRemota er = (ExcecaoNegocioRemota) te;
-			tratarExcecaoNegocioRemota(er);
-			excecaoTratada = true;
-		}
+        if (te instanceof ConstraintViolationException) {
+            ConstraintViolationException cve = (ConstraintViolationException) te;
+            tratarConstraintViolationException(cve);
+            excecaoTratada = true;
+        } else if (te instanceof ExcecaoNegocio) {
+            ExcecaoNegocio exn = (ExcecaoNegocio) te;
+            tratarExcecaoNegocio(exn);
+            excecaoTratada = true;
+        } else if (te instanceof AccessDeniedException) {
+            // Não é necessário nenhum tratamento adicional a partir deste ponto
+            // pois o próprio Spring irá tratar a exceção
+            // através do AccessDeniedHandlerImpl configurado no
+            // SpringSecurityConfig e em spring-security-beans.xml.
+            excecaoTratada = false;
+        } else if (te instanceof ExcecaoNegocioRemota) {
+            ExcecaoNegocioRemota er = (ExcecaoNegocioRemota) te;
+            tratarExcecaoNegocioRemota(er);
+            excecaoTratada = true;
+        }
 
-		return excecaoTratada;
-	}
+        return excecaoTratada;
+    }
 
-	private void tratarExcecaoNegocio(ExcecaoNegocio exn) {
-		new TratadorExcecaoNegocio().tratarExcecao(exn);
-	}
+    private void tratarExcecaoNegocio(ExcecaoNegocio exn) {
+        new TratadorExcecaoNegocio().tratarExcecao(exn);
+    }
 
-	private void tratarExcecaoNegocioRemota(ExcecaoNegocioRemota er) {
-		new TratadorExcecaoNegocioRemota().tratarExcecao(er);
-	}
+    private void tratarExcecaoNegocioRemota(ExcecaoNegocioRemota er) {
+        new TratadorExcecaoNegocioRemota().tratarExcecao(er);
+    }
 
-	private void tratarExcecoesNaoPrevistas(FacesContext facesContext,
-			List<ExcecaoNaoPrevista> excecoesNaoPrevistas) {
-		new TratadorExcecoesNaoPrevistas().tratarExcecoes(facesContext,
-				excecoesNaoPrevistas);
-	}
+    private void tratarExcecoesNaoPrevistas(FacesContext facesContext, List<ExcecaoNaoPrevista> excecoesNaoPrevistas) {
+        new TratadorExcecoesNaoPrevistas().tratarExcecoes(facesContext, excecoesNaoPrevistas);
+    }
 
 }

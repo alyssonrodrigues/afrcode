@@ -18,15 +18,13 @@ import br.com.afrcode.arquitetura.util.contexto.ContextoAplicacaoWeb;
 @Profile(Profiles.PROFILE_APLICACAO)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	@Autowired
-	private ContextoAplicacaoWeb contextoAplicacaoWeb;
+    @Autowired
+    private ContextoAplicacaoWeb contextoAplicacaoWeb;
 
-	@Transactional(readOnly = true)
-	public UserDetails loadUserByUsername(String username)
-			throws UsernameNotFoundException, DataAccessException {
-		return new User(username, username,
-				AuthorityUtils.createAuthorityList("ROLE_USER"));
+    @Transactional(readOnly = true)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
+        return new User(username, username, AuthorityUtils.createAuthorityList("ROLE_USER"));
 
-	}
+    }
 
 }

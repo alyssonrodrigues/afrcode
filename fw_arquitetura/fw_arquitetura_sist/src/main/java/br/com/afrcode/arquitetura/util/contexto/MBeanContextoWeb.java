@@ -16,38 +16,37 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Profile({ Profiles.PROFILE_APLICACAO })
 public class MBeanContextoWeb implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private static final Logger LOG = Logger.getLogger(MBeanContextoWeb.class);
+    private static final Logger LOG = Logger.getLogger(MBeanContextoWeb.class);
 
-	@ManagedProperty(value = "#{contextoAplicacaoWeb}")
-	private ContextoAplicacaoWeb contextoAplicacaoWeb;
+    @ManagedProperty(value = "#{contextoAplicacaoWeb}")
+    private ContextoAplicacaoWeb contextoAplicacaoWeb;
 
-	@ManagedProperty("#{contextoSeguranca}")
-	private ContextoSeguranca contextoSeguranca;
+    @ManagedProperty("#{contextoSeguranca}")
+    private ContextoSeguranca contextoSeguranca;
 
-	public MBeanContextoWeb() {
-		LOG.debug("Criando MBeanContextoWeb...");
-	}
+    public MBeanContextoWeb() {
+        LOG.debug("Criando MBeanContextoWeb...");
+    }
 
-	public void setContextoAplicacaoWeb(
-			ContextoAplicacaoWeb contextoAplicacaoWeb) {
-		this.contextoAplicacaoWeb = contextoAplicacaoWeb;
-	}
+    public void setContextoAplicacaoWeb(ContextoAplicacaoWeb contextoAplicacaoWeb) {
+        this.contextoAplicacaoWeb = contextoAplicacaoWeb;
+    }
 
-	/**
-	 * @return the contextoAplicacaoWeb
-	 */
-	public ContextoAplicacaoWeb getContextoAplicacaoWeb() {
-		return contextoAplicacaoWeb;
-	}
+    /**
+     * @return the contextoAplicacaoWeb
+     */
+    public ContextoAplicacaoWeb getContextoAplicacaoWeb() {
+        return contextoAplicacaoWeb;
+    }
 
-	public void setContextoSeguranca(ContextoSeguranca contextoSeguranca) {
-		this.contextoSeguranca = contextoSeguranca;
-	}
+    public void setContextoSeguranca(ContextoSeguranca contextoSeguranca) {
+        this.contextoSeguranca = contextoSeguranca;
+    }
 
-	public ContextoSeguranca getContextoSeguranca() {
-		return contextoSeguranca;
-	}
+    public ContextoSeguranca getContextoSeguranca() {
+        return contextoSeguranca;
+    }
 
 }

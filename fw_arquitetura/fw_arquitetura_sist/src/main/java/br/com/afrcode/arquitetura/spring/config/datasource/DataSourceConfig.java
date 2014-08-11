@@ -41,51 +41,48 @@ import br.com.afrcode.arquitetura.util.excecao.ExcecaoNaoPrevista;
 @Configuration
 @Profile(Profiles.PROFILE_APLICACAO)
 public class DataSourceConfig {
-	private static final Logger LOG = Logger.getLogger(DataSourceConfig.class);
+    private static final Logger LOG = Logger.getLogger(DataSourceConfig.class);
 
-	@Autowired
-	private ContextoAplicacaoWeb contextoAplicacaoWeb;
+    @Autowired
+    private ContextoAplicacaoWeb contextoAplicacaoWeb;
 
-	@Bean
-	@Primary
-	public DataSource dataSource() {
-		DataSource dataSource = null;
-		try {
-			Context context = new InitialContext();
-			String datasourceJndiName = recuperarDatasourceJndiName();
-			dataSource = (DataSource) context.lookup(datasourceJndiName);
-		} catch (NamingException e) {
-			LOG.error(e);
-			throw new ExcecaoNaoPrevista(e);
-		}
-		return dataSource;
-	}
+    @Bean
+    @Primary
+    public DataSource dataSource() {
+        DataSource dataSource = null;
+        try {
+            Context context = new InitialContext();
+            String datasourceJndiName = recuperarDatasourceJndiName();
+            dataSource = (DataSource) context.lookup(datasourceJndiName);
+        } catch (NamingException e) {
+            LOG.error(e);
+            throw new ExcecaoNaoPrevista(e);
+        }
+        return dataSource;
+    }
 
-	private String recuperarDatasourceJndiName() {
-		String datasourceJndiName = null;
-		InputStream isDataSourceProperties = Thread.currentThread()
-				.getContextClassLoader()
-				.getResourceAsStream("datasource.properties");
-		if (isDataSourceProperties == null) {
-			datasourceJndiName = "java:/xadatasources/"
-					+ contextoAplicacaoWeb.getNomeContextoWeb() + "Datasource";
-		} else {
-			Properties datasourceProperties = new Properties();
-			try {
-				datasourceProperties.load(isDataSourceProperties);
-				datasourceJndiName = datasourceProperties
-						.getProperty("datasourceJndiName");
-			} catch (IOException e) {
-				throw new ExcecaoNaoPrevista(e);
-			}
-		}
-		return datasourceJndiName;
-	}
+    private String recuperarDatasourceJndiName() {
+        String datasourceJndiName = null;
+        InputStream isDataSourceProperties =
+                Thread.currentThread().getContextClassLoader().getResourceAsStream("datasource.properties");
+        if (isDataSourceProperties == null) {
+            datasourceJndiName = "java:/xadatasources/" + contextoAplicacaoWeb.getNomeContextoWeb() + "Datasource";
+        } else {
+            Properties datasourceProperties = new Properties();
+            try {
+                datasourceProperties.load(isDataSourceProperties);
+                datasourceJndiName = datasourceProperties.getProperty("datasourceJndiName");
+            } catch (IOException e) {
+                throw new ExcecaoNaoPrevista(e);
+            }
+        }
+        return datasourceJndiName;
+    }
 
-	@Bean
-	@Primary
-	public JdbcTemplate jdbcTemplate() {
-		return new JdbcTemplate(dataSource());
-	}
+    @Bean
+    @Primary
+    public JdbcTemplate jdbcTemplate() {
+        return new JdbcTemplate(dataSource());
+    }
 
 }

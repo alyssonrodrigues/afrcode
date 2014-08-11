@@ -18,18 +18,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 public class SpringJUnit4ClassRunnerExtended extends SpringJUnit4ClassRunner {
 
-	public SpringJUnit4ClassRunnerExtended(Class<?> clazz)
-			throws InitializationError {
-		super(clazz);
-	}
+    public SpringJUnit4ClassRunnerExtended(Class<?> clazz) throws InitializationError {
+        super(clazz);
+    }
 
-	@Override
-	protected Statement withPotentialRepeat(FrameworkMethod frameworkMethod,
-			Object testInstance, Statement next) {
-		Repeat repeatAnnotation = frameworkMethod.getAnnotation(Repeat.class);
-		int repeat = (repeatAnnotation == null ? 1 : repeatAnnotation.value());
-		return new SpringRepeatExtended(next, frameworkMethod.getMethod(),
-				repeat);
-	}
+    @Override
+    protected Statement withPotentialRepeat(FrameworkMethod frameworkMethod, Object testInstance, Statement next) {
+        Repeat repeatAnnotation = frameworkMethod.getAnnotation(Repeat.class);
+        int repeat = (repeatAnnotation == null ? 1 : repeatAnnotation.value());
+        return new SpringRepeatExtended(next, frameworkMethod.getMethod(), repeat);
+    }
 
 }

@@ -20,59 +20,57 @@ import br.com.afrcode.arquitetura.util.excecao.ExcecaoNaoPrevista;
  * 
  */
 @Componente
-public class ContextoAplicacaoWeb implements ApplicationContextAware,
-		ServletContextAware {
+public class ContextoAplicacaoWeb implements ApplicationContextAware, ServletContextAware {
 
-	private ApplicationContext applicationContext;
+    private ApplicationContext applicationContext;
 
-	private JndiTemplate jndiTemplate = new JndiTemplate();
+    private JndiTemplate jndiTemplate = new JndiTemplate();
 
-	/**
-	 * Faz-se uso do ServletContext para obtenção de informações apenas. NÃO é
-	 * permitido expor o ServletContext para as camadas inferiores!!!
-	 */
-	private ServletContext servletContext;
+    /**
+     * Faz-se uso do ServletContext para obtenção de informações apenas. NÃO é
+     * permitido expor o ServletContext para as camadas inferiores!!!
+     */
+    private ServletContext servletContext;
 
-	/**
-	 * Método de recuperação do caminho absoluto, no servidor de aplicação, do
-	 * contexto web corrente.
-	 * 
-	 * @return
-	 */
-	public String getContextRealPath() {
-		return servletContext.getRealPath("/");
-	}
+    /**
+     * Método de recuperação do caminho absoluto, no servidor de aplicação, do
+     * contexto web corrente.
+     * 
+     * @return
+     */
+    public String getContextRealPath() {
+        return servletContext.getRealPath("/");
+    }
 
-	/**
-	 * Método de recuperação do nome do contexto web corrente.
-	 * 
-	 * @return
-	 */
-	public String getNomeContextoWeb() {
-		if (isAmbienteTU()) {
-			return applicationContext.getId();
-		} else {
-			try {
-				return jndiTemplate.lookup("java:app/AppName").toString();
-			} catch (NamingException e) {
-				throw new ExcecaoNaoPrevista(e);
-			}
-		}
-	}
+    /**
+     * Método de recuperação do nome do contexto web corrente.
+     * 
+     * @return
+     */
+    public String getNomeContextoWeb() {
+        if (isAmbienteTU()) {
+            return applicationContext.getId();
+        } else {
+            try {
+                return jndiTemplate.lookup("java:app/AppName").toString();
+            } catch (NamingException e) {
+                throw new ExcecaoNaoPrevista(e);
+            }
+        }
+    }
 
-	public boolean isAmbienteTU() {
-		return Profiles.isProfileTUAtivo(applicationContext.getEnvironment());
-	}
+    public boolean isAmbienteTU() {
+        return Profiles.isProfileTUAtivo(applicationContext.getEnvironment());
+    }
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext)
-			throws BeansException {
-		this.applicationContext = applicationContext;
-	}
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 
-	@Override
-	public void setServletContext(ServletContext servletContext) {
-		this.servletContext = servletContext;
-	}
+    @Override
+    public void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext;
+    }
 
 }

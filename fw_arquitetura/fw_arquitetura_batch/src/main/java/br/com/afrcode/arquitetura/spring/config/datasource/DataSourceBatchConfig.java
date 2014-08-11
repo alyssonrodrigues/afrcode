@@ -27,66 +27,63 @@ import br.com.afrcode.arquitetura.util.hsqldb.HsqldbUtil;
 @Configuration
 @Profile(Profiles.PROFILE_APLICACAO_BATCH)
 public class DataSourceBatchConfig {
-	private static final Logger LOG = Logger
-			.getLogger(DataSourceBatchConfig.class);
+    private static final Logger LOG = Logger.getLogger(DataSourceBatchConfig.class);
 
-	@Value("${hibernate.connection.url}")
-	private String url;
+    @Value("${hibernate.connection.url}")
+    private String url;
 
-	@Value("${hibernate.connection.user}")
-	private String username;
+    @Value("${hibernate.connection.user}")
+    private String username;
 
-	@Value("${hibernate.connection.password}")
-	private String password;
+    @Value("${hibernate.connection.password}")
+    private String password;
 
-	@Value("${hibernate.connection.driver_class}")
-	private String driverClassName;
+    @Value("${hibernate.connection.driver_class}")
+    private String driverClassName;
 
-	@Value("${hibernate.connection.minIdle}")
-	private String minIdleConnections;
+    @Value("${hibernate.connection.minIdle}")
+    private String minIdleConnections;
 
-	@Value("${hibernate.connection.maxActive}")
-	private String maxActiveConnections;
+    @Value("${hibernate.connection.maxActive}")
+    private String maxActiveConnections;
 
-	@Autowired
-	private HsqldbUtil hsqldbUtil;
+    @Autowired
+    private HsqldbUtil hsqldbUtil;
 
-	@Bean
-	@Primary
-	public DataSource dataSource() {
+    @Bean
+    @Primary
+    public DataSource dataSource() {
 
-		alterarUrlParaTUSeNecessario();
+        alterarUrlParaTUSeNecessario();
 
-		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setUrl(url);
-		dataSource.setUsername(username);
-		dataSource.setPassword(password);
-		dataSource.setDriverClassName(driverClassName);
-		dataSource.setMinIdle(Integer.valueOf(minIdleConnections));
-		dataSource.setMaxActive(Integer.valueOf(maxActiveConnections));
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
+        dataSource.setDriverClassName(driverClassName);
+        dataSource.setMinIdle(Integer.valueOf(minIdleConnections));
+        dataSource.setMaxActive(Integer.valueOf(maxActiveConnections));
 
-		return dataSource;
-	}
+        return dataSource;
+    }
 
-	private void alterarUrlParaTUSeNecessario() {
-		if (!hsqldbUtil.isExecutandoPovoadorStandAlone()
-				&& !hsqldbUtil.isExecutandoTesteFuncional()
-				&& !hsqldbUtil.isExecutandoTesteIntegracao()
-				&& !hsqldbUtil.isEjbSpringApplicationContext()
-				&& !hsqldbUtil.isServerPortDefault()) {
-			// TUs usando HSQLDB iniciado em porta diferente do padrão, é
-			// necessário alterar a URL padrão, obtida do
-			// hibernate-jpaProperties.properties.
-			String replacement = "localhost\\:" + hsqldbUtil.getServerPort();
-			url = url.replaceFirst("localhost", replacement);
-			LOG.info("Nova url para o HSQLDB iniciado em nova porta: " + url);
-		}
-	}
+    private void alterarUrlParaTUSeNecessario() {
+        if (!hsqldbUtil.isExecutandoPovoadorStandAlone() && !hsqldbUtil.isExecutandoTesteFuncional()
+                && !hsqldbUtil.isExecutandoTesteIntegracao() && !hsqldbUtil.isEjbSpringApplicationContext()
+                && !hsqldbUtil.isServerPortDefault()) {
+            // TUs usando HSQLDB iniciado em porta diferente do padrão, é
+            // necessário alterar a URL padrão, obtida do
+            // hibernate-jpaProperties.properties.
+            String replacement = "localhost\\:" + hsqldbUtil.getServerPort();
+            url = url.replaceFirst("localhost", replacement);
+            LOG.info("Nova url para o HSQLDB iniciado em nova porta: " + url);
+        }
+    }
 
-	@Bean
-	@Primary
-	public JdbcTemplate jdbcTemplate() {
-		return new JdbcTemplate(dataSource());
-	}
+    @Bean
+    @Primary
+    public JdbcTemplate jdbcTemplate() {
+        return new JdbcTemplate(dataSource());
+    }
 
 }
