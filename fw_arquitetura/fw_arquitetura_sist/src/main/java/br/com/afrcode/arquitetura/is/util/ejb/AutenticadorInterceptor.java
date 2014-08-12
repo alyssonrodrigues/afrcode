@@ -52,7 +52,7 @@ public class AutenticadorInterceptor {
                 EJBSpringApplicationContextUtils.getBean(UserDetailsServiceImpl.class);
         UserDetails user = userDetailsServiceImpl.loadUserByUsername(username);
         UsernamePasswordAuthenticationToken usrPasswdToken =
-                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), user.getAuthorities());
+                new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
 
         // Repassando credenciais ao Spring Security.
         SecurityContextHolder.getContext().setAuthentication(usrPasswdToken);
