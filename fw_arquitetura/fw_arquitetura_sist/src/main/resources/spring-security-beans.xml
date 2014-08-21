@@ -17,6 +17,7 @@
         <intercept-url pattern="/javax.faces.resource/**" access="isAnonymous() or isAuthenticated()"/>
         <intercept-url pattern="/org.richfaces.resources/**" access="isAnonymous() or isAuthenticated()"/>
         <intercept-url pattern="/web/acessonegado.xhtml" access="isAnonymous() or isAuthenticated()"/>
+        <intercept-url pattern="/web/versao.xhtml" access="isAnonymous() or isAuthenticated()"/>
         
         <intercept-url pattern="/**" access="isAuthenticated()" />
 
