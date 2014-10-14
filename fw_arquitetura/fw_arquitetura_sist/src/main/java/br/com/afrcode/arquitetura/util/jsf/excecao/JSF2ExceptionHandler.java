@@ -52,7 +52,7 @@ public class JSF2ExceptionHandler extends ExceptionHandlerWrapper {
     private HttpServletRequest getHttpServletRequest(ExceptionQueuedEvent event) {
         Object requestObj = event.getContext().getContext().getExternalContext().getRequest();
         Validate.isTrue(HttpServletRequest.class.isAssignableFrom(requestObj.getClass()),
-                "request n√£o √© HttpServletRequest!");
+                "request n„o È HttpServletRequest!");
         HttpServletRequest request = (HttpServletRequest) requestObj;
         return request;
     }
@@ -60,7 +60,7 @@ public class JSF2ExceptionHandler extends ExceptionHandlerWrapper {
     private HttpServletResponse getHttpServletResponse(ExceptionQueuedEvent event) {
         Object requestObj = event.getContext().getContext().getExternalContext().getResponse();
         Validate.isTrue(HttpServletResponse.class.isAssignableFrom(requestObj.getClass()),
-                "request n√£o √© HttpServletResponse!");
+                "request n„o È HttpServletResponse!");
         HttpServletResponse request = (HttpServletResponse) requestObj;
         return request;
     }
@@ -85,9 +85,9 @@ public class JSF2ExceptionHandler extends ExceptionHandlerWrapper {
 
             Throwable te = obterExpcetionCause(ctx.getException());
             if (te instanceof AbortProcessingException) {
-                // Exce√ß√µes internas ao ciclo de vida do JSF ser√£o tratadas
-                // por ele mesmo, n√£o √© necess√°rio prosseguir na cadeia
-                // de exce√ß√µes.
+                // ExceÁıes internas ao ciclo de vida do JSF ser„o tratadas
+                // por ele mesmo, n„o È necess·rio prosseguir na cadeia
+                // de exceÁıes.
                 super.handle();
                 return;
             }
@@ -97,7 +97,7 @@ public class JSF2ExceptionHandler extends ExceptionHandlerWrapper {
                 excecaoTratada = tratarExcecaoSeExcecaoConhecida(te, event);
             } finally {
                 if (excecaoTratada) {
-                    // Indicando ao JSF 2 que houve erro de valida√ß√£o.
+                    // Indicando ao JSF 2 que houve erro de validaÁ„o.
                     FacesContext.getCurrentInstance().validationFailed();
                     it.remove();
                 }
