@@ -1,4 +1,4 @@
-package br.gov.tcu.arquitetura.spring.config.security;
+package br.com.afrcode.arquitetura.spring.config.security;
 
 import java.io.IOException;
 
@@ -13,10 +13,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.access.AccessDeniedException;
 
-import br.gov.tcu.arquitetura.util.excecao.ExcecaoNaoPrevista;
+import br.com.afrcode.arquitetura.util.excecao.ExcecaoNaoPrevista;
 
 /**
- * Componente respons√°vel por tratar erros de acesso negado (erros de autoriza√ß√£o).
+ * Componente respons·vel por tratar erros de acesso negado (erros de
+ * autorizaÁ„o).
  * 
  * 
  */
@@ -25,8 +26,9 @@ public class AccessDeniedHandlerImpl {
 
     private static final String ATRIBUTO_EXCECAO_ACESSO_NEGADO = "excecaoAcessoNegado";
 
-    private static final String MSG_ERRO_AO_REDIRECIONAR = "N√£o foi poss√≠vel redirecionar para a p√°gina de acesso negado, " +
-            "pois j√° houve envio de reposta HTML ao usu√°rio!";
+    private static final String MSG_ERRO_AO_REDIRECIONAR =
+            "N„o foi possÌvel redirecionar para a p·gina de acesso negado, "
+                    + "pois j· houve envio de reposta HTML ao usu·rio!";
 
     private String errorPage;
 
@@ -44,7 +46,8 @@ public class AccessDeniedHandlerImpl {
         return stackTraceComoString.replaceAll("\t", "<br/>");
     }
 
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) {
+    public void handle(HttpServletRequest request, HttpServletResponse response,
+            AccessDeniedException accessDeniedException) {
         try {
             if (response.isCommitted()) {
                 throw new ExcecaoNaoPrevista(MSG_ERRO_AO_REDIRECIONAR, accessDeniedException);
@@ -61,8 +64,8 @@ public class AccessDeniedHandlerImpl {
 
     private boolean isAjaxRequest() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        boolean ajax = facesContext.getPartialViewContext() != null
-                && facesContext.getPartialViewContext().isAjaxRequest();
+        boolean ajax =
+                facesContext.getPartialViewContext() != null && facesContext.getPartialViewContext().isAjaxRequest();
         return ajax;
     }
 
@@ -78,11 +81,14 @@ public class AccessDeniedHandlerImpl {
     }
 
     /**
-     * The error page to use. Must begin with a "/" and is interpreted relative to the current context root.
+     * The error page to use. Must begin with a "/" and is interpreted relative
+     * to the current context root.
      * 
-     * @param errorPage the dispatcher path to display
+     * @param errorPage
+     *            the dispatcher path to display
      * 
-     * @throws IllegalArgumentException if the argument doesn't comply with the above limitations
+     * @throws IllegalArgumentException
+     *             if the argument doesn't comply with the above limitations
      */
     public void setErrorPage(String errorPage) {
         if ((errorPage != null) && !errorPage.startsWith("/")) {

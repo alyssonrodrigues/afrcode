@@ -21,7 +21,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.jsf.FacesContextUtils;
 
 import br.com.afrcode.arquitetura.is.util.excecao.ExcecaoNegocioRemota;
-import br.gov.tcu.arquitetura.spring.config.security.AccessDeniedHandlerImpl;
+import br.com.afrcode.arquitetura.spring.config.security.AccessDeniedHandlerImpl;
 import br.com.afrcode.arquitetura.util.excecao.ExcecaoNaoPrevista;
 import br.com.afrcode.arquitetura.util.excecao.ExcecaoNegocio;
 import br.com.afrcode.arquitetura.util.excecao.TratadorConstraintViolationException;
@@ -30,21 +30,19 @@ import br.com.afrcode.arquitetura.util.excecao.TratadorExcecaoNegocioRemota;
 import br.com.afrcode.arquitetura.util.excecao.TratadorExcecoesNaoPrevistas;
 
 /**
- * Classe central de tratamento de exceções para o JSF 2.
+ * Classe central de tratamento de exce��es para o JSF 2.
  * 
- * Determinados tipos de exceções são tratados de alguma forma a partir desta
- * classe - gerando mensagens ao usuário, logs, redirecionamento p/ páginas de
+ * Determinados tipos de exce��es s�o tratados de alguma forma a partir desta
+ * classe - gerando mensagens ao usu�rio, logs, redirecionamento p/ p�ginas de
  * erros inesperados, etc. Ver tratarExcecaoSeExcecaoConhecida(Throwable).
  * 
- * ATENÇÃO: o tratamento da exceção quanto a transações é feito anteriormente a
- * este tratador, ou seja, neste ponto a transação corrente já deixou de existir
+ * ATEN��O: o tratamento da exce��o quanto a transa��es � feito anteriormente a
+ * este tratador, ou seja, neste ponto a transa��o corrente j� deixou de existir
  * (via rollback - Transactional).
  * 
  * 
  */
 public class JSF2ExceptionHandler extends ExceptionHandlerWrapper {
-    private static Logger LOG = Logger.getLogger(JSF2ExceptionHandler.class);
-
     private ExceptionHandler wrapped;
 
     public JSF2ExceptionHandler(ExceptionHandler wrapped) {
@@ -53,14 +51,16 @@ public class JSF2ExceptionHandler extends ExceptionHandlerWrapper {
 
     private HttpServletRequest getHttpServletRequest(ExceptionQueuedEvent event) {
         Object requestObj = event.getContext().getContext().getExternalContext().getRequest();
-        Validate.isTrue(HttpServletRequest.class.isAssignableFrom(requestObj.getClass()), "request não é HttpServletRequest!");
+        Validate.isTrue(HttpServletRequest.class.isAssignableFrom(requestObj.getClass()),
+                "request não é HttpServletRequest!");
         HttpServletRequest request = (HttpServletRequest) requestObj;
         return request;
     }
 
     private HttpServletResponse getHttpServletResponse(ExceptionQueuedEvent event) {
         Object requestObj = event.getContext().getContext().getExternalContext().getResponse();
-        Validate.isTrue(HttpServletResponse.class.isAssignableFrom(requestObj.getClass()), "request não é HttpServletResponse!");
+        Validate.isTrue(HttpServletResponse.class.isAssignableFrom(requestObj.getClass()),
+                "request não é HttpServletResponse!");
         HttpServletResponse request = (HttpServletResponse) requestObj;
         return request;
     }
@@ -85,7 +85,8 @@ public class JSF2ExceptionHandler extends ExceptionHandlerWrapper {
 
             Throwable te = obterExpcetionCause(ctx.getException());
             if (te instanceof AbortProcessingException) {
-                // Exceções internas ao ciclo de vida do JSF serão tratadas por ele mesmo, não é necessário prosseguir na cadeia
+                // Exceções internas ao ciclo de vida do JSF serão tratadas
+                // por ele mesmo, não é necessário prosseguir na cadeia
                 // de exceções.
                 super.handle();
                 return;
@@ -99,7 +100,7 @@ public class JSF2ExceptionHandler extends ExceptionHandlerWrapper {
                     // Indicando ao JSF 2 que houve erro de validação.
                     FacesContext.getCurrentInstance().validationFailed();
                     it.remove();
-                } 
+                }
             }
         }
 
@@ -126,7 +127,7 @@ public class JSF2ExceptionHandler extends ExceptionHandlerWrapper {
         new TratadorConstraintViolationException().tratarExcecao(cve);
     }
 
-    private boolean tratarExcecaoSeExcecaoConhecida(Throwable te) {
+    private boolean tratarExcecaoSeExcecaoConhecida(Throwable te, ExceptionQueuedEvent event) {
         boolean excecaoTratada = false;
 
         if (te instanceof ConstraintViolationException) {
