@@ -11,12 +11,17 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.lang.Validate;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.jsf.FacesContextUtils;
 
 import br.com.afrcode.arquitetura.is.util.excecao.ExcecaoNegocioRemota;
+import br.gov.tcu.arquitetura.spring.config.security.AccessDeniedHandlerImpl;
 import br.com.afrcode.arquitetura.util.excecao.ExcecaoNaoPrevista;
 import br.com.afrcode.arquitetura.util.excecao.ExcecaoNegocio;
 import br.com.afrcode.arquitetura.util.excecao.TratadorConstraintViolationException;
@@ -25,14 +30,14 @@ import br.com.afrcode.arquitetura.util.excecao.TratadorExcecaoNegocioRemota;
 import br.com.afrcode.arquitetura.util.excecao.TratadorExcecoesNaoPrevistas;
 
 /**
- * Classe central de tratamento de exceções para o JSF 2.
+ * Classe central de tratamento de exceÃ§Ãµes para o JSF 2.
  * 
- * Determinados tipos de exceções são tratados de alguma forma a partir desta
- * classe - gerando mensagens ao usuário, logs, redirecionamento p/ páginas de
+ * Determinados tipos de exceÃ§Ãµes sÃ£o tratados de alguma forma a partir desta
+ * classe - gerando mensagens ao usuÃ¡rio, logs, redirecionamento p/ pÃ¡ginas de
  * erros inesperados, etc. Ver tratarExcecaoSeExcecaoConhecida(Throwable).
  * 
- * ATENÇÃO: o tratamento da exceção quanto a transações é feito anteriormente a
- * este tratador, ou seja, neste ponto a transação corrente já deixou de existir
+ * ATENÃ‡ÃƒO: o tratamento da exceÃ§Ã£o quanto a transaÃ§Ãµes Ã© feito anteriormente a
+ * este tratador, ou seja, neste ponto a transaÃ§Ã£o corrente jÃ¡ deixou de existir
  * (via rollback - Transactional).
  * 
  * 
@@ -44,6 +49,25 @@ public class JSF2ExceptionHandler extends ExceptionHandlerWrapper {
 
     public JSF2ExceptionHandler(ExceptionHandler wrapped) {
         this.wrapped = wrapped;
+    }
+
+    private HttpServletRequest getHttpServletRequest(ExceptionQueuedEvent event) {
+        Object requestObj = event.getContext().getContext().getExternalContext().getRequest();
+        Validate.isTrue(HttpServletRequest.class.isAssignableFrom(requestObj.getClass()), "request nÃ£o Ã© HttpServletRequest!");
+        HttpServletRequest request = (HttpServletRequest) requestObj;
+        return request;
+    }
+
+    private HttpServletResponse getHttpServletResponse(ExceptionQueuedEvent event) {
+        Object requestObj = event.getContext().getContext().getExternalContext().getResponse();
+        Validate.isTrue(HttpServletResponse.class.isAssignableFrom(requestObj.getClass()), "request nÃ£o Ã© HttpServletResponse!");
+        HttpServletResponse request = (HttpServletResponse) requestObj;
+        return request;
+    }
+
+    private WebApplicationContext getWebApplicationContext(ExceptionQueuedEvent event) {
+        WebApplicationContext webCtx = FacesContextUtils.getWebApplicationContext(event.getContext().getContext());
+        return webCtx;
     }
 
     @Override
@@ -59,41 +83,23 @@ public class JSF2ExceptionHandler extends ExceptionHandlerWrapper {
             ExceptionQueuedEvent event = it.next();
             ExceptionQueuedEventContext ctx = event.getContext();
 
-            if (ctx.getException() instanceof AbortProcessingException) {
-                // Exceções internas ao ciclo de vida do JSF serão tratadas por
-                // ele mesmo, não é necessário prosseguir na cadeia
-                // de exceções.
+            Throwable te = obterExpcetionCause(ctx.getException());
+            if (te instanceof AbortProcessingException) {
+                // ExceÃ§Ãµes internas ao ciclo de vida do JSF serÃ£o tratadas por ele mesmo, nÃ£o Ã© necessÃ¡rio prosseguir na cadeia
+                // de exceÃ§Ãµes.
                 super.handle();
                 return;
             }
 
-            Throwable te = obterExpcetionCause(ctx.getException());
-            boolean houveAccessDeniedException = te instanceof AccessDeniedException;
             boolean excecaoTratada = false;
             try {
-                excecaoTratada = tratarExcecaoSeExcecaoConhecida(te);
+                excecaoTratada = tratarExcecaoSeExcecaoConhecida(te, event);
             } finally {
                 if (excecaoTratada) {
-                    // Indicando ao JSF 2 que houve erro de validação.
+                    // Indicando ao JSF 2 que houve erro de validaÃ§Ã£o.
                     FacesContext.getCurrentInstance().validationFailed();
                     it.remove();
-                } else {
-                    if (houveAccessDeniedException) {
-                        // Houve AccessDeniedException que será tratada pelo
-                        // AccessDeniedHandlerImpl posteriormente.
-                        LOG.warn(te.getMessage());
-                        super.handle();
-                    } else {
-                        excecoesNaoPrevistas.add(new ExcecaoNaoPrevista(te));
-                        it.remove();
-                    }
-                }
-            }
-
-            if (houveAccessDeniedException) {
-                // Exceção tratada pelo Spring, não é necessário prosseguir na
-                // cadeia de exceções.
-                return;
+                } 
             }
         }
 
@@ -106,6 +112,14 @@ public class JSF2ExceptionHandler extends ExceptionHandlerWrapper {
             te = te.getCause();
         }
         return te;
+    }
+
+    private void tratarAccessDeniedException(AccessDeniedException ex, ExceptionQueuedEvent event) {
+        WebApplicationContext webCtx = getWebApplicationContext(event);
+        HttpServletRequest request = getHttpServletRequest(event);
+        HttpServletResponse response = getHttpServletResponse(event);
+        AccessDeniedHandlerImpl handler = webCtx.getBean(AccessDeniedHandlerImpl.class);
+        handler.handle(request, response, ex);
     }
 
     private void tratarConstraintViolationException(ConstraintViolationException cve) {
@@ -124,11 +138,8 @@ public class JSF2ExceptionHandler extends ExceptionHandlerWrapper {
             tratarExcecaoNegocio(exn);
             excecaoTratada = true;
         } else if (te instanceof AccessDeniedException) {
-            // Não é necessário nenhum tratamento adicional a partir deste ponto
-            // pois o próprio Spring irá tratar a exceção
-            // através do AccessDeniedHandlerImpl configurado no
-            // SpringSecurityConfig e em spring-security-beans.xml.
-            excecaoTratada = false;
+            tratarAccessDeniedException(AccessDeniedException.class.cast(te), event);
+            excecaoTratada = true;
         } else if (te instanceof ExcecaoNegocioRemota) {
             ExcecaoNegocioRemota er = (ExcecaoNegocioRemota) te;
             tratarExcecaoNegocioRemota(er);
