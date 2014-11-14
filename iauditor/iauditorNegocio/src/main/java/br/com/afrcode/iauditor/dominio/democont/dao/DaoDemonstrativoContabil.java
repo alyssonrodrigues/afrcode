@@ -27,15 +27,15 @@ public class DaoDemonstrativoContabil {
 	@Autowired
 	private HttpRequestFactory requestFactory;
 
-	public String getExtendedStats(String label) {
+	public String getExtendedStats(String field) {
 		String index = elasticSearchProperties.getElasticsearchDemoContIndex();
 		String type = elasticSearchProperties
 				.getElasticsearchDemoConsolResultType();
 		String query = "_search?pretty=true";
 		ElasticsearchUrl url = ElasticsearchUrl.get(index, type, query);
 
-		final String queryObject = "{ \"aggs\": { \"EXT STATS " + label
-				+ "\": { \"extended_stats\": { \"field\": \"" + label
+		final String queryObject = "{ \"aggs\": { \"EXT STATS " + field
+				+ "\": { \"extended_stats\": { \"field\": \"" + field
 				+ "\" } } } }";
 		try {
 			HttpContent content = new InputStreamContent(Json.MEDIA_TYPE,
