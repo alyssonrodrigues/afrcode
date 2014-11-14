@@ -3,7 +3,7 @@ package br.com.afrcode.main;
 import br.com.afrcode.arquitetura.BatchRunner;
 
 /**
- * Classe principal de execução de rotinas via linha de comando java. Veja
+ * Classe principal de execuÃ§Ã£o de rotinas via linha de comando java. Veja
  * exemplo de rotina em RotinaExemplo.
  * 
  */

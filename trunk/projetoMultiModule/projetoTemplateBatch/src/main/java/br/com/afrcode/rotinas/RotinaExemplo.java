@@ -10,7 +10,7 @@ public class RotinaExemplo {
 	private static Logger LOG = Logger.getLogger(RotinaExemplo.class);
 
 	/**
-	 * Execução de 15 em 15 segundos.
+	 * ExecuÃ§Ã£o de 15 em 15 segundos.
 	 */
 	@Scheduled(cron = "0,15,30,45 * * * * ?")
 	public void executar() {
