@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto! -->
+	<name>iauditor</name>
+	<groupId>br.com.afrcode.app</groupId>
+	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto! -->
+	<artifactId>iauditor</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+	    <fwarquitetura.version>0.0.1-SNAPSHOT</fwarquitetura.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<skipTests>false</skipTests>
+		<maven-resources-plugin.version>2.6</maven-resources-plugin.version>
+		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+		<maven-jar-plugin.version>2.4</maven-jar-plugin.version>
+		<maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
+		<maven-failsafe-plugin.version>2.17</maven-failsafe-plugin.version>
+
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+		<sonar.jacoco.reportPath>${project.build.directory}/jacoco-ut.exec</sonar.jacoco.reportPath>
+		<sonar.jacoco.itReportPath>${project.build.directory}/jacoco-it.exec</sonar.jacoco.itReportPath>
+		<jacoco-maven-plugin.version>0.6.3.201306030806</jacoco-maven-plugin.version>
+	</properties>
+
+	<modules>
+		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto 
+			de negocio! -->
+		<module>iauditorNegocio</module>
+		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto 
+			de definição de serviços! -->
+		<module>iauditorIS-api</module>
+		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto 
+			de implementação de serviços! -->
+		<module>iauditorIS-impl</module>
+		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto 
+			de contexto web! -->
+		<module>iauditorWeb</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven-resources-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<debug>true</debug>
+					<optimize>true</optimize>
+					<source>1.7</source>
+					<target>1.7</target>
+					<fork>true</fork>
+					<meminitial>256m</meminitial>
+					<maxmem>1024m</maxmem>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven-jar-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>gerar-test-jar</id>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${jacoco-maven-plugin.version}</version>
+					<executions>
+						<!-- Configurações de agente jacoco para testes unitários. -->
+						<execution>
+							<id>pre-test</id>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+							<configuration>
+								<destFile>${sonar.jacoco.reportPath}</destFile>
+								<propertyName>surefire.argLine</propertyName>
+							</configuration>
+						</execution>
+						<!-- Configurações de report jacoco para testes unitários. -->
+						<execution>
+							<id>post-test</id>
+							<phase>test</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+							<configuration>
+								<dataFile>${sonar.jacoco.reportPath}</dataFile>
+							</configuration>
+						</execution>
+						<!-- Configurações de agente jacoco para testes de integração. -->
+						<execution>
+							<id>pre-integration-test</id>
+							<phase>pre-integration-test</phase>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+							<configuration>
+								<destFile>${sonar.jacoco.itReportPath}</destFile>
+								<propertyName>failsafe.argLine</propertyName>
+							</configuration>
+						</execution>
+						<!-- Configurações de report jacoco para testes de integração. -->
+						<execution>
+							<id>post-integration-test</id>
+							<phase>post-integration-test</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+							<configuration>
+								<dataFile>${sonar.jacoco.itReportPath}</dataFile>
+								<outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<!-- Configurações para execução de testes unitários. -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+					<configuration>
+						<argLine>-XX:MaxPermSize=768m -Xmx512m ${surefire.argLine}</argLine>
+						<includes>
+							<include>**/*.class</include>
+						</includes>
+						<excludedGroups>br.com.afrcode.arquitetura.teste.integracao.util.testeintegracao.CategoriaTesteIntegracao</excludedGroups>
+					</configuration>
+				</plugin>
+				<!-- Configurações para execução dos testes de integração. -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>${maven-failsafe-plugin.version}</version>
+					<configuration>
+						<groups>br.com.afrcode.arquitetura.teste.integracao.util.testeintegracao.CategoriaTesteIntegracao</groups>
+						<test>**/*.java</test>
+					</configuration>
+					<executions>
+						<execution>
+							<id>integration-test-execution</id>
+							<goals>
+								<goal>integration-test</goal>
+							</goals>
+							<configuration>
+								<argLine>-XX:MaxPermSize=768m -Xmx512m ${failsafe.argLine}</argLine>
+								<includes>
+									<include>**/*.class</include>
+								</includes>
+							</configuration>
+						</execution>
+						<execution>
+							<id>integration-test-verify</id>
+							<goals>
+								<goal>verify</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<!-- Configurações para WTP em função do uso do jacoco. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.jacoco</groupId>
+										<artifactId>jacoco-maven-plugin</artifactId>
+										<versionRange>[${jacoco-maven-plugin.version},)</versionRange>
+										<goals>
+											<goal>prepare-agent</goal>
+										</goals>
+
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>repo1</id>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
+		<repository>
+			<id>jbooss.nexus</id>
+			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>jboss.org</id>
+			<url>http://repository.jboss.com/maven2/</url>
+		</repository>
+		<repository>
+			<id>ibiblio.org</id>
+			<url>http://mirrors.ibiblio.org/pub/mirrors/maven2</url>
+		</repository>
+		<repository>
+			<snapshots />
+			<id>snapshots.jboss.org</id>
+			<name>JBoss Snapshot Repository</name>
+			<url>http://snapshots.jboss.org/maven2</url>
+		</repository>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
+</project>

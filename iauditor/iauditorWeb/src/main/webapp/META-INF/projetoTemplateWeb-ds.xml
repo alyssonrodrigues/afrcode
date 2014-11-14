@@ -1,0 +1,17 @@
+<datasources>
+    <!-- ATENCAO: O uso do HSQLDB como SGBD para o projeto visa promover agilidade e testabilidade em fases inicias do projeto.
+      Posteriormente, espera-se que faca-se uso de outro SGBD, como o Oracle. E, para isto deve-se usar e configurar o arquivo
+      projetoTemplateWeb-ds.xml, removendo este arquivo especifico ao HSQLDB. -->
+    <!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado de datasource para o projeto! -->
+    <datasource jta="true" jndi-name="java:/xadatasources/iauditorWebDatasource"
+        pool-name="iauditorWebDatasource" enabled="true" use-java-context="true"
+        use-ccm="true">
+        <!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado de datasource para o projeto! -->
+        <connection-url>jdbc:hsqldb:hsql://localhost/iauditornegociotestedb
+        </connection-url>
+        <driver>hsqldb2</driver>
+        <security>
+            <user-name>sa</user-name>
+        </security>
+    </datasource>
+</datasources>
