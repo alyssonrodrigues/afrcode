@@ -18,7 +18,7 @@ import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * Classe central de configuração do contexto Spring para aplicação.
+ * Classe central de configuraÃ§Ã£o do contexto Spring para aplicaÃ§Ã£o.
  * 
  * 
  */
@@ -28,48 +28,49 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 // Spring.
 @ComponentScan(basePackages = { "br.com.afrcode" })
 // Configuracoes para uso do AspectJ support do Spring com CGLIB.
-// proxyTargetClass = true => Devemos usar CGLIB e não javaassist para que o
+// proxyTargetClass = true => Devemos usar CGLIB e nï¿½o javaassist para que o
 // autowiring por tipo do Spring continue funcional.
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-// Configuracoes para uso do Spring TaskScheduler para execução de rotinas
+// Configuracoes para uso do Spring TaskScheduler para execuï¿½ï¿½o de rotinas
 // em background.
 @EnableScheduling
 @Profile({ Profiles.PROFILE_APLICACAO, Profiles.PROFILE_APLICACAO_BATCH })
 public class SpringAppConfig {
 
-    // Configuracao p/ uso de ${...} obtidas via @PropertySource em anotacoes
-    // @Value.
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
+	// Configuracao p/ uso de ${...} obtidas via @PropertySource em anotacoes
+	// @Value.
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
 
-    /**
-     * Bean responsável por obter mensagens através de seus códigos via arquivos
-     * de messages resources (.properties).
-     * 
-     * TODO: rever se este bean não deveria estar presente no profile de TUs.
-     * 
-     * @return
-     */
-    @Bean
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+	/**
+	 * Bean responsÃ¡vel por obter mensagens atravÃ©s de seus cÃ³digos via arquivos
+	 * de messages resources (.properties).
+	 * 
+	 * TODO: rever se este bean nÃ£o deveria estar presente no profile de TUs.
+	 * 
+	 * @return
+	 */
+	@Bean
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
 
-        // Resource bundle de mensages do Spring Security, locale pt_BR.
-        String springSecurityMessages = "org.springframework.security.messages_pt_BR";
+		// Resource bundle de mensages do Spring Security, locale pt_BR.
+		String springSecurityMessages = "org.springframework.security.messages_pt_BR";
 
-        // TODO: adicionar demais messages resources sob demanda!
-        String[] messagesResources = new String[] { springSecurityMessages };
-        messageSource.setBasenames(messagesResources);
-        return messageSource;
-    }
+		// TODO: adicionar demais messages resources sob demanda!
+		String[] messagesResources = new String[] { springSecurityMessages };
+		messageSource.setBasenames(messagesResources);
+		return messageSource;
+	}
 
-    @Bean
-    public TaskScheduler taskScheduler() {
-        ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-        return new ConcurrentTaskScheduler(scheduledExecutorService);
+	@Bean
+	public TaskScheduler taskScheduler() {
+		ScheduledExecutorService scheduledExecutorService = Executors
+				.newSingleThreadScheduledExecutor();
+		return new ConcurrentTaskScheduler(scheduledExecutorService);
 
-    }
+	}
 
 }

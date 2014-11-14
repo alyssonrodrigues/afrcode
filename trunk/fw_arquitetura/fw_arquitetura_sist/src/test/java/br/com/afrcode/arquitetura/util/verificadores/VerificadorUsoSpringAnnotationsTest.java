@@ -30,43 +30,50 @@ import br.com.afrcode.arquitetura.util.dao.ExecutorTUCRUDDaoUtil;
 import br.com.afrcode.arquitetura.util.hsqldb.HsqldbSchemaUtil;
 import br.com.afrcode.arquitetura.util.hsqldb.HsqldbUtil;
 
-public class VerificadorUsoSpringAnnotationsTest extends AbstractCasoTesteEmMemoria {
-    @Qualifier("springAnnotationsClasspathScanner")
-    @Autowired
-    private ClassPathScanningCandidateComponentScanner springAnnotationsClasspathScanner;
+public class VerificadorUsoSpringAnnotationsTest extends
+		AbstractCasoTesteEmMemoria {
+	@Qualifier("springAnnotationsClasspathScanner")
+	@Autowired
+	private ClassPathScanningCandidateComponentScanner springAnnotationsClasspathScanner;
 
-    /**
-     * Método de verificação de regra arquitetural: "Todo componente Spring deve
-     * fazer uso das anotações previstas - Componente, Servico, Dao ou
-     * Povoador".
-     */
-    @Test
-    public void verificarTodoBeanSpringUsaAnotacaoPrevistaSpring() {
-        Set<BeanDefinition> beansSpring =
-                springAnnotationsClasspathScanner.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
+	/**
+	 * MÃ©todo de verificaÃ§Ã£o de regra arquitetural: "Todo componente Spring deve
+	 * fazer uso das anotaÃ§Ãµes previstas - Componente, Servico, Dao ou
+	 * Povoador".
+	 */
+	@Test
+	public void verificarTodoBeanSpringUsaAnotacaoPrevistaSpring() {
+		Set<BeanDefinition> beansSpring = springAnnotationsClasspathScanner
+				.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
 
-        List<String> anotacoesSpring =
-                Arrays.asList(new String[] { Componente.class.getSimpleName(), Servico.class.getSimpleName(),
-                        Dao.class.getSimpleName(), Povoador.class.getSimpleName() });
+		List<String> anotacoesSpring = Arrays.asList(new String[] {
+				Componente.class.getSimpleName(),
+				Servico.class.getSimpleName(), Dao.class.getSimpleName(),
+				Povoador.class.getSimpleName() });
 
-        List<String> excecoesARegra =
-                Arrays.asList(new String[] { ServicoConsultaUmObjetoEmMemoriaRmi.class.getName(),
-                        HsqldbUtil.class.getName(), HsqldbSchemaUtil.class.getName(),
-                        DaoUmObjetoEmMemoria.class.getName(), ComponentLoggingAspect.class.getName(),
-                        ApplicationContextUtils.class.getName(), ExecutorTUCRUDDaoUtil.class.getName(),
-                        QueueSender.class.getName(), QueueListener.class.getName(),
-                        JmsExceptionListener.class.getName() });
+		List<String> excecoesARegra = Arrays.asList(new String[] {
+				ServicoConsultaUmObjetoEmMemoriaRmi.class.getName(),
+				HsqldbUtil.class.getName(), HsqldbSchemaUtil.class.getName(),
+				DaoUmObjetoEmMemoria.class.getName(),
+				ComponentLoggingAspect.class.getName(),
+				ApplicationContextUtils.class.getName(),
+				ExecutorTUCRUDDaoUtil.class.getName(),
+				QueueSender.class.getName(), QueueListener.class.getName(),
+				JmsExceptionListener.class.getName() });
 
-        Set<String> beansSpringSemAnotacao = new HashSet<String>();
-        for (BeanDefinition beanSpring : beansSpring) {
-            if (!excecoesARegra.contains(beanSpring.getBeanClassName())) {
-                beansSpringSemAnotacao.add(beanSpring.getBeanClassName());
-            }
-        }
+		Set<String> beansSpringSemAnotacao = new HashSet<String>();
+		for (BeanDefinition beanSpring : beansSpring) {
+			if (!excecoesARegra.contains(beanSpring.getBeanClassName())) {
+				beansSpringSemAnotacao.add(beanSpring.getBeanClassName());
+			}
+		}
 
-        Assert.assertTrue(
-                "As anotações Spring previstas são: " + StringUtils.join(anotacoesSpring, ",") + ". "
-                        + "Os seguintes beans Spring não fazem uso destas anotações: "
-                        + StringUtils.join(beansSpringSemAnotacao, ","), beansSpringSemAnotacao.isEmpty());
-    }
+		Assert.assertTrue(
+				"As anotaÃ§Ãµes Spring previstas sÃ£: "
+						+ StringUtils.join(anotacoesSpring, ",")
+						+ ". "
+						+ "Os seguintes beans Spring nÃ£o fazem uso destas anotaÃ§Ãµes: "
+						+ StringUtils.join(beansSpringSemAnotacao, ","),
+				beansSpringSemAnotacao.isEmpty());
+	}
 }

@@ -13,31 +13,32 @@ import org.springframework.transaction.support.TransactionTemplate;
 import br.com.afrcode.arquitetura.is.util.excecao.ExcecaoNaoPrevistaRemota;
 
 /**
- * EJB utilit·rio para execuÁ„o de TUs de EJBs segundo documentaÁ„o
+ * EJB utilit√°rio para execu√ß√£o de TUs de EJBs segundo documenta√ß√£o
  * http://tomee.apache.org/unit-testing-transactions.html.
  */
 @Stateless
 @Remote(Caller.class)
-public class ServicoTransactionBean extends AbstractServicoEJB implements Caller {
-    @Autowired
-    private TransactionTemplate transactionTemplate;
+public class ServicoTransactionBean extends AbstractServicoEJB implements
+		Caller {
+	@Autowired
+	private TransactionTemplate transactionTemplate;
 
-    @Override
-    public <V> V call(final Callable<V> callable) throws Exception {
-        return transactionTemplate.execute(new TransactionCallback<V>() {
-            @Override
-            public V doInTransaction(TransactionStatus status) {
-                try {
-                    // Chamada ao cÛdigo cliente de TU.
-                    return callable.call();
-                } catch (Exception e) {
-                    throw new ExcecaoNaoPrevistaRemota(e);
-                } finally {
-                    // DemarcaÁ„o de rollback por padr„o para TU.
-                    status.setRollbackOnly();
-                }
-            }
-        });
-    }
+	@Override
+	public <V> V call(final Callable<V> callable) throws Exception {
+		return transactionTemplate.execute(new TransactionCallback<V>() {
+			@Override
+			public V doInTransaction(TransactionStatus status) {
+				try {
+					// Chamada ao c√≥digo cliente de TU.
+					return callable.call();
+				} catch (Exception e) {
+					throw new ExcecaoNaoPrevistaRemota(e);
+				} finally {
+					// Demarca√ß√£o de rollback por padr√£o para TU.
+					status.setRollbackOnly();
+				}
+			}
+		});
+	}
 
 }

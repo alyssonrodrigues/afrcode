@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -6,7 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-    <p:dialog header="Navegador incompatível"
+    <p:dialog header="Navegador incompatÃ­vel"
         widgetVar="widgetErroNavegadorIncompativel"
         id="painelDialogErroNavegadorIncompativel" 
         width="800" modal="true" closable="false"
@@ -17,12 +17,12 @@
             <div class="ui-messages-error ui-corner-all" style="margin:0px auto;width:95%;font-weight:bold;">
                 <span class="ui-messages-error-icon"></span>
                 <span class="ui-messages-error-summary">
-                    Este sistema é compatível com os navegadores: Internet Explorer versão 9 ou superior, Google Chrome e Mozilla Firefox.
+                    Este sistema Ã© compatÃ­vel com os navegadores: Internet Explorer versÃ£o 9 ou superior, Google Chrome e Mozilla Firefox.
                 </span>
                 <span class="ui-messages-error-detail">
     			    <p>Certifique-se de que o "Modo do Navegador" do Internet Explorer seja "Internet Explorer 9" ou superior. 
-	                Para isto, acione a tecla "F12" e verifique o conteúdo do campo "Modo do Navegador".</p>
-	                <p>Se necessário, atualize o seu navegador para o correto funcionamento deste sistema.</p>
+	                Para isto, acione a tecla "F12" e verifique o conteÃºdo do campo "Modo do Navegador".</p>
+	                <p>Se necessÃ¡rio, atualize o seu navegador para o correto funcionamento deste sistema.</p>
                 </span>
             </div>
         </div>
@@ -30,7 +30,7 @@
 	</p:dialog>
 
     <script type="text/javascript">
-        // Função anônima a executar somente quando o document DOM estiver apto à execução de javascripts.
+        // FunÃ§Ã£o anÃ´nima a executar somente quando o document DOM estiver apto Ã  execuÃ§Ã£o de javascripts.
         jQuery(function($) {
         	if (NavegadorUtil.identificarEAlertarSeNavegadorNaoSuportado()) {
         		PF('widgetErroNavegadorIncompativel').show();

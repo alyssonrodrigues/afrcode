@@ -10,9 +10,9 @@ import org.springframework.core.type.filter.RegexPatternTypeFilter;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * Configurações para scanner de classpath para componentes de Teste sobre Daos.
+ * ConfiguraÃ§Ãµes para scanner de classpath para componentes de Teste sobre Daos.
  * 
- * Em uso em testes de aderência e conformidade.
+ * Em uso em testes de aderÃªncia e conformidade.
  * 
  * 
  */
@@ -20,14 +20,15 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Configuration
 public class DaoTesteClasspathScannerConfig {
 
-    @Bean
-    public ClassPathScanningCandidateComponentScanner daoTesteClasspathScanner() {
-        ClassPathScanningCandidateComponentScanner daoTesteClasspathScanner =
-                new ClassPathScanningCandidateComponentScanner();
-        for (String regExpInclude : ConstantesPadroes.REGS_EXP_TESTES_DAO) {
-            daoTesteClasspathScanner.addIncludeFilter(new RegexPatternTypeFilter(Pattern.compile(regExpInclude)));
-        }
-        return daoTesteClasspathScanner;
-    }
+	@Bean
+	public ClassPathScanningCandidateComponentScanner daoTesteClasspathScanner() {
+		ClassPathScanningCandidateComponentScanner daoTesteClasspathScanner = new ClassPathScanningCandidateComponentScanner();
+		for (String regExpInclude : ConstantesPadroes.REGS_EXP_TESTES_DAO) {
+			daoTesteClasspathScanner
+					.addIncludeFilter(new RegexPatternTypeFilter(Pattern
+							.compile(regExpInclude)));
+		}
+		return daoTesteClasspathScanner;
+	}
 
 }

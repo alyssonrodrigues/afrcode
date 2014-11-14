@@ -6,34 +6,36 @@ import java.util.List;
 import org.springframework.core.env.Environment;
 
 /**
- * DefiniÁıes de "ambientes" para uso de Spring profiles.
+ * Defini√ß√µes de "ambientes" para uso de Spring profiles.
  * 
- * Cada profile determina um conjunto de beans que ser„o geridos pelo Spring.
+ * Cada profile determina um conjunto de beans que ser√£o geridos pelo Spring.
  * 
  * Use @Profile em classes @Configuration para informar uma lista de profiles
- * nos quais os beans declarados ser„o geridos pelo Spring.
+ * nos quais os beans declarados ser√£o geridos pelo Spring.
  * 
  * 
  */
 public class Profiles {
-    // Profiles gerais de aplicaÁ„o e testes unit·rios.
-    public static final String PROFILE_TU = "tu";
-    public static final String PROFILE_APLICACAO = "aplicacao";
-    public static final String PROFILE_APLICACAO_BATCH = "batch";
+	// Profiles gerais de aplica√ß√£o e testes unit√°rios.
+	public static final String PROFILE_TU = "tu";
+	public static final String PROFILE_APLICACAO = "aplicacao";
+	public static final String PROFILE_APLICACAO_BATCH = "batch";
 
-    private static List<String> getActiveProfiles(Environment environment) {
-        List<String> activeProfiles = Arrays.asList(environment.getActiveProfiles());
-        return activeProfiles;
-    }
+	private static List<String> getActiveProfiles(Environment environment) {
+		List<String> activeProfiles = Arrays.asList(environment
+				.getActiveProfiles());
+		return activeProfiles;
+	}
 
-    public static boolean isProfileAplicacaoAtivo(Environment environment) {
-        List<String> activeProfiles = getActiveProfiles(environment);
-        return activeProfiles.contains(PROFILE_APLICACAO) || activeProfiles.contains(PROFILE_APLICACAO_BATCH);
-    }
+	public static boolean isProfileAplicacaoAtivo(Environment environment) {
+		List<String> activeProfiles = getActiveProfiles(environment);
+		return activeProfiles.contains(PROFILE_APLICACAO)
+				|| activeProfiles.contains(PROFILE_APLICACAO_BATCH);
+	}
 
-    public static boolean isProfileTUAtivo(Environment environment) {
-        List<String> activeProfiles = getActiveProfiles(environment);
-        return activeProfiles.contains(PROFILE_TU);
-    }
+	public static boolean isProfileTUAtivo(Environment environment) {
+		List<String> activeProfiles = getActiveProfiles(environment);
+		return activeProfiles.contains(PROFILE_TU);
+	}
 
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
@@ -11,15 +11,15 @@
             <p:idleMonitor onidle="idleDialog.show();inicializarContador();" rendered="#{not mBeanDialogoAtivarSessao.acessoAnonimo}"
               timeout="#{(mBeanDialogoAtivarSessao.timeoutSessao - mBeanDialogoAtivarSessao.tempoExibicao)*1000}">
                 <p:confirmDialog id="confirmDialogSessaoAExpirar" widgetVar="idleDialog" modal="true" closable="false" 
-                    header="Controle de sessão de usuário"
+                    header="Controle de sessÃ£o de usuÃ¡rio"
                     severity="alert" >
                        <f:facet name="message">
-                          <h:outputText value="Sua sessão está prestes a expirar por inatividade. Deseja manter sua sessão ativa?"/>
+                          <h:outputText value="Sua sessÃ£o estÃ¡ prestes a expirar por inatividade. Deseja manter sua sessÃ£o ativa?"/>
                           <br/>
                           <h:outputLabel value="Tempo restante: "/><h:outputText id="tempoRestante" value="#{mBeanDialogoAtivarSessao.tempoExibicao}"/><h:outputText value=" segundos."/>                         
                        </f:facet>                      
                        <h:commandButton id="comandoSim" process="@this" value="Sim" oncomplete="idleDialog.hide();reiniciarContador();" actionListener="#{mBeanDialogoAtivarSessao.ativarSessao}" immediate="true"/>
-                       <h:commandButton id="comandoNao" process="@this" value="Não" oncomplete="idleDialog.hide()" actionListener="#{mBeanDialogoAtivarSessao.efetuarLogout}" immediate="true"/>
+                       <h:commandButton id="comandoNao" process="@this" value="NÃ£o" oncomplete="idleDialog.hide()" actionListener="#{mBeanDialogoAtivarSessao.efetuarLogout}" immediate="true"/>
                 </p:confirmDialog>
             </p:idleMonitor>
         </h:form>
@@ -44,7 +44,7 @@
 
            var tempoExibicao = '<h:outputText value="#{mBeanDialogoAtivarSessao.tempoExibicao}"/>';
            
-           timeout = setTimeout(logout,tempoExibicao*1000); //após o timeout, redireciona para a página de login.
+           timeout = setTimeout(logout,tempoExibicao*1000); //apÃ³s o timeout, redireciona para a pÃ¡gina de login.
        }
 
        function reiniciarContador(){

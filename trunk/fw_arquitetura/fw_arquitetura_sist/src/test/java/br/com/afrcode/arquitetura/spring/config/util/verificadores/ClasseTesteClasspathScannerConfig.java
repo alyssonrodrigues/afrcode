@@ -10,9 +10,9 @@ import org.springframework.core.type.filter.RegexPatternTypeFilter;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * Configurações para scanner de classpath para componentes de Classes de Teste.
+ * ConfiguraÃ§Ãµes para scanner de classpath para componentes de Classes de Teste.
  * 
- * Em uso em testes de aderência e conformidade.
+ * Em uso em testes de aderÃªncia e conformidade.
  * 
  * 
  */
@@ -20,14 +20,15 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Configuration
 public class ClasseTesteClasspathScannerConfig {
 
-    @Bean
-    public ClassPathScanningCandidateComponentScanner classeTesteClasspathScanner() {
-        ClassPathScanningCandidateComponentScanner classeTesteClasspathScanner =
-                new ClassPathScanningCandidateComponentScanner();
-        for (String regExpInclude : ConstantesPadroes.REGS_EXP_TESTES_COMPONENTE) {
-            classeTesteClasspathScanner.addIncludeFilter(new RegexPatternTypeFilter(Pattern.compile(regExpInclude)));
-        }
-        return classeTesteClasspathScanner;
-    }
+	@Bean
+	public ClassPathScanningCandidateComponentScanner classeTesteClasspathScanner() {
+		ClassPathScanningCandidateComponentScanner classeTesteClasspathScanner = new ClassPathScanningCandidateComponentScanner();
+		for (String regExpInclude : ConstantesPadroes.REGS_EXP_TESTES_COMPONENTE) {
+			classeTesteClasspathScanner
+					.addIncludeFilter(new RegexPatternTypeFilter(Pattern
+							.compile(regExpInclude)));
+		}
+		return classeTesteClasspathScanner;
+	}
 
 }

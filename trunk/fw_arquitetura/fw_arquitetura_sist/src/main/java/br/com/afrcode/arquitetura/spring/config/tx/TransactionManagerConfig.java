@@ -10,7 +10,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * Configurações pra uso de JTA via Hibernate EntityManager.
+ * ConfiguraÃ§Ãµes pra uso de JTA via Hibernate EntityManager.
  * 
  * 
  */
@@ -21,21 +21,21 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Profile(Profiles.PROFILE_APLICACAO)
 public class TransactionManagerConfig {
 
-    @Bean
-    public JtaTransactionManager transactionManager() {
-        return new JtaTransactionManager();
-    }
+	@Bean
+	public JtaTransactionManager transactionManager() {
+		return new JtaTransactionManager();
+	}
 
-    /**
-     * Bean para uso de transações programaticamente. Ver TransactionTemplate.
-     * 
-     * @return
-     */
-    @Bean
-    public TransactionTemplate transactionTemplate() {
-        TransactionTemplate transactionTemplate = new TransactionTemplate();
-        transactionTemplate.setTransactionManager(transactionManager());
-        return transactionTemplate;
-    }
+	/**
+	 * Bean para uso de transaÃ§Ãµes programaticamente. Ver TransactionTemplate.
+	 * 
+	 * @return
+	 */
+	@Bean
+	public TransactionTemplate transactionTemplate() {
+		TransactionTemplate transactionTemplate = new TransactionTemplate();
+		transactionTemplate.setTransactionManager(transactionManager());
+		return transactionTemplate;
+	}
 
 }

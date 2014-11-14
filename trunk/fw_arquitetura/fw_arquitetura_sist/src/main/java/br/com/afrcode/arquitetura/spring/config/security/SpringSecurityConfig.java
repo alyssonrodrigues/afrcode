@@ -22,14 +22,14 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * ConfiguraÁıes necess·rias para uso do Spring Security.
+ * Configura√ß√µes necess√°rias para uso do Spring Security.
  * 
- * A estratÈgia em uso È a de definiÁ„o dos beans necess·rios em detrimento ao
+ * A estrat√©gia em uso √© a de defini√ß√£o dos beans necess√°rios em detrimento ao
  * uso do namespace security (via XML). O uso do namespace security (via XML)
- * poder· ser usado em conjunto ou em substituiÁ„o a esta classe.
+ * poder√° ser usado em conjunto ou em substitui√ß√£o a esta classe.
  * 
- * ATEN«√O: para que aplicaÁıes WEB obtenham os serviÁos aqui configurados È
- * necess·rio incluir o filter DelegatingFilterProxy em seus respectivos
+ * ATEN√á√ÉO: para que aplica√ß√µes WEB obtenham os servi√ßos aqui configurados √©
+ * necess√°rio incluir o filter DelegatingFilterProxy em seus respectivos
  * arquivos web.xml conforme exemplo abaixo:
  * 
  * <filter> <filter-name>springSecurityFilterChain</filter-name>
@@ -45,145 +45,153 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Profile(Profiles.PROFILE_APLICACAO)
 @ImportResource({ "classpath:spring-security-beans.xml" })
 public class SpringSecurityConfig {
-    public static final String LOGIN_CONTEXT_NAME = "SPRINGSECURITY";
-    public static final String LOGIN_MODULE = "org.jboss.security.ClientLoginModule";
+	public static final String LOGIN_CONTEXT_NAME = "SPRINGSECURITY";
+	public static final String LOGIN_MODULE = "org.jboss.security.ClientLoginModule";
 
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+	@Autowired
+	private UserDetailsServiceImpl userDetailsService;
 
-    /**
-     * Bean provedor de autenticaÁ„o Spring. Respons·vel por encadear a
-     * autenticaÁ„o via DAO pattern e via JAAS.
-     * 
-     * @return
-     */
-    @Bean
-    @Primary
-    public AuthenticationProviderImpl authenticationProviderImpl() {
-        AuthenticationProviderImpl authenticationProviderImpl = new AuthenticationProviderImpl();
-        authenticationProviderImpl.setDaoAuthenticationProvider(daoAuthenticationProvider());
-        authenticationProviderImpl.setDefaultJaasAuthenticationProvider(defaultJaasAuthenticationProvider());
-        return authenticationProviderImpl;
-    }
+	/**
+	 * Bean provedor de autentica√ß√£o Spring. Respons√°vel por encadear a
+	 * autentica√ß√£o via DAO pattern e via JAAS.
+	 * 
+	 * @return
+	 */
+	@Bean
+	@Primary
+	public AuthenticationProviderImpl authenticationProviderImpl() {
+		AuthenticationProviderImpl authenticationProviderImpl = new AuthenticationProviderImpl();
+		authenticationProviderImpl
+				.setDaoAuthenticationProvider(daoAuthenticationProvider());
+		authenticationProviderImpl
+				.setDefaultJaasAuthenticationProvider(defaultJaasAuthenticationProvider());
+		return authenticationProviderImpl;
+	}
 
-    /**
-     * Bean provedor de autenticaÁ„o Spring. Respons·vel por validar as
-     * credenciais de um usu·rio via DAO pattern.
-     * 
-     * A obtenÁ„o dos dados para validaÁ„o face ‡s credenciais ocorre via
-     * implementaÁ„o de UserDetailsService.
-     * 
-     * @return
-     */
-    @Bean
-    @Primary
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        daoAuthenticationProvider.setPasswordEncoder(new PlaintextPasswordEncoder());
-        return daoAuthenticationProvider;
-    }
+	/**
+	 * Bean provedor de autentica√ß√£o Spring. Respons√°vel por validar as
+	 * credenciais de um usu√°rio via DAO pattern.
+	 * 
+	 * A obten√ß√£o dos dados para valida√ß√£o face √†s credenciais ocorre via
+	 * implementa√ß√£o de UserDetailsService.
+	 * 
+	 * @return
+	 */
+	@Bean
+	@Primary
+	public DaoAuthenticationProvider daoAuthenticationProvider() {
+		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+		daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+		daoAuthenticationProvider
+				.setPasswordEncoder(new PlaintextPasswordEncoder());
+		return daoAuthenticationProvider;
+	}
 
-    /**
-     * Bean provedor de autenticaÁ„o Spring. Respons·vel por validar as
-     * credenciais de um usu·rio via JAAS LoginModule.
-     * 
-     * O LoginModule È configurado via AppConfigurationEntry e repassado ao
-     * DefaultJaasAuthenticationProvider.
-     * 
-     * O provider JAAS em uso È o JBoss Security vi mÛdulo
-     * org.jboss.security.ClientLoginModule. Este mÛdulo È respons·vel por
-     * configurar as propriedades
-     * org.jboss.security.SecurityAssociation.principal e
-     * org.jboss.security.SecurityAssociation.credential de acordo com a
-     * informaÁıes correntes de autenticaÁ„o. Ou seja, n„o h· autenticaÁ„o de
-     * fato em execuÁ„o neste mÛdulo e sim apenas configuraÁ„o de ambiente!
-     * 
-     * @return
-     */
-    @Bean
-    public DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider() {
-        DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider = new DefaultJaasAuthenticationProvider();
+	/**
+	 * Bean provedor de autentica√ß√£o Spring. Respons√°vel por validar as
+	 * credenciais de um usu√°rio via JAAS LoginModule.
+	 * 
+	 * O LoginModule √© configurado via AppConfigurationEntry e repassado ao
+	 * DefaultJaasAuthenticationProvider.
+	 * 
+	 * O provider JAAS em uso √© o JBoss Security vi m√≥dulo
+	 * org.jboss.security.ClientLoginModule. Este m√≥dulo √© respons√°vel por
+	 * configurar as propriedades
+	 * org.jboss.security.SecurityAssociation.principal e
+	 * org.jboss.security.SecurityAssociation.credential de acordo com a
+	 * informa√ß√µes correntes de autentica√ß√£o. Ou seja, n√£o h√° autentica√ß√£o de
+	 * fato em execu√ß√£o neste m√≥dulo e sim apenas configura√ß√£o de ambiente!
+	 * 
+	 * @return
+	 */
+	@Bean
+	public DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider() {
+		DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider = new DefaultJaasAuthenticationProvider();
 
-        // ConfiguraÁıes do provider JAAS. IntegraÁ„o Spring Security com o JAAS
-        // provider (JBoss) para AutenticaÁ„o.
-        AppConfigurationEntry appConfigurationEntry =
-                new AppConfigurationEntry(LOGIN_MODULE, LoginModuleControlFlag.REQUIRED, new HashMap<String, Object>());
-        defaultJaasAuthenticationProvider.setConfiguration(new InMemoryConfiguration(
-                new AppConfigurationEntry[] { appConfigurationEntry }));
-        defaultJaasAuthenticationProvider.setLoginContextName(LOGIN_CONTEXT_NAME);
+		// Configura√ß√µes do provider JAAS. Integra√ß√£o Spring Security com o JAAS
+		// provider (JBoss) para Autentica√ß√£o.
+		AppConfigurationEntry appConfigurationEntry = new AppConfigurationEntry(
+				LOGIN_MODULE, LoginModuleControlFlag.REQUIRED,
+				new HashMap<String, Object>());
+		defaultJaasAuthenticationProvider
+				.setConfiguration(new InMemoryConfiguration(
+						new AppConfigurationEntry[] { appConfigurationEntry }));
+		defaultJaasAuthenticationProvider
+				.setLoginContextName(LOGIN_CONTEXT_NAME);
 
-        // ConfiguraÁıes do provider JAAS. IntegraÁ„o Spring Security com o JAAS
-        // provider para AutorizaÁ„o.
-        AuthorityGranter authorityGranter = authorityGranter();
-        defaultJaasAuthenticationProvider.setAuthorityGranters(new AuthorityGranter[] { authorityGranter });
+		// Configura√ß√µes do provider JAAS. Integra√ß√£o Spring Security com o JAAS
+		// provider para Autoriza√ß√£o.
+		AuthorityGranter authorityGranter = authorityGranter();
+		defaultJaasAuthenticationProvider
+				.setAuthorityGranters(new AuthorityGranter[] { authorityGranter });
 
-        return defaultJaasAuthenticationProvider;
-    }
+		return defaultJaasAuthenticationProvider;
+	}
 
-    /**
-     * Adaptador respons·vel por fazer o DE-PARA entre credenciais do principal
-     * (Subject JAAS) e GrantedAuthority do Spring Security (DAO pattern).
-     * 
-     * @return
-     */
-    @Bean
-    public AuthorityGranter authorityGranter() {
-        AuthorityGranterImpl authorityGranter = new AuthorityGranterImpl();
-        authorityGranter.setUserDetailsService(userDetailsService);
-        return authorityGranter;
-    }
+	/**
+	 * Adaptador respons√°vel por fazer o DE-PARA entre credenciais do principal
+	 * (Subject JAAS) e GrantedAuthority do Spring Security (DAO pattern).
+	 * 
+	 * @return
+	 */
+	@Bean
+	public AuthorityGranter authorityGranter() {
+		AuthorityGranterImpl authorityGranter = new AuthorityGranterImpl();
+		authorityGranter.setUserDetailsService(userDetailsService);
+		return authorityGranter;
+	}
 
-    /**
-     * Bean respons·vel por finalizar o processo de Logout de usu·rios.
-     * 
-     * Ver LogoutSuccessHandler.
-     * 
-     * @return
-     */
-    @Bean
-    public LogoutSuccessHandlerImpl logoutSuccessHandlerImpl() {
-        LogoutSuccessHandlerImpl logoutSuccessHandlerImpl = new LogoutSuccessHandlerImpl();
-        logoutSuccessHandlerImpl.setTargetUrlParameter("/web/login.xhtml");
-        return logoutSuccessHandlerImpl;
-    }
+	/**
+	 * Bean respons√°vel por finalizar o processo de Logout de usu√°rios.
+	 * 
+	 * Ver LogoutSuccessHandler.
+	 * 
+	 * @return
+	 */
+	@Bean
+	public LogoutSuccessHandlerImpl logoutSuccessHandlerImpl() {
+		LogoutSuccessHandlerImpl logoutSuccessHandlerImpl = new LogoutSuccessHandlerImpl();
+		logoutSuccessHandlerImpl.setTargetUrlParameter("/web/login.xhtml");
+		return logoutSuccessHandlerImpl;
+	}
 
-    /**
-     * Bean respons·vel por tratar erros de acesso negado (erros de
-     * autorizaÁ„o).
-     * 
-     * @return
-     */
-    @Bean
-    public AccessDeniedHandlerImpl accessDeniedHandlerImpl() {
-        AccessDeniedHandlerImpl accessDeniedHandlerImpl = new AccessDeniedHandlerImpl();
-        accessDeniedHandlerImpl.setErrorPage("/web/acessonegado.xhtml");
-        return accessDeniedHandlerImpl;
-    }
+	/**
+	 * Bean respons√°vel por tratar erros de acesso negado (erros de
+	 * autoriza√ß√£o).
+	 * 
+	 * @return
+	 */
+	@Bean
+	public AccessDeniedHandlerImpl accessDeniedHandlerImpl() {
+		AccessDeniedHandlerImpl accessDeniedHandlerImpl = new AccessDeniedHandlerImpl();
+		accessDeniedHandlerImpl.setErrorPage("/web/acessonegado.xhtml");
+		return accessDeniedHandlerImpl;
+	}
 
-    /**
-     * Bean respons·vel por gerir o processo de Logout de usu·rios.
-     * 
-     * Ver LogoutHandler.
-     * 
-     * @return
-     */
-    @Bean
-    public LogoutHandler logoutHandler() {
-        return new SecurityContextLogoutHandler();
-    }
+	/**
+	 * Bean respons√°vel por gerir o processo de Logout de usu√°rios.
+	 * 
+	 * Ver LogoutHandler.
+	 * 
+	 * @return
+	 */
+	@Bean
+	public LogoutHandler logoutHandler() {
+		return new SecurityContextLogoutHandler();
+	}
 
-    /**
-     * Bean respons·vel por tratar erros de login.
-     * 
-     * @return
-     */
-    @Bean
-    public AuthenticationFailureHandlerImpl authenticationFailureHandlerImpl() {
-        AuthenticationFailureHandlerImpl authenticationFailureHandlerImpl = new AuthenticationFailureHandlerImpl();
-        authenticationFailureHandlerImpl.setDefaultFailureUrl("/web/login.xhtml");
-        authenticationFailureHandlerImpl.setUseForward(false);
-        return authenticationFailureHandlerImpl;
-    }
+	/**
+	 * Bean respons√°vel por tratar erros de login.
+	 * 
+	 * @return
+	 */
+	@Bean
+	public AuthenticationFailureHandlerImpl authenticationFailureHandlerImpl() {
+		AuthenticationFailureHandlerImpl authenticationFailureHandlerImpl = new AuthenticationFailureHandlerImpl();
+		authenticationFailureHandlerImpl
+				.setDefaultFailureUrl("/web/login.xhtml");
+		authenticationFailureHandlerImpl.setUseForward(false);
+		return authenticationFailureHandlerImpl;
+	}
 
 }

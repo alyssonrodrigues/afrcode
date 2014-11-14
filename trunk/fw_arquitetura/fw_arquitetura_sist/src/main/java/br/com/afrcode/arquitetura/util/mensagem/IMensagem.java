@@ -1,52 +1,52 @@
 package br.com.afrcode.arquitetura.util.mensagem;
 
 /**
- * Interface base de definição de mensagem.
+ * Interface base de definiÃ§Ã£o de mensagem.
  * 
- * Podem existir mensagens de diferentes tipos (erro, alerta, informação, etc.)
+ * Podem existir mensagens de diferentes tipos (erro, alerta, informaÃ§Ã£o, etc.)
  * e seus respectivos tratadores. Ver ITratadorMensagem. Cada tratador de
- * mensagens saberá como formatar e como proceder em relação a mensagem.
+ * mensagens saberÃ¡ como formatar e como proceder em relaÃ§Ã£o a mensagem.
  * 
- * A mensagem literal em geral será obtida de algum resource bundle java.
+ * A mensagem literal em geral serÃ¡ obtida de algum resource bundle java.
  * 
  * 
  */
 public interface IMensagem {
 
-    /**
-     * Método de acesso ao códido da mensagem.
-     * 
-     * @return
-     */
-    String getCodMensagem();
+	/**
+	 * MÃ©todo de acesso ao cÃ³dido da mensagem.
+	 * 
+	 * @return
+	 */
+	String getCodMensagem();
 
-    /**
-     * Método de atribuição do código da mensagem.
-     * 
-     * @param codMensagem
-     */
-    void setCodMensagem(String codMensagem);
+	/**
+	 * MÃ©todo de atribuiÃ§Ã£o do cÃ³digo da mensagem.
+	 * 
+	 * @param codMensagem
+	 */
+	void setCodMensagem(String codMensagem);
 
-    /**
-     * Método de obtenção da mensagem associada em geral obtida de algum
-     * resource bundle.
-     * 
-     * @return
-     */
-    String getMensagem();
+	/**
+	 * MÃ©todo de obtenÃ§Ã£o da mensagem associada em geral obtida de algum
+	 * resource bundle.
+	 * 
+	 * @return
+	 */
+	String getMensagem();
 
-    /**
-     * Método de atribuição de messagem em geral obtida de algum resource
-     * bundle.
-     * 
-     * @param mensagem
-     */
-    void setMensagem(String mensagem);
+	/**
+	 * MÃ©todo de atribuiÃ§Ã£o de messagem em geral obtida de algum resource
+	 * bundle.
+	 * 
+	 * @param mensagem
+	 */
+	void setMensagem(String mensagem);
 
-    /**
-     * Método para tratar a mensagem em geral através de uma implementação de
-     * ITratadorMensagem.
-     */
-    void tratarMensagem();
+	/**
+	 * MÃ©todo para tratar a mensagem em geral atravÃ©s de uma implementaÃ§Ã£o de
+	 * ITratadorMensagem.
+	 */
+	void tratarMensagem();
 
 }

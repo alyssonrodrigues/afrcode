@@ -9,9 +9,9 @@ import br.com.afrcode.arquitetura.spring.anotacoes.Servico;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * Configurações para scanner de classpath para componentes Dao.
+ * ConfiguraÃ§Ãµes para scanner de classpath para componentes Dao.
  * 
- * Em uso em testes de aderência e conformidade.
+ * Em uso em testes de aderÃªncia e conformidade.
  * 
  * 
  */
@@ -19,12 +19,12 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Configuration
 public class ServicoAnnotationClasspathScannerConfig {
 
-    @Bean
-    public ClassPathScanningCandidateComponentScanner servicoAnnotationClasspathScanner() {
-        ClassPathScanningCandidateComponentScanner servicoAnnotationClasspathScanner =
-                new ClassPathScanningCandidateComponentScanner();
-        servicoAnnotationClasspathScanner.addIncludeFilter(new AnnotationTypeFilter(Servico.class, false));
-        return servicoAnnotationClasspathScanner;
-    }
+	@Bean
+	public ClassPathScanningCandidateComponentScanner servicoAnnotationClasspathScanner() {
+		ClassPathScanningCandidateComponentScanner servicoAnnotationClasspathScanner = new ClassPathScanningCandidateComponentScanner();
+		servicoAnnotationClasspathScanner
+				.addIncludeFilter(new AnnotationTypeFilter(Servico.class, false));
+		return servicoAnnotationClasspathScanner;
+	}
 
 }

@@ -11,22 +11,28 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmM
 
 public class SpringSecurityContextTest extends AbstractCasoTesteEmMemoria {
 
-    @Autowired
-    private DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider;
+	@Autowired
+	private DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider;
 
-    private UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(LoginModuleParaTU.USER,
-            LoginModuleParaTU.PASSWD);
+	private UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+			LoginModuleParaTU.USER, LoginModuleParaTU.PASSWD);
 
-    @Test
-    public void testarLoginJAASComSucesso() {
-        Authentication auth = defaultJaasAuthenticationProvider.authenticate(token);
-        Assert.assertEquals("O usuário deveria ter sido autenticado com sucesso!", true, auth.isAuthenticated());
-        Assert.assertEquals("O usuário autenticado deveria ter o principal: " + token.getPrincipal(),
-                token.getPrincipal(), auth.getPrincipal());
-        Assert.assertEquals("O usuário autenticado deveria ter a credencial: " + AuthorityGranterParaTU.ROLE_USER,
-                token.getCredentials(), auth.getCredentials());
-        Assert.assertEquals("O usuário autenticado deveria ter a autorização:" + AuthorityGranterParaTU.ROLE_USER,
-                false, auth.getAuthorities().isEmpty());
-    }
+	@Test
+	public void testarLoginJAASComSucesso() {
+		Authentication auth = defaultJaasAuthenticationProvider
+				.authenticate(token);
+		Assert.assertEquals(
+				"O usuÃ¡rio deveria ter sido autenticado com sucesso!", true,
+				auth.isAuthenticated());
+		Assert.assertEquals("O usuÃ¡rio autenticado deveria ter o principal: "
+				+ token.getPrincipal(), token.getPrincipal(),
+				auth.getPrincipal());
+		Assert.assertEquals("O usuÃ¡rio autenticado deveria ter a credencial: "
+				+ AuthorityGranterParaTU.ROLE_USER, token.getCredentials(),
+				auth.getCredentials());
+		Assert.assertEquals("O usuÃ¡rio autenticado deveria ter a autorizaÃ§Ã£o:"
+				+ AuthorityGranterParaTU.ROLE_USER, false, auth
+				.getAuthorities().isEmpty());
+	}
 
 }

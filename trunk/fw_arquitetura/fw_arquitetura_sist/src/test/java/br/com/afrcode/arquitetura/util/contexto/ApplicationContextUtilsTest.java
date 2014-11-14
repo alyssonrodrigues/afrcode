@@ -7,9 +7,10 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmM
 
 public class ApplicationContextUtilsTest extends AbstractCasoTesteEmMemoria {
 
-    @Test
-    public void testarGetApplicationContext() {
-        Assert.assertNotNull("ApplicationContext n„o deve ser nulo!", ApplicationContextUtils.getApplicationContext());
-    }
+	@Test
+	public void testarGetApplicationContext() {
+		Assert.assertNotNull("ApplicationContext n√£o deve ser nulo!",
+				ApplicationContextUtils.getApplicationContext());
+	}
 
 }

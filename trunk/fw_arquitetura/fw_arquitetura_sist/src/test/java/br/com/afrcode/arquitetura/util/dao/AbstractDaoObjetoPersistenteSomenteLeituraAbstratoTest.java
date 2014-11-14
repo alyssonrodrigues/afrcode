@@ -8,14 +8,14 @@ import br.com.afrcode.arquitetura.modelo.entidade.dao.DaoJpaAbstrato;
 import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTeste;
 
 /**
- * Classe base para testes de implementações de IDao de
+ * Classe base para testes de implementaÃ§Ãµes de IDao de
  * ObjetoPersistenteAbstrato de leitura apenas - tipicamente Entidades mapeadas
  * como Immutable.
  * 
- * Subclasses desta classe herdarão testes para as operações CRUD básicas.
+ * Subclasses desta classe herdarÃ£o testes para as operaÃ§Ãµes CRUD bÃ¡sicas.
  * 
  * Pretende-se que esta seja a super classe de testes de todos os testes de
- * implementações de IDao de ObjetoPersistenteAbstrato de leitura apenas -
+ * implementaÃ§Ãµes de IDao de ObjetoPersistenteAbstrato de leitura apenas -
  * tipicamente Entidades mapeadas como Immutable.
  * 
  * 
@@ -25,16 +25,16 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTeste;
  *            Subtipo de IEntidade
  */
 public abstract class AbstractDaoObjetoPersistenteSomenteLeituraAbstratoTest<T extends Comparable<T>, E extends IEntidade<T>>
-        extends AbstractCasoTeste {
+		extends AbstractCasoTeste {
 
-    protected abstract DaoJpaAbstrato<T, E> getDao();
+	protected abstract DaoJpaAbstrato<T, E> getDao();
 
-    @Autowired
-    private ExecutorTUCRUDDaoUtil testadorDaoUtil;
+	@Autowired
+	private ExecutorTUCRUDDaoUtil testadorDaoUtil;
 
-    @Test
-    public void testarRecuperarTodosJaCadastradosComPaginacao() {
-        testadorDaoUtil.testarRecuperarTodosJaCadastradosComPaginacao(getDao());
-    }
+	@Test
+	public void testarRecuperarTodosJaCadastradosComPaginacao() {
+		testadorDaoUtil.testarRecuperarTodosJaCadastradosComPaginacao(getDao());
+	}
 
 }

@@ -3,54 +3,54 @@ package br.com.afrcode.arquitetura.apresentacao.managedbean;
 import br.com.afrcode.arquitetura.util.mensagem.IMensagem;
 
 /**
- * Interface de definiÁ„o de JSF managed beans.
+ * Interface de defini√ß√£o de JSF managed beans.
  * 
  * 
  */
 public interface IManagedBean {
 
-    /**
-     * MÈtodo central de adiÁ„o de mensagens cujo tratamento depende de seu
-     * tipo.
-     * 
-     * Ver IMensagem e ITratadorMensagem.
-     * 
-     * @param mensagem
-     */
-    void adicionarMensagem(IMensagem mensagem);
+	/**
+	 * M√©todo central de adi√ß√£o de mensagens cujo tratamento depende de seu
+	 * tipo.
+	 * 
+	 * Ver IMensagem e ITratadorMensagem.
+	 * 
+	 * @param mensagem
+	 */
+	void adicionarMensagem(IMensagem mensagem);
 
-    /**
-     * MÈtodo de adiÁ„o de objetos em sess„o HTTP.
-     * 
-     * N„o È permitida a inclus„o de Entidades (objetos IEntidade) em sess„o
-     * HTTP - problemas relacionados: detached object, stalled data, lazy
-     * initialization exceptions, resources leak, etc.
-     * 
-     * @param chave
-     *            chave ˙nica do objeto em sess„o
-     * @param objetoEmSessao
-     *            um objeto para adiÁ„o em sess„o
-     * 
-     * @throws IllegalArgumentException
-     *             quando o objeto È na verdade uma IEntidade
-     */
-    void adicionarObjetoEmSessaoHttp(String chave, Object objetoEmSessao);
+	/**
+	 * M√©todo de adi√ß√£o de objetos em sess√£o HTTP.
+	 * 
+	 * N√£o √© permitida a inclus√£o de Entidades (objetos IEntidade) em sess√£o
+	 * HTTP - problemas relacionados: detached object, stalled data, lazy
+	 * initialization exceptions, resources leak, etc.
+	 * 
+	 * @param chave
+	 *            chave √∫nica do objeto em sess√£o
+	 * @param objetoEmSessao
+	 *            um objeto para adi√ß√£o em sess√£o
+	 * 
+	 * @throws IllegalArgumentException
+	 *             quando o objeto √© na verdade uma IEntidade
+	 */
+	void adicionarObjetoEmSessaoHttp(String chave, Object objetoEmSessao);
 
-    /**
-     * MÈtodo de remoÁ„o de objetos em sess„o HTTP atravÈs de chave ˙nica
-     * identificadora.
-     * 
-     * @param chave
-     */
-    void removerObjetoEmSessaoHttp(String chave);
+	/**
+	 * M√©todo de remo√ß√£o de objetos em sess√£o HTTP atrav√©s de chave √∫nica
+	 * identificadora.
+	 * 
+	 * @param chave
+	 */
+	void removerObjetoEmSessaoHttp(String chave);
 
-    /**
-     * MÈtodo de obtenÁ„o de objetos em sess„o HTTP atravÈs de chave ˙nica
-     * identificadora.
-     * 
-     * @param chave
-     * @return null ou o objeto em sess„o encontrado
-     */
-    Object getObjetoEmSessao(String chave);
+	/**
+	 * M√©todo de obten√ß√£o de objetos em sess√£o HTTP atrav√©s de chave √∫nica
+	 * identificadora.
+	 * 
+	 * @param chave
+	 * @return null ou o objeto em sess√£o encontrado
+	 */
+	Object getObjetoEmSessao(String chave);
 
 }

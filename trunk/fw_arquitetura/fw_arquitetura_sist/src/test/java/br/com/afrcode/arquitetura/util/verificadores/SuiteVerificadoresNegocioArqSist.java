@@ -5,14 +5,16 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * Suite de verificadores de aderência para camada de negócio.
+ * Suite de verificadores de aderÃªncia para camada de negÃ³cio.
  * 
  * 
  */
 @RunWith(Suite.class)
-@SuiteClasses({ VerificadorComponenteComTUTest.class, VerificadorDaoComTUTest.class, VerificadorEntityComDaoTest.class,
-        VerificadorServicoComTUTest.class, VerificadorSuperclasseClassesTUTest.class,
-        VerificadorUsoSpringAnnotationsTest.class })
+@SuiteClasses({ VerificadorComponenteComTUTest.class,
+		VerificadorDaoComTUTest.class, VerificadorEntityComDaoTest.class,
+		VerificadorServicoComTUTest.class,
+		VerificadorSuperclasseClassesTUTest.class,
+		VerificadorUsoSpringAnnotationsTest.class })
 public class SuiteVerificadoresNegocioArqSist {
 
 }

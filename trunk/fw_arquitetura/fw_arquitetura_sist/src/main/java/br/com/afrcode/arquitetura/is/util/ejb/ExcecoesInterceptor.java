@@ -9,35 +9,35 @@ import br.com.afrcode.arquitetura.is.util.excecao.ExcecaoNegocioRemota;
 import br.com.afrcode.arquitetura.util.excecao.ExcecaoNegocio;
 
 /**
- * Componente responsável por encapsular exceções internas a um Sistema.
+ * Componente responsÃ¤vel por encapsular exceÃ§Ãµes internas a um Sistema.
  * 
  * 
  */
 public class ExcecoesInterceptor {
 
-    @AroundInvoke
-    public Object encapsularExcecoes(InvocationContext ctx) throws Exception {
-        Object retVal = null;
+	@AroundInvoke
+	public Object encapsularExcecoes(InvocationContext ctx) throws Exception {
+		Object retVal = null;
 
-        try {
-            retVal = ctx.proceed();
-        } catch (ExcecaoNegocio e) {
-            // Exceções de negócio lançadas explicitamente.
-            throw new ExcecaoNegocioRemota(e.getMessage(), e);
-        } catch (ConstraintViolationException e) {
-            // Exceções oriundas do Hibernate Validator.
-            throw new ExcecaoNegocioRemota(e.getMessage(), e);
-        } catch (ExcecaoNegocioRemota e) {
-            // Houve lançamento explícito de ExcecaoNegocioRemota, seja por
-            // conversão de ExceptionS (checked ExceptionS) de negócio ou
-            // desnecessariamente. Este tratamento/re-throw ocorre apenas para
-            // efeitos de legibilidade de código.
-            throw new ExcecaoNegocioRemota(e.getMensagem(), e);
-        } catch (Exception e) {
-            throw new ExcecaoNaoPrevistaRemota(e);
-        }
+		try {
+			retVal = ctx.proceed();
+		} catch (ExcecaoNegocio e) {
+			// ExceÃ§Ãµes de negÃ³cio lanÃ§adas explicitamente.
+			throw new ExcecaoNegocioRemota(e.getMessage(), e);
+		} catch (ConstraintViolationException e) {
+			// ExceÃ§Ãµes oriundas do Hibernate Validator.
+			throw new ExcecaoNegocioRemota(e.getMessage(), e);
+		} catch (ExcecaoNegocioRemota e) {
+			// Houve lanÃ§amento explÃ­cito de ExcecaoNegocioRemota, seja por
+			// conversÃ£o de ExceptionS (checked ExceptionS) de negÃ³cio ou
+			// desnecessariamente. Este tratamento/re-throw ocorre apenas para
+			// efeitos de legibilidade de cÃ³digo.
+			throw new ExcecaoNegocioRemota(e.getMensagem(), e);
+		} catch (Exception e) {
+			throw new ExcecaoNaoPrevistaRemota(e);
+		}
 
-        return retVal;
-    }
+		return retVal;
+	}
 
 }

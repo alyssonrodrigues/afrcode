@@ -3,11 +3,11 @@ package br.com.afrcode.arquitetura.is.util.ejb;
 import java.util.concurrent.Callable;
 
 /**
- * Caller utilit·rio para execuÁ„o de TUs de EJBs segundo documentaÁ„o
+ * Caller utilit√°rio para execu√ß√£o de TUs de EJBs segundo documenta√ß√£o
  * http://tomee.apache.org/unit-testing-transactions.html.
  */
 public interface Caller {
 
-    public <V> V call(Callable<V> callable) throws Exception;
+	public <V> V call(Callable<V> callable) throws Exception;
 
 }

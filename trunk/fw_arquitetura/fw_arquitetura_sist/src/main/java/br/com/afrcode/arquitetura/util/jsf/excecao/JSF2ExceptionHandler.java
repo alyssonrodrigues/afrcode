@@ -30,136 +30,150 @@ import br.com.afrcode.arquitetura.util.excecao.TratadorExcecaoNegocioRemota;
 import br.com.afrcode.arquitetura.util.excecao.TratadorExcecoesNaoPrevistas;
 
 /**
- * Classe central de tratamento de exceÁıes para o JSF 2.
+ * Classe central de tratamento de exce√ß√µes para o JSF 2.
  * 
- * Determinados tipos de exceÁıes s„o tratados de alguma forma a partir desta
- * classe - gerando mensagens ao usu·rio, logs, redirecionamento p/ p·ginas de
+ * Determinados tipos de exce√ß√µes s√£o tratados de alguma forma a partir desta
+ * classe - gerando mensagens ao usu√°rio, logs, redirecionamento p/ p√°ginas de
  * erros inesperados, etc. Ver tratarExcecaoSeExcecaoConhecida(Throwable).
  * 
- * ATEN«√O: o tratamento da exceÁ„o quanto a transaÁıes È feito anteriormente a
- * este tratador, ou seja, neste ponto a transaÁ„o corrente j· deixou de existir
+ * ATEN√á√ÉO: o tratamento da exce√ß√£o quanto a transa√ß√µes √© feito anteriormente a
+ * este tratador, ou seja, neste ponto a transa√ß√£o corrente j√° deixou de existir
  * (via rollback - Transactional).
  * 
  * 
  */
 public class JSF2ExceptionHandler extends ExceptionHandlerWrapper {
-    private ExceptionHandler wrapped;
+	private ExceptionHandler wrapped;
 
-    public JSF2ExceptionHandler(ExceptionHandler wrapped) {
-        this.wrapped = wrapped;
-    }
+	public JSF2ExceptionHandler(ExceptionHandler wrapped) {
+		this.wrapped = wrapped;
+	}
 
-    private HttpServletRequest getHttpServletRequest(ExceptionQueuedEvent event) {
-        Object requestObj = event.getContext().getContext().getExternalContext().getRequest();
-        Validate.isTrue(HttpServletRequest.class.isAssignableFrom(requestObj.getClass()),
-                "request n„o È HttpServletRequest!");
-        HttpServletRequest request = (HttpServletRequest) requestObj;
-        return request;
-    }
+	private HttpServletRequest getHttpServletRequest(ExceptionQueuedEvent event) {
+		Object requestObj = event.getContext().getContext()
+				.getExternalContext().getRequest();
+		Validate.isTrue(HttpServletRequest.class.isAssignableFrom(requestObj
+				.getClass()), "request n√£o √© HttpServletRequest!");
+		HttpServletRequest request = (HttpServletRequest) requestObj;
+		return request;
+	}
 
-    private HttpServletResponse getHttpServletResponse(ExceptionQueuedEvent event) {
-        Object requestObj = event.getContext().getContext().getExternalContext().getResponse();
-        Validate.isTrue(HttpServletResponse.class.isAssignableFrom(requestObj.getClass()),
-                "request n„o È HttpServletResponse!");
-        HttpServletResponse request = (HttpServletResponse) requestObj;
-        return request;
-    }
+	private HttpServletResponse getHttpServletResponse(
+			ExceptionQueuedEvent event) {
+		Object requestObj = event.getContext().getContext()
+				.getExternalContext().getResponse();
+		Validate.isTrue(HttpServletResponse.class.isAssignableFrom(requestObj
+				.getClass()), "request n√£o √© HttpServletResponse!");
+		HttpServletResponse request = (HttpServletResponse) requestObj;
+		return request;
+	}
 
-    private WebApplicationContext getWebApplicationContext(ExceptionQueuedEvent event) {
-        WebApplicationContext webCtx = FacesContextUtils.getWebApplicationContext(event.getContext().getContext());
-        return webCtx;
-    }
+	private WebApplicationContext getWebApplicationContext(
+			ExceptionQueuedEvent event) {
+		WebApplicationContext webCtx = FacesContextUtils
+				.getWebApplicationContext(event.getContext().getContext());
+		return webCtx;
+	}
 
-    @Override
-    public ExceptionHandler getWrapped() {
-        return wrapped;
-    }
+	@Override
+	public ExceptionHandler getWrapped() {
+		return wrapped;
+	}
 
-    @Override
-    public void handle() throws FacesException {
-        List<ExcecaoNaoPrevista> excecoesNaoPrevistas = new ArrayList<ExcecaoNaoPrevista>();
+	@Override
+	public void handle() throws FacesException {
+		List<ExcecaoNaoPrevista> excecoesNaoPrevistas = new ArrayList<ExcecaoNaoPrevista>();
 
-        for (Iterator<ExceptionQueuedEvent> it = getUnhandledExceptionQueuedEvents().iterator(); it.hasNext();) {
-            ExceptionQueuedEvent event = it.next();
-            ExceptionQueuedEventContext ctx = event.getContext();
+		for (Iterator<ExceptionQueuedEvent> it = getUnhandledExceptionQueuedEvents()
+				.iterator(); it.hasNext();) {
+			ExceptionQueuedEvent event = it.next();
+			ExceptionQueuedEventContext ctx = event.getContext();
 
-            Throwable te = obterExpcetionCause(ctx.getException());
-            if (te instanceof AbortProcessingException) {
-                // ExceÁıes internas ao ciclo de vida do JSF ser„o tratadas
-                // por ele mesmo, n„o È necess·rio prosseguir na cadeia
-                // de exceÁıes.
-                super.handle();
-                return;
-            }
+			Throwable te = obterExpcetionCause(ctx.getException());
+			if (te instanceof AbortProcessingException) {
+				// Exce√ß√µes internas ao ciclo de vida do JSF ser√£o tratadas
+				// por ele mesmo, n√£o √© necess√°rio prosseguir na cadeia
+				// de exce√ß√µes.
+				super.handle();
+				return;
+			}
 
-            boolean excecaoTratada = false;
-            try {
-                excecaoTratada = tratarExcecaoSeExcecaoConhecida(te, event);
-            } finally {
-                if (excecaoTratada) {
-                    // Indicando ao JSF 2 que houve erro de validaÁ„o.
-                    FacesContext.getCurrentInstance().validationFailed();
-                    it.remove();
-                }
-            }
-        }
+			boolean excecaoTratada = false;
+			try {
+				excecaoTratada = tratarExcecaoSeExcecaoConhecida(te, event);
+			} finally {
+				if (excecaoTratada) {
+					// Indicando ao JSF 2 que houve erro de valida√ß√£o.
+					FacesContext.getCurrentInstance().validationFailed();
+					it.remove();
+				}
+			}
+		}
 
-        tratarExcecoesNaoPrevistas(FacesContext.getCurrentInstance(), excecoesNaoPrevistas);
-    }
+		tratarExcecoesNaoPrevistas(FacesContext.getCurrentInstance(),
+				excecoesNaoPrevistas);
+	}
 
-    private Throwable obterExpcetionCause(Throwable exception) {
-        Throwable te = exception;
-        while (te.getCause() != null) {
-            te = te.getCause();
-        }
-        return te;
-    }
+	private Throwable obterExpcetionCause(Throwable exception) {
+		Throwable te = exception;
+		while (te.getCause() != null) {
+			te = te.getCause();
+		}
+		return te;
+	}
 
-    private void tratarAccessDeniedException(AccessDeniedException ex, ExceptionQueuedEvent event) {
-        WebApplicationContext webCtx = getWebApplicationContext(event);
-        HttpServletRequest request = getHttpServletRequest(event);
-        HttpServletResponse response = getHttpServletResponse(event);
-        AccessDeniedHandlerImpl handler = webCtx.getBean(AccessDeniedHandlerImpl.class);
-        handler.handle(request, response, ex);
-    }
+	private void tratarAccessDeniedException(AccessDeniedException ex,
+			ExceptionQueuedEvent event) {
+		WebApplicationContext webCtx = getWebApplicationContext(event);
+		HttpServletRequest request = getHttpServletRequest(event);
+		HttpServletResponse response = getHttpServletResponse(event);
+		AccessDeniedHandlerImpl handler = webCtx
+				.getBean(AccessDeniedHandlerImpl.class);
+		handler.handle(request, response, ex);
+	}
 
-    private void tratarConstraintViolationException(ConstraintViolationException cve) {
-        new TratadorConstraintViolationException().tratarExcecao(cve);
-    }
+	private void tratarConstraintViolationException(
+			ConstraintViolationException cve) {
+		new TratadorConstraintViolationException().tratarExcecao(cve);
+	}
 
-    private boolean tratarExcecaoSeExcecaoConhecida(Throwable te, ExceptionQueuedEvent event) {
-        boolean excecaoTratada = false;
+	private boolean tratarExcecaoSeExcecaoConhecida(Throwable te,
+			ExceptionQueuedEvent event) {
+		boolean excecaoTratada = false;
 
-        if (te instanceof ConstraintViolationException) {
-            ConstraintViolationException cve = (ConstraintViolationException) te;
-            tratarConstraintViolationException(cve);
-            excecaoTratada = true;
-        } else if (te instanceof ExcecaoNegocio) {
-            ExcecaoNegocio exn = (ExcecaoNegocio) te;
-            tratarExcecaoNegocio(exn);
-            excecaoTratada = true;
-        } else if (te instanceof AccessDeniedException) {
-            tratarAccessDeniedException(AccessDeniedException.class.cast(te), event);
-            excecaoTratada = true;
-        } else if (te instanceof ExcecaoNegocioRemota) {
-            ExcecaoNegocioRemota er = (ExcecaoNegocioRemota) te;
-            tratarExcecaoNegocioRemota(er);
-            excecaoTratada = true;
-        }
+		if (te instanceof ConstraintViolationException) {
+			ConstraintViolationException cve = (ConstraintViolationException) te;
+			tratarConstraintViolationException(cve);
+			excecaoTratada = true;
+		} else if (te instanceof ExcecaoNegocio) {
+			ExcecaoNegocio exn = (ExcecaoNegocio) te;
+			tratarExcecaoNegocio(exn);
+			excecaoTratada = true;
+		} else if (te instanceof AccessDeniedException) {
+			tratarAccessDeniedException(AccessDeniedException.class.cast(te),
+					event);
+			excecaoTratada = true;
+		} else if (te instanceof ExcecaoNegocioRemota) {
+			ExcecaoNegocioRemota er = (ExcecaoNegocioRemota) te;
+			tratarExcecaoNegocioRemota(er);
+			excecaoTratada = true;
+		}
 
-        return excecaoTratada;
-    }
+		return excecaoTratada;
+	}
 
-    private void tratarExcecaoNegocio(ExcecaoNegocio exn) {
-        new TratadorExcecaoNegocio().tratarExcecao(exn);
-    }
+	private void tratarExcecaoNegocio(ExcecaoNegocio exn) {
+		new TratadorExcecaoNegocio().tratarExcecao(exn);
+	}
 
-    private void tratarExcecaoNegocioRemota(ExcecaoNegocioRemota er) {
-        new TratadorExcecaoNegocioRemota().tratarExcecao(er);
-    }
+	private void tratarExcecaoNegocioRemota(ExcecaoNegocioRemota er) {
+		new TratadorExcecaoNegocioRemota().tratarExcecao(er);
+	}
 
-    private void tratarExcecoesNaoPrevistas(FacesContext facesContext, List<ExcecaoNaoPrevista> excecoesNaoPrevistas) {
-        new TratadorExcecoesNaoPrevistas().tratarExcecoes(facesContext, excecoesNaoPrevistas);
-    }
+	private void tratarExcecoesNaoPrevistas(FacesContext facesContext,
+			List<ExcecaoNaoPrevista> excecoesNaoPrevistas) {
+		new TratadorExcecoesNaoPrevistas().tratarExcecoes(facesContext,
+				excecoesNaoPrevistas);
+	}
 
 }

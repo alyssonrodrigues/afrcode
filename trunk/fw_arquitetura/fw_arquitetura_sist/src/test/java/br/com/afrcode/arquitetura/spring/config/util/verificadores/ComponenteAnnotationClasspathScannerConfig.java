@@ -9,9 +9,9 @@ import br.com.afrcode.arquitetura.spring.anotacoes.Componente;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * Configurações para scanner de classpath para componentes Componente.
+ * ConfiguraÃ§Ãµes para scanner de classpath para componentes Componente.
  * 
- * Em uso em testes de aderência e conformidade.
+ * Em uso em testes de aderÃªncia e conformidade.
  * 
  * 
  */
@@ -19,12 +19,13 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Configuration
 public class ComponenteAnnotationClasspathScannerConfig {
 
-    @Bean
-    public ClassPathScanningCandidateComponentScanner componenteAnnotationClasspathScanner() {
-        ClassPathScanningCandidateComponentScanner componenteAnnotationClasspathScanner =
-                new ClassPathScanningCandidateComponentScanner();
-        componenteAnnotationClasspathScanner.addIncludeFilter(new AnnotationTypeFilter(Componente.class, false));
-        return componenteAnnotationClasspathScanner;
-    }
+	@Bean
+	public ClassPathScanningCandidateComponentScanner componenteAnnotationClasspathScanner() {
+		ClassPathScanningCandidateComponentScanner componenteAnnotationClasspathScanner = new ClassPathScanningCandidateComponentScanner();
+		componenteAnnotationClasspathScanner
+				.addIncludeFilter(new AnnotationTypeFilter(Componente.class,
+						false));
+		return componenteAnnotationClasspathScanner;
+	}
 
 }

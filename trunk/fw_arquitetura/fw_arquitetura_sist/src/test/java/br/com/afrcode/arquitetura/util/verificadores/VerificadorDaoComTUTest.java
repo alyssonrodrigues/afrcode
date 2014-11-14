@@ -26,91 +26,98 @@ import br.com.afrcode.arquitetura.util.dao.AbstractDaoObjetoPersistenteSomenteLe
 
 public class VerificadorDaoComTUTest extends AbstractCasoTesteEmMemoria {
 
-    @Qualifier("daoAnnotationClasspathScanner")
-    @Autowired
-    private ClassPathScanningCandidateComponentScanner daoAnnotationClasspathScanner;
+	@Qualifier("daoAnnotationClasspathScanner")
+	@Autowired
+	private ClassPathScanningCandidateComponentScanner daoAnnotationClasspathScanner;
 
-    @Qualifier("daoTesteClasspathScanner")
-    @Autowired
-    private ClassPathScanningCandidateComponentScanner daoTesteClasspathScanner;
+	@Qualifier("daoTesteClasspathScanner")
+	@Autowired
+	private ClassPathScanningCandidateComponentScanner daoTesteClasspathScanner;
 
-    /**
-     * MÈtodo de verificaÁ„o de regra arquitetural:
-     * "Para todo DAo deve existir uma classe de Teste.".
-     */
-    @Test
-    public void verificarParaTodoDaoHaUmaClasseTU() {
-        Set<BeanDefinition> beansDao =
-                daoAnnotationClasspathScanner.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
-        Set<BeanDefinition> beansDaoTest =
-                daoTesteClasspathScanner.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
+	/**
+	 * M√©todo de verifica√ß√£o de regra arquitetural:
+	 * "Para todo DAo deve existir uma classe de Teste.".
+	 */
+	@Test
+	public void verificarParaTodoDaoHaUmaClasseTU() {
+		Set<BeanDefinition> beansDao = daoAnnotationClasspathScanner
+				.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
+		Set<BeanDefinition> beansDaoTest = daoTesteClasspathScanner
+				.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
 
-        Map<String, BeanDefinition> daosTest = new HashMap<String, BeanDefinition>();
-        for (BeanDefinition beanDaoTest : beansDaoTest) {
-            String daoTestClassName = beanDaoTest.getBeanClassName();
-            String daoTestSimpleClassName = daoTestClassName.substring(daoTestClassName.lastIndexOf(".") + 1);
-            daosTest.put(daoTestSimpleClassName, beanDaoTest);
-        }
+		Map<String, BeanDefinition> daosTest = new HashMap<String, BeanDefinition>();
+		for (BeanDefinition beanDaoTest : beansDaoTest) {
+			String daoTestClassName = beanDaoTest.getBeanClassName();
+			String daoTestSimpleClassName = daoTestClassName
+					.substring(daoTestClassName.lastIndexOf(".") + 1);
+			daosTest.put(daoTestSimpleClassName, beanDaoTest);
+		}
 
-        Set<String> daosSemTest = new HashSet<String>();
-        for (BeanDefinition beanDao : beansDao) {
-            String daoClassName = beanDao.getBeanClassName();
-            String daoSimpleClassName = daoClassName.substring(daoClassName.lastIndexOf(".") + 1);
-            String daoTestSimpleClassName = ConstantesPadroes.PREFIXO_TESTE + daoSimpleClassName;
-            BeanDefinition daoBeanDaoTest = daosTest.get(daoTestSimpleClassName);
-            if (daoBeanDaoTest == null) {
-                daoTestSimpleClassName = daoSimpleClassName + ConstantesPadroes.SUFIXO_TESTE;
-                daoBeanDaoTest = daosTest.get(daoTestSimpleClassName);
-                if (daoBeanDaoTest == null) {
-                    daosSemTest.add(beanDao.getBeanClassName());
-                }
-            }
-        }
+		Set<String> daosSemTest = new HashSet<String>();
+		for (BeanDefinition beanDao : beansDao) {
+			String daoClassName = beanDao.getBeanClassName();
+			String daoSimpleClassName = daoClassName.substring(daoClassName
+					.lastIndexOf(".") + 1);
+			String daoTestSimpleClassName = ConstantesPadroes.PREFIXO_TESTE
+					+ daoSimpleClassName;
+			BeanDefinition daoBeanDaoTest = daosTest
+					.get(daoTestSimpleClassName);
+			if (daoBeanDaoTest == null) {
+				daoTestSimpleClassName = daoSimpleClassName
+						+ ConstantesPadroes.SUFIXO_TESTE;
+				daoBeanDaoTest = daosTest.get(daoTestSimpleClassName);
+				if (daoBeanDaoTest == null) {
+					daosSemTest.add(beanDao.getBeanClassName());
+				}
+			}
+		}
 
-        Assert.assertTrue(
-                "Os seguintes DAOs n„o possuem classe de testes implementada: " + StringUtils.join(daosSemTest, ","),
-                daosSemTest.isEmpty());
-    }
+		Assert.assertTrue(
+				"Os seguintes DAOs n√£o possuem classe de testes implementada: "
+						+ StringUtils.join(daosSemTest, ","),
+				daosSemTest.isEmpty());
+	}
 
-    /**
-     * MÈtodo de verificaÁ„o de regra arquitetural: "Classes de TU de DAO devem
-     * ser subclasses de AbstractDaoObjetoPersistenteEmMemoriaAbstratoTest,
-     * AbstractDaoObjetoPersistenteAbstratoTest,
-     * AbstractDaoObjetoPersistenteSomenteLeituraAbstratoTest, CasoTeste ou
-     * CasoTesteEmMemoria".
-     * 
-     * @throws ClassNotFoundException
-     */
-    @Test
-    public void verificarSuperclasseDeTesteDao() throws ClassNotFoundException {
-        Set<BeanDefinition> beansDaoTU =
-                daoTesteClasspathScanner.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
-        List<Class<?>> classesDaoTU =
-                Arrays.asList(new Class<?>[] { AbstractDaoObjetoPersistenteEmMemoriaAbstratoTest.class,
-                        AbstractDaoObjetoPersistenteAbstratoTest.class,
-                        AbstractDaoObjetoPersistenteSomenteLeituraAbstratoTest.class, AbstractCasoTeste.class,
-                        AbstractCasoTesteEmMemoria.class });
+	/**
+	 * M√©todo de verifica√ß√£o de regra arquitetural: "Classes de TU de DAO devem
+	 * ser subclasses de AbstractDaoObjetoPersistenteEmMemoriaAbstratoTest,
+	 * AbstractDaoObjetoPersistenteAbstratoTest,
+	 * AbstractDaoObjetoPersistenteSomenteLeituraAbstratoTest, CasoTeste ou
+	 * CasoTesteEmMemoria".
+	 * 
+	 * @throws ClassNotFoundException
+	 */
+	@Test
+	public void verificarSuperclasseDeTesteDao() throws ClassNotFoundException {
+		Set<BeanDefinition> beansDaoTU = daoTesteClasspathScanner
+				.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
+		List<Class<?>> classesDaoTU = Arrays.asList(new Class<?>[] {
+				AbstractDaoObjetoPersistenteEmMemoriaAbstratoTest.class,
+				AbstractDaoObjetoPersistenteAbstratoTest.class,
+				AbstractDaoObjetoPersistenteSomenteLeituraAbstratoTest.class,
+				AbstractCasoTeste.class, AbstractCasoTesteEmMemoria.class });
 
-        List<String> classesDaoTUSemSuperclasseTu = new ArrayList<String>();
-        for (BeanDefinition beanClasseTeste : beansDaoTU) {
-            String daoTUName = beanClasseTeste.getBeanClassName();
-            Class<?> classeDaoTU = ClassUtils.getClass(daoTUName);
+		List<String> classesDaoTUSemSuperclasseTu = new ArrayList<String>();
+		for (BeanDefinition beanClasseTeste : beansDaoTU) {
+			String daoTUName = beanClasseTeste.getBeanClassName();
+			Class<?> classeDaoTU = ClassUtils.getClass(daoTUName);
 
-            boolean isSubclasseSuperclasseDaoTU = false;
-            for (Class<?> superClassDaoTU : classesDaoTU) {
-                if (superClassDaoTU.isAssignableFrom(classeDaoTU)) {
-                    isSubclasseSuperclasseDaoTU = true;
-                    break;
-                }
-            }
+			boolean isSubclasseSuperclasseDaoTU = false;
+			for (Class<?> superClassDaoTU : classesDaoTU) {
+				if (superClassDaoTU.isAssignableFrom(classeDaoTU)) {
+					isSubclasseSuperclasseDaoTU = true;
+					break;
+				}
+			}
 
-            if (!isSubclasseSuperclasseDaoTU) {
-                classesDaoTUSemSuperclasseTu.add(daoTUName);
-            }
-        }
-        Assert.assertTrue(
-                "Os seguintes DAOs n„o possuem superclasses previstas: "
-                        + StringUtils.join(classesDaoTUSemSuperclasseTu, ","), classesDaoTUSemSuperclasseTu.isEmpty());
-    }
+			if (!isSubclasseSuperclasseDaoTU) {
+				classesDaoTUSemSuperclasseTu.add(daoTUName);
+			}
+		}
+		Assert.assertTrue(
+				"Os seguintes DAOs n√£o possuem superclasses previstas: "
+						+ StringUtils.join(classesDaoTUSemSuperclasseTu, ","),
+				classesDaoTUSemSuperclasseTu.isEmpty());
+	}
 
 }

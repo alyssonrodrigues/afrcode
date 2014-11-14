@@ -15,38 +15,42 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 import br.com.afrcode.arquitetura.util.excecao.ExcecaoNaoPrevista;
 
 /**
- * Classe utilitária para tratamento de falhas de login.
+ * Classe utilitÃ¡ria para tratamento de falhas de login.
  * 
  * 
  */
-public class AuthenticationFailureHandlerImpl extends SimpleUrlAuthenticationFailureHandler {
-    private static final Logger LOG = Logger.getLogger(AuthenticationFailureHandlerImpl.class);
+public class AuthenticationFailureHandlerImpl extends
+		SimpleUrlAuthenticationFailureHandler {
+	private static final Logger LOG = Logger
+			.getLogger(AuthenticationFailureHandlerImpl.class);
 
-    @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-            AuthenticationException exception) throws IOException, ServletException {
-        registrarMensagemErroLogin(request, response, exception);
-        super.onAuthenticationFailure(request, response, exception);
-    }
+	@Override
+	public void onAuthenticationFailure(HttpServletRequest request,
+			HttpServletResponse response, AuthenticationException exception)
+			throws IOException, ServletException {
+		registrarMensagemErroLogin(request, response, exception);
+		super.onAuthenticationFailure(request, response, exception);
+	}
 
-    private void registrarMensagemErroLogin(HttpServletRequest request, HttpServletResponse response,
-            AuthenticationException exception) {
+	private void registrarMensagemErroLogin(HttpServletRequest request,
+			HttpServletResponse response, AuthenticationException exception) {
 
-        LOG.error("Erro ao efetuar login: ", exception);
+		LOG.error("Erro ao efetuar login: ", exception);
 
-        // TODO: Obter msg de um resource bundle ou criar arquivos de mensagens
-        // para o Spring!!!
-        String msgSummary = exception.getMessage();
-        String msg = msgSummary;
+		// TODO: Obter msg de um resource bundle ou criar arquivos de mensagens
+		// para o Spring!!!
+		String msgSummary = exception.getMessage();
+		String msg = msgSummary;
 
-        try {
-            setDefaultFailureUrl("/web/login.xhtml?erroLogin=" + URLEncoder.encode(msg, "ISO-8859-1"));
-        } catch (UnsupportedEncodingException e) {
-            throw new ExcecaoNaoPrevista(e);
-        }
+		try {
+			setDefaultFailureUrl("/web/login.xhtml?erroLogin="
+					+ URLEncoder.encode(msg, "ISO-8859-1"));
+		} catch (UnsupportedEncodingException e) {
+			throw new ExcecaoNaoPrevista(e);
+		}
 
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Login inválido: " + msg);
-        }
-    }
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Login invï¿½lido: " + msg);
+		}
+	}
 }

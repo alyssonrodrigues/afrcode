@@ -21,75 +21,86 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Profile(Profiles.PROFILE_TU)
 public class ExecutorTUCRUDDaoUtil {
 
-    private boolean isComIdEGeneratedValue(Class<?> clazz) {
-        boolean comIdEGeneratedValue = false;
-        Id annotationId = AnnotationUtils.findAnnotation(clazz, Id.class);
-        GeneratedValue annotationGeneratedValue = AnnotationUtils.findAnnotation(clazz, GeneratedValue.class);
-        comIdEGeneratedValue = annotationId != null && annotationGeneratedValue != null;
-        return comIdEGeneratedValue;
-    }
+	private boolean isComIdEGeneratedValue(Class<?> clazz) {
+		boolean comIdEGeneratedValue = false;
+		Id annotationId = AnnotationUtils.findAnnotation(clazz, Id.class);
+		GeneratedValue annotationGeneratedValue = AnnotationUtils
+				.findAnnotation(clazz, GeneratedValue.class);
+		comIdEGeneratedValue = annotationId != null
+				&& annotationGeneratedValue != null;
+		return comIdEGeneratedValue;
+	}
 
-    public <TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>> void testarExcluir(
-            DaoJpaAbstrato<TIPOID, TIPOENTIDADE> dao) {
-        TIPOENTIDADE stub = dao.instanciarObjetoPersistivel();
-        dao.salvar(stub);
-        TIPOID id = stub.getId();
-        dao.excluir(stub);
-        TIPOENTIDADE r = dao.procurarPorId(id);
-        Assert.assertNull("O objeto n„o foi excluÌdo!", r);
-    }
+	public <TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>> void testarExcluir(
+			DaoJpaAbstrato<TIPOID, TIPOENTIDADE> dao) {
+		TIPOENTIDADE stub = dao.instanciarObjetoPersistivel();
+		dao.salvar(stub);
+		TIPOID id = stub.getId();
+		dao.excluir(stub);
+		TIPOENTIDADE r = dao.procurarPorId(id);
+		Assert.assertNull("O objeto n√£o foi exclu√≠do!", r);
+	}
 
-    public <TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>> void testarProcurarPorId(
-            DaoJpaAbstrato<TIPOID, TIPOENTIDADE> dao) {
-        TIPOENTIDADE stub = dao.instanciarObjetoPersistivel();
-        dao.salvar(stub);
-        TIPOID id = stub.getId();
-        TIPOENTIDADE r = dao.procurarPorId(id);
-        Assert.assertEquals("O objeto recuperado n„o foi o esperado!", id, r.getId());
-    }
+	public <TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>> void testarProcurarPorId(
+			DaoJpaAbstrato<TIPOID, TIPOENTIDADE> dao) {
+		TIPOENTIDADE stub = dao.instanciarObjetoPersistivel();
+		dao.salvar(stub);
+		TIPOID id = stub.getId();
+		TIPOENTIDADE r = dao.procurarPorId(id);
+		Assert.assertEquals("O objeto recuperado n√£o foi o esperado!", id,
+				r.getId());
+	}
 
-    public <TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>> void
-            testarRecuperarObjetosComPaginacao(DaoJpaAbstrato<TIPOID, TIPOENTIDADE> dao) {
-        TIPOENTIDADE stub = dao.instanciarObjetoPersistivel();
-        dao.salvar(stub);
-        TIPOID idA = stub.getId();
+	public <TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>> void testarRecuperarObjetosComPaginacao(
+			DaoJpaAbstrato<TIPOID, TIPOENTIDADE> dao) {
+		TIPOENTIDADE stub = dao.instanciarObjetoPersistivel();
+		dao.salvar(stub);
+		TIPOID idA = stub.getId();
 
-        Collection<TIPOENTIDADE> objs = new ArrayList<TIPOENTIDADE>();
-        objs.add(stub);
+		Collection<TIPOENTIDADE> objs = new ArrayList<TIPOENTIDADE>();
+		objs.add(stub);
 
-        String qlString = "from " + stub.getClass().getName() + " as obj where id = :param_idA";
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("param_idA", idA);
+		String qlString = "from " + stub.getClass().getName()
+				+ " as obj where id = :param_idA";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("param_idA", idA);
 
-        Collection<TIPOENTIDADE> r = dao.recuperarObjetos(qlString, params, 0, 1);
-        Assert.assertTrue("Os objetos recuperados n„o s„o os esperados", r.containsAll(objs));
-    }
+		Collection<TIPOENTIDADE> r = dao.recuperarObjetos(qlString, params, 0,
+				1);
+		Assert.assertTrue("Os objetos recuperados n√£o s√£o os esperados",
+				r.containsAll(objs));
+	}
 
-    public <TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>> void
-            testarRecuperarTodosJaCadastradosComPaginacao(DaoJpaAbstrato<TIPOID, TIPOENTIDADE> dao) {
-        int pagina = 0;
-        int quantidadeDeItens = 1;
-        Collection<TIPOENTIDADE> r = dao.recuperarTodos(pagina, quantidadeDeItens);
-        Assert.assertEquals("Deveria ter sido recuperado um ˙nico objeto!", 1, r.size());
-    }
+	public <TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>> void testarRecuperarTodosJaCadastradosComPaginacao(
+			DaoJpaAbstrato<TIPOID, TIPOENTIDADE> dao) {
+		int pagina = 0;
+		int quantidadeDeItens = 1;
+		Collection<TIPOENTIDADE> r = dao.recuperarTodos(pagina,
+				quantidadeDeItens);
+		Assert.assertEquals("Deveria ter sido recuperado um √∫nico objeto!", 1,
+				r.size());
+	}
 
-    public <TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>> void testarSalvarEProcurar(
-            DaoJpaAbstrato<TIPOID, TIPOENTIDADE> dao) {
-        TIPOENTIDADE stub = dao.instanciarObjetoPersistivel();
-        validarId(stub);
-        dao.salvar(stub);
-        Assert.assertNotNull("O id do objeto persistÌvel N√O deveria ser nulo depois de salvar!", stub.getId());
-        TIPOENTIDADE r = dao.procurarPorId(stub.getId());
-        Assert.assertEquals("O objeto n„o foi persistido e/ou recuperado!", stub, r);
-    }
+	public <TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>> void testarSalvarEProcurar(
+			DaoJpaAbstrato<TIPOID, TIPOENTIDADE> dao) {
+		TIPOENTIDADE stub = dao.instanciarObjetoPersistivel();
+		validarId(stub);
+		dao.salvar(stub);
+		Assert.assertNotNull(
+				"O id do objeto persist√≠vel N√ÉO deveria ser nulo depois de salvar!",
+				stub.getId());
+		TIPOENTIDADE r = dao.procurarPorId(stub.getId());
+		Assert.assertEquals("O objeto n√£o foi persistido e/ou recuperado!",
+				stub, r);
+	}
 
-    private <TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>> void
-            validarId(TIPOENTIDADE stub) {
-        if (isComIdEGeneratedValue(stub.getClass())) {
-            Assert.assertNull("O id do objeto persistÌvel deveria ser nulo antes de salvar!");
-        } else {
-            Assert.assertNotNull("O id do objeto persistÌvel n„o deveria ser nulo antes de salvar!");
-        }
-    }
+	private <TIPOID extends Comparable<TIPOID>, TIPOENTIDADE extends IEntidade<TIPOID>> void validarId(
+			TIPOENTIDADE stub) {
+		if (isComIdEGeneratedValue(stub.getClass())) {
+			Assert.assertNull("O id do objeto persist√≠vel deveria ser nulo antes de salvar!");
+		} else {
+			Assert.assertNotNull("O id do objeto persist√≠vel n√£o deveria ser nulo antes de salvar!");
+		}
+	}
 
 }

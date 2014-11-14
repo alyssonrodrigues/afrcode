@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 import br.com.afrcode.arquitetura.modelo.entidade.IEntidade;
 
 /**
- * Implementação padrão da interface IDao.
+ * ImplementaÃ§Ã£o padrÃ£o da interface IDao.
  * 
  * 
  * @param <T>
@@ -24,192 +24,196 @@ import br.com.afrcode.arquitetura.modelo.entidade.IEntidade;
  * @param <E>
  *            Subtipo de IEntidade
  */
-public abstract class DaoJpaAbstrato<T extends Comparable<T>, E extends IEntidade<T>> implements IDao<T, E> {
+public abstract class DaoJpaAbstrato<T extends Comparable<T>, E extends IEntidade<T>>
+		implements IDao<T, E> {
 
-    protected static final Logger LOG = Logger.getLogger(DaoJpaAbstrato.class);
+	protected static final Logger LOG = Logger.getLogger(DaoJpaAbstrato.class);
 
-    /**
-     * Contexto de persistência transacional, onde ao final de uma transação os
-     * recursos envolvidos (EntityManager, Session, Connection, etc.) são
-     * descartados.
-     * 
-     * O uso do padrão OpenEntityManagerInViewFilter adia o descarte dos
-     * recursos envolvidos até o final do processamento da camada View. O uso
-     * deste padrão permite que entidades sejam usadas em MBeans JSF, EM UMA
-     * MESMA REQUISIÇÃO, sem ocorrência de exceções de detached object e/ou lazy
-     * exceptions.
-     */
-    @PersistenceContext(type = PersistenceContextType.TRANSACTION)
-    private EntityManager entityManager;
+	/**
+	 * Contexto de persistÃªncia transacional, onde ao final de uma transaÃ§Ã£o os
+	 * recursos envolvidos (EntityManager, Session, Connection, etc.) sÃ£o
+	 * descartados.
+	 * 
+	 * O uso do padrÃ£o OpenEntityManagerInViewFilter adia o descarte dos
+	 * recursos envolvidos atÃ© o final do processamento da camada View. O uso
+	 * deste padrÃ£o permite que entidades sejam usadas em MBeans JSF, EM UMA
+	 * MESMA REQUISIÃ‡ÃƒO, sem ocorrÃªncia de exceÃ§Ãµes de detached object e/ou lazy
+	 * exceptions.
+	 */
+	@PersistenceContext(type = PersistenceContextType.TRANSACTION)
+	private EntityManager entityManager;
 
-    private Class<E> classeEntidade;
+	private Class<E> classeEntidade;
 
-    private Object classeId;
+	private Object classeId;
 
-    public DaoJpaAbstrato() {
-        iniciar();
-    }
+	public DaoJpaAbstrato() {
+		iniciar();
+	}
 
-    /**
-     * Método de obtenção do tipo associado ao DAO via generic parameterers.
-     */
-    private void iniciar() {
-        Class<?> clazz = this.getClass();
-        Type superClazz = clazz.getGenericSuperclass();
-        // Em geral um DAO contém apenas um supertipo genérico, porém mais de um
-        // supertipo genérico pode surgir na presença de
-        // aspectos associados ao DAO.
-        while (!ParameterizedType.class.isAssignableFrom(superClazz.getClass())) {
-            clazz = clazz.getSuperclass();
-            superClazz = clazz.getGenericSuperclass();
-        }
-        ParameterizedType tipoParametrizado = (ParameterizedType) superClazz;
-        Type[] params = tipoParametrizado.getActualTypeArguments();
-        classeId = params[0];
-        classeEntidade = (Class<E>) params[1];
-    }
+	/**
+	 * MÃ©todo de obtenÃ§Ã£o do tipo associado ao DAO via generic parameterers.
+	 */
+	private void iniciar() {
+		Class<?> clazz = this.getClass();
+		Type superClazz = clazz.getGenericSuperclass();
+		// Em geral um DAO contï¿½m apenas um supertipo genï¿½rico, porï¿½m mais de um
+		// supertipo genï¿½rico pode surgir na presenï¿½a de
+		// aspectos associados ao DAO.
+		while (!ParameterizedType.class.isAssignableFrom(superClazz.getClass())) {
+			clazz = clazz.getSuperclass();
+			superClazz = clazz.getGenericSuperclass();
+		}
+		ParameterizedType tipoParametrizado = (ParameterizedType) superClazz;
+		Type[] params = tipoParametrizado.getActualTypeArguments();
+		classeId = params[0];
+		classeEntidade = (Class<E>) params[1];
+	}
 
-    @Override
-    public E procurarPorId(T id) {
-        return entityManager.find(getClasseEntidade(), id);
-    }
+	@Override
+	public E procurarPorId(T id) {
+		return entityManager.find(getClasseEntidade(), id);
+	}
 
-    @Override
-    public Collection<E> recuperarTodos() {
-        String qlString = "from " + getClasseEntidade().getName();
-        TypedQuery<E> query = entityManager.createQuery(qlString, getClasseEntidade());
-        return query.getResultList();
-    }
+	@Override
+	public Collection<E> recuperarTodos() {
+		String qlString = "from " + getClasseEntidade().getName();
+		TypedQuery<E> query = entityManager.createQuery(qlString,
+				getClasseEntidade());
+		return query.getResultList();
+	}
 
-    @Override
-    public Collection<E> recuperarTodos(int pagina, int quantidadeDeItens) {
-        String qlString = "from " + getClasseEntidade().getName();
-        TypedQuery<E> query = entityManager.createQuery(qlString, getClasseEntidade());
+	@Override
+	public Collection<E> recuperarTodos(int pagina, int quantidadeDeItens) {
+		String qlString = "from " + getClasseEntidade().getName();
+		TypedQuery<E> query = entityManager.createQuery(qlString,
+				getClasseEntidade());
 
-        int startPosition = pagina == 0 ? 0 : (pagina * quantidadeDeItens);
-        query.setFirstResult(startPosition);
-        query.setMaxResults(quantidadeDeItens);
+		int startPosition = pagina == 0 ? 0 : (pagina * quantidadeDeItens);
+		query.setFirstResult(startPosition);
+		query.setMaxResults(quantidadeDeItens);
 
-        return query.getResultList();
-    }
+		return query.getResultList();
+	}
 
-    @Override
-    public Collection<E>
-            recuperarObjetos(String qlString, Map<String, Object> params, int pagina, int quantidadeDeItens) {
-        TypedQuery<E> query = entityManager.createQuery(qlString, getClasseEntidade());
+	@Override
+	public Collection<E> recuperarObjetos(String qlString,
+			Map<String, Object> params, int pagina, int quantidadeDeItens) {
+		TypedQuery<E> query = entityManager.createQuery(qlString,
+				getClasseEntidade());
 
-        int startPosition = pagina == 0 ? 0 : (pagina * quantidadeDeItens);
-        query.setFirstResult(startPosition);
-        query.setMaxResults(quantidadeDeItens);
+		int startPosition = pagina == 0 ? 0 : (pagina * quantidadeDeItens);
+		query.setFirstResult(startPosition);
+		query.setMaxResults(quantidadeDeItens);
 
-        for (Entry<String, Object> umParam : params.entrySet()) {
-            query.setParameter(umParam.getKey(), umParam.getValue());
-        }
+		for (Entry<String, Object> umParam : params.entrySet()) {
+			query.setParameter(umParam.getKey(), umParam.getValue());
+		}
 
-        return query.getResultList();
-    }
+		return query.getResultList();
+	}
 
-    @Override
-    public void salvar(E obj) {
-        obj.validarSalvamento();
-        entityManager.persist(obj);
-    }
+	@Override
+	public void salvar(E obj) {
+		obj.validarSalvamento();
+		entityManager.persist(obj);
+	}
 
-    @Override
-    public void salvarEmLote(Collection<E> objs, int numObjsPorLote) {
-        int i = 0;
-        for (E obj : objs) {
-            salvar(obj);
-            if (++i % numObjsPorLote == 0) {
-                sincronizar();
-                limparCache();
-            }
-        }
+	@Override
+	public void salvarEmLote(Collection<E> objs, int numObjsPorLote) {
+		int i = 0;
+		for (E obj : objs) {
+			salvar(obj);
+			if (++i % numObjsPorLote == 0) {
+				sincronizar();
+				limparCache();
+			}
+		}
 
-        if (i % numObjsPorLote != 0) {
-            // Último lote com numObjs < numObjsPorLote...
-            sincronizar();
-            limparCache();
-        }
-    }
+		if (i % numObjsPorLote != 0) {
+			// ï¿½ltimo lote com numObjs < numObjsPorLote...
+			sincronizar();
+			limparCache();
+		}
+	}
 
-    @Override
-    public void excluir(E obj) {
-        obj.validarExclusao();
-        entityManager.remove(obj);
-    }
+	@Override
+	public void excluir(E obj) {
+		obj.validarExclusao();
+		entityManager.remove(obj);
+	}
 
-    @Override
-    public void excluirEmLote(Collection<E> objs, int numObjsPorLote) {
-        int i = 0;
-        for (E obj : objs) {
-            excluir(obj);
-            if (++i % numObjsPorLote == 0) {
-                sincronizar();
-                limparCache();
-            }
-        }
+	@Override
+	public void excluirEmLote(Collection<E> objs, int numObjsPorLote) {
+		int i = 0;
+		for (E obj : objs) {
+			excluir(obj);
+			if (++i % numObjsPorLote == 0) {
+				sincronizar();
+				limparCache();
+			}
+		}
 
-        if (i % numObjsPorLote != 0) {
-            // Último lote com numObjs < numObjsPorLote...
-            sincronizar();
-            limparCache();
-        }
+		if (i % numObjsPorLote != 0) {
+			// ï¿½ltimo lote com numObjs < numObjsPorLote...
+			sincronizar();
+			limparCache();
+		}
 
-    }
+	}
 
-    @Override
-    public void sincronizar() {
-        entityManager.flush();
-    }
+	@Override
+	public void sincronizar() {
+		entityManager.flush();
+	}
 
-    @Override
-    public void limparCache() {
-        entityManager.clear();
-    }
+	@Override
+	public void limparCache() {
+		entityManager.clear();
+	}
 
-    /**
-     * Deve ser sobrescrito para atribuição de atributos não nulos do objeto
-     * instanciado.
-     * 
-     * @return TIPOENTIDADE
-     */
-    @Override
-    public E instanciarObjetoPersistivel() {
-        E obj = null;
-        try {
-            obj = getClasseEntidade().newInstance();
-            obj.preencherComValoresPersistiveis();
-        } catch (InstantiationException e) {
-            LOG.error("InstantiationException", e);
-        } catch (IllegalAccessException e) {
-            LOG.error("IllegalAccessException", e);
-        }
-        return obj;
-    }
+	/**
+	 * Deve ser sobrescrito para atribuiÃ§Ã£o de atributos nÃ£o nulos do objeto
+	 * instanciado.
+	 * 
+	 * @return TIPOENTIDADE
+	 */
+	@Override
+	public E instanciarObjetoPersistivel() {
+		E obj = null;
+		try {
+			obj = getClasseEntidade().newInstance();
+			obj.preencherComValoresPersistiveis();
+		} catch (InstantiationException e) {
+			LOG.error("InstantiationException", e);
+		} catch (IllegalAccessException e) {
+			LOG.error("IllegalAccessException", e);
+		}
+		return obj;
+	}
 
-    /**
-     * @return the classeEntidade
-     */
-    public Class<E> getClasseEntidade() {
-        return classeEntidade;
-    }
+	/**
+	 * @return the classeEntidade
+	 */
+	public Class<E> getClasseEntidade() {
+		return classeEntidade;
+	}
 
-    /**
-     * @return the classeId
-     */
-    public Object getClasseId() {
-        return classeId;
-    }
+	/**
+	 * @return the classeId
+	 */
+	public Object getClasseId() {
+		return classeId;
+	}
 
-    /**
-     * Método de acesso ao EntityManager associado ao DAO via injeção de
-     * dependência.
-     * 
-     * @return
-     */
-    protected EntityManager getEntityManager() {
-        return entityManager;
-    }
+	/**
+	 * MÃ©todo de acesso ao EntityManager associado ao DAO via injeÃ§Ã£o de
+	 * dependÃªncia.
+	 * 
+	 * @return
+	 */
+	protected EntityManager getEntityManager() {
+		return entityManager;
+	}
 
 }

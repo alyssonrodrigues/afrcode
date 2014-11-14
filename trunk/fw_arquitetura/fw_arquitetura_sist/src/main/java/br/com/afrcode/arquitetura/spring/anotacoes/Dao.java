@@ -11,16 +11,12 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Anotação para uso em componentes do tipo IDao (camada Model do MVC).
+ * AnotaÃ§Ã£o para uso em componentes do tipo IDao (camada Model do MVC).
  * 
- * Ao usar esta anotação um contexto transacional é associado implicitamente ao
- * componente através da anotação Transactional com propagação do tipo
- * Propagation#REQUIRED - usa-se a transação existente, se existir, ou cria-se
- * uma nova caso contrário.
- * 
- * TODO: Verificar se é desejável associar contexto transacional obrigatório
- * neste tipo de componente.
- * 
+ * Ao usar esta anotaÃ§Ã£o um contexto transacional Ã© associado implicitamente ao
+ * componente atravÃ©s da anotaÃ§Ã£o Transactional com propagaÃ§Ã£o do tipo
+ * Propagation#REQUIRED - usa-se a transaÃ§Ã£o existente, se existir, ou cria-se
+ * uma nova caso contrÃ¡rio.
  * 
  */
 @Target({ ElementType.TYPE })

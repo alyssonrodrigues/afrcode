@@ -13,7 +13,7 @@ import br.com.afrcode.arquitetura.spring.anotacoes.Componente;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * Classe utilit·ria para obtenÁ„o de informaÁıes de autenticaÁ„o e autorizaÁ„o
+ * Classe utilit√°ria para obten√ß√£o de informa√ß√µes de autentica√ß√£o e autoriza√ß√£o
  * para o PROFILE_APLICACAO.
  * 
  * 
@@ -22,37 +22,40 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Profile(Profiles.PROFILE_APLICACAO)
 public class ContextoSeguranca extends ContextoSegurancaAbstrato {
 
-    @Override
-    public User getUsuarioAutenticado() {
-        User usuario = null;
-        Authentication auth = getAuthentication();
-        Validate.notNull(auth);
-        Object principal = auth.getPrincipal();
-        Validate.notNull(principal, "Deveria existir um usu·rio autenticado!");
+	@Override
+	public User getUsuarioAutenticado() {
+		User usuario = null;
+		Authentication auth = getAuthentication();
+		Validate.notNull(auth);
+		Object principal = auth.getPrincipal();
+		Validate.notNull(principal, "Deveria existir um usu√°rio autenticado!");
 
-        if (User.class.isAssignableFrom(principal.getClass())) {
-            usuario = User.class.cast(principal);
-        } else if (AbstractAuthenticationToken.class.isAssignableFrom(auth.getClass())) {
-            usuario = converterAbstractAuthenticationTokenEmUsuario(auth);
-        }
+		if (User.class.isAssignableFrom(principal.getClass())) {
+			usuario = User.class.cast(principal);
+		} else if (AbstractAuthenticationToken.class.isAssignableFrom(auth
+				.getClass())) {
+			usuario = converterAbstractAuthenticationTokenEmUsuario(auth);
+		}
 
-        return usuario;
-    }
+		return usuario;
+	}
 
-    /**
-     * Convers„o de tipos. Em acessos anÙnimos, ou via servlets de testes, o
-     * token de autenticaÁ„o n„o È Usuario e sim AbstractAuthenticationToken.
-     * 
-     * @param principal
-     * @return
-     */
-    private User converterAbstractAuthenticationTokenEmUsuario(Authentication principal) {
-        AbstractAuthenticationToken token = AbstractAuthenticationToken.class.cast(principal);
-        String username = token.getName();
-        String password = String.class.cast(token.getCredentials());
-        Collection<GrantedAuthority> authorities = token.getAuthorities();
-        User usuario = new User(username, password, authorities);
-        return usuario;
-    }
+	/**
+	 * Convers√£o de tipos. Em acessos an√¥nimos, ou via servlets de testes, o
+	 * token de autentica√ß√£o n√£o √© Usuario e sim AbstractAuthenticationToken.
+	 * 
+	 * @param principal
+	 * @return
+	 */
+	private User converterAbstractAuthenticationTokenEmUsuario(
+			Authentication principal) {
+		AbstractAuthenticationToken token = AbstractAuthenticationToken.class
+				.cast(principal);
+		String username = token.getName();
+		String password = String.class.cast(token.getCredentials());
+		Collection<GrantedAuthority> authorities = token.getAuthorities();
+		User usuario = new User(username, password, authorities);
+		return usuario;
+	}
 
 }

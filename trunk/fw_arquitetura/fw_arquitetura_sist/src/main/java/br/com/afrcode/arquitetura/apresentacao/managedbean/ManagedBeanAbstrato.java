@@ -27,107 +27,111 @@ import br.com.afrcode.arquitetura.util.mensagem.IMensagem;
  * 
  */
 public abstract class ManagedBeanAbstrato implements IManagedBean, Serializable {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @ManagedProperty("#{contextoSeguranca}")
-    private IContextoSeguranca contextoSeguranca;
+	@ManagedProperty("#{contextoSeguranca}")
+	private IContextoSeguranca contextoSeguranca;
 
-    @Override
-    public void adicionarMensagem(IMensagem mensagem) {
-        Validate.notNull(mensagem, "Mensagem n„o deve ser nula!");
-        mensagem.tratarMensagem();
-    }
+	@Override
+	public void adicionarMensagem(IMensagem mensagem) {
+		Validate.notNull(mensagem, "Mensagem n√£o deve ser nula!");
+		mensagem.tratarMensagem();
+	}
 
-    @Override
-    public void adicionarObjetoEmSessaoHttp(String chave, Object objetoEmSessao) {
-        validarChaveObjetoEmSessao(chave);
-        Validate.notNull(objetoEmSessao, "Objeto em sess„o n„o deve ser n˙lo!");
+	@Override
+	public void adicionarObjetoEmSessaoHttp(String chave, Object objetoEmSessao) {
+		validarChaveObjetoEmSessao(chave);
+		Validate.notNull(objetoEmSessao, "Objeto em sess√£o n√£o deve ser nulo!");
 
-        boolean isObjEntidade =
-                objetoEmSessao.getClass().getAnnotation(Entity.class) != null
-                        || IEntidade.class.isAssignableFrom(objetoEmSessao.getClass());
-        if (isObjEntidade) {
-            throw new IllegalArgumentException(
-                    "N„o È permitida a inclus„o de Entidades em sess„o HTTP - problemas "
-                            + "relacionados: detached object, stalled data, lazy initialization exceptions, resources leak, etc.");
-        }
+		boolean isObjEntidade = objetoEmSessao.getClass().getAnnotation(
+				Entity.class) != null
+				|| IEntidade.class.isAssignableFrom(objetoEmSessao.getClass());
+		if (isObjEntidade) {
+			throw new IllegalArgumentException(
+					"N√£o √© permitida a inclus√£o de Entidades em sess√£o HTTP - problemas "
+							+ "relacionados: detached object, stalled data, lazy initialization exceptions, resources leak, etc.");
+		}
 
-        HttpServletRequest request = getHttpServletRequest();
-        request.getSession().setAttribute(chave, objetoEmSessao);
-    }
+		HttpServletRequest request = getHttpServletRequest();
+		request.getSession().setAttribute(chave, objetoEmSessao);
+	}
 
-    /**
-     * MÈtodo de verificaÁ„o de autorizaÁ„o de acesso ao MBean.
-     * 
-     * MBeanS n„o s„o beans Spring, s„o beans JSF, e por isto È necess·rio
-     * acionar o componente AccessDecisionManager do Spring programaticamente
-     * para fazer uso do mecanismos de autorizaÁ„o adequadamente.
-     */
-    @PostConstruct
-    public void checarAutorizacao() {
-        RolesAllowed rolesAllowed = getClass().getAnnotation(RolesAllowed.class);
-        Validate.notNull(rolesAllowed, "Especifique a anotaÁ„o @RolesAllowed no MBean " + getClass().getName()
-                + " informando ao menos uma funÁ„o computacional!");
-        contextoSeguranca.checarAutorizacao(rolesAllowed);
-    }
+	/**
+	 * M√©todo de verifica√ß√£o de autoriza√ß√£o de acesso ao MBean.
+	 * 
+	 * MBeanS n√£o s√£o beans Spring, s√£o beans JSF, e por isto √© necess√°rio
+	 * acionar o componente AccessDecisionManager do Spring programaticamente
+	 * para fazer uso do mecanismos de autoriza√ß√£o adequadamente.
+	 */
+	@PostConstruct
+	public void checarAutorizacao() {
+		RolesAllowed rolesAllowed = getClass()
+				.getAnnotation(RolesAllowed.class);
+		Validate.notNull(rolesAllowed,
+				"Especifique a anota√ß√£o @RolesAllowed no MBean "
+						+ getClass().getName()
+						+ " informando ao menos uma fun√ß√£o computacional!");
+		contextoSeguranca.checarAutorizacao(rolesAllowed);
+	}
 
-    public HttpServletRequest getHttpServletRequest() {
-        HttpServletRequest httpServletRequest =
-                (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        return httpServletRequest;
-    }
+	public HttpServletRequest getHttpServletRequest() {
+		HttpServletRequest httpServletRequest = (HttpServletRequest) FacesContext
+				.getCurrentInstance().getExternalContext().getRequest();
+		return httpServletRequest;
+	}
 
-    public HttpServletResponse getHttpServletResponse() {
-        HttpServletResponse httpServletResponse =
-                (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-        return httpServletResponse;
-    }
+	public HttpServletResponse getHttpServletResponse() {
+		HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext
+				.getCurrentInstance().getExternalContext().getResponse();
+		return httpServletResponse;
+	}
 
-    @Override
-    public Object getObjetoEmSessao(String chave) {
-        validarChaveObjetoEmSessao(chave);
+	@Override
+	public Object getObjetoEmSessao(String chave) {
+		validarChaveObjetoEmSessao(chave);
 
-        HttpServletRequest request = getHttpServletRequest();
-        Object objetoEmSessao = request.getSession().getAttribute(chave);
+		HttpServletRequest request = getHttpServletRequest();
+		Object objetoEmSessao = request.getSession().getAttribute(chave);
 
-        return objetoEmSessao;
-    }
+		return objetoEmSessao;
+	}
 
-    @Override
-    public void removerObjetoEmSessaoHttp(String chave) {
-        validarChaveObjetoEmSessao(chave);
+	@Override
+	public void removerObjetoEmSessaoHttp(String chave) {
+		validarChaveObjetoEmSessao(chave);
 
-        HttpServletRequest request = getHttpServletRequest();
-        request.getSession().removeAttribute(chave);
-    }
+		HttpServletRequest request = getHttpServletRequest();
+		request.getSession().removeAttribute(chave);
+	}
 
-    /**
-     * MÈtodo de recuperaÁ„o do usu·rio autenticado para fins de consulta por
-     * MBeans concretos.
-     * 
-     * @return
-     */
-    protected User getUsuarioAutenticado() {
-        return contextoSeguranca.getUsuarioAutenticado();
-    }
+	/**
+	 * M√©todo de recupera√ß√£o do usu√°rio autenticado para fins de consulta por
+	 * MBeans concretos.
+	 * 
+	 * @return
+	 */
+	protected User getUsuarioAutenticado() {
+		return contextoSeguranca.getUsuarioAutenticado();
+	}
 
-    private void validarChaveObjetoEmSessao(String chave) {
-        Validate.isTrue(StringUtils.isNotBlank(chave), "Chave identificadora de objeto em sess„o n„o deve ser nula!");
-    }
+	private void validarChaveObjetoEmSessao(String chave) {
+		Validate.isTrue(StringUtils.isNotBlank(chave),
+				"Chave identificadora de objeto em sess√£o n√£o deve ser nula!");
+	}
 
-    /**
-     * @param contextoSeguranca
-     *            the contextoSeguranca to set
-     */
-    public void setContextoSeguranca(IContextoSeguranca contextoSeguranca) {
-        this.contextoSeguranca = contextoSeguranca;
-    }
+	/**
+	 * @param contextoSeguranca
+	 *            the contextoSeguranca to set
+	 */
+	public void setContextoSeguranca(IContextoSeguranca contextoSeguranca) {
+		this.contextoSeguranca = contextoSeguranca;
+	}
 
-    /**
-     * @return the contextoSeguranca
-     */
-    protected IContextoSeguranca getContextoSeguranca() {
-        return contextoSeguranca;
-    }
+	/**
+	 * @return the contextoSeguranca
+	 */
+	protected IContextoSeguranca getContextoSeguranca() {
+		return contextoSeguranca;
+	}
 
 }

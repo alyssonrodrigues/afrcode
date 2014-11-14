@@ -4,22 +4,22 @@ import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExceptionHandlerFactory;
 
 /**
- * Factory para obtenção do tratador de exceções JSF 2 implementado em
+ * Factory para obtenÃ§Ã£o do tratador de exceÃ§Ãµes JSF 2 implementado em
  * JSF2ExceptionHandler.
  * 
  * 
  */
 public class JSF2ExceptionHandlerFactory extends ExceptionHandlerFactory {
 
-    private ExceptionHandlerFactory parent;
+	private ExceptionHandlerFactory parent;
 
-    public JSF2ExceptionHandlerFactory(ExceptionHandlerFactory parent) {
-        this.parent = parent;
-    }
+	public JSF2ExceptionHandlerFactory(ExceptionHandlerFactory parent) {
+		this.parent = parent;
+	}
 
-    @Override
-    public ExceptionHandler getExceptionHandler() {
-        return new JSF2ExceptionHandler(parent.getExceptionHandler());
-    }
+	@Override
+	public ExceptionHandler getExceptionHandler() {
+		return new JSF2ExceptionHandler(parent.getExceptionHandler());
+	}
 
 }

@@ -10,30 +10,33 @@ import br.com.afrcode.arquitetura.util.mensagem.erro.MensagemErroNegocio;
 import br.com.afrcode.arquitetura.util.mensagem.info.MensagemInfoNegocio;
 
 /**
- * Tratador de exceÁıes ExcecaoNegocioRemota originadas em serviÁos remotos.
+ * Tratador de exce√ß√µes ExcecaoNegocioRemota originadas em servi√ßos remotos.
  * 
  * Ver ExcecoesInterceptor.
  * 
  * 
  */
-public class TratadorExcecaoNegocioRemota implements ITratadorExcecao<ExcecaoNegocioRemota> {
+public class TratadorExcecaoNegocioRemota implements
+		ITratadorExcecao<ExcecaoNegocioRemota> {
 
-    @Override
-    public void tratarExcecao(ExcecaoNegocioRemota excecao) {
-        Validate.notNull(excecao, "Uma inst‚ncia de ExcecaoNegocio deve ser informada!");
-        String msg = excecao.getMensagem();
+	@Override
+	public void tratarExcecao(ExcecaoNegocioRemota excecao) {
+		Validate.notNull(excecao,
+				"Uma inst√¢ncia de ExcecaoNegocio deve ser informada!");
+		String msg = excecao.getMensagem();
 
-        MensagemNegocioAbstrata mensagem = null;
-        if (Severidade.ERRO.equals(excecao.getSeveridade())) {
-            mensagem = new MensagemErroNegocio(msg);
-        } else if (Severidade.ALERTA.equals(excecao.getSeveridade())) {
-            mensagem = new MensagemAlertaNegocio(msg);
-        } else if (Severidade.INFO.equals(excecao.getSeveridade())) {
-            mensagem = new MensagemInfoNegocio(msg);
-        } else {
-            throw new IllegalArgumentException("Tipo de mensagem n„o reconhecido!");
-        }
+		MensagemNegocioAbstrata mensagem = null;
+		if (Severidade.ERRO.equals(excecao.getSeveridade())) {
+			mensagem = new MensagemErroNegocio(msg);
+		} else if (Severidade.ALERTA.equals(excecao.getSeveridade())) {
+			mensagem = new MensagemAlertaNegocio(msg);
+		} else if (Severidade.INFO.equals(excecao.getSeveridade())) {
+			mensagem = new MensagemInfoNegocio(msg);
+		} else {
+			throw new IllegalArgumentException(
+					"Tipo de mensagem n√£o reconhecido!");
+		}
 
-        mensagem.tratarMensagem();
-    }
+		mensagem.tratarMensagem();
+	}
 }

@@ -10,10 +10,10 @@ import org.springframework.core.type.filter.RegexPatternTypeFilter;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * Configurações para scanner de classpath para componentes de Teste sobre
+ * ConfiguraÃ§Ãµes para scanner de classpath para componentes de Teste sobre
  * Servicos.
  * 
- * Em uso em testes de aderência e conformidade.
+ * Em uso em testes de aderÃªncia e conformidade.
  * 
  * 
  */
@@ -21,14 +21,15 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Configuration
 public class ServicoTesteClasspathScannerConfig {
 
-    @Bean
-    public ClassPathScanningCandidateComponentScanner servicoTesteClasspathScanner() {
-        ClassPathScanningCandidateComponentScanner servicoTesteClasspathScanner =
-                new ClassPathScanningCandidateComponentScanner();
-        for (String regExpInclude : ConstantesPadroes.REGS_EXP_TESTES_SERVICO) {
-            servicoTesteClasspathScanner.addIncludeFilter(new RegexPatternTypeFilter(Pattern.compile(regExpInclude)));
-        }
-        return servicoTesteClasspathScanner;
-    }
+	@Bean
+	public ClassPathScanningCandidateComponentScanner servicoTesteClasspathScanner() {
+		ClassPathScanningCandidateComponentScanner servicoTesteClasspathScanner = new ClassPathScanningCandidateComponentScanner();
+		for (String regExpInclude : ConstantesPadroes.REGS_EXP_TESTES_SERVICO) {
+			servicoTesteClasspathScanner
+					.addIncludeFilter(new RegexPatternTypeFilter(Pattern
+							.compile(regExpInclude)));
+		}
+		return servicoTesteClasspathScanner;
+	}
 
 }

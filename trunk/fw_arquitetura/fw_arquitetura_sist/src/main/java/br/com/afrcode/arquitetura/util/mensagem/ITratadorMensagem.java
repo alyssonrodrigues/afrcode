@@ -1,7 +1,7 @@
 package br.com.afrcode.arquitetura.util.mensagem;
 
 /**
- * Interface base para implementaÁ„o de tratadores de IMensagem.
+ * Interface base para implementa√ß√£o de tratadores de IMensagem.
  * 
  * 
  * @param <T>
@@ -9,14 +9,14 @@ package br.com.afrcode.arquitetura.util.mensagem;
  */
 public interface ITratadorMensagem<T extends IMensagem> {
 
-    /**
-     * MÈtodo respons·vel por dar tratamento adequado a mensagem.
-     * 
-     * Exemplo de tratamentos tÌpicos: enviar email, registrar mensagem BD,
-     * registrar em LOG, formatar mensagem para exibir ao usu·rio, etc.
-     * 
-     * @param mensagem
-     */
-    void tratarMensagem(T mensagem);
+	/**
+	 * M√©todo respons√°vel por dar tratamento adequado a mensagem.
+	 * 
+	 * Exemplo de tratamentos t√≥picos: enviar email, registrar mensagem BD,
+	 * registrar em LOG, formatar mensagem para exibir ao usu√°rio, etc.
+	 * 
+	 * @param mensagem
+	 */
+	void tratarMensagem(T mensagem);
 
 }
