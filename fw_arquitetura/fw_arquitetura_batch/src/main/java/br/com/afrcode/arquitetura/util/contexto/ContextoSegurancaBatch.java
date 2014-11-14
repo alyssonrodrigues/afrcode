@@ -22,10 +22,10 @@ import br.com.afrcode.arquitetura.spring.config.security.LoginModuleParaBatch;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * Classe utilitária para obtenção de informações de autenticação e autorização
+ * Classe utilitÃ¤ria para obtenÃ§Ã£o de informaÃ§Ãµes de autenticaÃ§Ã£o e autorizaÃ§Ã£o
  * para o Batch.
  * 
- * A autenticação e a autorização para batchES baseia-se em configurações
+ * A autenticaÃ§Ã£o e a autorizaÃ§Ã£o para batchES baseia-se em configuraÃ§Ãµes
  * presentes em SpringSecurityBatchConfig.
  * 
  * 
@@ -34,34 +34,39 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Profile({ Profiles.PROFILE_APLICACAO_BATCH })
 public class ContextoSegurancaBatch extends ContextoSegurancaAbstrato {
 
-    /**
-     * Ver SpringSecurityBatchConfig para maiores informações acerca do
-     * DefaultJaasAuthenticationProvider em uso por batchES.
-     */
-    @Autowired
-    private DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider;
+	/**
+	 * Ver SpringSecurityBatchConfig para maiores informaÃ§Ãµes acerca do
+	 * DefaultJaasAuthenticationProvider em uso por batchES.
+	 */
+	@Autowired
+	private DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider;
 
-    /**
-     * Método responsável por criar autenticação para o Batch.
-     */
-    @PostConstruct
-    void iniciar() {
-        UsernamePasswordAuthenticationToken token =
-                new UsernamePasswordAuthenticationToken(LoginModuleParaBatch.USER, LoginModuleParaBatch.PASSWD);
-        Authentication auth = defaultJaasAuthenticationProvider.authenticate(token);
-        Validate.isTrue(auth.isAuthenticated(), "O usuário deveria ter sido autenticado com sucesso para batchES!");
-        SecurityContextHolder.getContext().setAuthentication(auth);
-    }
+	/**
+	 * MÃ©todo responsÃ¡vel por criar autenticaÃ§Ã£o para o Batch.
+	 */
+	@PostConstruct
+	void iniciar() {
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+				LoginModuleParaBatch.USER, LoginModuleParaBatch.PASSWD);
+		Authentication auth = defaultJaasAuthenticationProvider
+				.authenticate(token);
+		Validate.isTrue(auth.isAuthenticated(),
+				"O usuÃ¡rio deveria ter sido autenticado com sucesso para batchES!");
+		SecurityContextHolder.getContext().setAuthentication(auth);
+	}
 
-    @Override
-    public User getUsuarioAutenticado() {
-        JaasAuthenticationToken jaasAuthenticationToken = JaasAuthenticationToken.class.cast(getAuthentication());
-        String username = jaasAuthenticationToken.getName();
-        String password = String.class.cast(jaasAuthenticationToken.getCredentials());
-        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(AuthorityGranterParaBatch.ROLE_USER);
+	@Override
+	public User getUsuarioAutenticado() {
+		JaasAuthenticationToken jaasAuthenticationToken = JaasAuthenticationToken.class
+				.cast(getAuthentication());
+		String username = jaasAuthenticationToken.getName();
+		String password = String.class.cast(jaasAuthenticationToken
+				.getCredentials());
+		List<GrantedAuthority> authorities = AuthorityUtils
+				.createAuthorityList(AuthorityGranterParaBatch.ROLE_USER);
 
-        User usuario = new User(username, password, authorities);
-        return usuario;
-    }
+		User usuario = new User(username, password, authorities);
+		return usuario;
+	}
 
 }
