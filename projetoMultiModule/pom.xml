@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -12,7 +12,7 @@
 
 	<properties>
 	    <fwarquitetura.version>0.0.1-SNAPSHOT</fwarquitetura.version>
-		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<skipTests>false</skipTests>
 		<maven-resources-plugin.version>2.6</maven-resources-plugin.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -35,10 +35,10 @@
 			de negocio! -->
 		<module>projetoTemplateBatch</module>
 		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto 
-			de definição de serviços! -->
+			de definiÃ§Ã£o de serviÃ§os! -->
 		<module>projetoTemplateIS-api</module>
 		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto 
-			de implementação de serviços! -->
+			de implementaÃ§Ã£o de serviÃ§os! -->
 		<module>projetoTemplateIS-impl</module>
 		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto 
 			de contexto web! -->
@@ -57,7 +57,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<encoding>ISO-8859-1</encoding>
+					<encoding>UTF-8</encoding>
 					<debug>true</debug>
 					<optimize>true</optimize>
 					<source>1.7</source>
@@ -88,7 +88,7 @@
 					<artifactId>jacoco-maven-plugin</artifactId>
 					<version>${jacoco-maven-plugin.version}</version>
 					<executions>
-						<!-- Configurações de agente jacoco para testes unitários. -->
+						<!-- ConfiguraÃ§Ãµes de agente jacoco para testes unitÃ¡rios. -->
 						<execution>
 							<id>pre-test</id>
 							<goals>
@@ -99,7 +99,7 @@
 								<propertyName>surefire.argLine</propertyName>
 							</configuration>
 						</execution>
-						<!-- Configurações de report jacoco para testes unitários. -->
+						<!-- ConfiguraÃ§Ãµes de report jacoco para testes unitÃ¡rios. -->
 						<execution>
 							<id>post-test</id>
 							<phase>test</phase>
@@ -110,7 +110,7 @@
 								<dataFile>${sonar.jacoco.reportPath}</dataFile>
 							</configuration>
 						</execution>
-						<!-- Configurações de agente jacoco para testes de integração. -->
+						<!-- ConfiguraÃ§Ãµes de agente jacoco para testes de integraÃ§Ã£o. -->
 						<execution>
 							<id>pre-integration-test</id>
 							<phase>pre-integration-test</phase>
@@ -122,7 +122,7 @@
 								<propertyName>failsafe.argLine</propertyName>
 							</configuration>
 						</execution>
-						<!-- Configurações de report jacoco para testes de integração. -->
+						<!-- ConfiguraÃ§Ãµes de report jacoco para testes de integraÃ§Ã£o. -->
 						<execution>
 							<id>post-integration-test</id>
 							<phase>post-integration-test</phase>
@@ -136,7 +136,7 @@
 						</execution>
 					</executions>
 				</plugin>
-				<!-- Configurações para execução de testes unitários. -->
+				<!-- ConfiguraÃ§Ãµes para execuÃ§Ã£o de testes unitÃ¡rios. -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
@@ -149,7 +149,7 @@
 						<excludedGroups>br.com.afrcode.arquitetura.teste.integracao.util.testeintegracao.CategoriaTesteIntegracao</excludedGroups>
 					</configuration>
 				</plugin>
-				<!-- Configurações para execução dos testes de integração. -->
+				<!-- ConfiguraÃ§Ãµes para execuÃ§Ã£o dos testes de integraÃ§Ã£o. -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-failsafe-plugin</artifactId>
@@ -179,7 +179,7 @@
 						</execution>
 					</executions>
 				</plugin>
-				<!-- Configurações para WTP em função do uso do jacoco. -->
+				<!-- ConfiguraÃ§Ãµes para WTP em funÃ§Ã£o do uso do jacoco. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
