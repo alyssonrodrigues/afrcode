@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -8,7 +9,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<skipTests>false</skipTests>
 		<maven-resources-plugin.version>2.6</maven-resources-plugin.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -45,7 +46,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<encoding>ISO-8859-1</encoding>
+					<encoding>UTF-8</encoding>
 					<debug>true</debug>
 					<optimize>true</optimize>
 					<source>1.7</source>
