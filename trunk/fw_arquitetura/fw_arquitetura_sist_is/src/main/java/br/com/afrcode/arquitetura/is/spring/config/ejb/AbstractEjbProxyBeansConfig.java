@@ -14,98 +14,101 @@ import org.springframework.ejb.access.SimpleRemoteStatelessSessionProxyFactoryBe
 import br.com.afrcode.arquitetura.is.spring.config.util.ProfilesIS;
 
 /**
- * Superclasse para configuraÁ„o de beans proxies de EJBs 3.1.
+ * Superclasse para configura√ß√£o de beans proxies de EJBs 3.1.
  * 
- * IntegraÁ„o Spring => EJB. (Beans Spring vÍem EJBs)
+ * Integra√ß√£o Spring => EJB. (Beans Spring v√™em EJBs)
  * 
  * @param <T>
- *            tipo de interface de negÛcio associada ao proxy EJB 3.1
+ *            tipo de interface de neg√≥cio associada ao proxy EJB 3.1
  */
-public abstract class AbstractEjbProxyBeansConfig<T> implements ApplicationContextAware {
+public abstract class AbstractEjbProxyBeansConfig<T> implements
+		ApplicationContextAware {
 
-    private ApplicationContext applicationContext;
+	private ApplicationContext applicationContext;
 
-    private Class<T> classeProxy;
+	private Class<T> classeProxy;
 
-    public AbstractEjbProxyBeansConfig() {
-        iniciar();
-    }
+	public AbstractEjbProxyBeansConfig() {
+		iniciar();
+	}
 
-    private void configurarParaTUsSeNecessario(SimpleRemoteStatelessSessionProxyFactoryBean ejbProxyFactory,
-            String jndiName) {
-        if (isProfileTUAtivo()) {
-            OpenEJB3ConfigUtil.configurarParaTUs(ejbProxyFactory, jndiName);
-        }
-    }
+	private void configurarParaTUsSeNecessario(
+			SimpleRemoteStatelessSessionProxyFactoryBean ejbProxyFactory,
+			String jndiName) {
+		if (isProfileTUAtivo()) {
+			OpenEJB3ConfigUtil.configurarParaTUs(ejbProxyFactory, jndiName);
+		}
+	}
 
-    /**
-     * MÈtodo de criaÁ„o um proxy EJB a partir do nome JNDI e da interface de
-     * negÛcio.
-     * 
-     * @param jndiName
-     *            O nome JNDI.
-     * @return O proxy EJB para o dado serviÁo cujo tipo ser· o tipo
-     *         parametrizado por TIPOINTERFACENEGOCIO.
-     * @throws NamingException
-     */
-    protected T criarEjb3RemoteStatelessSessionProxy(String jndiName) throws NamingException {
-        SimpleRemoteStatelessSessionProxyFactoryBean ejbProxyFactory =
-                new SimpleRemoteStatelessSessionProxyFactoryBean();
+	/**
+	 * M√©todo de cria√ß√£o um proxy EJB a partir do nome JNDI e da interface de
+	 * neg√≥cio.
+	 * 
+	 * @param jndiName
+	 *            O nome JNDI.
+	 * @return O proxy EJB para o dado servi√ßo cujo tipo ser√° o tipo
+	 *         parametrizado por TIPOINTERFACENEGOCIO.
+	 * @throws NamingException
+	 */
+	protected T criarEjb3RemoteStatelessSessionProxy(String jndiName)
+			throws NamingException {
+		SimpleRemoteStatelessSessionProxyFactoryBean ejbProxyFactory = new SimpleRemoteStatelessSessionProxyFactoryBean();
 
-        // ConfiguraÁ„o para Proxy com alvo lazy, ou seja, o alvo do proxy (EJB)
-        // sÛ ser· verificado quando do primeiro acesso ao
-        // proxy; e n„o no startup do contexto (setLookupHomeOnStartup). Esta
-        // configuraÁ„o È importante pois permite que um
-        // cliente de EJBS (usu·rio de proxies) seja iniciado em parelelo ou
-        // anteriormente ao hospedeiro dos EJBs (alvos).
-        ejbProxyFactory.setLookupHomeOnStartup(false);
+		// Configura√ß√£o para Proxy com alvo lazy, ou seja, o alvo do proxy (EJB)
+		// s√≥ ser√° verificado quando do primeiro acesso ao
+		// proxy; e n√£o no startup do contexto (setLookupHomeOnStartup). Esta
+		// configura√ß√£o √© importante pois permite que um
+		// cliente de EJBS (usu√°rio de proxies) seja iniciado em parelelo ou
+		// anteriormente ao hospedeiro dos EJBs (alvos).
+		ejbProxyFactory.setLookupHomeOnStartup(false);
 
-        ejbProxyFactory.setJndiName(jndiName);
-        ejbProxyFactory.setResourceRef(false);
-        ejbProxyFactory.setBusinessInterface(getClasseProxy());
+		ejbProxyFactory.setJndiName(jndiName);
+		ejbProxyFactory.setResourceRef(false);
+		ejbProxyFactory.setBusinessInterface(getClasseProxy());
 
-        configurarParaTUsSeNecessario(ejbProxyFactory, jndiName);
+		configurarParaTUsSeNecessario(ejbProxyFactory, jndiName);
 
-        // A Factory de EJB3 proxies deve ser iniciada previamente para j·
-        // prover inst‚ncias do proxy alvo.
-        ejbProxyFactory.afterPropertiesSet();
+		// A Factory de EJB3 proxies deve ser iniciada previamente para j√°
+		// prover inst√¢ncias do proxy alvo.
+		ejbProxyFactory.afterPropertiesSet();
 
-        return (T) ejbProxyFactory.getObject();
-    }
+		return (T) ejbProxyFactory.getObject();
+	}
 
-    protected Class<T> getClasseProxy() {
-        return classeProxy;
-    }
+	protected Class<T> getClasseProxy() {
+		return classeProxy;
+	}
 
-    /**
-     * MÈtodo de obtenÁ„o do tipo associado ao proxy.
-     */
-    private void iniciar() {
-        Class<?> clazz = this.getClass();
-        Type superClazz = clazz.getGenericSuperclass();
-        // Em geral uma classe de configuraÁ„o de proxy contÈm apenas um
-        // supertipo genÈrico, porÈm mais de um supertipo genÈrico
-        // pode surgir na presenÁa de aspectos associados a esta classe.
-        while (!ParameterizedType.class.isAssignableFrom(superClazz.getClass())) {
-            clazz = clazz.getSuperclass();
-            superClazz = clazz.getGenericSuperclass();
-        }
-        ParameterizedType tipoParametrizado = (ParameterizedType) superClazz;
-        Type[] params = tipoParametrizado.getActualTypeArguments();
-        classeProxy = (Class<T>) params[0];
-    }
+	/**
+	 * M√©todo de obten√ß√£o do tipo associado ao proxy.
+	 */
+	private void iniciar() {
+		Class<?> clazz = this.getClass();
+		Type superClazz = clazz.getGenericSuperclass();
+		// Em geral uma classe de configura√ß√£o de proxy cont√©m apenas um
+		// supertipo gen√©rico, por√©m mais de um supertipo gen√©rico
+		// pode surgir na presen√ßa de aspectos associados a esta classe.
+		while (!ParameterizedType.class.isAssignableFrom(superClazz.getClass())) {
+			clazz = clazz.getSuperclass();
+			superClazz = clazz.getGenericSuperclass();
+		}
+		ParameterizedType tipoParametrizado = (ParameterizedType) superClazz;
+		Type[] params = tipoParametrizado.getActualTypeArguments();
+		classeProxy = (Class<T>) params[0];
+	}
 
-    protected boolean isProfileTUAtivo() {
-        boolean profileTUAtivo = false;
+	protected boolean isProfileTUAtivo() {
+		boolean profileTUAtivo = false;
 
-        List<String> profilesAtivos = Arrays.asList(applicationContext.getEnvironment().getActiveProfiles());
-        profileTUAtivo = profilesAtivos.contains(ProfilesIS.PROFILE_TU);
+		List<String> profilesAtivos = Arrays.asList(applicationContext
+				.getEnvironment().getActiveProfiles());
+		profileTUAtivo = profilesAtivos.contains(ProfilesIS.PROFILE_TU);
 
-        return profileTUAtivo;
-    }
+		return profileTUAtivo;
+	}
 
-    public void setApplicationContext(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
+	public void setApplicationContext(ApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
+	}
 
 }

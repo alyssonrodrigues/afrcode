@@ -3,106 +3,97 @@ package br.com.afrcode.arquitetura.is.util.excecao;
 import org.apache.commons.lang.exception.ExceptionUtils;
 
 /**
- * Classe base para encapsular exceÁıes de negÛcio lanÁadas por serviÁos
- * remotos. Este ser· o tipo de exceÁ„o de negÛcio visto pelos clientes de
- * serviÁos remotos.
+ * Classe base para encapsular exce√ß√µes de neg√≥cio lan√ßadas por servi√ßos
+ * remotos. Este ser√° o tipo de exce√ßo de neg√≥cio visto pelos clientes de
+ * servi√ßos remotos.
  * 
- * Em geral estas exceÁıes s„o conhecidas e tratadas gerando informaÁıes e
- * mensagens exibidas ou enviadas ao usu·rio final.
+ * Em geral estas exce√ß√µes s√£o conhecidas e tratadas gerando informa√ß√µes e
+ * mensagens exibidas ou enviadas ao usu√°rio final.
  * 
- * ServiÁos remotos expıe serviÁos locais de sistemas que por sua vez
- * implementam regras de negÛcio locais. ExceÁıes de negÛcio locais a estas
- * regras de negÛcio devem ser relanÁadas usando este, E SOMENTE este, tipo,
+ * Servi√ßos remotos exp√µe servi√ßos locais de sistemas que por sua vez
+ * implementam regras de neg√≥cio locais. Exce√ß√µes de neg√≥cio locais a estas
+ * regras de neg√≥cio devem ser relanÔøΩadas usando este, E SOMENTE este, tipo,
  * ExcecaoNegocioRemota.
  * 
- * … importante que a exceÁ„o causa seja convertida para String, pois esta tende
- * a ser de um tipo desconhecido pelo cliente do serviÁo remoto. Por isto o
- * atributo RuntimeException#getCause() ser· sempre nulo.
+ * √â importante que a exce√ß√£o causa seja convertida para String, pois esta tende
+ * a ser de um tipo desconhecido pelo cliente do servi√ßo remoto. Por isto o
+ * atributo RuntimeException#getCause() ser√° sempre nulo.
  * 
  * 
  */
 public class ExcecaoNegocioRemota extends RuntimeException {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Enum que descreve a Severidade do erro
-     */
-    public static enum Severidade {
-        ERRO, ALERTA, INFO;
-    }
+	/**
+	 * Enum que descreve a Severidade do erro
+	 */
+	public static enum Severidade {
+		ERRO, ALERTA, INFO;
+	}
 
-    private Severidade severidade = Severidade.ERRO;
+	private Severidade severidade = Severidade.ERRO;
 
-    private String mensagem;
+	private String mensagem;
 
-    /**
-     * 
-     * @param mensagem
-     * @param cause
-     */
-    public ExcecaoNegocioRemota(String mensagem, Throwable cause) {
-        // message conter· a fullstracktrace
-        super(mensagem + "#" + ExceptionUtils.getFullStackTrace(cause));
-        // mensagem conter· a mensagem requerida pelo desenvolvedor
-        this.mensagem = mensagem;
-    }
+	/**
+	 * 
+	 * @param mensagem
+	 * @param cause
+	 */
+	public ExcecaoNegocioRemota(String mensagem, Throwable cause) {
+		// message conter√° a fullstracktrace
+		super(mensagem + "#" + ExceptionUtils.getFullStackTrace(cause));
+		// mensagem conter√° a mensagem requerida pelo desenvolvedor
+		this.mensagem = mensagem;
+	}
 
-    /**
-     * 
-     * @param cause
-     */
-    public ExcecaoNegocioRemota(Throwable cause) {
-        // message conter· a fullstracktrace
-        super(ExceptionUtils.getFullStackTrace(cause));
-    }
+	/**
+	 * 
+	 * @param cause
+	 */
+	public ExcecaoNegocioRemota(Throwable cause) {
+		// message conter√° a fullstracktrace
+		super(ExceptionUtils.getFullStackTrace(cause));
+	}
 
-    /**
-     * Construtor para Erros de Negocio com a definiÁ„o de serveridade
-     * 
-     * @param mensagem
-     * @param cause
-     * @param severidade
-     */
-    public ExcecaoNegocioRemota(String mensagem, Throwable cause, Severidade severidade) {
-        // message conter· a fullstracktrace
-        super(mensagem + "#" + ExceptionUtils.getFullStackTrace(cause));
-        this.severidade = severidade;
-        // mensagem conter· a mensagem requerida pelo desenvolvedor
-        this.mensagem = mensagem;
-    }
+	/**
+	 * Construtor para Erros de Negocio com a defini√ß√£o de serveridade
+	 * 
+	 * @param mensagem
+	 * @param cause
+	 * @param severidade
+	 */
+	public ExcecaoNegocioRemota(String mensagem, Throwable cause,
+			Severidade severidade) {
+		// message conter√° a fullstracktrace
+		super(mensagem + "#" + ExceptionUtils.getFullStackTrace(cause));
+		this.severidade = severidade;
+		// mensagem conter√° a mensagem requerida pelo desenvolvedor
+		this.mensagem = mensagem;
+	}
 
-    /**
-     * Retorna a serveridade do erro de negÛcio remoto
-     * 
-     * @return
-     */
-    public Severidade getSeveridade() {
-        return this.severidade;
-    }
+	public Severidade getSeveridade() {
+		return this.severidade;
+	}
 
-    /**
-     * Seta a severidade do erro de negÛcio remoto
-     * 
-     * @param severidade
-     */
-    public void setSeveridade(Severidade severidade) {
-        this.severidade = severidade;
-    }
+	public void setSeveridade(Severidade severidade) {
+		this.severidade = severidade;
+	}
 
-    /**
-     * @return the mensagem
-     */
-    public String getMensagem() {
-        return mensagem;
-    }
+	/**
+	 * @return the mensagem
+	 */
+	public String getMensagem() {
+		return mensagem;
+	}
 
-    /**
-     * @param mensagem
-     *            the mensagem to set
-     */
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
-    }
+	/**
+	 * @param mensagem
+	 *            the mensagem to set
+	 */
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
 
 }

@@ -8,9 +8,9 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 /**
- * Ouvinte padrão de mensagens recebidas via JMS.
+ * Ouvinte padrÃ£o de mensagens recebidas via JMS.
  * 
- * TODO: Flexibilizar uso e recepção da mensagem para componente externo
+ * TODO: Flexibilizar uso e recepÃ§Ã£o da mensagem para componente externo
  * qualquer.
  * 
  * 
@@ -18,21 +18,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class QueueListener implements MessageListener {
 
-    private static final Logger LOG = Logger.getLogger(QueueListener.class);
+	private static final Logger LOG = Logger.getLogger(QueueListener.class);
 
-    public QueueListener() {
-    }
+	public QueueListener() {
+	}
 
-    @Override
-    public void onMessage(Message message) {
-        LOG.info("Mensagem recebida via JMS...");
-        final TextMessage textMessage = (TextMessage) message;
-        try {
-            String text = textMessage.getText();
-            LOG.info("Conteúdo: " + text);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+	@Override
+	public void onMessage(Message message) {
+		LOG.info("Mensagem recebida via JMS...");
+		final TextMessage textMessage = (TextMessage) message;
+		try {
+			String text = textMessage.getText();
+			LOG.info("ConteÃºdo: " + text);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 }

@@ -15,64 +15,73 @@ import br.com.afrcode.arquitetura.is.modelo.rmi.objetoemmemoria.service.IServico
 import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteSemJpaEJta;
 
 /**
- * Este teste visa exercitar e validar a infra disponÌvel para exposiÁ„o de
- * serviÁos RMI via Spring remoting.
+ * Este teste visa exercitar e validar a infra dispon√≠vel para exposi√ß√£o de
+ * servi√ßos RMI via Spring remoting.
  * 
  * 
  */
-public class ServicoConsultaUmObjetoEmMemoriaRmiTest extends AbstractCasoTesteSemJpaEJta {
-    private static final Logger LOG = Logger.getLogger(ServicoConsultaUmObjetoEmMemoriaRmiTest.class);
+public class ServicoConsultaUmObjetoEmMemoriaRmiTest extends
+		AbstractCasoTesteSemJpaEJta {
+	private static final Logger LOG = Logger
+			.getLogger(ServicoConsultaUmObjetoEmMemoriaRmiTest.class);
 
-    /**
-     * Acesso a inst‚ncia remota de serviÁo exposto via RMI.
-     */
-    @Autowired
-    @Qualifier("servicoConsultaUmObjetoEmMemoriaRmiClient")
-    private IServicoConsultaUmObjetoEmMemoriaRmi servicoConsultaUmObjetoEmMemoriaRmiClient;
+	/**
+	 * Acesso a inst√¢ncia remota de servi√ßo exposto via RMI.
+	 */
+	@Autowired
+	@Qualifier("servicoConsultaUmObjetoEmMemoriaRmiClient")
+	private IServicoConsultaUmObjetoEmMemoriaRmi servicoConsultaUmObjetoEmMemoriaRmiClient;
 
-    @Autowired
-    private StopWatch stopWatch;
+	@Autowired
+	private StopWatch stopWatch;
 
-    @Test
-    public void testarListar() {
-        validarDI();
+	@Test
+	public void testarListar() {
+		validarDI();
 
-        stopWatch.start();
+		stopWatch.start();
 
-        Collection<UmObjetoEmMemoria> objs = servicoConsultaUmObjetoEmMemoriaRmiClient.listar();
+		Collection<UmObjetoEmMemoria> objs = servicoConsultaUmObjetoEmMemoriaRmiClient
+				.listar();
 
-        stopWatch.stop();
+		stopWatch.stop();
 
-        LOG.info("testarListar: " + stopWatch.toString());
-        stopWatch.reset();
+		LOG.info("testarListar: " + stopWatch.toString());
+		stopWatch.reset();
 
-        Assert.assertNotNull("A coleÁ„o de objetos n„o deveria ser nula!", objs);
-        Assert.assertTrue("A coleÁ„o de objetos n„o deveria estar vazia!", !objs.isEmpty());
-        Assert.assertTrue("A coleÁ„o de objetos deveria ter " + DaoUmObjetoEmMemoria.NUM_OBJS_CRIADOS + " objetos!",
-                objs.size() == DaoUmObjetoEmMemoria.NUM_OBJS_CRIADOS);
-    }
+		Assert.assertNotNull("A cole√ß√£o de objetos n√£o deveria ser nula!", objs);
+		Assert.assertTrue("A cole√ß√£o de objetos n√£o deveria estar vazia!",
+				!objs.isEmpty());
+		Assert.assertTrue("A cole√ß√£o de objetos deveria ter "
+				+ DaoUmObjetoEmMemoria.NUM_OBJS_CRIADOS + " objetos!",
+				objs.size() == DaoUmObjetoEmMemoria.NUM_OBJS_CRIADOS);
+	}
 
-    @Test
-    public void testarRecuperarPorId() {
-        validarDI();
-        Long id = 1L;
+	@Test
+	public void testarRecuperarPorId() {
+		validarDI();
+		Long id = 1L;
 
-        stopWatch.start();
+		stopWatch.start();
 
-        UmObjetoEmMemoria umObj = servicoConsultaUmObjetoEmMemoriaRmiClient.recuperarPorId(id);
+		UmObjetoEmMemoria umObj = servicoConsultaUmObjetoEmMemoriaRmiClient
+				.recuperarPorId(id);
 
-        stopWatch.stop();
+		stopWatch.stop();
 
-        LOG.info("testarRecuperarPorId: " + stopWatch.toString());
-        stopWatch.reset();
+		LOG.info("testarRecuperarPorId: " + stopWatch.toString());
+		stopWatch.reset();
 
-        Assert.assertNotNull("O objeto n„o deveria ser nulo!", umObj);
-        Assert.assertEquals("O id do objeto retornado È diferente do esperado!", id, umObj.getId());
-    }
+		Assert.assertNotNull("O objeto n√£o deveria ser nulo!", umObj);
+		Assert.assertEquals(
+				"O id do objeto retornado √© diferente do esperado!", id,
+				umObj.getId());
+	}
 
-    private void validarDI() {
-        Assert.assertNotNull("Deveria ter sido obtido um proxy para acesso ao serviÁo exposto via RMI!",
-                servicoConsultaUmObjetoEmMemoriaRmiClient);
-    }
+	private void validarDI() {
+		Assert.assertNotNull(
+				"Deveria ter sido obtido um proxy para acesso ao servi√ßo exposto via RMI!",
+				servicoConsultaUmObjetoEmMemoriaRmiClient);
+	}
 
 }

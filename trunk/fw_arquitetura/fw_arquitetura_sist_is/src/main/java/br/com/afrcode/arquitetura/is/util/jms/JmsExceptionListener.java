@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 /**
- * Tratador central de exceções ocorridas durante o uso de JMS.
+ * Tratador central de exceÃ§Ãµes ocorridas durante o uso de JMS.
  * 
  * TODO: Implementar tratamento adequado.
  * 
@@ -16,11 +16,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class JmsExceptionListener implements ExceptionListener {
 
-    private static final Logger LOG = Logger.getLogger(JmsExceptionListener.class);
+	private static final Logger LOG = Logger
+			.getLogger(JmsExceptionListener.class);
 
-    @Override
-    public void onException(JMSException exception) {
-        LOG.error("Erro: ", exception);
-    }
+	@Override
+	public void onException(JMSException exception) {
+		LOG.error("Erro: ", exception);
+	}
 
 }

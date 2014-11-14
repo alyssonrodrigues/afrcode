@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
 import br.com.afrcode.arquitetura.is.spring.config.util.ProfilesIS;
 
 /**
- * Classe utilit·ria para uso do ApplicationContext Spring em classes onde n„o È
- * possÌvel fazer injeÁ„o declarativa (via anotaÁ„o Autowired).
+ * Classe utilit√°ria para uso do ApplicationContext Spring em classes onde n√£o √©
+ * poss√≠vel fazer inje√ß√£o declarativa (via anota√ß√£o Autowired).
  * 
- * Cen·rio de uso: Classes nao geridas pelo Spring, instanciadas pelo
+ * Cen√°rio de uso: Classes nao geridas pelo Spring, instanciadas pelo
  * programador ou por outro framework qualquer, que necessitem usar beans
  * geridos pelo Spring.
  * 
@@ -25,45 +25,52 @@ import br.com.afrcode.arquitetura.is.spring.config.util.ProfilesIS;
  */
 @Component
 public class ApplicationContextUtils implements ApplicationContextAware {
-    private static final Logger LOG = Logger.getLogger(ApplicationContextUtils.class);
+	private static final Logger LOG = Logger
+			.getLogger(ApplicationContextUtils.class);
 
-    private static ApplicationContext applicationContext;
+	private static ApplicationContext applicationContext;
 
-    public static ApplicationContext getApplicationContext() {
-        return applicationContext;
-    }
+	public static ApplicationContext getApplicationContext() {
+		return applicationContext;
+	}
 
-    public static <T> T getBean(Class<T> tipoBean) {
-        return getApplicationContext().getBean(tipoBean);
-    }
+	public static <T> T getBean(Class<T> tipoBean) {
+		return getApplicationContext().getBean(tipoBean);
+	}
 
-    public static boolean isEjbSpringApplicationContext(ApplicationContext appCtx) {
-        return false;
-    }
+	public static boolean isEjbSpringApplicationContext(
+			ApplicationContext appCtx) {
+		return false;
+	}
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-        log();
-    }
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext)
+			throws BeansException {
+		this.applicationContext = applicationContext;
+		log();
+	}
 
-    private void log() {
-        String nomeAplicacao = getNomeAplicacao();
-        LOG.info("Spring ApplicationContext iniciado hashcode[" + applicationContext.hashCode() + "] para "
-                + nomeAplicacao + "...");
-    }
+	private void log() {
+		String nomeAplicacao = getNomeAplicacao();
+		LOG.info("Spring ApplicationContext iniciado hashcode["
+				+ applicationContext.hashCode() + "] para " + nomeAplicacao
+				+ "...");
+	}
 
-    public static String getNomeAplicacao() {
-        String nomeAplicacao = applicationContext.getId();
-        if (!Arrays.asList(applicationContext.getEnvironment().getActiveProfiles()).contains(ProfilesIS.PROFILE_TU)) {
-            JndiTemplate jndiTemplate = new JndiTemplate();
-            try {
-                nomeAplicacao = jndiTemplate.lookup("java:app/AppName").toString();
-            } catch (NamingException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return nomeAplicacao;
-    }
+	public static String getNomeAplicacao() {
+		String nomeAplicacao = applicationContext.getId();
+		if (!Arrays.asList(
+				applicationContext.getEnvironment().getActiveProfiles())
+				.contains(ProfilesIS.PROFILE_TU)) {
+			JndiTemplate jndiTemplate = new JndiTemplate();
+			try {
+				nomeAplicacao = jndiTemplate.lookup("java:app/AppName")
+						.toString();
+			} catch (NamingException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return nomeAplicacao;
+	}
 
 }

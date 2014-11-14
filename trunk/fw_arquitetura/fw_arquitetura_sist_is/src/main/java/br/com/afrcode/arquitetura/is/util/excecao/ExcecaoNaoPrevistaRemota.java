@@ -3,80 +3,69 @@ package br.com.afrcode.arquitetura.is.util.excecao;
 import org.apache.commons.lang.exception.ExceptionUtils;
 
 /**
- * Classe base para lanÁamento de exceÁıes, n„o previstas, obtidas em serviÁos
- * remotos. Este ser· o tipo de exceÁ„o n„o prevista visto pelos clientes de
- * serviÁos remotos.
+ * Classe base para lan√ßamento de exce√ß√µes, n√£o previstas, obtidas em servi√ßos
+ * remotos. Este ser√° o tipo de exce√ß√£o n√£o prevista visto pelos clientes de
+ * servi√ßos remotos.
  * 
- * ServiÁos remotos expıe serviÁos locais de sistemas que por sua vez
- * implementam regras de negÛcio locais. ExceÁıes locais, n„o previstas, a estas
- * regras de negÛcio locais devem ser relanÁadas usando este, E SOMENTE este,
- * tipo, ExcecaoNaoPrevistaRemota.
+ * Servi√ßos remotos exp√µe servi√ßs locais de sistemas que por sua vez implementam
+ * regras de neg√≥cio locais. Exce√ß√µes locais, n√£o previstas, a estas regras de
+ * neg√≥cio locais devem ser relan√ßadas usando este, E SOMENTE este, tipo,
+ * ExcecaoNaoPrevistaRemota.
  * 
- * … importante que a exceÁ„o causa seja convertida para String, pois esta tende
- * a ser de um tipo desconhecido pelo cliente do serviÁo remoto. Por isto o
- * atributo RuntimeException#getCause() ser· sempre nulo.
+ * √â importante que a exce√ß√£o causa seja convertida para String, pois esta tende
+ * a ser de um tipo desconhecido pelo cliente do servi√ßo remoto. Por isto o
+ * atributo RuntimeException#getCause() ser√° sempre nulo.
  * 
  * 
  */
 public class ExcecaoNaoPrevistaRemota extends RuntimeException {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * A mensagem da prÛpria RuntimeException contÈm toda a stacktrace do erro.
-     * Este atributo expıe a mensagem "principal" do erro.
-     */
-    private String mensagem;
+	/**
+	 * A mensagem da pr√≥pria RuntimeException cont√©m toda a stacktrace do erro.
+	 * Este atributo exp√µe a mensagem "principal" do erro.
+	 */
+	private String mensagem;
 
-    /**
-     * Construtor. Respons·vel por obter toda a stack trace da exceÁ„o cause em
-     * formato String em conjunto com a mensagem requerida.
-     * 
-     * N„o se deve atribuir a causa desta exceÁ„o a causa requerida diretamente
-     * pois o cliente de um serviÁo remoto n„o necessariamente ter· o tipo da
-     * exceÁ„o causa em classpath.
-     * 
-     * @param mensagem
-     * @param cause
-     */
-    public ExcecaoNaoPrevistaRemota(String mensagem, Throwable cause) {
-        // message conter· a fullstracktrace
-        super(mensagem + "#" + ExceptionUtils.getFullStackTrace(cause));
-        // mensagem conter· a mensagem requerida pelo desenvolvedor
-        this.mensagem = mensagem;
-    }
+	/**
+	 * Construtor. Respons√°vel por obter toda a stack trace da exce√ß√£o cause em
+	 * formato String em conjunto com a mensagem requerida.
+	 * 
+	 * N√£o se deve atribuir a causa desta exce√ß√£o a causa requerida diretamente
+	 * pois o cliente de um servi√ßo remoto n√£o necessariamente ter√° o tipo da
+	 * exce√ß√£o causa em classpath.
+	 * 
+	 * @param mensagem
+	 * @param cause
+	 */
+	public ExcecaoNaoPrevistaRemota(String mensagem, Throwable cause) {
+		// message conter√° a fullstracktrace
+		super(mensagem + "#" + ExceptionUtils.getFullStackTrace(cause));
+		// mensagem conter√° a mensagem requerida pelo desenvolvedor
+		this.mensagem = mensagem;
+	}
 
-    /**
-     * Construtor. Respons·vel por obter toda a stack trace da exceÁ„o cause em
-     * formato String.
-     * 
-     * N„o se deve atribuir a causa desta exceÁ„o a causa requerida diretamente
-     * pois o cliente de um serviÁo remoto n„o necessariamente ter· o tipo da
-     * exceÁ„o causa em classpath.
-     * 
-     * @param cause
-     */
-    public ExcecaoNaoPrevistaRemota(Throwable cause) {
-        // message conter· a fullstracktrace
-        super(ExceptionUtils.getFullStackTrace(cause));
-    }
+	/**
+	 * Construtor. Respons√°vel por obter toda a stack trace da exce√ß√£o cause em
+	 * formato String.
+	 * 
+	 * N√£o se deve atribuir a causa desta exce√ß√£o a causa requerida diretamente
+	 * pois o cliente de um servi√ßo remoto n√£o necessariamente ter√° o tipo da
+	 * exce√ß√£o causa em classpath.
+	 * 
+	 * @param cause
+	 */
+	public ExcecaoNaoPrevistaRemota(Throwable cause) {
+		// message conter√° a fullstracktrace
+		super(ExceptionUtils.getFullStackTrace(cause));
+	}
 
-    /**
-     * Retorna a mensagem da exceÁ„o
-     * 
-     * @return
-     */
-    public String getMensagem() {
-        return this.mensagem;
-    }
+	public String getMensagem() {
+		return this.mensagem;
+	}
 
-    /**
-     * Seta a mensagem da exceÁ„o
-     * 
-     * @param mensagem
-     */
-    public void setMensagem(String mensagem) {
-
-        this.mensagem = mensagem;
-    }
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
 }

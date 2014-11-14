@@ -6,25 +6,25 @@ import org.springframework.context.ApplicationContext;
 import br.com.afrcode.arquitetura.util.contexto.ApplicationContextUtils;
 
 /**
- * Classe utilit·ria para obteÁ„o do BeanFactory Spring atravÈs do qual e
- * possÌvel acessar o contexto Spring para obtenÁ„o de beans e resources. Em
- * geral esta classe ser· usada onde o contexto Spring n„o È injet·vel
+ * Classe utilit√°ria para obte√ß√£o do BeanFactory Spring atrav√©s do qual e
+ * poss√≠vel acessar o contexto Spring para obten√ß√£o de beans e resources. Em
+ * geral esta classe ser√° usada onde o contexto Spring n√£o √© injet√°vel
  * declarativamente, exemplo: InterceptorS EJB.
  * 
  * 
  */
 public class EJBSpringApplicationContextUtils {
 
-    public static BeanFactory getBeanFactory() {
-        return getApplicationContext();
-    }
+	public static BeanFactory getBeanFactory() {
+		return getApplicationContext();
+	}
 
-    public static ApplicationContext getApplicationContext() {
-        return ApplicationContextUtils.getApplicationContext();
-    }
+	public static ApplicationContext getApplicationContext() {
+		return ApplicationContextUtils.getApplicationContext();
+	}
 
-    public static <T> T getBean(Class<T> tipoBean) {
-        return getApplicationContext().getBean(tipoBean);
-    }
+	public static <T> T getBean(Class<T> tipoBean) {
+		return getApplicationContext().getBean(tipoBean);
+	}
 
 }

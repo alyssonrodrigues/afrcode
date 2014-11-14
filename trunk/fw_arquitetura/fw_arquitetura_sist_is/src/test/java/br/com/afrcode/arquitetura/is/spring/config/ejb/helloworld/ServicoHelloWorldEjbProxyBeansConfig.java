@@ -12,20 +12,22 @@ import br.com.afrcode.arquitetura.is.spring.config.ejb.AbstractEjbProxyBeansConf
 import br.com.afrcode.arquitetura.is.spring.config.util.ProfilesIS;
 
 /**
- * Configurações, por EJB, necessárias para DI de EJBs em beans Spring.
+ * ConfiguraÃ§Ãµes, por EJB, necessÃ¡rias para DI de EJBs em beans Spring.
  * 
- * Integração Spring => EJB. (Beans Spring vêem EJBs)
+ * IntegraÃ§Ã£o Spring => EJB. (Beans Spring vÃªem EJBs)
  * 
  * 
  */
 @Configuration
 @Profile(ProfilesIS.PROFILE_TU)
-public class ServicoHelloWorldEjbProxyBeansConfig extends AbstractEjbProxyBeansConfig<IServicoHelloWorld> {
+public class ServicoHelloWorldEjbProxyBeansConfig extends
+		AbstractEjbProxyBeansConfig<IServicoHelloWorld> {
 
-    @Bean
-    @Lazy
-    public IServicoHelloWorld servicoHelloWorldBeanRemote() throws NamingException {
-        return criarEjb3RemoteStatelessSessionProxy("ServicoHelloWorldBeanRemote");
-    }
+	@Bean
+	@Lazy
+	public IServicoHelloWorld servicoHelloWorldBeanRemote()
+			throws NamingException {
+		return criarEjb3RemoteStatelessSessionProxy("ServicoHelloWorldBeanRemote");
+	}
 
 }
