@@ -14,29 +14,29 @@ import br.com.afrcode.arquitetura.teste.unitario.spring.config.SpringTestConfig;
 import br.com.afrcode.arquitetura.teste.unitario.util.junit.SpringJUnit4ClassRunnerExtended;
 
 /**
- * Classe base para execuÁ„o de testes funcionais, usando o Spring Context, SEM
- * startup autom·tico de banco de testes.
+ * Classe base para execu√ß√£o de testes funcionais, usando o Spring Context, SEM
+ * startup autom√°tico de banco de testes.
  * 
- * Classes de testes funcionais que envolvam operaÁıes de persistÍncia
+ * Classes de testes funcionais que envolvam opera√ß√µes de persist√™ncia
  * (JPA/Hibernate) <b>devem</b> ter esta classe como superclasse.
  * 
- * ObservaÁıes: O contexto transacional dos testes funcionais È isolado em
- * relaÁ„o ao da aplicaÁ„o onde os testes s„o executados.<br>
+ * Observa√ß√µes: O contexto transacional dos testes funcionais √© isolado em
+ * rela√ß√£o ao da aplica√ß√£o onde os testes s√£o executados.<br>
  * Por isto, usa-se TransactionConfiguration#defaultRollback() == false.
  * 
- * Para criaÁ„o de massa de dados de testes È necess·rio fazer uso do
+ * Para cria√ß√£o de massa de dados de testes √© necess√°rio fazer uso do
  * TransactionTemplate programaticamente.
  * 
- * Subclasses de AbstractCasoTesteFuncional ter„o como Profile Spring ativo
+ * Subclasses de AbstractCasoTesteFuncional ter√£o como Profile Spring ativo
  * (ActiveProfiles) o Profiles#PROFILE_TU, onde apenas classes Configuration
  * e/ou classes Component, e subtipos de Component, com Profile
- * Profiles#PROFILE_TU ser„o avaliadas em classpath pelo Spring.
+ * Profiles#PROFILE_TU ser√£o avaliadas em classpath pelo Spring.
  * 
  * 
  */
 @RunWith(SpringJUnit4ClassRunnerExtended.class)
 @ContextConfiguration(classes = { SpringTestConfig.class })
-// ConfiguraÁ„o para execuÁ„o de testes de integraÁ„o somente se houver a
+// Configura√ß√£o para execu√ß√£o de testes de integra√ß√£o somente se houver a
 // System.property[executandoTesteFuncional]
 // (-DexecutandoTesteFuncional=true) com valor igual a true.
 @IfProfileValue(name = "executandoTesteFuncional", value = "true")
@@ -44,29 +44,29 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.SpringJUnit4ClassRun
 @TransactionConfiguration(defaultRollback = false)
 public abstract class AbstractCasoTesteFuncional {
 
-    @BeforeClass
-    public static void iniciarSpringProfilesParaWebDriver() {
-        // SystemProperty para inibir startup/shutdown do HSQLDB. Ver
-        // HsqldbUtil.
-        System.setProperty("executandoTesteFuncional", "true");
-        System.setProperty("spring.profiles.active", Profiles.PROFILE_TU);
-    }
+	@BeforeClass
+	public static void iniciarSpringProfilesParaWebDriver() {
+		// SystemProperty para inibir startup/shutdown do HSQLDB. Ver
+		// HsqldbUtil.
+		System.setProperty("executandoTesteFuncional", "true");
+		System.setProperty("spring.profiles.active", Profiles.PROFILE_TU);
+	}
 
-    /**
-     * Metodo de pre-configuracao para um metodo de TU. Deve ser sobrescrito
-     * quando necessario.
-     */
-    @Before
-    public void antesDeExecutarMetodoTU() {
+	/**
+	 * Metodo de pre-configuracao para um metodo de TU. Deve ser sobrescrito
+	 * quando necessario.
+	 */
+	@Before
+	public void antesDeExecutarMetodoTU() {
 
-    }
+	}
 
-    /**
-     * Metodo de configuracao pre-execucao de um metodo de TU.
-     */
-    @After
-    public void aposExecutarMetodoTU() {
+	/**
+	 * Metodo de configuracao pre-execucao de um metodo de TU.
+	 */
+	@After
+	public void aposExecutarMetodoTU() {
 
-    }
+	}
 
 }

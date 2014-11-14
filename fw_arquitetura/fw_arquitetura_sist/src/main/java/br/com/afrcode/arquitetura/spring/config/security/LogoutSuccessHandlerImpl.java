@@ -11,23 +11,24 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
 /**
- * Classe utilit·rio para tratamento de Logout de usu·rios para o Spring
+ * Classe utilit√°ria para tratamento de Logout de usu√°rios para o Spring
  * Security.
  * 
  * 
  */
-public class LogoutSuccessHandlerImpl extends SimpleUrlLogoutSuccessHandler implements InitializingBean {
+public class LogoutSuccessHandlerImpl extends SimpleUrlLogoutSuccessHandler
+		implements InitializingBean {
 
-    @Override
-    public void
-            onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-                    throws IOException, ServletException {
-        super.onLogoutSuccess(request, response, authentication);
-    }
+	@Override
+	public void onLogoutSuccess(HttpServletRequest request,
+			HttpServletResponse response, Authentication authentication)
+			throws IOException, ServletException {
+		super.onLogoutSuccess(request, response, authentication);
+	}
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
+	@Override
+	public void afterPropertiesSet() throws Exception {
 
-    }
+	}
 
 }

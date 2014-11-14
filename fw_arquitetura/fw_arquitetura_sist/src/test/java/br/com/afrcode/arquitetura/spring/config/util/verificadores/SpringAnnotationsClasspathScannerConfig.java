@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * Configurações para scanner de classpath para componentes que violam o uso das
- * anotações Spring previstas.
+ * ConfiguraÃ§Ãµes para scanner de classpath para componentes que violam o uso das
+ * anotaÃ§Ãµes Spring previstas.
  * 
- * Em uso em testes de aderência e conformidade.
+ * Em uso em testes de aderÃªncia e conformidade.
  * 
  * 
  */
@@ -23,14 +23,20 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Configuration
 public class SpringAnnotationsClasspathScannerConfig {
 
-    @Bean
-    public ClassPathScanningCandidateComponentScanner springAnnotationsClasspathScanner() {
-        ClassPathScanningCandidateComponentScanner springAnnotationsClasspathScanner =
-                new ClassPathScanningCandidateComponentScanner();
-        springAnnotationsClasspathScanner.addIncludeFilter(new AnnotationTypeFilter(Component.class, false));
-        springAnnotationsClasspathScanner.addIncludeFilter(new AnnotationTypeFilter(Controller.class, false));
-        springAnnotationsClasspathScanner.addIncludeFilter(new AnnotationTypeFilter(Repository.class, false));
-        springAnnotationsClasspathScanner.addIncludeFilter(new AnnotationTypeFilter(Service.class, false));
-        return springAnnotationsClasspathScanner;
-    }
+	@Bean
+	public ClassPathScanningCandidateComponentScanner springAnnotationsClasspathScanner() {
+		ClassPathScanningCandidateComponentScanner springAnnotationsClasspathScanner = new ClassPathScanningCandidateComponentScanner();
+		springAnnotationsClasspathScanner
+				.addIncludeFilter(new AnnotationTypeFilter(Component.class,
+						false));
+		springAnnotationsClasspathScanner
+				.addIncludeFilter(new AnnotationTypeFilter(Controller.class,
+						false));
+		springAnnotationsClasspathScanner
+				.addIncludeFilter(new AnnotationTypeFilter(Repository.class,
+						false));
+		springAnnotationsClasspathScanner
+				.addIncludeFilter(new AnnotationTypeFilter(Service.class, false));
+		return springAnnotationsClasspathScanner;
+	}
 }

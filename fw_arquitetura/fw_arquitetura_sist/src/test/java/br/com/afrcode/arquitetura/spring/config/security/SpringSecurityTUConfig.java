@@ -18,15 +18,15 @@ import org.springframework.security.authentication.jaas.memory.InMemoryConfigura
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * ConfiguraÁıes necess·rias para uso do Spring Security.
+ * Configura√ß√µes necess√°rias para uso do Spring Security.
  * 
- * A estratÈgia em uso È a de definiÁ„o dos beans necess·rios em detrimento ao
+ * A estrat√©gia em uso √© a de defini√ß√£o dos beans necess√°rios em detrimento ao
  * uso do namespace security (via XML). O uso do namespace security (via XML)
- * poder· ser usado em conjunto ou em substituiÁ„o a esta classe.
+ * poder√° ser usado em conjunto ou em substitui√ß√£o a esta classe.
  * 
- * Para o profile de TUs basta definir um autenticador JAAS para autenticaÁ„o de
- * um PRINCIPAL com ROLE padr„o para os TUs. Ver LoginModuleParaTU e suas
- * definiÁıes.
+ * Para o profile de TUs basta definir um autenticador JAAS para autentica√ß√£o de
+ * um PRINCIPAL com ROLE padr√£o para os TUs. Ver LoginModuleParaTU e suas
+ * defini√ß√µes.
  * 
  * 
  */
@@ -35,47 +35,50 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @ImportResource({ "classpath:spring-security-beans-tu.xml" })
 public class SpringSecurityTUConfig {
 
-    /**
-     * Bean provedor de autenticaÁ„o Spring. Respons·vel por validar as
-     * credenciais de um usu·rio via JAAS LoginModule.
-     * 
-     * O LoginModule È configurado via AppConfigurationEntry e repassado ao
-     * DefaultJaasAuthenticationProvider.
-     * 
-     * O provider JAAS em uso para testes È o LoginModuleParaTU.
-     * 
-     * @return
-     */
-    @Bean
-    public DefaultJaasAuthenticationProvider authenticationProviderImpl() {
-        DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider = new DefaultJaasAuthenticationProvider();
+	/**
+	 * Bean provedor de autentica√ß√£o Spring. Respons√°vel por validar as
+	 * credenciais de um usu√°rio via JAAS LoginModule.
+	 * 
+	 * O LoginModule √© configurado via AppConfigurationEntry e repassado ao
+	 * DefaultJaasAuthenticationProvider.
+	 * 
+	 * O provider JAAS em uso para testes √© o LoginModuleParaTU.
+	 * 
+	 * @return
+	 */
+	@Bean
+	public DefaultJaasAuthenticationProvider authenticationProviderImpl() {
+		DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider = new DefaultJaasAuthenticationProvider();
 
-        // ConfiguraÁıes do provider JAAS. IntegraÁ„o Spring Security com o JAAS
-        // provider para AutenticaÁ„o.
-        Map<String, AppConfigurationEntry[]> appCofEntries = new HashMap<String, AppConfigurationEntry[]>();
-        AppConfigurationEntry appConfigurationEntry =
-                new AppConfigurationEntry(LoginModuleParaTU.class.getName(), LoginModuleControlFlag.REQUIRED,
-                        Collections.EMPTY_MAP);
-        appCofEntries.put("SPRINGSECURITY", new AppConfigurationEntry[] { appConfigurationEntry });
-        defaultJaasAuthenticationProvider.setConfiguration(new InMemoryConfiguration(appCofEntries));
+		// Configura√ß√µes do provider JAAS. Integra√ß√£o Spring Security com o JAAS
+		// provider para Autentica√ß√£o.
+		Map<String, AppConfigurationEntry[]> appCofEntries = new HashMap<String, AppConfigurationEntry[]>();
+		AppConfigurationEntry appConfigurationEntry = new AppConfigurationEntry(
+				LoginModuleParaTU.class.getName(),
+				LoginModuleControlFlag.REQUIRED, Collections.EMPTY_MAP);
+		appCofEntries.put("SPRINGSECURITY",
+				new AppConfigurationEntry[] { appConfigurationEntry });
+		defaultJaasAuthenticationProvider
+				.setConfiguration(new InMemoryConfiguration(appCofEntries));
 
-        // ConfiguraÁıes do provider JAAS. IntegraÁ„o Spring Security com o JAAS
-        // provider para AutorizaÁ„o.
-        AuthorityGranter authorityGranter = authorityGranter();
-        defaultJaasAuthenticationProvider.setAuthorityGranters(new AuthorityGranter[] { authorityGranter });
+		// Configura√ß√µes do provider JAAS. Integra√ß√£o Spring Security com o JAAS
+		// provider para Autoriza√ß√£o.
+		AuthorityGranter authorityGranter = authorityGranter();
+		defaultJaasAuthenticationProvider
+				.setAuthorityGranters(new AuthorityGranter[] { authorityGranter });
 
-        return defaultJaasAuthenticationProvider;
-    }
+		return defaultJaasAuthenticationProvider;
+	}
 
-    /**
-     * Adaptador respons·vel por fazer o DE-PARA entre credenciais do principal
-     * (Subject JAAS) e GrantedAuthority do Spring Security.
-     * 
-     * @return
-     */
-    private AuthorityGranter authorityGranter() {
-        AuthorityGranter authorityGranter = new AuthorityGranterParaTU();
-        return authorityGranter;
-    }
+	/**
+	 * Adaptador respons√°vel por fazer o DE-PARA entre credenciais do principal
+	 * (Subject JAAS) e GrantedAuthority do Spring Security.
+	 * 
+	 * @return
+	 */
+	private AuthorityGranter authorityGranter() {
+		AuthorityGranter authorityGranter = new AuthorityGranterParaTU();
+		return authorityGranter;
+	}
 
 }

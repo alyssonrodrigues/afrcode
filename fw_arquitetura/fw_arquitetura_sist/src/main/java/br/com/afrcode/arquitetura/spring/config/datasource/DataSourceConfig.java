@@ -22,17 +22,17 @@ import br.com.afrcode.arquitetura.util.contexto.ContextoAplicacaoWeb;
 import br.com.afrcode.arquitetura.util.excecao.ExcecaoNaoPrevista;
 
 /**
- * ConfiguraÁıes para definiÁıes de datasource em uso pela aplicaÁ„o em
- * produÁ„o.
+ * Configura√ß√µes para defini√ß√µes de datasource em uso pela aplica√ß√£o em
+ * produ√ß√£o.
  * 
- * O datasource ser· obtido via JNDI.
+ * O datasource ser√° obtido via JNDI.
  * 
- * Contextos Spring para aplicaÁıes Web s„o iniciados a partir do web.xml, onde
- * È definido o init-param contextId=nomeContextoWeb. Neste caso o nome JNDI
- * ser· obtido via sintaxe: java:/xadatasources/<<nomeContextoWeb>>Datasource.
+ * Contextos Spring para aplica√ß√µes Web s√£o iniciados a partir do web.xml, onde
+ * √© definido o init-param contextId=nomeContextoWeb. Neste caso o nome JNDI
+ * ser√° obtido via sintaxe: java:/xadatasources/<<nomeContextoWeb>>Datasource.
  * 
- * Contextos Spring para EJBs s„o independentes e isolados em relaÁ„o a
- * Contextos Spring para aplicaÁıes Web. Neste caso o nome JNDI ser· obtido via
+ * Contextos Spring para EJBs s√£o independentes e isolados em rela√ß√£o a
+ * Contextos Spring para aplica√ß√µes Web. Neste caso o nome JNDI ser√° obtido via
  * arquivo de propriedades em
  * <<projeto>>IS-impl/src/main/resources/datasource.properties.
  * 
@@ -41,48 +41,51 @@ import br.com.afrcode.arquitetura.util.excecao.ExcecaoNaoPrevista;
 @Configuration
 @Profile(Profiles.PROFILE_APLICACAO)
 public class DataSourceConfig {
-    private static final Logger LOG = Logger.getLogger(DataSourceConfig.class);
+	private static final Logger LOG = Logger.getLogger(DataSourceConfig.class);
 
-    @Autowired
-    private ContextoAplicacaoWeb contextoAplicacaoWeb;
+	@Autowired
+	private ContextoAplicacaoWeb contextoAplicacaoWeb;
 
-    @Bean
-    @Primary
-    public DataSource dataSource() {
-        DataSource dataSource = null;
-        try {
-            Context context = new InitialContext();
-            String datasourceJndiName = recuperarDatasourceJndiName();
-            dataSource = (DataSource) context.lookup(datasourceJndiName);
-        } catch (NamingException e) {
-            LOG.error(e);
-            throw new ExcecaoNaoPrevista(e);
-        }
-        return dataSource;
-    }
+	@Bean
+	@Primary
+	public DataSource dataSource() {
+		DataSource dataSource = null;
+		try {
+			Context context = new InitialContext();
+			String datasourceJndiName = recuperarDatasourceJndiName();
+			dataSource = (DataSource) context.lookup(datasourceJndiName);
+		} catch (NamingException e) {
+			LOG.error(e);
+			throw new ExcecaoNaoPrevista(e);
+		}
+		return dataSource;
+	}
 
-    private String recuperarDatasourceJndiName() {
-        String datasourceJndiName = null;
-        InputStream isDataSourceProperties =
-                Thread.currentThread().getContextClassLoader().getResourceAsStream("datasource.properties");
-        if (isDataSourceProperties == null) {
-            datasourceJndiName = "java:/xadatasources/" + contextoAplicacaoWeb.getNomeContextoWeb() + "Datasource";
-        } else {
-            Properties datasourceProperties = new Properties();
-            try {
-                datasourceProperties.load(isDataSourceProperties);
-                datasourceJndiName = datasourceProperties.getProperty("datasourceJndiName");
-            } catch (IOException e) {
-                throw new ExcecaoNaoPrevista(e);
-            }
-        }
-        return datasourceJndiName;
-    }
+	private String recuperarDatasourceJndiName() {
+		String datasourceJndiName = null;
+		InputStream isDataSourceProperties = Thread.currentThread()
+				.getContextClassLoader()
+				.getResourceAsStream("datasource.properties");
+		if (isDataSourceProperties == null) {
+			datasourceJndiName = "java:/xadatasources/"
+					+ contextoAplicacaoWeb.getNomeContextoWeb() + "Datasource";
+		} else {
+			Properties datasourceProperties = new Properties();
+			try {
+				datasourceProperties.load(isDataSourceProperties);
+				datasourceJndiName = datasourceProperties
+						.getProperty("datasourceJndiName");
+			} catch (IOException e) {
+				throw new ExcecaoNaoPrevista(e);
+			}
+		}
+		return datasourceJndiName;
+	}
 
-    @Bean
-    @Primary
-    public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(dataSource());
-    }
+	@Bean
+	@Primary
+	public JdbcTemplate jdbcTemplate() {
+		return new JdbcTemplate(dataSource());
+	}
 
 }

@@ -13,11 +13,11 @@ import org.hibernate.validator.constraints.br.CPF;
 import br.com.afrcode.arquitetura.modelo.entidade.ObjetoPersistenteAbstrato;
 
 /**
- * Classe de entidade para teste e validaÁ„o inicial do frameworkarquitetura.
+ * Classe de entidade para teste e valida√ß√£o inicial do frameworkarquitetura.
  * 
- * ATEN«√O: Esta entidade encontra-se em src/test/java pois È uma Entidade para
+ * ATEN√á√ÉO: Esta entidade encontra-se em src/test/java pois √© uma Entidade para
  * TESTE inicial do frameworkarquitetura e somente por isto! Entidades da
- * aplicaÁ„o devem estar em src/main/java!
+ * aplica√ß√£o devem estar em src/main/java!
  * 
  * 
  */
@@ -25,50 +25,52 @@ import br.com.afrcode.arquitetura.modelo.entidade.ObjetoPersistenteAbstrato;
 @SequenceGenerator(name = "ID_GENERATOR", sequenceName = "SEQ_UM_OBJ_PERSISTENTE")
 public class UmObjetoPersistente extends ObjetoPersistenteAbstrato {
 
-    @Length(min = 3, max = 100)
-    @NotNull
-    private String descricao;
+	private static final long serialVersionUID = 1L;
 
-    @Past
-    private Calendar data;
+	@Length(min = 3, max = 100)
+	@NotNull
+	private String descricao;
 
-    @CPF
-    private String numCpf;
+	@Past
+	private Calendar data;
 
-    @Override
-    public void preencherComValoresPersistiveis() {
-        setDescricao("Uma descriÁ„o");
-    }
+	@CPF
+	private String numCpf;
 
-    /**
-     * @return the descricao
-     */
-    public String getDescricao() {
-        return descricao;
-    }
+	@Override
+	public void preencherComValoresPersistiveis() {
+		setDescricao("Uma descri√ß√£o");
+	}
 
-    /**
-     * @param descricao
-     *            the descricao to set
-     */
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	/**
+	 * @return the descricao
+	 */
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public Calendar getData() {
-        return data;
-    }
+	/**
+	 * @param descricao
+	 *            the descricao to set
+	 */
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public void setData(Calendar data) {
-        this.data = data;
-    }
+	public Calendar getData() {
+		return data;
+	}
 
-    public String getNumCpf() {
-        return numCpf;
-    }
+	public void setData(Calendar data) {
+		this.data = data;
+	}
 
-    public void setNumCpf(String numCpf) {
-        this.numCpf = numCpf;
-    }
+	public String getNumCpf() {
+		return numCpf;
+	}
+
+	public void setNumCpf(String numCpf) {
+		this.numCpf = numCpf;
+	}
 
 }

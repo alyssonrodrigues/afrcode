@@ -2,7 +2,7 @@ package br.com.afrcode.arquitetura.util.excecao;
 
 /**
  * 
- * Interface base de implementaÁ„o de tratadores de exceÁ„o.
+ * Interface base de implementa√ß√£o de tratadores de exce√ß√£o.
  * 
  * 
  * @param <T>
@@ -10,14 +10,14 @@ package br.com.afrcode.arquitetura.util.excecao;
  */
 public interface ITratadorExcecao<T extends Throwable> {
 
-    /**
-     * MÈtodo respons·vel por dar tratamento adequado a exceÁ„o.
-     * 
-     * Exemplo de tratamentos tÌpicos: enviar email, registrar erro em BD,
-     * registrar em LOG, formatar mensagem para exibir ao usu·rio, etc.
-     * 
-     * @param excecao
-     */
-    void tratarExcecao(T excecao);
+	/**
+	 * M√©todo respons√°vel por dar tratamento adequado a exce√ß√£o.
+	 * 
+	 * Exemplo de tratamentos t√≥picos: enviar email, registrar erro em BD,
+	 * registrar em LOG, formatar mensagem para exibir ao usu√°rio, etc.
+	 * 
+	 * @param excecao
+	 */
+	void tratarExcecao(T excecao);
 
 }

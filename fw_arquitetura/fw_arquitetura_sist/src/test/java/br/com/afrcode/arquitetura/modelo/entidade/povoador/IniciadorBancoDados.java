@@ -3,11 +3,11 @@ package br.com.afrcode.arquitetura.modelo.entidade.povoador;
 import br.com.afrcode.arquitetura.spring.anotacoes.Povoador;
 
 /**
- * Classe cuja responsabilidade é iniciar o banco de dados com um schema inicial
+ * Classe cuja responsabilidade Ã© iniciar o banco de dados com um schema inicial
  * sem dados.
  * 
- * Via configurações de TESTES presentes em
- * projeto/src/main/resources/hibernate-jpaProperties.properties é executado um
+ * Via configuraÃ§Ãµes de TESTES presentes em
+ * projeto/src/main/resources/hibernate-jpaProperties.properties Ã© executado um
  * schema drop-create via Hibernate tools com base nas entidades encontradas em
  * classpath.
  * 
@@ -16,17 +16,17 @@ import br.com.afrcode.arquitetura.spring.anotacoes.Povoador;
 @Povoador
 public class IniciadorBancoDados extends PovoadorAbstrato {
 
-    public IniciadorBancoDados() {
-        super(IniciadorBancoDados.class);
-    }
+	public IniciadorBancoDados() {
+		super(IniciadorBancoDados.class);
+	}
 
-    @Override
-    public void povoar() {
-        // Nenhum dado é criado.
-    }
+	@Override
+	public void povoar() {
+		// Nenhum dado Ã© criado.
+	}
 
-    public static void main(String[] args) {
-        new IniciadorBancoDados().executar();
-    }
+	public static void main(String[] args) {
+		new IniciadorBancoDados().executar();
+	}
 
 }

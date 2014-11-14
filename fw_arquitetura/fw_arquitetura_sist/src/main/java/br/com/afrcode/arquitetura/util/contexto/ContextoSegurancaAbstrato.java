@@ -16,40 +16,43 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
- * Classe base de implementação de IContextoSeguranca para uso em
+ * Classe base de implementaÃ§Ã£o de IContextoSeguranca para uso em
  * PROFILE_APLICACAO e PROFILE_TU.
  * 
  * 
  */
 public abstract class ContextoSegurancaAbstrato implements IContextoSeguranca {
 
-    @Autowired
-    private MethodSecurityInterceptor methodSecurityInterceptor;
+	@Autowired
+	private MethodSecurityInterceptor methodSecurityInterceptor;
 
-    public ContextoSegurancaAbstrato() {
-        super();
-    }
+	public ContextoSegurancaAbstrato() {
+		super();
+	}
 
-    @Override
-    public boolean seUsuarioAnonimo() {
-        Authentication authentication = getAuthentication();
-        AuthenticationTrustResolver authenticationTrustResolver = new AuthenticationTrustResolverImpl();
-        return authenticationTrustResolver.isAnonymous(authentication);
-    }
+	@Override
+	public boolean seUsuarioAnonimo() {
+		Authentication authentication = getAuthentication();
+		AuthenticationTrustResolver authenticationTrustResolver = new AuthenticationTrustResolverImpl();
+		return authenticationTrustResolver.isAnonymous(authentication);
+	}
 
-    @Override
-    public void checarAutorizacao(RolesAllowed rolesAllowed) {
-        Collection<ConfigAttribute> securityConfAttributes = new ArrayList<ConfigAttribute>();
-        for (String funcaoComputacional : rolesAllowed.value()) {
-            securityConfAttributes.add(new Jsr250SecurityConfig(funcaoComputacional));
-        }
-        AccessDecisionManager accessDecisionManager = methodSecurityInterceptor.getAccessDecisionManager();
-        Authentication authentication = getAuthentication();
-        accessDecisionManager.decide(authentication, null, securityConfAttributes);
-    }
+	@Override
+	public void checarAutorizacao(RolesAllowed rolesAllowed) {
+		Collection<ConfigAttribute> securityConfAttributes = new ArrayList<ConfigAttribute>();
+		for (String funcaoComputacional : rolesAllowed.value()) {
+			securityConfAttributes.add(new Jsr250SecurityConfig(
+					funcaoComputacional));
+		}
+		AccessDecisionManager accessDecisionManager = methodSecurityInterceptor
+				.getAccessDecisionManager();
+		Authentication authentication = getAuthentication();
+		accessDecisionManager.decide(authentication, null,
+				securityConfAttributes);
+	}
 
-    protected Authentication getAuthentication() {
-        return SecurityContextHolder.getContext().getAuthentication();
-    }
+	protected Authentication getAuthentication() {
+		return SecurityContextHolder.getContext().getAuthentication();
+	}
 
 }

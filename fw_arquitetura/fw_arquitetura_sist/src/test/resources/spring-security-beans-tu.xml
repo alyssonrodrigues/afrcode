@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
     xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
@@ -7,9 +7,9 @@
            http://www.springframework.org/schema/security/spring-security.xsd">
 
     <!-- O atributo jaas-api-provision="true" indica ao Spring para incluir o org.springframework.security.web.jaasapi.JaasApiIntegrationFilter 
-         na cadeia de execução de requests! Este filtro iniciará o Subject e executará a requisição via Subject.doAs...
+         na cadeia de execucao de requests! Este filtro iniciara o Subject e executara a requisicao via Subject.doAs...
          O atributo use-expressions="true" indica ao Spring o uso de expressions Spring nos atributos access das tags intercept-url.
-         Veja a lista de possíveis expressões para uso em: http://static.springsource.org/spring-security/site/docs/3.1.x/reference/el-access.html. -->
+         Veja a lista de possiveis expressoes para uso em: http://static.springsource.org/spring-security/site/docs/3.1.x/reference/el-access.html. -->
     <http jaas-api-provision="true" use-expressions="true">
     
         <anonymous enabled="true" />
@@ -17,13 +17,13 @@
         <http-basic />
     </http>
     
-    <!-- Configurações para definição de provider de autenticação para o Spring. Faz-se uso do suporte Spring ao JAAS - veja em
-         br.com.afrcode.arquitetura.spring.config.security.SpringSecurityTUConfig a documentação a respeito. -->
+    <!-- Configuracoes para definicao de provider de autenticacao para o Spring. Faz-se uso do suporte Spring ao JAAS - veja em
+         br.com.afrcode.arquitetura.spring.config.security.SpringSecurityTUConfig a documentacao a respeito. -->
     <authentication-manager>
         <authentication-provider ref="authenticationProviderImpl"/>
     </authentication-manager>
     
-    <!--  Esta configuração desabilita as anotações @RolesAllowed do JAAS, similares as @Secured do Spring Security 
+    <!--  Esta configuracao desabilita as anotacoes @RolesAllowed do JAAS, similares as @Secured do Spring Security 
           para TUS. -->
     <global-method-security jsr250-annotations="disabled" secured-annotations="disabled" />
     

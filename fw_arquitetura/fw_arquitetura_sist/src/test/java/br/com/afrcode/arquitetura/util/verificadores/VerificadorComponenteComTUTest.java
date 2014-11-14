@@ -20,54 +20,63 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmM
 import br.com.afrcode.arquitetura.util.contexto.ContextoAplicacaoWeb;
 
 public class VerificadorComponenteComTUTest extends AbstractCasoTesteEmMemoria {
-    @Qualifier("componenteAnnotationClasspathScanner")
-    @Autowired
-    private ClassPathScanningCandidateComponentScanner componenteAnnotationClasspathScanner;
+	@Qualifier("componenteAnnotationClasspathScanner")
+	@Autowired
+	private ClassPathScanningCandidateComponentScanner componenteAnnotationClasspathScanner;
 
-    @Qualifier("componenteTesteClasspathScanner")
-    @Autowired
-    private ClassPathScanningCandidateComponentScanner componenteTesteClasspathScanner;
+	@Qualifier("componenteTesteClasspathScanner")
+	@Autowired
+	private ClassPathScanningCandidateComponentScanner componenteTesteClasspathScanner;
 
-    /**
-     * MÈtodo de verificaÁ„o de regra arquitetural:
-     * "Para todo Componente deve existir uma classe de Teste.".
-     */
-    @Test
-    public void verificarParaTodoComponenteHaUmaClasseTU() {
-        Set<BeanDefinition> beansComponente =
-                componenteAnnotationClasspathScanner.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
-        Set<BeanDefinition> beansTesteComponente =
-                componenteTesteClasspathScanner.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
+	/**
+	 * M√©todo de verifica√ß√£o de regra arquitetural:
+	 * "Para todo Componente deve existir uma classe de Teste.".
+	 */
+	@Test
+	public void verificarParaTodoComponenteHaUmaClasseTU() {
+		Set<BeanDefinition> beansComponente = componenteAnnotationClasspathScanner
+				.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
+		Set<BeanDefinition> beansTesteComponente = componenteTesteClasspathScanner
+				.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
 
-        Map<String, BeanDefinition> testesComponentes = new HashMap<String, BeanDefinition>();
-        for (BeanDefinition beanTesteComponente : beansTesteComponente) {
-            String testeComponenteClassName = beanTesteComponente.getBeanClassName();
-            String testeComponenteSimpleClassName =
-                    testeComponenteClassName.substring(testeComponenteClassName.lastIndexOf(".") + 1);
-            testesComponentes.put(testeComponenteSimpleClassName, beanTesteComponente);
-        }
+		Map<String, BeanDefinition> testesComponentes = new HashMap<String, BeanDefinition>();
+		for (BeanDefinition beanTesteComponente : beansTesteComponente) {
+			String testeComponenteClassName = beanTesteComponente
+					.getBeanClassName();
+			String testeComponenteSimpleClassName = testeComponenteClassName
+					.substring(testeComponenteClassName.lastIndexOf(".") + 1);
+			testesComponentes.put(testeComponenteSimpleClassName,
+					beanTesteComponente);
+		}
 
-        List<String> excecoesARegra = Arrays.asList(ContextoAplicacaoWeb.class.getName());
+		List<String> excecoesARegra = Arrays.asList(ContextoAplicacaoWeb.class
+				.getName());
 
-        Set<String> componentesSemTeste = new HashSet<String>();
-        for (BeanDefinition beanComponente : beansComponente) {
-            String componenteClassName = beanComponente.getBeanClassName();
-            String componenteSimpleClassName = componenteClassName.substring(componenteClassName.lastIndexOf(".") + 1);
-            String testeComponenteSimpleClassName = ConstantesPadroes.PREFIXO_TESTE + componenteSimpleClassName;
-            BeanDefinition componenteBeanTesteComponente = testesComponentes.get(testeComponenteSimpleClassName);
-            if (componenteBeanTesteComponente == null) {
-                testeComponenteSimpleClassName = componenteSimpleClassName + ConstantesPadroes.SUFIXO_TESTE;
-                componenteBeanTesteComponente = testesComponentes.get(testeComponenteSimpleClassName);
-                if (!excecoesARegra.contains(beanComponente.getBeanClassName())
-                        && componenteBeanTesteComponente == null) {
-                    componentesSemTeste.add(beanComponente.getBeanClassName());
-                }
-            }
-        }
+		Set<String> componentesSemTeste = new HashSet<String>();
+		for (BeanDefinition beanComponente : beansComponente) {
+			String componenteClassName = beanComponente.getBeanClassName();
+			String componenteSimpleClassName = componenteClassName
+					.substring(componenteClassName.lastIndexOf(".") + 1);
+			String testeComponenteSimpleClassName = ConstantesPadroes.PREFIXO_TESTE
+					+ componenteSimpleClassName;
+			BeanDefinition componenteBeanTesteComponente = testesComponentes
+					.get(testeComponenteSimpleClassName);
+			if (componenteBeanTesteComponente == null) {
+				testeComponenteSimpleClassName = componenteSimpleClassName
+						+ ConstantesPadroes.SUFIXO_TESTE;
+				componenteBeanTesteComponente = testesComponentes
+						.get(testeComponenteSimpleClassName);
+				if (!excecoesARegra.contains(beanComponente.getBeanClassName())
+						&& componenteBeanTesteComponente == null) {
+					componentesSemTeste.add(beanComponente.getBeanClassName());
+				}
+			}
+		}
 
-        Assert.assertTrue(
-                "Os seguintes Componentes n„o possuem classe de testes implementada: "
-                        + StringUtils.join(componentesSemTeste, ","), componentesSemTeste.isEmpty());
-    }
+		Assert.assertTrue(
+				"Os seguintes Componentes n√£o possuem classe de testes implementada: "
+						+ StringUtils.join(componentesSemTeste, ","),
+				componentesSemTeste.isEmpty());
+	}
 
 }

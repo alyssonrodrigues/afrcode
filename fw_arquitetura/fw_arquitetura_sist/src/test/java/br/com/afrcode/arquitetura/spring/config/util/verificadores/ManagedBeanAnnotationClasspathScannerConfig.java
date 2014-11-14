@@ -10,9 +10,9 @@ import org.springframework.core.type.filter.AnnotationTypeFilter;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * Configurações para scanner de classpath para componentes ManagedBean.
+ * ConfiguraÃ§Ãµes para scanner de classpath para componentes ManagedBean.
  * 
- * Em uso em testes de aderência e conformidade.
+ * Em uso em testes de aderÃªncia e conformidade.
  * 
  * 
  */
@@ -20,12 +20,13 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Configuration
 public class ManagedBeanAnnotationClasspathScannerConfig {
 
-    @Bean
-    public ClassPathScanningCandidateComponentScanner managedBeanAnnotationClasspathScanner() {
-        ClassPathScanningCandidateComponentScanner managedBeanAnnotationClasspathScanner =
-                new ClassPathScanningCandidateComponentScanner();
-        managedBeanAnnotationClasspathScanner.addIncludeFilter(new AnnotationTypeFilter(ManagedBean.class, false));
-        return managedBeanAnnotationClasspathScanner;
-    }
+	@Bean
+	public ClassPathScanningCandidateComponentScanner managedBeanAnnotationClasspathScanner() {
+		ClassPathScanningCandidateComponentScanner managedBeanAnnotationClasspathScanner = new ClassPathScanningCandidateComponentScanner();
+		managedBeanAnnotationClasspathScanner
+				.addIncludeFilter(new AnnotationTypeFilter(ManagedBean.class,
+						false));
+		return managedBeanAnnotationClasspathScanner;
+	}
 
 }

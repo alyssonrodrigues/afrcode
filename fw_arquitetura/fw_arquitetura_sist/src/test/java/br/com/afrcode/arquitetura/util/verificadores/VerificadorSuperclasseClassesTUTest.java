@@ -19,47 +19,50 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTeste;
 import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmMemoria;
 import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteSemJpaEJta;
 
-public class VerificadorSuperclasseClassesTUTest extends AbstractCasoTesteEmMemoria {
+public class VerificadorSuperclasseClassesTUTest extends
+		AbstractCasoTesteEmMemoria {
 
-    @Qualifier("classeTesteClasspathScanner")
-    @Autowired
-    private ClassPathScanningCandidateComponentScanner classeTesteClasspathScanner;
+	@Qualifier("classeTesteClasspathScanner")
+	@Autowired
+	private ClassPathScanningCandidateComponentScanner classeTesteClasspathScanner;
 
-    /**
-     * MÈtodo de verificaÁ„o de regra arquitetural:
-     * "Classes de TU devem ser subclasses de CasoTeste, CasoTesteEmMemoria ou CasoTesteSemJpaEJta"
-     * .
-     * 
-     * @throws ClassNotFoundException
-     */
-    @Test
-    public void verificarSuperclasseDeClasseTeste() throws ClassNotFoundException {
-        Set<BeanDefinition> beansClasseTeste =
-                classeTesteClasspathScanner.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
-        List<Class<?>> classesTU =
-                Arrays.asList(new Class<?>[] { AbstractCasoTeste.class, AbstractCasoTesteEmMemoria.class,
-                        AbstractCasoTesteSemJpaEJta.class });
+	/**
+	 * M√©todo de verifica√ß√£o de regra arquitetural:
+	 * "Classes de TU devem ser subclasses de CasoTeste, CasoTesteEmMemoria ou CasoTesteSemJpaEJta"
+	 * .
+	 * 
+	 * @throws ClassNotFoundException
+	 */
+	@Test
+	public void verificarSuperclasseDeClasseTeste()
+			throws ClassNotFoundException {
+		Set<BeanDefinition> beansClasseTeste = classeTesteClasspathScanner
+				.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
+		List<Class<?>> classesTU = Arrays.asList(new Class<?>[] {
+				AbstractCasoTeste.class, AbstractCasoTesteEmMemoria.class,
+				AbstractCasoTesteSemJpaEJta.class });
 
-        List<String> classesTesteSemSuperclasseTu = new ArrayList<String>();
-        for (BeanDefinition beanClasseTeste : beansClasseTeste) {
-            String classeTesteName = beanClasseTeste.getBeanClassName();
-            Class<?> classeTeste = ClassUtils.getClass(classeTesteName);
+		List<String> classesTesteSemSuperclasseTu = new ArrayList<String>();
+		for (BeanDefinition beanClasseTeste : beansClasseTeste) {
+			String classeTesteName = beanClasseTeste.getBeanClassName();
+			Class<?> classeTeste = ClassUtils.getClass(classeTesteName);
 
-            boolean isSubclasseSuperclasseTU = false;
-            for (Class<?> superClassTU : classesTU) {
-                if (superClassTU.isAssignableFrom(classeTeste)) {
-                    isSubclasseSuperclasseTU = true;
-                    break;
-                }
-            }
+			boolean isSubclasseSuperclasseTU = false;
+			for (Class<?> superClassTU : classesTU) {
+				if (superClassTU.isAssignableFrom(classeTeste)) {
+					isSubclasseSuperclasseTU = true;
+					break;
+				}
+			}
 
-            if (!isSubclasseSuperclasseTU) {
-                classesTesteSemSuperclasseTu.add(classeTesteName);
-            }
-        }
-        Assert.assertTrue(
-                "Os seguintes TUs n„o possuem superclasses previstas: "
-                        + StringUtils.join(classesTesteSemSuperclasseTu, ","), classesTesteSemSuperclasseTu.isEmpty());
-    }
+			if (!isSubclasseSuperclasseTU) {
+				classesTesteSemSuperclasseTu.add(classeTesteName);
+			}
+		}
+		Assert.assertTrue(
+				"Os seguintes TUs n√£o possuem superclasses previstas: "
+						+ StringUtils.join(classesTesteSemSuperclasseTu, ","),
+				classesTesteSemSuperclasseTu.isEmpty());
+	}
 
 }

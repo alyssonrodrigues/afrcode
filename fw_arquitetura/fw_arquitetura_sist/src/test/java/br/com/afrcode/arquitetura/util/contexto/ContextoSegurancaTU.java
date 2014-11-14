@@ -22,10 +22,10 @@ import br.com.afrcode.arquitetura.spring.config.security.LoginModuleParaTU;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * Classe utilitária para obtenção de informações de autenticação e autorização
+ * Classe utilitÃ¡ria para obtenÃ§Ã£o de informaÃ§Ãµes de autenticaÃ§Ã£o e autorizaÃ§Ã£o
  * para o PROFILE_TU.
  * 
- * A autenticação e a autorização para TUs baseia-se via configurações presentes
+ * A autenticaÃ§Ã£o e a autorizaÃ§Ã£o para TUs baseia-se via configuraÃ§Ãµes presentes
  * em SpringSecurityTUConfig.
  * 
  * 
@@ -34,34 +34,39 @@ import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 @Profile({ Profiles.PROFILE_TU })
 public class ContextoSegurancaTU extends ContextoSegurancaAbstrato {
 
-    /**
-     * Ver SpringSecurityTUConfig para maiores informações acerca do
-     * DefaultJaasAuthenticationProvider em uso por TUs.
-     */
-    @Autowired
-    private DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider;
+	/**
+	 * Ver SpringSecurityTUConfig para maiores informaÃ§Ãµes acerca do
+	 * DefaultJaasAuthenticationProvider em uso por TUs.
+	 */
+	@Autowired
+	private DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider;
 
-    /**
-     * Método responsável por criar autenticação para o PROFILE_TU.
-     */
-    @PostConstruct
-    void iniciar() {
-        UsernamePasswordAuthenticationToken token =
-                new UsernamePasswordAuthenticationToken(LoginModuleParaTU.USER, LoginModuleParaTU.PASSWD);
-        Authentication auth = defaultJaasAuthenticationProvider.authenticate(token);
-        Validate.isTrue(auth.isAuthenticated(), "O usuário deveria ter sido autenticado com sucesso para TUs!");
-        SecurityContextHolder.getContext().setAuthentication(auth);
-    }
+	/**
+	 * MÃ©todo responsÃ¡vel por criar autenticaÃ§Ã£o para o PROFILE_TU.
+	 */
+	@PostConstruct
+	void iniciar() {
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+				LoginModuleParaTU.USER, LoginModuleParaTU.PASSWD);
+		Authentication auth = defaultJaasAuthenticationProvider
+				.authenticate(token);
+		Validate.isTrue(auth.isAuthenticated(),
+				"O usuÃ¡rio deveria ter sido autenticado com sucesso para TUs!");
+		SecurityContextHolder.getContext().setAuthentication(auth);
+	}
 
-    @Override
-    public User getUsuarioAutenticado() {
-        JaasAuthenticationToken jaasAuthenticationToken = JaasAuthenticationToken.class.cast(getAuthentication());
-        String username = jaasAuthenticationToken.getName();
-        String password = String.class.cast(jaasAuthenticationToken.getCredentials());
-        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(AuthorityGranterParaTU.ROLE_USER);
+	@Override
+	public User getUsuarioAutenticado() {
+		JaasAuthenticationToken jaasAuthenticationToken = JaasAuthenticationToken.class
+				.cast(getAuthentication());
+		String username = jaasAuthenticationToken.getName();
+		String password = String.class.cast(jaasAuthenticationToken
+				.getCredentials());
+		List<GrantedAuthority> authorities = AuthorityUtils
+				.createAuthorityList(AuthorityGranterParaTU.ROLE_USER);
 
-        User usuario = new User(username, password, authorities);
-        return usuario;
-    }
+		User usuario = new User(username, password, authorities);
+		return usuario;
+	}
 
 }

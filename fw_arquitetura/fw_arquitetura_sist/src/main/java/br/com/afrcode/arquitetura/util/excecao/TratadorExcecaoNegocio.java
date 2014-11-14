@@ -5,17 +5,18 @@ import org.apache.commons.lang.Validate;
 import br.com.afrcode.arquitetura.util.mensagem.MensagemNegocioAbstrata;
 
 /**
- * Tratador de execeções para o tipo específico de exceção ExcecaoNegocio.
+ * Tratador de execeÃ§Ãµes para o tipo especÃ­fico de exceÃ§Ã£o ExcecaoNegocio.
  * 
  * 
  */
 public class TratadorExcecaoNegocio implements ITratadorExcecao<ExcecaoNegocio> {
 
-    @Override
-    public void tratarExcecao(ExcecaoNegocio excecao) {
-        Validate.notNull(excecao, "Uma instância de ExcecaoNegocio deve ser informada!");
-        MensagemNegocioAbstrata mensagem = excecao.getMensagem();
-        mensagem.tratarMensagem();
-    }
+	@Override
+	public void tratarExcecao(ExcecaoNegocio excecao) {
+		Validate.notNull(excecao,
+				"Uma instÃ¢ncia de ExcecaoNegocio deve ser informada!");
+		MensagemNegocioAbstrata mensagem = excecao.getMensagem();
+		mensagem.tratarMensagem();
+	}
 
 }

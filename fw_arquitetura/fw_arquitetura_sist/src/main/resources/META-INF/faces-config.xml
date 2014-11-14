@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xi="http://www.w3.org/2001/XInclude"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 
-    <!-- Integração entre o JSF e o Spring! -->
+    <!-- Integracao entre o JSF e o Spring! -->
     <application>
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
         <locale-config>
@@ -10,7 +10,7 @@
         </locale-config>
     </application>
 
-    <!-- Configurações para uso do tratador de exceções implementado. -->
+    <!-- Configuracoes para uso do tratador de excecoes implementado. -->
     <factory>
         <exception-handler-factory>
             br.com.afrcode.arquitetura.util.jsf.excecao.JSF2ExceptionHandlerFactory

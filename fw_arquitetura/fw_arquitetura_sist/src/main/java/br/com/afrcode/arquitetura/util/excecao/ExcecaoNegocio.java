@@ -5,49 +5,51 @@ import org.apache.commons.lang.Validate;
 import br.com.afrcode.arquitetura.util.mensagem.MensagemNegocioAbstrata;
 
 /**
- * Classe base para exceÁıes de negÛcio (lanÁadas na camada Model do MVC).
+ * Classe base para exce√ß√µes de neg√≥cio (lan√ßadas na camada Model do MVC).
  * 
  * Ver MensagemNegocioAbstrata e seus subtipos.
  * 
- * Em geral estas exceÁıes s„o conhecidas e tratadas gerando informaÁıes e
- * mensagens exibidas ou enviadas ao usu·rio final.
+ * Em geral estas exce√ß√µes s√£o conhecidas e tratadas gerando informa√ß√µes e
+ * mensagens exibidas ou enviadas ao usu√°rio final.
  * 
  * 
  */
-public class ExcecaoNegocio extends RuntimeException implements IExcecao<MensagemNegocioAbstrata> {
+public class ExcecaoNegocio extends RuntimeException implements
+		IExcecao<MensagemNegocioAbstrata> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private MensagemNegocioAbstrata msg;
+	private MensagemNegocioAbstrata msg;
 
-    public ExcecaoNegocio(MensagemNegocioAbstrata msg, Throwable cause) {
-        super(cause);
-        validarMsg(msg);
-        this.msg = msg;
-    }
+	public ExcecaoNegocio(MensagemNegocioAbstrata msg, Throwable cause) {
+		super(cause);
+		validarMsg(msg);
+		this.msg = msg;
+	}
 
-    /**
-     * Construtor padr„o onde deve ser informada a chave de mensagem a exibir ao
-     * usu·rio final.
-     * 
-     * @param msg
-     */
-    public ExcecaoNegocio(MensagemNegocioAbstrata msg) {
-        validarMsg(msg);
-        this.msg = msg;
-    }
+	/**
+	 * Construtor padr√£o onde deve ser informada a chave de mensagem a exibir ao
+	 * usu√°rio final.
+	 * 
+	 * @param msg
+	 */
+	public ExcecaoNegocio(MensagemNegocioAbstrata msg) {
+		validarMsg(msg);
+		this.msg = msg;
+	}
 
-    @Override
-    public MensagemNegocioAbstrata getMensagem() {
-        return msg;
-    }
+	@Override
+	public MensagemNegocioAbstrata getMensagem() {
+		return msg;
+	}
 
-    private void validarMsg(MensagemNegocioAbstrata msg) {
-        Validate.notNull(msg, "Uma inst‚ncia de MensagemErroNegocio deve ser informada!");
-    }
+	private void validarMsg(MensagemNegocioAbstrata msg) {
+		Validate.notNull(msg,
+				"Uma inst√¢ncia de MensagemErroNegocio deve ser informada!");
+	}
 
-    @Override
-    public String getMessage() {
-        return getMensagem().getMensagem();
-    }
+	@Override
+	public String getMessage() {
+		return getMensagem().getMensagem();
+	}
 }

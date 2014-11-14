@@ -6,26 +6,27 @@ import javax.validation.ConstraintViolationException;
 import br.com.afrcode.arquitetura.util.mensagem.erro.MensagemErroNegocio;
 
 /**
- * Tratador de execeções para o tipo específico de exceção
+ * Tratador de execeÃ§Ãµes para o tipo especÃ­fico de exceÃ§Ã£o
  * ConstraintViolationException.
  * 
  * 
  */
-public class TratadorConstraintViolationException implements ITratadorExcecao<ConstraintViolationException> {
+public class TratadorConstraintViolationException implements
+		ITratadorExcecao<ConstraintViolationException> {
 
-    @Override
-    public void tratarExcecao(ConstraintViolationException cve) {
-        // Exceções de violações de constraints do beans validations serão
-        // convertidas para mensagens de erro de negócio e
-        // portanto serão tratadas pelo respectivo tratador de mensagens de erro
-        // de negócio.
-        for (ConstraintViolation<?> cv : cve.getConstraintViolations()) {
-            String propPath = cv.getPropertyPath().toString();
-            MensagemErroNegocio mensagemErroNegocio = new MensagemErroNegocio();
-            mensagemErroNegocio.setCodMensagem(propPath);
-            mensagemErroNegocio.setMensagem(propPath + cv.getMessage());
-            mensagemErroNegocio.tratarMensagem();
-        }
-    }
+	@Override
+	public void tratarExcecao(ConstraintViolationException cve) {
+		// ExceÃ§Ãµes de violaÃ§Ãµes de constraints do beans validations serÃ£o
+		// convertidas para mensagens de erro de negÃ³cio e
+		// portanto serÃ£o tratadas pelo respectivo tratador de mensagens de erro
+		// de negÃ³cio.
+		for (ConstraintViolation<?> cv : cve.getConstraintViolations()) {
+			String propPath = cv.getPropertyPath().toString();
+			MensagemErroNegocio mensagemErroNegocio = new MensagemErroNegocio();
+			mensagemErroNegocio.setCodMensagem(propPath);
+			mensagemErroNegocio.setMensagem(propPath + cv.getMessage());
+			mensagemErroNegocio.tratarMensagem();
+		}
+	}
 
 }

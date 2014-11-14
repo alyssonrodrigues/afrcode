@@ -5,13 +5,15 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * Suite de verificadores de aderência para a camada web.
+ * Suite de verificadores de aderÃªncia para a camada web.
  * 
  * 
  */
 @RunWith(Suite.class)
-@SuiteClasses({ VerificadorComponenteComTUTest.class, VerificadorManagedBeanComTUTest.class,
-        VerificadorSuperclasseClassesTUTest.class, VerificadorUsoSpringAnnotationsTest.class })
+@SuiteClasses({ VerificadorComponenteComTUTest.class,
+		VerificadorManagedBeanComTUTest.class,
+		VerificadorSuperclasseClassesTUTest.class,
+		VerificadorUsoSpringAnnotationsTest.class })
 public class SuiteVerificadoresWebArqSist {
 
 }

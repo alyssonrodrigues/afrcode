@@ -14,12 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.afrcode.arquitetura.spring.config.util.Profiles;
 
 /**
- * AnotaÁ„o para uso em componentes do tipo Povoador.
+ * Anota√ß√£o para uso em componentes do tipo Povoador.
  * 
- * Ao usar esta anotaÁ„o um contexto transacional È associado implicitamente ao
- * componente atravÈs da anotaÁ„o Transactional com propagaÁ„o do tipo
- * Propagation#REQUIRED - usa-se a transaÁ„o existente, se existir, ou cria-se
- * uma nova caso contr·rio.
+ * Ao usar esta anota√ß√£o um contexto transacional √© associado implicitamente ao
+ * componente atrav√©s da anota√ß√£o Transactional com propaga√ß√£o do tipo
+ * Propagation#REQUIRED - usa-se a transa√ß√£o existente, se existir, ou cria-se
+ * uma nova caso contr√°rio.
  * 
  * 
  */

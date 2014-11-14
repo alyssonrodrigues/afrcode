@@ -7,11 +7,11 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @WebFilter(servletNames = { "facesServlet" })
 public class CharacterEncodingFilter3 extends CharacterEncodingFilter {
 
-    private static final String ISO_8859_1 = "ISO-8859-1";
+	private static final String UTF_8 = "UTF-8";
 
-    public CharacterEncodingFilter3() {
-        setForceEncoding(true);
-        setEncoding(ISO_8859_1);
-    }
+	public CharacterEncodingFilter3() {
+		setForceEncoding(true);
+		setEncoding(UTF_8);
+	}
 
 }

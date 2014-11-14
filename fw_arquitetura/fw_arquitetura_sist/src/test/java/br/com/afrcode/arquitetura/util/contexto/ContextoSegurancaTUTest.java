@@ -9,13 +9,14 @@ import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmM
 
 public class ContextoSegurancaTUTest extends AbstractCasoTesteEmMemoria {
 
-    @Autowired
-    private IContextoSeguranca contextoSeguranca;
+	@Autowired
+	private IContextoSeguranca contextoSeguranca;
 
-    @Test
-    public void testarContextoSeguranca() {
-        User usuario = contextoSeguranca.getUsuarioAutenticado();
-        Assert.assertNotNull("Deveria existir um usu·rio autenticado para TUs!", usuario);
-    }
+	@Test
+	public void testarContextoSeguranca() {
+		User usuario = contextoSeguranca.getUsuarioAutenticado();
+		Assert.assertNotNull(
+				"Deveria existir um usu√°rio autenticado para TUs!", usuario);
+	}
 
 }
