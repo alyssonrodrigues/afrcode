@@ -8,41 +8,42 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
 /**
- * Aspectos para logging de testes unit·rios que envolvam componentes Spring,
- * incluindo instrumentaÁ„o de cÛdigo para an·lises de desempenho.
+ * Aspectos para logging de testes unit√°rios que envolvam componentes Spring,
+ * incluindo instrumenta√ß√£o de c√≥digo para an√°lises de desempenho.
  * 
  * 
  */
 @Component
 @Aspect
 public class ComponentLoggingAspect {
-    private static final Logger LOG = Logger.getLogger(ComponentLoggingAspect.class);
+	private static final Logger LOG = Logger
+			.getLogger(ComponentLoggingAspect.class);
 
-    @Around("bean(dao*)")
-    public Object monitorarDAOs(ProceedingJoinPoint pjp) throws Throwable {
-        return monitorar(pjp);
-    }
+	@Around("bean(dao*)")
+	public Object monitorarDAOs(ProceedingJoinPoint pjp) throws Throwable {
+		return monitorar(pjp);
+	}
 
-    private Object monitorar(ProceedingJoinPoint pjp) throws Throwable {
-        Object retVal = null;
-        boolean okay = true;
-        String signature = pjp.getStaticPart().getSignature().toShortString();
-        StopWatch stopWatch = new StopWatch();
-        try {
-            stopWatch.start();
-            retVal = pjp.proceed();
-            return retVal;
-        } catch (Exception e) {
-            okay = false;
-            throw e;
-        } finally {
-            stopWatch.stop();
-            if (LOG.isDebugEnabled()) {
-                String sufixo = !okay ? " falhou: " : ": ";
-                LOG.debug(signature + sufixo + stopWatch.toString());
-            }
-            stopWatch.reset();
-        }
-    }
+	private Object monitorar(ProceedingJoinPoint pjp) throws Throwable {
+		Object retVal = null;
+		boolean okay = true;
+		String signature = pjp.getStaticPart().getSignature().toShortString();
+		StopWatch stopWatch = new StopWatch();
+		try {
+			stopWatch.start();
+			retVal = pjp.proceed();
+			return retVal;
+		} catch (Exception e) {
+			okay = false;
+			throw e;
+		} finally {
+			stopWatch.stop();
+			if (LOG.isDebugEnabled()) {
+				String sufixo = !okay ? " falhou: " : ": ";
+				LOG.debug(signature + sufixo + stopWatch.toString());
+			}
+			stopWatch.reset();
+		}
+	}
 
 }

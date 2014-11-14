@@ -11,22 +11,22 @@ import br.com.afrcode.arquitetura.teste.unitario.spring.config.SpringTestConfig;
 import br.com.afrcode.arquitetura.teste.unitario.spring.config.util.ProfilesTU;
 
 /**
- * Classe base para execuÁ„o de testes unit·rios usando do Spring Context SEM
- * contexto transacional e de persistÍncia.
+ * Classe base para execu√ß√£o de testes unit√°rios usando do Spring Context SEM
+ * contexto transacional e de persist√™ncia.
  * 
- * ObservaÁ„o: SÛ deve ser usada para testes que n„o envolvam transaÁıes (sejam
+ * Observa√ß√£o: S√≥ deve ser usada para testes que n√£o envolvam transa√ß√µes (sejam
  * via JPA ou JTA).
  * 
- * Subclasses de AbstractCasoTesteSemJpaEJta ter„o como Profile Spring ativo
+ * Subclasses de AbstractCasoTesteSemJpaEJta ter√£o como Profile Spring ativo
  * (ActiveProfiles) o PROFILE_TU, onde apenas classes Configuration e/ou classes
- * Component, e subtipos de Component, com Profile PROFILE_TU ser„o avaliadas em
+ * Component, e subtipos de Component, com Profile PROFILE_TU ser√£o avaliadas em
  * classpath pelo Spring.
  * 
- * Classes de teste unit·rio de serviÁos remotos <b>devem</b> usar esta classe
- * como superclasse, sempre! ServiÁos remotos s„o fachadas de acesso a serviÁos
- * j· existens e por isto far„o uso dos serviÁos de persistÍncia locais aos
- * serviÁos locais e <b>n„o far„o uso dos serviÁos de persistÍncia por si
- * sÛ.</b>.
+ * Classes de teste unit√°rio de servi√ßos remotos <b>devem</b> usar esta classe
+ * como superclasse, sempre! Servi√ßos remotos s√£o fachadas de acesso a servi√ßos
+ * j√° existens e por isto far√£o uso dos servi√ßos de persist√™ncia locais aos
+ * servi√ßos locais e <b>n√£o far√£o uso dos servi√ßos de persist√™ncia por si
+ * s√≥.</b>.
  * 
  * 
  */
@@ -35,36 +35,36 @@ import br.com.afrcode.arquitetura.teste.unitario.spring.config.util.ProfilesTU;
 @ActiveProfiles(ProfilesTU.PROFILE_TU)
 public abstract class AbstractCasoTesteSemJpaEJta {
 
-    /**
-     * Existindo EJBs 3 no classpath com Interceptors
-     * SpringBeanAutowiringInterceptor um novo contexto Spring ser· iniciado.
-     * Este por sua vez ser· distinto e independete do contexto Spring inicial
-     * de testes. Portanto, faz necess·rio a configuraÁ„o do profile Spring a
-     * usar. Isto È feito programaticamente por este mÈtodo.
-     */
-    @BeforeClass
-    public static void iniciarSpringProfilesParaContextosEJB() {
-        System.setProperty("spring.profiles.active", ProfilesTU.PROFILE_TU);
-        // Para evitar que o OpenEJB reconfigure o log4j conflitando com threads
-        // j· em execuÁ„o (Spring Threads, por exemplo).
-        System.setProperty("openejb.logger.external", "true");
-    }
+	/**
+	 * Existindo EJBs 3 no classpath com Interceptors
+	 * SpringBeanAutowiringInterceptor um novo contexto Spring ser√° iniciado.
+	 * Este por sua vez ser√° distinto e independete do contexto Spring inicial
+	 * de testes. Portanto, faz necess√°rio a configura√ß√£o do profile Spring a
+	 * usar. Isto √© feito programaticamente por este m√©todo.
+	 */
+	@BeforeClass
+	public static void iniciarSpringProfilesParaContextosEJB() {
+		System.setProperty("spring.profiles.active", ProfilesTU.PROFILE_TU);
+		// Para evitar que o OpenEJB reconfigure o log4j conflitando com threads
+		// j√° em execu√ß√£o (Spring Threads, por exemplo).
+		System.setProperty("openejb.logger.external", "true");
+	}
 
-    /**
-     * Metodo de pre-configuracao para um metodo de TU. Deve ser sobrescrito
-     * quando necessario.
-     */
-    @Before
-    public void antesDeExecutarMetodoTU() {
-        // PrÈ-condiÁıes de execuÁ„o de mÈtodos de TU.
-    }
+	/**
+	 * Metodo de pre-configuracao para um metodo de TU. Deve ser sobrescrito
+	 * quando necessario.
+	 */
+	@Before
+	public void antesDeExecutarMetodoTU() {
+		// Pr√©-condi√ß√µes de execu√ß√£o de m√©todos de TU.
+	}
 
-    /**
-     * Metodo de configuracao pre-execucao de um metodo de TU.
-     */
-    @After
-    public void aposExecutarMetodoTU() {
-        // PÛs-condiÁıes de execuÁ„o de mÈtodos de TU.
-    }
+	/**
+	 * Metodo de configuracao pre-execucao de um metodo de TU.
+	 */
+	@After
+	public void aposExecutarMetodoTU() {
+		// P√≥s-condi√ß√µes de execu√ß√£o de m√©todos de TU.
+	}
 
 }

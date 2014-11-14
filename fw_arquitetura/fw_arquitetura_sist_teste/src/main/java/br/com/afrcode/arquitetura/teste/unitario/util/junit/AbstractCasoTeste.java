@@ -13,23 +13,23 @@ import br.com.afrcode.arquitetura.teste.unitario.spring.config.SpringTestConfig;
 import br.com.afrcode.arquitetura.teste.unitario.spring.config.util.ProfilesTU;
 
 /**
- * Classe base para execuÁ„o de testes unit·rios, usando o Spring Context.
+ * Classe base para execu√ß√£o de testes unit√°rios, usando o Spring Context.
  * 
- * Classes de teste unit·rio que envolvam operaÁıes de persistÍncia
+ * Classes de teste unit√°rio que envolvam opera√ß√µes de persist√™ncia
  * (JPA/Hibernate) <b>podem</b> ter esta classe como superclasse ou
  * (exclusivamente) a classe AbstractCasoTesteEmMemoria como superclasse.
  * 
- * Classes de teste unit·rio de serviÁos remotos <b>n„o devem</b> usar esta
+ * Classes de teste unit√°rio de servi√ßos remotos <b>n√£o devem</b> usar esta
  * classe como superclasse! Ver a classe AbstractCasoTesteSemJpaEJta para
- * maiores informaÁıes.
+ * maiores informa√ß√µes.
  * 
- * ObservaÁıes: um contexto transacional (via anotaÁ„o Transactional) È provido
+ * Observa√ß√µes: um contexto transacional (via anota√ß√£o Transactional) √© provido
  * tendo como comportamento default o rollback (ver TransactionConfiguration) ao
- * final de cada mÈtodo de teste.
+ * final de cada m√©todo de teste.
  * 
- * Subclasses de AbstractCasoTeste ter„o como Profile Spring ativo
+ * Subclasses de AbstractCasoTeste ter√£o como Profile Spring ativo
  * (ActiveProfiles) o PROFILE_TU, onde apenas classes Configuration e/ou classes
- * Component, e subtipos de Component, com Profile PROFILE_TU ser„o avaliadas em
+ * Component, e subtipos de Component, com Profile PROFILE_TU ser√£o avaliadas em
  * classpath pelo Spring.
  * 
  * 
@@ -41,36 +41,36 @@ import br.com.afrcode.arquitetura.teste.unitario.spring.config.util.ProfilesTU;
 @TransactionConfiguration(defaultRollback = true)
 public abstract class AbstractCasoTeste {
 
-    /**
-     * Existindo EJBs 3 no classpath com Interceptors
-     * SpringBeanAutowiringInterceptor um novo contexto Spring ser· iniciado.
-     * Este por sua vez ser· distinto e independete do contexto Spring inicial
-     * de testes. Portanto, faz necess·rio a configuraÁ„o do profile Spring a
-     * usar. Isto È feito programaticamente por este mÈtodo.
-     */
-    @BeforeClass
-    public static void iniciarSpringProfilesParaContextosEJB() {
-        System.setProperty("spring.profiles.active", ProfilesTU.PROFILE_TU);
-        // Para evitar que o OpenEJB reconfigure o log4j conflitando com threads
-        // j· em execuÁ„o (Spring Threads, por exemplo).
-        System.setProperty("openejb.logger.external", "true");
-    }
+	/**
+	 * Existindo EJBs 3 no classpath com Interceptors
+	 * SpringBeanAutowiringInterceptor um novo contexto Spring ser√° iniciado.
+	 * Este por sua vez ser√° distinto e independete do contexto Spring inicial
+	 * de testes. Portanto, faz necess√°rio a configura√ß√£o do profile Spring a
+	 * usar. Isto √© feito programaticamente por este m√©todo.
+	 */
+	@BeforeClass
+	public static void iniciarSpringProfilesParaContextosEJB() {
+		System.setProperty("spring.profiles.active", ProfilesTU.PROFILE_TU);
+		// Para evitar que o OpenEJB reconfigure o log4j conflitando com threads
+		// j√° em execu√ß√£o (Spring Threads, por exemplo).
+		System.setProperty("openejb.logger.external", "true");
+	}
 
-    /**
-     * Metodo de pre-configuracao para um metodo de TU. Deve ser sobrescrito
-     * quando necessario.
-     */
-    @Before
-    public void antesDeExecutarMetodoTU() {
-        // PrÈ-condiÁıes de execuÁ„o de mÈtodos de TU.
-    }
+	/**
+	 * Metodo de pre-configuracao para um metodo de TU. Deve ser sobrescrito
+	 * quando necessario.
+	 */
+	@Before
+	public void antesDeExecutarMetodoTU() {
+		// Pr√©-condi√ß√µes de execu√ß√£o de m√©todos de TU.
+	}
 
-    /**
-     * Metodo de configuracao pre-execucao de um metodo de TU.
-     */
-    @After
-    public void aposExecutarMetodoTU() {
-        // PÛs-condiÁıes de execuÁ„o de mÈtodos de TU.
-    }
+	/**
+	 * Metodo de configuracao pre-execucao de um metodo de TU.
+	 */
+	@After
+	public void aposExecutarMetodoTU() {
+		// P√≥s-condi√ß√µes de execu√ß√£o de m√©todos de TU.
+	}
 
 }

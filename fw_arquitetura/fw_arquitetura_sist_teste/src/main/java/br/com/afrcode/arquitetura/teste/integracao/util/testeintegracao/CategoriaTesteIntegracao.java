@@ -1,11 +1,11 @@
 package br.com.afrcode.arquitetura.teste.integracao.util.testeintegracao;
 
 /**
- * Categoria em uso por JUnit e Maven surefire para distinção entre testes
- * unitários e de integração.
+ * Categoria em uso por JUnit e Maven surefire para distinÃ§Ã£o entre testes
+ * unitÃ¡rios e de integraÃ§Ã£o.
  * 
- * É necessário distinguir testes unitários e de integração para acioná-los em
- * momentos adequandos (sem ou com servidor de aplicação, respectivamente).
+ * Ã‰ necessÃ¡rio distinguir testes unitÃ¡rios e de integraÃ§Ã£o para acionÃ¡-los em
+ * momentos adequandos (sem ou com servidor de aplicaÃ§Ã£o, respectivamente).
  */
 public interface CategoriaTesteIntegracao {
 
