@@ -10,35 +10,40 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.authentication.jaas.DefaultJaasAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 
-import br.com.afrcode.arquitetura.spring.config.security.AuthorityGranterParaBatch;
-import br.com.afrcode.arquitetura.spring.config.security.LoginModuleParaBatch;
 import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmMemoria;
 
 public class SpringBatchContextTest extends AbstractCasoTesteEmMemoria {
-    @PersistenceUnit
-    private EntityManagerFactory entityManagerFactory;
+	@PersistenceUnit
+	private EntityManagerFactory entityManagerFactory;
 
-    @Autowired
-    private DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider;
+	@Autowired
+	private DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider;
 
-    private UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-            LoginModuleParaBatch.USER, LoginModuleParaBatch.PASSWD);
+	private UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+			LoginModuleParaBatch.USER, LoginModuleParaBatch.PASSWD);
 
-    @Test
-    public void testarEntityManagerFactory() {
-        Assert.assertNotNull("EntityManagerFactory indisponÌvel!", entityManagerFactory);
-    }
+	@Test
+	public void testarEntityManagerFactory() {
+		Assert.assertNotNull("EntityManagerFactory indisponÔøΩvel!",
+				entityManagerFactory);
+	}
 
-    @Test
-    public void testarLoginJAASComSucesso() {
-        Authentication auth = defaultJaasAuthenticationProvider.authenticate(token);
-        Assert.assertEquals("O usu·rio deveria ter sido autenticado com sucesso!", true, auth.isAuthenticated());
-        Assert.assertEquals("O usu·rio autenticado deveria ter o principal: " + token.getPrincipal(),
-                token.getPrincipal(), auth.getPrincipal());
-        Assert.assertEquals("O usu·rio autenticado deveria ter a credencial: " + AuthorityGranterParaBatch.ROLE_USER,
-                token.getCredentials(), auth.getCredentials());
-        Assert.assertEquals("O usu·rio autenticado deveria ter a autorizaÁ„o:" + AuthorityGranterParaBatch.ROLE_USER,
-                false, auth.getAuthorities().isEmpty());
-    }
+	@Test
+	public void testarLoginJAASComSucesso() {
+		Authentication auth = defaultJaasAuthenticationProvider
+				.authenticate(token);
+		Assert.assertEquals(
+				"O usu√°rio deveria ter sido autenticado com sucesso!", true,
+				auth.isAuthenticated());
+		Assert.assertEquals("O usu√°rio autenticado deveria ter o principal: "
+				+ token.getPrincipal(), token.getPrincipal(),
+				auth.getPrincipal());
+		Assert.assertEquals("O usu√°rio autenticado deveria ter a credencial: "
+				+ AuthorityGranterParaBatch.ROLE_USER, token.getCredentials(),
+				auth.getCredentials());
+		Assert.assertEquals("O usu√°rio autenticado deveria ter a autoriza√ß√£o:"
+				+ AuthorityGranterParaBatch.ROLE_USER, false, auth
+				.getAuthorities().isEmpty());
+	}
 
 }
