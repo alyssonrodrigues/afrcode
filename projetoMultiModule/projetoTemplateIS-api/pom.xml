@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de definição de serviços! -->
+	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de definiÃ§Ã£o de serviÃ§os! -->
 	<name>projetoTemplateIS-api</name>
-	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de definição de serviços! -->
+	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de definiÃ§Ã£o de serviÃ§os! -->
 	<artifactId>projetoTemplateIS-api</artifactId>
 	<packaging>jar</packaging>
 
@@ -21,7 +21,7 @@
             <artifactId>fw_arquitetura_sist_is</artifactId>
             <version>${fwarquitetura.version}</version>
         </dependency>
-        <!-- Dependências para testes. -->
+        <!-- DependÃªncias para testes. -->
         <dependency>
             <groupId>br.com.afrcode.lib</groupId>
             <artifactId>fw_arquitetura_sist_teste</artifactId>
@@ -31,7 +31,7 @@
 	</dependencies>
 
 	<build>
-		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de definição de serviços! -->
+		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de definiÃ§Ã£o de serviÃ§os! -->
 		<finalName>projetoTemplateIS-api</finalName>
 		<!-- Plugins configurados no projeto agregador em uso. -->
 		<plugins>
