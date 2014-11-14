@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de implementação de serviços! -->
+	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de implementaÃ§Ã£o de serviÃ§os! -->
 	<name>projetoTemplateIS-impl</name>
-	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de implementação de serviços! -->
+	<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de implementaÃ§Ã£o de serviÃ§os! -->
 	<artifactId>projetoTemplateIS-impl</artifactId>
 	<packaging>jar</packaging>
 
@@ -18,20 +18,20 @@
 	<dependencies>
         <dependency>
             <groupId>br.com.afrcode.app</groupId>
-			<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de negócio! -->
+			<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de negÃ³cio! -->
             <artifactId>projetoTemplateNegocio</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>br.com.afrcode.app</groupId>
-			<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de definição de serviços! -->
+			<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de definiÃ§Ã£o de serviÃ§os! -->
             <artifactId>projetoTemplateIS-api</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- Dependências para testes. -->
+        <!-- DependÃªncias para testes. -->
         <dependency>
             <groupId>br.com.afrcode.app</groupId>
-			<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de negócio! -->
+			<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de negÃ³cio! -->
             <artifactId>projetoTemplateNegocio</artifactId>
             <version>${project.version}</version>
             <classifier>tests</classifier>
@@ -69,11 +69,11 @@
             <version>4.0.0</version>
             <scope>test</scope>
         </dependency>
-        <!-- FIM Dependências para testes. -->
+        <!-- FIM DependÃªncias para testes. -->
 	</dependencies>
 
 	<build>
-		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de implementação de serviços! -->
+		<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de implementaÃ§Ã£o de serviÃ§os! -->
 		<finalName>projetoTemplateIS-impl</finalName>
 		<!-- Plugins configurados no projeto agregador em uso. -->
 		<plugins>
