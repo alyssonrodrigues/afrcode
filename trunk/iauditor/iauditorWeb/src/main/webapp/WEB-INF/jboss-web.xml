@@ -1,0 +1,3 @@
+<jboss-web>
+    <security-domain>java:/jaas/SPRINGSECURITY</security-domain>
+</jboss-web> 
