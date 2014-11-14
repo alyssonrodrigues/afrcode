@@ -1,8 +1,7 @@
 package br.com.afrcode.arquitetura.util.verificadores;
 
-
 /**
- * Suite de verificadores de aderência.
+ * Suite de verificadores de aderÃªncia.
  * 
  * 
  */

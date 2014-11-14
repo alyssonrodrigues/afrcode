@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -16,8 +16,8 @@
 	</parent>
 
 	<properties>
-		<!-- Redefinição de diretório de report para testes de integração jacoco 
-			unificado com testes unitários (de MBeans). -->
+		<!-- RedefiniÃ§Ã£o de diretÃ³rio de report para testes de integraÃ§Ã£o jacoco 
+			unificado com testes unitÃ¡rios (de MBeans). -->
 		<sonar.jacoco.itReportPath>${sonar.jacoco.reportPath}</sonar.jacoco.itReportPath>
 		<jvm.args.jacoco>
 			-javaagent:${env.M2_REPO}/org/jacoco/org.jacoco.agent/${jacoco-maven-plugin.version}/org.jacoco.agent-${jacoco-maven-plugin.version}-runtime.jar=destfile=${sonar.jacoco.itReportPath},includes=*,excludes=org.jboss.as.test.*,append=true,output=file
@@ -33,11 +33,11 @@
 		</dependency>
         <dependency>
             <groupId>br.com.afrcode.app</groupId>
-            <!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de implementação de serviços! -->
+            <!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de implementaÃ§Ã£o de serviÃ§os! -->
             <artifactId>projetoTemplateIS-impl</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- Dependências para testes. -->
+        <!-- DependÃªncias para testes. -->
 		<dependency>
 			<groupId>br.com.afrcode.app</groupId>
 			<!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de negocio! -->
@@ -48,7 +48,7 @@
 		</dependency>
         <dependency>
             <groupId>br.com.afrcode.app</groupId>
-            <!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de implementação de serviços! -->
+            <!-- ALTERE AQUI => ATENCAO: Alterar para nome adequado para o projeto de implementaÃ§Ã£o de serviÃ§os! -->
             <artifactId>projetoTemplateIS-impl</artifactId>
             <version>${project.version}</version>
             <classifier>tests</classifier>
@@ -86,10 +86,10 @@
             <version>4.0.0</version>
             <scope>test</scope>
         </dependency>
-        <!-- FIM Dependências para testes. -->
+        <!-- FIM DependÃªncias para testes. -->
 
-		<!-- DEPENDÊNCIAS de runtime do projeto, ou seja, outros sistemas (WAR/EAR) 
-			necessários à execução deste projeto PARA TESTES FUNCIONAIS.
+		<!-- DEPENDÃŠNCIAS de runtime do projeto, ou seja, outros sistemas (WAR/EAR) 
+			necessÃ¡rios Ã  execuÃ§Ã£o deste projeto PARA TESTES FUNCIONAIS.
 		<dependency>
 			<groupId>br.com.afrcode.app</groupId>
 			<artifactId>outroProjetoQualquer</artifactId>
@@ -98,8 +98,8 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		 FIM DPENDÊNCIAS de runtime do atospessoal, ou seja, outros sistemas 
-			(WAR/EAR) necessários à execução deste projeto PARA TESTES FUNCIONAIS. -->
+		 FIM DPENDÃŠNCIAS de runtime do atospessoal, ou seja, outros sistemas 
+			(WAR/EAR) necessÃ¡rios Ã  execuÃ§Ã£o deste projeto PARA TESTES FUNCIONAIS. -->
 	</dependencies>
 
 	<build>
@@ -126,14 +126,14 @@
 		</plugins>
 	</build>
 
-	<!-- PROFILE de execução DE TESTES DE INTEGRAÇÃO abaixo do JBoss. Para acioná-lo use o comando mvn com indicação de profile,
+	<!-- PROFILE de execuÃ§Ã£o DE TESTES DE INTEGRAÃ‡ÃƒO abaixo do JBoss. Para acionÃ¡-lo use o comando mvn com indicaÃ§Ã£o de profile,
 	     exemplo: 
 	     
 	     mvn clean install -DexecutandoTesteIntegracao=true -U -e
 	     
-	     ATENÇÃO: É importante acionar o PROFILE maven via parâmetro de JVM (-DexecutandoTesteIntegracao=true) pois este parâmetro
-	     irá habilitar o PROFILE E também as classes de testes de integração diante do Spring. Isto é necessário para impedir que
-	     as classes de testes de integração sejam acionadas em execuções de testes unitários em isolado. -->
+	     ATENÃ‡ÃƒO: Ã‰ importante acionar o PROFILE maven via parÃ¢metro de JVM (-DexecutandoTesteIntegracao=true) pois este parÃ¢metro
+	     irÃ¡ habilitar o PROFILE E tambÃ©m as classes de testes de integraÃ§Ã£o diante do Spring. Isto Ã© necessÃ¡rio para impedir que
+	     as classes de testes de integraÃ§Ã£o sejam acionadas em execuÃ§Ãµes de testes unitÃ¡rios em isolado. -->
     <profiles>
         <profile>
             <id>ambiente.testesfuncionais.jboss</id>
@@ -145,13 +145,13 @@
             </activation>
             <build>
                 <plugins>
-                    <!-- Configurações para deploy abaixo do JBoss para testes de integração. -->
+                    <!-- ConfiguraÃ§Ãµes para deploy abaixo do JBoss para testes de integraÃ§Ã£o. -->
                     <plugin>
                         <groupId>org.jboss.as.plugins</groupId>
                         <artifactId>jboss-as-maven-plugin</artifactId>
                         <version>7.4.Final</version>
                         <executions>
-                            <!-- Startup do JBoss para execuçao de testes de integração. -->
+                            <!-- Startup do JBoss para execuÃ§ao de testes de integraÃ§Ã£o. -->
                             <execution>
                                 <id>startup-jboss</id>
                                 <phase>pre-clean</phase>
@@ -168,7 +168,7 @@
                                     -DexecutandoTesteIntegracao</jvmArgs>
                                 </configuration>
                             </execution>
-                            <!-- Configurações para deploy de outroProjetoQualquer em runtime para testes de integração. 
+                            <!-- ConfiguraÃ§Ãµes para deploy de outroProjetoQualquer em runtime para testes de integraÃ§Ã£o. 
                             <execution>
                                 <id>clean-undeploy-outroProjetoQualquer</id>
                                 <phase>clean</phase>
@@ -204,7 +204,7 @@
                                     <ignoreMissingDeployment>true</ignoreMissingDeployment>
                                 </configuration>
                             </execution>-->
-                            <!-- Configurações para deploy do projetoTeampleteWeb em runtime para testes de integração. -->
+                            <!-- ConfiguraÃ§Ãµes para deploy do projetoTeampleteWeb em runtime para testes de integraÃ§Ã£o. -->
                             <execution>
                                 <id>clean-undeploy-war</id>
                                 <phase>clean</phase>
