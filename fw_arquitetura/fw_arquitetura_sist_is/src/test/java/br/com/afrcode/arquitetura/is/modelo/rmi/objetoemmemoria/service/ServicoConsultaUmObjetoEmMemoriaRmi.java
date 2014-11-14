@@ -11,45 +11,48 @@ import br.com.afrcode.arquitetura.is.modelo.ejb.objetoemmemoria.service.DaoUmObj
 import br.com.afrcode.arquitetura.is.modelo.ejb.objetoemmemoria.service.UmObjetoEmMemoria;
 
 /**
- * Implementação de serviço exposto (IServicoConsultaUmObjetoEmMemoriaRmi) via
+ * ImplementaÃ§Ã£o de serviÃ§o exposto (IServicoConsultaUmObjetoEmMemoriaRmi) via
  * RMI para fins de testes sobre o Spring remoting.
  * 
  * 
  */
 @Component
-public class ServicoConsultaUmObjetoEmMemoriaRmi implements IServicoConsultaUmObjetoEmMemoriaRmi {
-    private static final Logger LOG = Logger.getLogger(ServicoConsultaUmObjetoEmMemoriaRmi.class);
+public class ServicoConsultaUmObjetoEmMemoriaRmi implements
+		IServicoConsultaUmObjetoEmMemoriaRmi {
+	private static final Logger LOG = Logger
+			.getLogger(ServicoConsultaUmObjetoEmMemoriaRmi.class);
 
-    @Autowired
-    private DaoUmObjetoEmMemoria daoUmObjetoPersistente;
+	@Autowired
+	private DaoUmObjetoEmMemoria daoUmObjetoPersistente;
 
-    @Autowired
-    private StopWatch stopWatch;
+	@Autowired
+	private StopWatch stopWatch;
 
-    @Override
-    public Collection<UmObjetoEmMemoria> listar() {
-        stopWatch.start();
+	@Override
+	public Collection<UmObjetoEmMemoria> listar() {
+		stopWatch.start();
 
-        Collection<UmObjetoEmMemoria> objs = daoUmObjetoPersistente.recuperarTodos();
+		Collection<UmObjetoEmMemoria> objs = daoUmObjetoPersistente
+				.recuperarTodos();
 
-        stopWatch.stop();
-        LOG.info("listar: " + stopWatch.toString());
-        stopWatch.reset();
+		stopWatch.stop();
+		LOG.info("listar: " + stopWatch.toString());
+		stopWatch.reset();
 
-        return objs;
-    }
+		return objs;
+	}
 
-    @Override
-    public UmObjetoEmMemoria recuperarPorId(Long id) {
-        stopWatch.start();
+	@Override
+	public UmObjetoEmMemoria recuperarPorId(Long id) {
+		stopWatch.start();
 
-        UmObjetoEmMemoria obj = daoUmObjetoPersistente.procurarPorId(id);
+		UmObjetoEmMemoria obj = daoUmObjetoPersistente.procurarPorId(id);
 
-        stopWatch.stop();
-        LOG.info("recuperarPorId: " + stopWatch.toString());
-        stopWatch.reset();
+		stopWatch.stop();
+		LOG.info("recuperarPorId: " + stopWatch.toString());
+		stopWatch.reset();
 
-        return obj;
-    }
+		return obj;
+	}
 
 }

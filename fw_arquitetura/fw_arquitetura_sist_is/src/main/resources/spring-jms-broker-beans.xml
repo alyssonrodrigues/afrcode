@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:amq="http://activemq.apache.org/schema/core"
@@ -7,7 +7,7 @@
                       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
                       http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd">
 
-    <!-- TODO: Rever após definição de qual provedor JMS será usado (HornetQ ou ActiveMQ). -->
+    <!-- TODO: Rever apÃ³s definiÃ§Ã£o de qual provedor JMS serÃ¡ usado (HornetQ ou ActiveMQ). -->
 
     <!--  Embedded ActiveMQ Broker -->
     <amq:broker id="myBrokerId" useJmx="false" persistent="false">

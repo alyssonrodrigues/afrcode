@@ -10,29 +10,29 @@ import br.com.afrcode.arquitetura.is.spring.config.rmi.AbstractRMIClientProxyBea
 import br.com.afrcode.arquitetura.is.spring.config.util.ProfilesIS;
 
 /**
- * Configurações para acesso a serviços remotos expostos via RMI.
+ * ConfiguraÃ§Ãµes para acesso a serviÃ§os remotos expostos via RMI.
  * 
  * 
  */
 @Configuration
 @Profile(ProfilesIS.PROFILE_TU)
 public class ServicoConsultaUmObjetoEmMemoriaRmiClientBeansConfig extends
-        AbstractRMIClientProxyBeansConfig<IServicoConsultaUmObjetoEmMemoriaRmi> {
+		AbstractRMIClientProxyBeansConfig<IServicoConsultaUmObjetoEmMemoriaRmi> {
 
-    /**
-     * Configurações para acesso ao serviço remoto exposto via RMI.
-     * 
-     * O Spring através de RmiProxyFactoryBean beans expõe serviços (POJOs)
-     * encapsulando todo o acesso ao RMI registry. É necessário: 1) informar a
-     * url de acesso ao serviço; 2) informar e possuir em classpath a interface
-     * referente ao serviço.
-     * 
-     * @return
-     */
-    @Bean
-    @DependsOn("servicoConsultaUmObjetoEmMemoriaRmiServiceExporter")
-    public IServicoConsultaUmObjetoEmMemoriaRmi servicoConsultaUmObjetoEmMemoriaRmiClient() {
-        return criarRmiProxy("servicoConsultaUmObjetoEmMemoriaRmiService");
-    }
+	/**
+	 * ConfiguraÃ§Ãµes para acesso ao serviÃ§o remoto exposto via RMI.
+	 * 
+	 * O Spring atravÃ©s de RmiProxyFactoryBean beans expÃµe serviÃ§os (POJOs)
+	 * encapsulando todo o acesso ao RMI registry. Ã© necessÃ¡rio: 1) informar a
+	 * url de acesso ao serviÃ§o; 2) informar e possuir em classpath a interface
+	 * referente ao serviÃ§o.
+	 * 
+	 * @return
+	 */
+	@Bean
+	@DependsOn("servicoConsultaUmObjetoEmMemoriaRmiServiceExporter")
+	public IServicoConsultaUmObjetoEmMemoriaRmi servicoConsultaUmObjetoEmMemoriaRmiClient() {
+		return criarRmiProxy("servicoConsultaUmObjetoEmMemoriaRmiService");
+	}
 
 }

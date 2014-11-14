@@ -15,46 +15,53 @@ import br.com.afrcode.arquitetura.is.modelo.ejb.objetoemmemoria.service.IServico
 import br.com.afrcode.arquitetura.is.modelo.ejb.objetoemmemoria.service.UmObjetoEmMemoria;
 import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteSemJpaEJta;
 
-public class ServicoConsultaUmObjetoEmMemoriaBeanTest extends AbstractCasoTesteSemJpaEJta {
-    private static final Logger LOG = Logger.getLogger(ServicoConsultaUmObjetoEmMemoriaBeanTest.class);
+public class ServicoConsultaUmObjetoEmMemoriaBeanTest extends
+		AbstractCasoTesteSemJpaEJta {
+	private static final Logger LOG = Logger
+			.getLogger(ServicoConsultaUmObjetoEmMemoriaBeanTest.class);
 
-    @Autowired
-    private StopWatch stopWatch;
+	@Autowired
+	private StopWatch stopWatch;
 
-    @EJB
-    private IServicoConsultaUmObjetoEmMemoria servicoConsultaUmObjetoEmMemoria;
+	@EJB
+	private IServicoConsultaUmObjetoEmMemoria servicoConsultaUmObjetoEmMemoria;
 
-    @Test
-    public void testarListar() {
-        stopWatch.start();
+	@Test
+	public void testarListar() {
+		stopWatch.start();
 
-        Collection<UmObjetoEmMemoria> objs = servicoConsultaUmObjetoEmMemoria.listar();
+		Collection<UmObjetoEmMemoria> objs = servicoConsultaUmObjetoEmMemoria
+				.listar();
 
-        stopWatch.stop();
+		stopWatch.stop();
 
-        LOG.info("testarListar: " + stopWatch.toString());
-        stopWatch.reset();
+		LOG.info("testarListar: " + stopWatch.toString());
+		stopWatch.reset();
 
-        Assert.assertNotNull("A coleÁ„o de objetos n„o deveria ser nula!", objs);
-        Assert.assertTrue("A coleÁ„o de objetos n„o deveria estar vazia!", !objs.isEmpty());
-        Assert.assertTrue("A coleÁ„o de objetos deveria ter " + DaoUmObjetoEmMemoria.NUM_OBJS_CRIADOS + " objetos!",
-                objs.size() == DaoUmObjetoEmMemoria.NUM_OBJS_CRIADOS);
-    }
+		Assert.assertNotNull("A cole√ß√£o de objetos n√£o deveria ser nula!", objs);
+		Assert.assertTrue("A cole√ß√£o de objetos n√£o deveria estar vazia!",
+				!objs.isEmpty());
+		Assert.assertTrue("A cole√ß√£o de objetos deveria ter "
+				+ DaoUmObjetoEmMemoria.NUM_OBJS_CRIADOS + " objetos!",
+				objs.size() == DaoUmObjetoEmMemoria.NUM_OBJS_CRIADOS);
+	}
 
-    @Test
-    public void testarRecuperarPorId() {
-        Long id = 1L;
+	@Test
+	public void testarRecuperarPorId() {
+		Long id = 1L;
 
-        stopWatch.start();
+		stopWatch.start();
 
-        UmObjetoEmMemoria umObj = servicoConsultaUmObjetoEmMemoria.recuperarPorId(id);
+		UmObjetoEmMemoria umObj = servicoConsultaUmObjetoEmMemoria
+				.recuperarPorId(id);
 
-        stopWatch.stop();
+		stopWatch.stop();
 
-        LOG.info("testarRecuperarPorId: " + stopWatch.toString());
-        stopWatch.reset();
+		LOG.info("testarRecuperarPorId: " + stopWatch.toString());
+		stopWatch.reset();
 
-        Assert.assertNotNull("O objeto n„o deveria ser nulo!", umObj);
-        Assert.assertTrue("O id do objeto retornado È diferente do esperado!", id.equals(umObj.getId()));
-    }
+		Assert.assertNotNull("O objeto n√£o deveria ser nulo!", umObj);
+		Assert.assertTrue("O id do objeto retornado √© diferente do esperado!",
+				id.equals(umObj.getId()));
+	}
 }

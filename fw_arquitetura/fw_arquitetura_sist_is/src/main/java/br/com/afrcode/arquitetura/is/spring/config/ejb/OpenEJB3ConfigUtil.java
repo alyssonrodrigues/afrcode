@@ -10,63 +10,69 @@ import org.springframework.ejb.access.SimpleRemoteStatelessSessionProxyFactoryBe
 
 public class OpenEJB3ConfigUtil {
 
-    private static final String OPENEJB_LOGGER_EXTERNAL = "openejb.logger.external";
-    private static final String OPENEJB_LOCALCOPY = "openejb.localcopy";
-    private static final String MSG_DEP_ARQ_SIST_IS_TESTS = "Vefique em seu pom.xml a dependÍncia ADICIONAL para "
-            + "fw_arquitetura_sist_is, scope test, classifier tests!";
-    private static final String OPENEJB_CONF_FILE = "openejb.conf.file";
-    private static final String JAVA_SECURITY_AUTH_LOGIN_CONFIG = "java.security.auth.login.config";
+	private static final String OPENEJB_LOGGER_EXTERNAL = "openejb.logger.external";
+	private static final String OPENEJB_LOCALCOPY = "openejb.localcopy";
+	private static final String MSG_DEP_ARQ_SIST_IS_TESTS = "Vefique em seu pom.xml a depend√™ncia ADICIONAL para "
+			+ "fw_arquitetura_sist_is, scope test, classifier tests!";
+	private static final String OPENEJB_CONF_FILE = "openejb.conf.file";
+	private static final String JAVA_SECURITY_AUTH_LOGIN_CONFIG = "java.security.auth.login.config";
 
-    private OpenEJB3ConfigUtil() {
+	private OpenEJB3ConfigUtil() {
 
-    }
+	}
 
-    public static void configurarParaTUs(SimpleRemoteStatelessSessionProxyFactoryBean ejbProxyFactory, String jndiName) {
-        String ejbJndiNameParaTU = jndiName;
-        int posInicialBeanName = ejbJndiNameParaTU.lastIndexOf('/');
-        if (posInicialBeanName != -1) {
-            ejbJndiNameParaTU = ejbJndiNameParaTU.substring(posInicialBeanName + 1) + "Remote";
-            ejbProxyFactory.setJndiName(ejbJndiNameParaTU);
-        }
+	public static void configurarParaTUs(
+			SimpleRemoteStatelessSessionProxyFactoryBean ejbProxyFactory,
+			String jndiName) {
+		String ejbJndiNameParaTU = jndiName;
+		int posInicialBeanName = ejbJndiNameParaTU.lastIndexOf('/');
+		if (posInicialBeanName != -1) {
+			ejbJndiNameParaTU = ejbJndiNameParaTU
+					.substring(posInicialBeanName + 1) + "Remote";
+			ejbProxyFactory.setJndiName(ejbJndiNameParaTU);
+		}
 
-        Properties props = new Properties();
-        configurarLoginModule(props);
-        configurarOpenEJB(props);
-        ejbProxyFactory.setJndiEnvironment(props);
-    }
+		Properties props = new Properties();
+		configurarLoginModule(props);
+		configurarOpenEJB(props);
+		ejbProxyFactory.setJndiEnvironment(props);
+	}
 
-    private static void configurarOpenEJB(Properties props) {
-        // APENAS PARA TESTES: configuraÁıes de context factory JNDI do OpenEJB.
-        // O OpenEJB ser· iniciado preguiÁosamente no primeiro acesso ao context
-        // factory JNDI informado.
-        // Para uso real em aplicaÁıes n„o È necess·rio informar o context
-        // factory JNDI, pois o mesmo ser· obtido via JBoss EJB
-        // Module.
-        props.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.openejb.core.LocalInitialContextFactory");
-        System.setProperty(OPENEJB_LOGGER_EXTERNAL, Boolean.TRUE.toString());
-        props.put(OPENEJB_LOGGER_EXTERNAL, Boolean.TRUE.toString());
-        final ClassLoader ctxCl = Thread.currentThread().getContextClassLoader();
-        Validate.notNull(ctxCl, "ContextClassLoader null!");
-        URL resource = ctxCl.getResource("openejb.xml");
-        Validate.notNull(resource, MSG_DEP_ARQ_SIST_IS_TESTS);
-        String urlOpenEjbConfigStr = resource.toExternalForm();
-        System.setProperty(OPENEJB_CONF_FILE, urlOpenEjbConfigStr);
-        props.put(OPENEJB_CONF_FILE, urlOpenEjbConfigStr);
-        System.setProperty(OPENEJB_LOCALCOPY, Boolean.FALSE.toString());
-        props.put(OPENEJB_LOCALCOPY, Boolean.FALSE.toString());
-    }
+	private static void configurarOpenEJB(Properties props) {
+		// APENAS PARA TESTES: configura√ß√µes de context factory JNDI do OpenEJB.
+		// O OpenEJB ser√° iniciado pregui√ßosamente no primeiro acesso ao context
+		// factory JNDI informado.
+		// Para uso real em aplica√ß√µes n√£o √© necess√°rio informar o context
+		// factory JNDI, pois o mesmo ser√° obtido via JBoss EJB
+		// Module.
+		props.put(Context.INITIAL_CONTEXT_FACTORY,
+				"org.apache.openejb.core.LocalInitialContextFactory");
+		System.setProperty(OPENEJB_LOGGER_EXTERNAL, Boolean.TRUE.toString());
+		props.put(OPENEJB_LOGGER_EXTERNAL, Boolean.TRUE.toString());
+		final ClassLoader ctxCl = Thread.currentThread()
+				.getContextClassLoader();
+		Validate.notNull(ctxCl, "ContextClassLoader null!");
+		URL resource = ctxCl.getResource("openejb.xml");
+		Validate.notNull(resource, MSG_DEP_ARQ_SIST_IS_TESTS);
+		String urlOpenEjbConfigStr = resource.toExternalForm();
+		System.setProperty(OPENEJB_CONF_FILE, urlOpenEjbConfigStr);
+		props.put(OPENEJB_CONF_FILE, urlOpenEjbConfigStr);
+		System.setProperty(OPENEJB_LOCALCOPY, Boolean.FALSE.toString());
+		props.put(OPENEJB_LOCALCOPY, Boolean.FALSE.toString());
+	}
 
-    private static void configurarLoginModule(Properties props) {
-        final ClassLoader ctxCl = Thread.currentThread().getContextClassLoader();
-        // APENAS PARA TESTES: configuraÁıes de login module JAAS.
-        // Para uso real em aplicaÁıes n„o È necess·rio informar o login module,
-        // pois o mesmo ser· obtido via configuraÁ„o do JBoss Security Domain
-        // (SpringSecurityConfig.LOGIN_CONTEXT_NAME).
-        Validate.notNull(ctxCl, "ContextClassLoader null!");
-        URL resource = ctxCl.getResource("login-module-tu.config");
-        Validate.notNull(resource, MSG_DEP_ARQ_SIST_IS_TESTS);
-        String urlLoginConfigStr = resource.toExternalForm();
-        System.setProperty(JAVA_SECURITY_AUTH_LOGIN_CONFIG, urlLoginConfigStr);
-        props.put(JAVA_SECURITY_AUTH_LOGIN_CONFIG, urlLoginConfigStr);
-    }
+	private static void configurarLoginModule(Properties props) {
+		final ClassLoader ctxCl = Thread.currentThread()
+				.getContextClassLoader();
+		// APENAS PARA TESTES: configura√ß√µes de login module JAAS.
+		// Para uso real em aplica√ß√µes n√£o √© necess√°rio informar o login module,
+		// pois o mesmo ser√° obtido via configura√ß√£o do JBoss Security Domain
+		// (SpringSecurityConfig.LOGIN_CONTEXT_NAME).
+		Validate.notNull(ctxCl, "ContextClassLoader null!");
+		URL resource = ctxCl.getResource("login-module-tu.config");
+		Validate.notNull(resource, MSG_DEP_ARQ_SIST_IS_TESTS);
+		String urlLoginConfigStr = resource.toExternalForm();
+		System.setProperty(JAVA_SECURITY_AUTH_LOGIN_CONFIG, urlLoginConfigStr);
+		props.put(JAVA_SECURITY_AUTH_LOGIN_CONFIG, urlLoginConfigStr);
+	}
 }
