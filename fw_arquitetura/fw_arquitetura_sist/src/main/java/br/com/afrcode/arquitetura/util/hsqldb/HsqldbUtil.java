@@ -82,7 +82,7 @@ public class HsqldbUtil {
 	private void doIniciarHSQLDB() {
 		int state = -1;
 		try {
-			LOG.info("Iniciando HSQLDB em mem�ria...");
+			LOG.info("Iniciando HSQLDB em memória...");
 			configurarHSQLDB(serverPort);
 			hsqldbServer.start();
 			state = hsqldbServer.getState();
