@@ -157,7 +157,7 @@
     </logger>
 
     <root>
-        <priority value="INFO" />
+        <priority value="DEBUG" />
         <appender-ref ref="stdout" />
         <appender-ref ref="file" />
     </root>
