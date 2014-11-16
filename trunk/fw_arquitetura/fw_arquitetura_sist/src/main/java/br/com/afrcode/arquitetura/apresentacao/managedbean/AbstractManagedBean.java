@@ -26,7 +26,7 @@ import br.com.afrcode.arquitetura.util.mensagem.IMensagem;
  * @author moniquebm
  * 
  */
-public abstract class ManagedBeanAbstrato implements IManagedBean, Serializable {
+public abstract class AbstractManagedBean implements IManagedBean, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@ManagedProperty("#{contextoSeguranca}")
