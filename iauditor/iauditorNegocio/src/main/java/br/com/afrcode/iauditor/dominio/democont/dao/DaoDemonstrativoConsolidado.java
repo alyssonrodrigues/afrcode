@@ -71,7 +71,7 @@ public class DaoDemonstrativoConsolidado {
 			HttpResponse response = request.execute();
 			String r = response.parseAsString();
 			if (LOG.isDebugEnabled()) {
-				LOG.debug(r);
+				LOG.debug("getExtendedStats:" + r);
 			}
 			return parseAsExtendedStats(r, labelConta);
 		} catch (IOException e) {
@@ -131,7 +131,7 @@ public class DaoDemonstrativoConsolidado {
 			HttpResponse response = request.execute();
 			String r = response.parseAsString();
 			if (LOG.isDebugEnabled()) {
-				LOG.debug(r);
+				LOG.debug("recuperarDemonstrativosConsolidados:" + r);
 			}
 			return parseAsDemonstrativosConsolidados(r);
 		} catch (IOException e) {
