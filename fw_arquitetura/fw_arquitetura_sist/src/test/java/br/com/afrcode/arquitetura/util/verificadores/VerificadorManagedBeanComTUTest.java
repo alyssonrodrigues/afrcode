@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.BeanDefinition;
 
-import br.com.afrcode.arquitetura.apresentacao.managedbean.ManagedBeanAbstrato;
+import br.com.afrcode.arquitetura.apresentacao.managedbean.AbstractManagedBean;
 import br.com.afrcode.arquitetura.spring.config.util.verificadores.ClassPathScanningCandidateComponentScanner;
 import br.com.afrcode.arquitetura.spring.config.util.verificadores.ConstantesPadroes;
 import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmMemoria;
@@ -81,7 +81,7 @@ public class VerificadorManagedBeanComTUTest extends AbstractCasoTesteEmMemoria 
 		Set<BeanDefinition> beansMBean = managedBeanAnnotationClasspathScanner
 				.findCandidateComponents(ConstantesPadroes.BASE_PACKAGE);
 		List<Class<?>> superclassesMBean = Arrays
-				.asList(new Class<?>[] { ManagedBeanAbstrato.class });
+				.asList(new Class<?>[] { AbstractManagedBean.class });
 
 		List<String> classesMBeanSemSuperclasse = new ArrayList<String>();
 		for (BeanDefinition beanMBean : beansMBean) {
