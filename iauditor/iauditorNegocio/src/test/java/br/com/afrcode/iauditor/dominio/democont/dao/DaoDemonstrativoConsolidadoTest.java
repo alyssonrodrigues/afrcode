@@ -29,8 +29,8 @@ public class DaoDemonstrativoConsolidadoTest extends AbstractCasoTesteEmMemoria 
 
 	@Test
 	public void recuperarDemonstrativosConsolidados() {
-		LocalDate dtMin = LocalDate.now().minusYears(10);
-		LocalDate dtMax = LocalDate.now();
+		final LocalDate dtMin = new LocalDate(2010, 3, 31);
+		final LocalDate dtMax = new LocalDate(2014, 3, 31);
 		List<DemonstrativoConsolidado> r = daoDemonstrativoConsolidado
 				.recuperarDemonstrativosConsolidados("BB", dtMin, dtMax);
 		Assert.assertNotNull("r nulo!", r);
@@ -38,8 +38,8 @@ public class DaoDemonstrativoConsolidadoTest extends AbstractCasoTesteEmMemoria 
 
 	@Test
 	public void getExtendedStats() {
-		LocalDate dtMin = LocalDate.now().minusYears(10);
-		LocalDate dtMax = LocalDate.now();
+		final LocalDate dtMin = new LocalDate(2010, 3, 31);
+		final LocalDate dtMax = new LocalDate(2014, 3, 31);
 		ExtendedStats stats = daoDemonstrativoConsolidado.getExtendedStats(
 				"BB", dtMin, dtMax, "LUCRO LÍQUIDO", "valor");
 		Assert.assertNotNull("stats nulo!", stats);
