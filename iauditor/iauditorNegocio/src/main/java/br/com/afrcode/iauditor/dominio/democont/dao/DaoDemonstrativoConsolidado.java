@@ -123,7 +123,8 @@ public class DaoDemonstrativoConsolidado {
 				+ "{ \"match\": { \"entidade\": \"" + entidade + "\" } }, "
 				+ "\"filter\": { \"range\": { " + "\"periodo\": { \"from\": \""
 				+ dtMin.toString(PERIODO_PATTERN) + "\"," + " \"to\": \""
-				+ dtMax.toString(PERIODO_PATTERN) + "\" } } } } } }";
+				+ dtMax.toString(PERIODO_PATTERN) + "\" } } } } }, "
+				+ "\"sort\": { \"periodo\": { \"order\": \"asc\" } } }";
 		try {
 			HttpContent content = new InputStreamContent(Json.MEDIA_TYPE,
 					new ByteArrayInputStream(queryObject.getBytes()));

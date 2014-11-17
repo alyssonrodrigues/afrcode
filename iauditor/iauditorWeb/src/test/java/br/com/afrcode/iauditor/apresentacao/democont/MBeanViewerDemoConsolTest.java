@@ -1,5 +1,10 @@
 package br.com.afrcode.iauditor.apresentacao.democont;
 
+import java.math.BigDecimal;
+
+import org.easymock.EasyMock;
+import org.easymock.IMockBuilder;
+import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +17,27 @@ public class MBeanViewerDemoConsolTest extends AbstractCasoTesteEmMemoria {
 	private DaoDemonstrativoConsolidado daoDemonstrativoConsolidado;
 
 	private MBeanViewerDemoConsol configurarMBean() {
-		MBeanViewerDemoConsol mBeanViewerDemoConsol = new MBeanViewerDemoConsol();
+		IMockBuilder<MBeanViewerDemoConsol> mBeanMockBuilder = EasyMock
+				.createMockBuilder(MBeanViewerDemoConsol.class);
+		mBeanMockBuilder = mBeanMockBuilder
+				.addMockedMethod("adicionarMensagem");
+		MBeanViewerDemoConsol mBeanViewerDemoConsol = mBeanMockBuilder
+				.createMock();
 		mBeanViewerDemoConsol
 				.setDaoDemonstrativoConsolidado(daoDemonstrativoConsolidado);
 		return mBeanViewerDemoConsol;
 	}
 
 	@Test
-	public void iniciarContasChartModel() {
+	public void iniciar() {
 		MBeanViewerDemoConsol mBean = configurarMBean();
-		mBean.iniciarContasChartModel();
-		Assert.assertNotNull("contasBarChartModel nulo!",
-				mBean.getContasChartModel());
+		mBean.setEntidadeAExibir("BB");
+		mBean.setDtMinAExibir(new LocalDate(2010, 3, 31));
+		mBean.setDtMaxAExibir(new LocalDate(2014, 3, 31));
+		mBean.setMaxStdDeviation(BigDecimal.valueOf(2));
+		mBean.iniciar();
+		Assert.assertNotNull("beansViewerContas nulo!",
+				mBean.getBeansViewerContas());
 	}
 
 }

@@ -2,6 +2,7 @@ package br.com.afrcode.arquitetura.util.mensagem;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
@@ -14,12 +15,14 @@ import br.com.afrcode.arquitetura.util.excecao.ExcecaoNaoPrevista;
  * 
  * 
  */
-public abstract class MensagemNegocioAbstrata implements IMensagem {
+public abstract class AbstractMensagemNegocio implements IMensagem {
 	private static Properties msgsResourceBundle = null;
 
 	private String codMensagem;
 
 	private String mensagem;
+
+	private Object[] args;
 
 	static {
 		InputStream isMsgsResourceBundle = Thread.currentThread()
@@ -48,7 +51,8 @@ public abstract class MensagemNegocioAbstrata implements IMensagem {
 	@Override
 	public String getMensagem() {
 		if (StringUtils.isBlank(mensagem)) {
-			mensagem = MensagensUtil.recuperarMensagem(getCodMensagem());
+			mensagem = String.format(
+					MensagensUtil.recuperarMensagem(getCodMensagem()), args);
 		}
 		return mensagem;
 	}
@@ -56,5 +60,15 @@ public abstract class MensagemNegocioAbstrata implements IMensagem {
 	@Override
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
+	}
+
+	public Object[] getArgs() {
+		return args;
+	}
+
+	public void setArgs(Object[] args) {
+		if (args != null && args.length > 0) {
+			this.args = Arrays.copyOf(args, args.length);
+		}
 	}
 }
