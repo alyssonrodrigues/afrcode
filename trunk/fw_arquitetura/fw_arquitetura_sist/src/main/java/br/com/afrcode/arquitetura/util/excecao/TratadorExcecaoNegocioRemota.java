@@ -4,7 +4,7 @@ import org.apache.commons.lang.Validate;
 
 import br.com.afrcode.arquitetura.is.util.excecao.ExcecaoNegocioRemota;
 import br.com.afrcode.arquitetura.is.util.excecao.ExcecaoNegocioRemota.Severidade;
-import br.com.afrcode.arquitetura.util.mensagem.MensagemNegocioAbstrata;
+import br.com.afrcode.arquitetura.util.mensagem.AbstractMensagemNegocio;
 import br.com.afrcode.arquitetura.util.mensagem.alerta.MensagemAlertaNegocio;
 import br.com.afrcode.arquitetura.util.mensagem.erro.MensagemErroNegocio;
 import br.com.afrcode.arquitetura.util.mensagem.info.MensagemInfoNegocio;
@@ -25,7 +25,7 @@ public class TratadorExcecaoNegocioRemota implements
 				"Uma instância de ExcecaoNegocio deve ser informada!");
 		String msg = excecao.getMensagem();
 
-		MensagemNegocioAbstrata mensagem = null;
+		AbstractMensagemNegocio mensagem = null;
 		if (Severidade.ERRO.equals(excecao.getSeveridade())) {
 			mensagem = new MensagemErroNegocio(msg);
 		} else if (Severidade.ALERTA.equals(excecao.getSeveridade())) {

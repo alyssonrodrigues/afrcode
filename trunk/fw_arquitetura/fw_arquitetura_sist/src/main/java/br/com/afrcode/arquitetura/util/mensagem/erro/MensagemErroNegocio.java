@@ -1,6 +1,6 @@
 package br.com.afrcode.arquitetura.util.mensagem.erro;
 
-import br.com.afrcode.arquitetura.util.mensagem.MensagemNegocioAbstrata;
+import br.com.afrcode.arquitetura.util.mensagem.AbstractMensagemNegocio;
 
 /**
  * Classe representativa de uma mensagem de erro de negócio.
@@ -8,7 +8,7 @@ import br.com.afrcode.arquitetura.util.mensagem.MensagemNegocioAbstrata;
  * 
  */
 
-public class MensagemErroNegocio extends MensagemNegocioAbstrata {
+public class MensagemErroNegocio extends AbstractMensagemNegocio {
 	private TratadorMensagemErroNegocio tratador;
 
 	public MensagemErroNegocio() {

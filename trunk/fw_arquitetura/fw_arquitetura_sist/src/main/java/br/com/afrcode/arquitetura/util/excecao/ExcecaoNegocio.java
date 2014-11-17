@@ -2,7 +2,7 @@ package br.com.afrcode.arquitetura.util.excecao;
 
 import org.apache.commons.lang.Validate;
 
-import br.com.afrcode.arquitetura.util.mensagem.MensagemNegocioAbstrata;
+import br.com.afrcode.arquitetura.util.mensagem.AbstractMensagemNegocio;
 
 /**
  * Classe base para exceções de negócio (lançadas na camada Model do MVC).
@@ -15,13 +15,13 @@ import br.com.afrcode.arquitetura.util.mensagem.MensagemNegocioAbstrata;
  * 
  */
 public class ExcecaoNegocio extends RuntimeException implements
-		IExcecao<MensagemNegocioAbstrata> {
+		IExcecao<AbstractMensagemNegocio> {
 
 	private static final long serialVersionUID = 1L;
 
-	private MensagemNegocioAbstrata msg;
+	private AbstractMensagemNegocio msg;
 
-	public ExcecaoNegocio(MensagemNegocioAbstrata msg, Throwable cause) {
+	public ExcecaoNegocio(AbstractMensagemNegocio msg, Throwable cause) {
 		super(cause);
 		validarMsg(msg);
 		this.msg = msg;
@@ -33,17 +33,17 @@ public class ExcecaoNegocio extends RuntimeException implements
 	 * 
 	 * @param msg
 	 */
-	public ExcecaoNegocio(MensagemNegocioAbstrata msg) {
+	public ExcecaoNegocio(AbstractMensagemNegocio msg) {
 		validarMsg(msg);
 		this.msg = msg;
 	}
 
 	@Override
-	public MensagemNegocioAbstrata getMensagem() {
+	public AbstractMensagemNegocio getMensagem() {
 		return msg;
 	}
 
-	private void validarMsg(MensagemNegocioAbstrata msg) {
+	private void validarMsg(AbstractMensagemNegocio msg) {
 		Validate.notNull(msg,
 				"Uma instância de MensagemErroNegocio deve ser informada!");
 	}

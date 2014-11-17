@@ -1,13 +1,13 @@
 package br.com.afrcode.arquitetura.util.mensagem.alerta;
 
-import br.com.afrcode.arquitetura.util.mensagem.MensagemNegocioAbstrata;
+import br.com.afrcode.arquitetura.util.mensagem.AbstractMensagemNegocio;
 
 /**
  * Classe representativa de uma mensagem de alerta de negócio.
  * 
  * 
  */
-public class MensagemAlertaNegocio extends MensagemNegocioAbstrata {
+public class MensagemAlertaNegocio extends AbstractMensagemNegocio {
 	private TratadorMensagemAlertaNegocio tratador;
 
 	public MensagemAlertaNegocio(String mensagem) {

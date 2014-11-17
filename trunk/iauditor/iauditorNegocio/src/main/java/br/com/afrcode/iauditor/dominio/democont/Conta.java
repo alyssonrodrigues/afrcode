@@ -11,6 +11,8 @@ public class Conta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Long id;
+
 	private String label;
 
 	private BigDecimal valor;
@@ -26,6 +28,10 @@ public class Conta implements Serializable {
 		return gson.fromJson(jsonElement, Conta.class);
 	}
 
+	public Long getId() {
+		return id;
+	}
+
 	public String getLabel() {
 		return label;
 	}
@@ -36,6 +42,10 @@ public class Conta implements Serializable {
 
 	public BigDecimal getValor() {
 		return valor;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setLabel(String label) {
