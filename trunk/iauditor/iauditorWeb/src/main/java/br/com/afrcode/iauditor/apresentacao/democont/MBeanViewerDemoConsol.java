@@ -35,24 +35,25 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 
 	private static final long serialVersionUID = 1L;
 
-	private BarChartModel contasBarChartModel;
+	private BarChartModel contasChartModel;
 
 	@ManagedProperty("#{daoDemonstrativoConsolidado}")
 	private DaoDemonstrativoConsolidado daoDemonstrativoConsolidado;
 
-	private void configurarContasBarChartModel(String entidade,
-			LocalDate dtMin, LocalDate dtMax) {
+	private void configurarContasChartModel(String entidade, LocalDate dtMin,
+			LocalDate dtMax) {
 		StringBuilder sb = new StringBuilder("Evolução das Contas do ");
 		sb.append(entidade).append(" de ").append(dtMin.getYear())
 				.append(" a ").append(dtMax.getYear());
-		contasBarChartModel.setTitle(sb.toString());
+		contasChartModel.setTitle(sb.toString());
 		final String legendPosition = "ne";
-		contasBarChartModel.setLegendPosition(legendPosition);
-		contasBarChartModel.setLegendCols(4);
-		Axis xAxis = contasBarChartModel.getAxis(AxisType.X);
+		contasChartModel.setLegendPosition(legendPosition);
+		contasChartModel.setLegendCols(4);
+		contasChartModel.setZoom(true);
+		Axis xAxis = contasChartModel.getAxis(AxisType.X);
 		final String labelXAxis = "Período";
 		xAxis.setLabel(labelXAxis);
-		Axis yAxis = contasBarChartModel.getAxis(AxisType.Y);
+		Axis yAxis = contasChartModel.getAxis(AxisType.Y);
 		final String labelYAxis = "Valores";
 		yAxis.setLabel(labelYAxis);
 		yAxis.setMin(0);
@@ -60,24 +61,24 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 		yAxis.setMax(35000000);
 	}
 
-	public BarChartModel getContasBarChartModel() {
-		return contasBarChartModel;
+	public BarChartModel getContasChartModel() {
+		return contasChartModel;
 	}
 
 	@URLAction(mappingId = "viewer.democonsol.init", phaseId = PhaseId.RESTORE_VIEW, onPostback = true)
-	public void iniciarContasBarChartModel() {
+	public void iniciarContasChartModel() {
 		final String entidade = "BB";
 		final LocalDate dtMin = new LocalDate(2010, 3, 31);
 		final LocalDate dtMax = new LocalDate(2014, 3, 31);
 		List<DemonstrativoConsolidado> demosConsol = recuperarDemonstrativosConsolidados(
 				entidade, dtMin, dtMax);
-		iniciarContasBarChartModel(demosConsol);
-		configurarContasBarChartModel(entidade, dtMin, dtMax);
+		iniciarContasChartModel(demosConsol);
+		configurarContasChartModel(entidade, dtMin, dtMax);
 	}
 
-	private void iniciarContasBarChartModel(
+	private void iniciarContasChartModel(
 			List<DemonstrativoConsolidado> demosConsol) {
-		contasBarChartModel = new BarChartModel();
+		contasChartModel = new BarChartModel();
 		Map<String, ChartSeries> chartsSeries = new HashMap<String, ChartSeries>();
 		for (DemonstrativoConsolidado demoConsol : demosConsol) {
 			for (Conta conta : demoConsol.getContas()) {
@@ -86,7 +87,7 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 				if (chartSeries == null) {
 					chartSeries = new ChartSeries(label);
 					chartsSeries.put(label, chartSeries);
-					contasBarChartModel.addSeries(chartSeries);
+					contasChartModel.addSeries(chartSeries);
 				}
 				LocalDate dt = LocalDate
 						.fromDateFields(demoConsol.getPeriodo());
