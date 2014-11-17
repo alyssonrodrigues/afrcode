@@ -12,9 +12,12 @@
 	    <p:panelGrid style="margin:0px auto;width:100%;height:100%;font-weight:bold;">
 	        <p:row>
 	            <p:column>
-	                <p:chart type="bar" 
-	                    model="#{mBeanViewerDemoConsol.contasBarChartModel}"
+	                <p:chart type="bar" widgetVar="widgetVarContasChart"
+	                    model="#{mBeanViewerDemoConsol.contasChartModel}"
 	                    style="height:480px;" />
+	                <p:commandButton type="button" value="Reiniciar" 
+	                    icon="ui-icon-cancel" 
+	                    onclick="PF('widgetVarContasChart').resetZoom()"/>
 	            </p:column>
 	        </p:row>
 	    </p:panelGrid> 

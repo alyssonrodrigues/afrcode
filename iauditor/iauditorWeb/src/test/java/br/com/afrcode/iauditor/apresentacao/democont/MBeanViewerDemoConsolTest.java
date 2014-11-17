@@ -21,9 +21,9 @@ public class MBeanViewerDemoConsolTest extends AbstractCasoTesteEmMemoria {
 	@Test
 	public void iniciarContasBarChartModel() {
 		MBeanViewerDemoConsol mBean = configurarMBean();
-		mBean.iniciarContasBarChartModel();
+		mBean.iniciarContasChartModel();
 		Assert.assertNotNull("contasBarChartModel nulo!",
-				mBean.getContasBarChartModel());
+				mBean.getContasChartModel());
 	}
 
 }
