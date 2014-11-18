@@ -1,11 +1,9 @@
 package br.com.afrcode.iauditor.dominio.democont.dao;
 
 import java.util.List;
-import java.util.Locale;
 
 import org.joda.time.LocalDate;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -22,11 +20,6 @@ public class DaoDemonstrativoConsolidadoTest extends AbstractCasoTesteEmMemoria 
 	@Autowired
 	private DaoDemonstrativoConsolidado daoDemonstrativoConsolidado;
 
-	@BeforeClass
-	public static void setupLocale() {
-		Locale.setDefault(new Locale("pt", "BR"));
-	}
-
 	@Test
 	public void recuperarDemonstrativosConsolidados() {
 		final LocalDate dtMin = new LocalDate(2010, 3, 31);
@@ -37,11 +30,24 @@ public class DaoDemonstrativoConsolidadoTest extends AbstractCasoTesteEmMemoria 
 	}
 
 	@Test
-	public void getExtendedStats() {
+	public void getContaExtendedStats() {
 		final LocalDate dtMin = new LocalDate(2010, 3, 31);
 		final LocalDate dtMax = new LocalDate(2014, 3, 31);
-		ExtendedStats stats = daoDemonstrativoConsolidado.getExtendedStats(
-				"BB", dtMin, dtMax, "LUCRO LÍQUIDO", "valor");
+		ExtendedStats stats = daoDemonstrativoConsolidado
+				.getContaExtendedStats("BB", dtMin, dtMax, "LUCRO LÍQUIDO",
+						"valor");
+		Assert.assertNotNull("stats nulo!", stats);
+	}
+
+	@Test
+	public void getSubcontaExtendedStats() {
+		final LocalDate dtMin = new LocalDate(2010, 3, 31);
+		final LocalDate dtMax = new LocalDate(2014, 3, 31);
+
+		ExtendedStats stats = daoDemonstrativoConsolidado
+				.getSubcontaExtendedStats("BB", dtMin, dtMax,
+						"RECEITAS DE INTERMEDIAÇÃO FINANCEIRA",
+						"Operações de arrendamento mercantil", "valor");
 		Assert.assertNotNull("stats nulo!", stats);
 	}
 

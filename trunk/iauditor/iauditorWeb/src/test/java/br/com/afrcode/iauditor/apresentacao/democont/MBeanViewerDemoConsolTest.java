@@ -40,4 +40,20 @@ public class MBeanViewerDemoConsolTest extends AbstractCasoTesteEmMemoria {
 				mBean.getBeansViewerContas());
 	}
 
+	@Test
+	public void detalharSubcontas() {
+		MBeanViewerDemoConsol mBean = configurarMBean();
+		mBean.setEntidadeAExibir("BB");
+		mBean.setDtMinAExibir(new LocalDate(2010, 3, 31));
+		mBean.setDtMaxAExibir(new LocalDate(2014, 3, 31));
+		mBean.setMaxStdDeviation(BigDecimal.valueOf(2));
+		mBean.iniciar();
+
+		mBean.detalharSubcontas(mBean.getBeansViewerContas().get(0));
+		Assert.assertNotNull("beanViewerContaADetalhar nulo!",
+				mBean.getBeanViewerContaADetalhar());
+		Assert.assertNotNull("beansViewerSubcontas nulo!",
+				mBean.getBeansViewerSubcontas());
+	}
+
 }

@@ -1,6 +1,7 @@
 package br.com.afrcode.iauditor.apresentacao.democont;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.primefaces.model.chart.LineChartModel;
 
@@ -16,12 +17,18 @@ public class BeanViewerConta implements Serializable {
 
 	private ExtendedStats extendedStats;
 
+	private List<BeanViewerConta> beansViewerSubcontas;
+
 	public BeanViewerConta(String label, LineChartModel chartModel,
 			ExtendedStats extendedStats) {
 		super();
 		this.label = label;
 		this.chartModel = chartModel;
 		this.extendedStats = extendedStats;
+	}
+
+	public List<BeanViewerConta> getBeansViewerSubcontas() {
+		return beansViewerSubcontas;
 	}
 
 	public LineChartModel getChartModel() {
@@ -34,6 +41,11 @@ public class BeanViewerConta implements Serializable {
 
 	public String getLabel() {
 		return label;
+	}
+
+	public void setBeansViewerSubcontas(
+			List<BeanViewerConta> beansViewerSubcontas) {
+		this.beansViewerSubcontas = beansViewerSubcontas;
 	}
 
 }
