@@ -1,8 +1,11 @@
 package br.com.afrcode.iauditor.dominio.democont;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,6 +34,9 @@ public class DemonstrativoConsolidado implements Serializable {
 	}
 
 	public List<Conta> getContas() {
+		if (contas == null) {
+			contas = new ArrayList<Conta>();
+		}
 		return contas;
 	}
 
@@ -40,6 +46,17 @@ public class DemonstrativoConsolidado implements Serializable {
 
 	public Date getPeriodo() {
 		return periodo;
+	}
+
+	public List<Conta> getSubcontas(String labelConta) {
+		List<Conta> r = new ArrayList<Conta>();
+		for (Conta conta : getContas()) {
+			if (StringUtils.equals(labelConta, conta.getLabel())) {
+				r.addAll(conta.getSubcontas());
+				break;
+			}
+		}
+		return r;
 	}
 
 	public void setContas(List<Conta> contas) {

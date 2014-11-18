@@ -2,6 +2,8 @@ package br.com.afrcode.iauditor.dominio.democont;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,7 +19,7 @@ public class Conta implements Serializable {
 
 	private BigDecimal valor;
 
-	private Conta subConta;
+	private List<Conta> subcontas;
 
 	public Conta() {
 
@@ -36,8 +38,11 @@ public class Conta implements Serializable {
 		return label;
 	}
 
-	public Conta getSubConta() {
-		return subConta;
+	public List<Conta> getSubcontas() {
+		if (subcontas == null) {
+			subcontas = new ArrayList<Conta>();
+		}
+		return subcontas;
 	}
 
 	public BigDecimal getValor() {
@@ -52,8 +57,8 @@ public class Conta implements Serializable {
 		this.label = label;
 	}
 
-	public void setSubConta(Conta subConta) {
-		this.subConta = subConta;
+	public void setSubcontas(List<Conta> subcontas) {
+		this.subcontas = subcontas;
 	}
 
 	public void setValor(BigDecimal valor) {

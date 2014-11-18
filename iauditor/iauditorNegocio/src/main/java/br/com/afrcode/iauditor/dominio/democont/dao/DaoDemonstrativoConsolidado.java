@@ -41,8 +41,8 @@ public class DaoDemonstrativoConsolidado {
 	@Autowired
 	private HttpRequestFactory requestFactory;
 
-	public ExtendedStats getExtendedStats(String entidade, LocalDate dtMin,
-			LocalDate dtMax, String labelConta, String field) {
+	public ExtendedStats getContaExtendedStats(String entidade,
+			LocalDate dtMin, LocalDate dtMax, String labelConta, String field) {
 		String index = elasticSearchProperties.getElasticsearchDemoContIndex();
 		String type = elasticSearchProperties
 				.getElasticsearchDemoConsolResultType();
@@ -73,10 +73,75 @@ public class DaoDemonstrativoConsolidado {
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("getExtendedStats:" + r);
 			}
-			return parseAsExtendedStats(r, labelConta);
+			return parseAsContaExtendedStats(r, labelConta);
 		} catch (IOException e) {
 			throw new ExcecaoNaoPrevista(e);
 		}
+	}
+
+	public ExtendedStats getSubcontaExtendedStats(String entidade,
+			LocalDate dtMin, LocalDate dtMax, String labelConta,
+			String labelSubconta, String field) {
+		String index = elasticSearchProperties.getElasticsearchDemoContIndex();
+		String type = elasticSearchProperties
+				.getElasticsearchDemoConsolResultType();
+		String query = "_search?pretty=true";
+		ElasticsearchUrl url = ElasticsearchUrl.get(index, type, query);
+
+		final String queryObject = "{ \"aggs\": { \"democonsolresult\": "
+				+ "{ \"filter\": { \"query\": { \"filtered\": "
+				+ "{ \"query\": { \"match\": " + "{ \"entidade\": \""
+				+ entidade
+				+ "\" } }, "
+				+ "\"filter\": { \"range\": { \"periodo\": { \"from\": \""
+				+ dtMin.toString(PERIODO_PATTERN)
+				+ "\", \"to\": \""
+				+ dtMax.toString(PERIODO_PATTERN)
+				+ "\" } } } } } }, \"aggs\": { \"contas\": "
+				+ "{ \"nested\": { \"path\": \"contas\" }, \"aggs\": { \""
+				+ labelConta
+				+ "\": { \"filter\": { \"query\": "
+				+ "{ \"match\": { \"contas.label\": { \"query\": \""
+				+ labelConta
+				+ "\", \"type\": \"phrase\" } } } }, "
+				+ "\"aggs\": { \"subcontas\": "
+				+ "{ \"nested\": { \"path\": \"contas.subcontas\" }, \"aggs\": { \""
+				+ labelSubconta
+				+ "\": { \"filter\": { \"query\": "
+				+ "{ \"match\": { \"contas.subcontas.label\": { \"query\": \""
+				+ labelSubconta
+				+ "\", \"type\": \"phrase\" } } } }, "
+				+ "\"aggs\": { \"ext_stats\": "
+				+ "{ \"extended_stats\": { \"field\": \"contas.subcontas."
+				+ field + "\" } } } } } } } } } } } } } }";
+		try {
+			HttpContent content = new InputStreamContent(Json.MEDIA_TYPE,
+					new ByteArrayInputStream(queryObject.getBytes()));
+			HttpRequest request = requestFactory.buildPostRequest(url, content);
+			HttpResponse response = request.execute();
+			String r = response.parseAsString();
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("getExtendedStats:" + r);
+			}
+			return parseAsSubcontaExtendedStats(r, labelConta, labelSubconta);
+		} catch (IOException e) {
+			throw new ExcecaoNaoPrevista(e);
+		}
+	}
+
+	private ExtendedStats parseAsContaExtendedStats(String r,
+			String labelContaBucket) {
+		JsonParser jsonParser = new JsonParser();
+		JsonObject rAsJsonObject = jsonParser.parse(r).getAsJsonObject();
+		final String aggsBucket = "aggregations";
+		JsonObject aggsMember = rAsJsonObject.get(aggsBucket).getAsJsonObject();
+		final String demoConsolResultBucket = "democonsolresult";
+		final String contasBucket = "contas";
+		final String extStatsBucket = "ext_stats";
+		JsonElement statsMember = aggsMember.get(demoConsolResultBucket)
+				.getAsJsonObject().get(contasBucket).getAsJsonObject()
+				.get(labelContaBucket).getAsJsonObject().get(extStatsBucket);
+		return ExtendedStats.fromJson(statsMember);
 	}
 
 	private List<DemonstrativoConsolidado> parseAsDemonstrativosConsolidados(
@@ -97,17 +162,21 @@ public class DaoDemonstrativoConsolidado {
 		return demosConsolidados;
 	}
 
-	private ExtendedStats parseAsExtendedStats(String r, String labelContaBucket) {
+	private ExtendedStats parseAsSubcontaExtendedStats(String r,
+			String labelContaBucket, String labelSubcontaBucket) {
 		JsonParser jsonParser = new JsonParser();
 		JsonObject rAsJsonObject = jsonParser.parse(r).getAsJsonObject();
 		final String aggsBucket = "aggregations";
 		JsonObject aggsMember = rAsJsonObject.get(aggsBucket).getAsJsonObject();
 		final String demoConsolResultBucket = "democonsolresult";
 		final String contasBucket = "contas";
+		final String subcontasBucket = "subcontas";
 		final String extStatsBucket = "ext_stats";
 		JsonElement statsMember = aggsMember.get(demoConsolResultBucket)
 				.getAsJsonObject().get(contasBucket).getAsJsonObject()
-				.get(labelContaBucket).getAsJsonObject().get(extStatsBucket);
+				.get(labelContaBucket).getAsJsonObject().get(subcontasBucket)
+				.getAsJsonObject().get(labelSubcontaBucket).getAsJsonObject()
+				.get(extStatsBucket);
 		return ExtendedStats.fromJson(statsMember);
 	}
 
