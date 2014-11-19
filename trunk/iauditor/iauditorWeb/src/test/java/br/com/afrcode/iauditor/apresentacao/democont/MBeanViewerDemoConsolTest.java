@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 import org.easymock.EasyMock;
 import org.easymock.IMockBuilder;
-import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
+import org.primefaces.model.chart.ChartModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.afrcode.arquitetura.teste.unitario.util.junit.AbstractCasoTesteEmMemoria;
@@ -32,9 +32,9 @@ public class MBeanViewerDemoConsolTest extends AbstractCasoTesteEmMemoria {
 	public void iniciar() {
 		MBeanViewerDemoConsol mBean = configurarMBean();
 		mBean.setEntidadeAExibir("BB");
-		mBean.setDtMinAExibir(new LocalDate(2010, 3, 31));
-		mBean.setDtMaxAExibir(new LocalDate(2014, 3, 31));
-		mBean.setMaxStdDeviation(BigDecimal.valueOf(2));
+		mBean.setAnoMin(2010);
+		mBean.setAnoMax(2014);
+		mBean.setMaxStdDeviationPercent(BigDecimal.valueOf(2));
 		mBean.iniciar();
 		Assert.assertNotNull("beansViewerContas nulo!",
 				mBean.getBeansViewerContas());
@@ -44,9 +44,9 @@ public class MBeanViewerDemoConsolTest extends AbstractCasoTesteEmMemoria {
 	public void detalharSubcontas() {
 		MBeanViewerDemoConsol mBean = configurarMBean();
 		mBean.setEntidadeAExibir("BB");
-		mBean.setDtMinAExibir(new LocalDate(2010, 3, 31));
-		mBean.setDtMaxAExibir(new LocalDate(2014, 3, 31));
-		mBean.setMaxStdDeviation(BigDecimal.valueOf(2));
+		mBean.setAnoMin(2010);
+		mBean.setAnoMax(2014);
+		mBean.setMaxStdDeviationPercent(BigDecimal.valueOf(2));
 		mBean.iniciar();
 
 		mBean.detalharSubcontas(mBean.getBeansViewerContas().get(0));
@@ -60,15 +60,15 @@ public class MBeanViewerDemoConsolTest extends AbstractCasoTesteEmMemoria {
 	public void detalharSubSubcontas() {
 		MBeanViewerDemoConsol mBean = configurarMBean();
 		mBean.setEntidadeAExibir("CEF");
-		mBean.setDtMinAExibir(new LocalDate(2010, 12, 31));
-		mBean.setDtMaxAExibir(new LocalDate(2014, 12, 31));
-		mBean.setMaxStdDeviation(BigDecimal.valueOf(2));
+		mBean.setAnoMin(2010);
+		mBean.setAnoMax(2014);
+		mBean.setMaxStdDeviationPercent(BigDecimal.valueOf(2));
 		mBean.iniciar();
 
-		BeanViewerConta beanViewerContaADetalhar = mBean.getBeansViewerContas()
-				.get(3);
+		BeanViewerConta<? extends ChartModel> beanViewerContaADetalhar = mBean
+				.getBeansViewerContas().get(4);
 		mBean.detalharSubcontas(beanViewerContaADetalhar);
-		BeanViewerConta beanViewerSubcontaADetalhar = mBean
+		BeanViewerConta<? extends ChartModel> beanViewerSubcontaADetalhar = mBean
 				.getBeansViewerSubcontas().get(6);
 		mBean.detalharSubSubcontas(beanViewerSubcontaADetalhar);
 		Assert.assertNotNull("beanViewerSubcontaADetalhar nulo!",

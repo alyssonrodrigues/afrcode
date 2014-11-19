@@ -30,13 +30,16 @@
 			        </f:facet>
 			        <p:panelGrid style="margin:0px auto;width:100%;height:100%;font-weight:bold;">
 				        <p:row>
-				            <p:column style="width:80%;word-wrap:break-word;white-space:normal;">
-				                <p:chart type="line" widgetVar="widgetVarSubSubcontaChart_#{beanViewerSubSubconta.label}"
+				            <p:column style="width:80%;word-wrap:break-word;white-space:normal;"
+				                colspan="#{empty beanViewerSubSubconta.extendedStats ? 2 : 1}">
+				                <p:chart type="#{beanViewerSubSubconta.chartType}" 
+				                    widgetVar="widgetVarSubSubcontaChart_#{beanViewerSubSubconta.label}"
 				                    model="#{beanViewerSubSubconta.chartModel}"
 				                    style="height:480px;">
 				                </p:chart>
 				            </p:column>
-				            <p:column style="width:20%;word-wrap:break-word;white-space:normal;">
+				            <p:column style="width:20%;word-wrap:break-word;white-space:normal;"
+				                rendered="#{!empty beanViewerSubSubconta.extendedStats}">
 				                <p>Min: <h:outputText value="#{beanViewerSubSubconta.extendedStats.min}"><f:convertNumber locale="pt_BR" /></h:outputText></p>
 				                <p>Max: <h:outputText value="#{beanViewerSubSubconta.extendedStats.max}"><f:convertNumber locale="pt_BR" /></h:outputText></p>
 				                <p>Média: <h:outputText value="#{beanViewerSubSubconta.extendedStats.avg}"><f:convertNumber locale="pt_BR" /></h:outputText></p>
