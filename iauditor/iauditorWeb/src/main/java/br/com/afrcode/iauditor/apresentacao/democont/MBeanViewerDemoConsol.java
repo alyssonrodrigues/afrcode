@@ -216,8 +216,8 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 		BeanViewerConta<LineChartModel> beanViewerContasConsol = new BeanViewerConta<LineChartModel>();
 		beanViewerContasConsol.setConsolidado(true);
 		beanViewerContasConsol
-				.setLabel("Demonstração Consolidada do Resultado do(a) "
-						+ entidadeAExibir);
+				.setLabel("Evolução de contas de Demonstrações Consolidadas "
+						+ "do Resultado do(a) " + entidadeAExibir);
 		LineChartModel contasConsolChartModel = new LineChartModel();
 		beanViewerContasConsol.setChartModel(contasConsolChartModel);
 		beansViewerContas.add(beanViewerContasConsol);
