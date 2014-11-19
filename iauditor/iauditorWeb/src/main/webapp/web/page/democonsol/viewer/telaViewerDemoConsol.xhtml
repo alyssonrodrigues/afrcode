@@ -21,19 +21,25 @@
 		        </f:facet>
 		        <p:panelGrid style="margin:0px auto;width:100%;height:100%;font-weight:bold;">
 			        <p:row>
-			            <p:column style="width:80%;word-wrap:break-word;white-space:normal;">
-			                <p:chart type="line" widgetVar="widgetVarContaChart_#{beanViewerConta.label}"
+			            <p:column style="width:80%;word-wrap:break-word;white-space:normal;"
+			                colspan="#{empty beanViewerConta.extendedStats ? 2 : 1}">
+			                <p:chart type="#{beanViewerConta.chartType}" widgetVar="widgetVarContaChart_#{beanViewerConta.label}"
 			                    model="#{beanViewerConta.chartModel}"
 			                    style="height:480px;">
 			                </p:chart>
 			                <p:commandButton action="#{mBeanViewerDemoConsol.detalharSubcontas(beanViewerConta)}"
 			                    process="@this"
-			                    oncomplete="PF('widgetViewerSubcontasDemoConsol').show()"
+			                    onclick="PF('widgetViewerSubcontasDemoConsol').show()"
 			                    value="Detalhar"
 			                    title="Detalhar"
-			                    rendered="true" />
+			                    rendered="#{!beanViewerConta.consolidado}">
+			                    <f:setPropertyActionListener 
+			                        target="#{mBeanViewerDemoConsol.telaEmExibicaoSubcontas}" 
+			                        value="#{true}" />
+			                </p:commandButton>
 			            </p:column>
-			            <p:column style="width:20%;word-wrap:break-word;white-space:normal;">
+			            <p:column style="width:20%;word-wrap:break-word;white-space:normal;"
+			                rendered="#{!empty beanViewerConta.extendedStats}">
 			                <p>Min: <h:outputText value="#{beanViewerConta.extendedStats.min}"><f:convertNumber locale="pt_BR" /></h:outputText></p>
 			                <p>Max: <h:outputText value="#{beanViewerConta.extendedStats.max}"><f:convertNumber locale="pt_BR" /></h:outputText></p>
 			                <p>Média: <h:outputText value="#{beanViewerConta.extendedStats.avg}"><f:convertNumber locale="pt_BR" /></h:outputText></p>

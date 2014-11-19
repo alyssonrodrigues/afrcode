@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/web/templates/template-fw-arq.xhtml">
+	<ui:define name="title">Index</ui:define>
+	<ui:define name="body">
+	    <p><h:outputText value="Bem vindo ao #{mBeanContextoWeb.contextoAplicacaoWeb.nomeContextoWeb}..." /></p>
+	    
+	    <p><h:outputLink value="#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/democonsol/viewer/init/BB/0.3/2011/2012/">
+	        Demonstração Consolidada do Resultado do(a) BB
+	    </h:outputLink></p>
+	    
+	    <p><h:outputLink value="#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/democonsol/viewer/init/CEF/0.3/2011/2012/">
+	        Demonstração Consolidada do Resultado do(a) CEF
+	    </h:outputLink></p> 
+	</ui:define>
+</ui:composition>
+
+</html>
