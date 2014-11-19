@@ -8,7 +8,7 @@
 	template="/web/templates/template-dialogo-fw-arq.xhtml">
 
 	<ui:define name="dialog">
-        <p:dialog header="Dashboard: Demonstração Consolidada do Resultado do(a) #{mBeanViewerDemoConsol.entidadeAExibir}" 
+        <p:dialog header="Dashboard: Demonstrações Consolidadas do Resultado do(a) #{mBeanViewerDemoConsol.entidadeAExibir}" 
             widgetVar="widgetViewerSubSubcontasDemoConsol" 
             id="painelDialogViewerSubSubcontasDemoConsol" width="1024" 
             height="600" modal="true" resizable="false" dynamic="true" 
@@ -25,9 +25,6 @@
 			        var="beanViewerSubSubconta" value="#{mBeanViewerDemoConsol.beansViewerSubSubcontas}"
 			        columns="1"
 			        emptyMessage="Não há subcontas recuperadas para esta subconta.">
-			        <f:facet name="header">
-			            Evolução de subcontas de #{mBeanViewerDemoConsol.beanViewerSubcontaADetalhar.label}
-			        </f:facet>
 			        <p:panelGrid style="margin:0px auto;width:100%;height:100%;font-weight:bold;">
 				        <p:row>
 				            <p:column style="width:80%;word-wrap:break-word;white-space:normal;"

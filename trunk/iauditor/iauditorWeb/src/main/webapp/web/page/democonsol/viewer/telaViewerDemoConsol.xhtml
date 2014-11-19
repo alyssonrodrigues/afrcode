@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/web/templates/template-fw-arq.xhtml">
-	<ui:define name="title">Dashboard: Demonstração Consolidada do Resultado do(a) #{mBeanViewerDemoConsol.entidadeAExibir}</ui:define>
+	<ui:define name="title">Dashboard: Demonstrações Consolidadas do Resultado do(a) #{mBeanViewerDemoConsol.entidadeAExibir}</ui:define>
 	<ui:define name="body">
 	    <h:form>
 		    <p:dataGrid
@@ -16,9 +16,6 @@
 		        var="beanViewerConta" value="#{mBeanViewerDemoConsol.beansViewerContas}"
 		        columns="1" 
 		        emptyMessage="Não há contas recuperadas para entidade informada.">
-		        <f:facet name="header">
-		            Evolução de contas do(a) #{mBeanViewerDemoConsol.entidadeAExibir}
-		        </f:facet>
 		        <p:panelGrid style="margin:0px auto;width:100%;height:100%;font-weight:bold;">
 			        <p:row>
 			            <p:column style="width:80%;word-wrap:break-word;white-space:normal;"
