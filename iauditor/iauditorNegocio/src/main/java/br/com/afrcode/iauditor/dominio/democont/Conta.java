@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -36,6 +38,17 @@ public class Conta implements Serializable {
 
 	public String getLabel() {
 		return label;
+	}
+
+	public Conta getSubconta(String labelSubconta) {
+		Conta r = null;
+		for (Conta subconta : getSubcontas()) {
+			if (StringUtils.equals(labelSubconta, subconta.getLabel())) {
+				r = subconta;
+				break;
+			}
+		}
+		return r;
 	}
 
 	public List<Conta> getSubcontas() {

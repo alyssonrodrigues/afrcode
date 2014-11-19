@@ -129,6 +129,64 @@ public class DaoDemonstrativoConsolidado {
 		}
 	}
 
+	public ExtendedStats getSubSubcontaExtendedStats(String entidade,
+			LocalDate dtMin, LocalDate dtMax, String labelConta,
+			String labelSubconta, String labelSubSubconta, String field) {
+		String index = elasticSearchProperties.getElasticsearchDemoContIndex();
+		String type = elasticSearchProperties
+				.getElasticsearchDemoConsolResultType();
+		String query = "_search?pretty=true";
+		ElasticsearchUrl url = ElasticsearchUrl.get(index, type, query);
+
+		final String queryObject = "{ \"aggs\": { \"democonsolresult\": "
+				+ "{ \"filter\": { \"query\": { \"filtered\": "
+				+ "{ \"query\": { \"match\": " + "{ \"entidade\": \""
+				+ entidade
+				+ "\" } }, "
+				+ "\"filter\": { \"range\": { \"periodo\": { \"from\": \""
+				+ dtMin.toString(PERIODO_PATTERN)
+				+ "\", \"to\": \""
+				+ dtMax.toString(PERIODO_PATTERN)
+				+ "\" } } } } } }, \"aggs\": { \"contas\": "
+				+ "{ \"nested\": { \"path\": \"contas\" }, \"aggs\": { \""
+				+ labelConta
+				+ "\": { \"filter\": { \"query\": "
+				+ "{ \"match\": { \"contas.label\": { \"query\": \""
+				+ labelConta
+				+ "\", \"type\": \"phrase\" } } } }, "
+				+ "\"aggs\": { \"subcontas\": "
+				+ "{ \"nested\": { \"path\": \"contas.subcontas\" }, \"aggs\": { \""
+				+ labelSubconta
+				+ "\": { \"filter\": { \"query\": "
+				+ "{ \"match\": { \"contas.subcontas.label\": { \"query\": \""
+				+ labelSubconta
+				+ "\", \"type\": \"phrase\" } } } }, "
+				+ "\"aggs\": { \"subcontas\": "
+				+ "{ \"nested\": { \"path\": \"contas.subcontas.subcontas\" }, \"aggs\": { \""
+				+ labelSubSubconta
+				+ "\": { \"filter\": { \"query\": "
+				+ "{ \"match\": { \"contas.subcontas.subcontas.label\": { \"query\": \""
+				+ labelSubSubconta
+				+ "\", \"type\": \"phrase\" } } } }, "
+				+ "\"aggs\": { \"ext_stats\": "
+				+ "{ \"extended_stats\": { \"field\": \"contas.subcontas.subcontas."
+				+ field + "\" } } } } } } } } } } } } } } } } } }";
+		try {
+			HttpContent content = new InputStreamContent(Json.MEDIA_TYPE,
+					new ByteArrayInputStream(queryObject.getBytes()));
+			HttpRequest request = requestFactory.buildPostRequest(url, content);
+			HttpResponse response = request.execute();
+			String r = response.parseAsString();
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("getExtendedStats:" + r);
+			}
+			return parseAsSubSubcontaExtendedStats(r, labelConta,
+					labelSubconta, labelSubSubconta);
+		} catch (IOException e) {
+			throw new ExcecaoNaoPrevista(e);
+		}
+	}
+
 	private ExtendedStats parseAsContaExtendedStats(String r,
 			String labelContaBucket) {
 		JsonParser jsonParser = new JsonParser();
@@ -176,6 +234,27 @@ public class DaoDemonstrativoConsolidado {
 				.getAsJsonObject().get(contasBucket).getAsJsonObject()
 				.get(labelContaBucket).getAsJsonObject().get(subcontasBucket)
 				.getAsJsonObject().get(labelSubcontaBucket).getAsJsonObject()
+				.get(extStatsBucket);
+		return ExtendedStats.fromJson(statsMember);
+	}
+
+	private ExtendedStats parseAsSubSubcontaExtendedStats(String r,
+			String labelContaBucket, String labelSubcontaBucket,
+			String labelSubSubcontaBucket) {
+		JsonParser jsonParser = new JsonParser();
+		JsonObject rAsJsonObject = jsonParser.parse(r).getAsJsonObject();
+		final String aggsBucket = "aggregations";
+		JsonObject aggsMember = rAsJsonObject.get(aggsBucket).getAsJsonObject();
+		final String demoConsolResultBucket = "democonsolresult";
+		final String contasBucket = "contas";
+		final String subcontasBucket = "subcontas";
+		final String extStatsBucket = "ext_stats";
+		JsonElement statsMember = aggsMember.get(demoConsolResultBucket)
+				.getAsJsonObject().get(contasBucket).getAsJsonObject()
+				.get(labelContaBucket).getAsJsonObject().get(subcontasBucket)
+				.getAsJsonObject().get(labelSubcontaBucket).getAsJsonObject()
+				.get(subcontasBucket).getAsJsonObject()
+				.get(labelSubSubcontaBucket).getAsJsonObject()
 				.get(extStatsBucket);
 		return ExtendedStats.fromJson(statsMember);
 	}

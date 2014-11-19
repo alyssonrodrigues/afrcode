@@ -35,7 +35,13 @@
 				                    model="#{beanViewerSubconta.chartModel}"
 				                    style="height:480px;">
 				                </p:chart>
-				            </p:column>
+				                <p:commandButton action="#{mBeanViewerDemoConsol.detalharSubSubcontas(beanViewerSubconta)}"
+				                    process="@this"
+				                    oncomplete="PF('widgetViewerSubSubcontasDemoConsol').show()"
+				                    value="Detalhar"
+				                    title="Detalhar"
+				                    rendered="true" />
+					            </p:column>
 				            <p:column style="width:20%;word-wrap:break-word;white-space:normal;">
 				                <p>Min: <h:outputText value="#{beanViewerSubconta.extendedStats.min}"><f:convertNumber locale="pt_BR" /></h:outputText></p>
 				                <p>Max: <h:outputText value="#{beanViewerSubconta.extendedStats.max}"><f:convertNumber locale="pt_BR" /></h:outputText></p>

@@ -51,4 +51,17 @@ public class DaoDemonstrativoConsolidadoTest extends AbstractCasoTesteEmMemoria 
 		Assert.assertNotNull("stats nulo!", stats);
 	}
 
+	@Test
+	public void getSubSubcontaExtendedStats() {
+		final LocalDate dtMin = new LocalDate(2010, 3, 31);
+		final LocalDate dtMax = new LocalDate(2014, 3, 31);
+
+		ExtendedStats stats = daoDemonstrativoConsolidado
+				.getSubSubcontaExtendedStats("CEF", dtMin, dtMax,
+						"OUTRAS RECEITAS/DESPESAS OPERACIONAIS",
+						"Outras receitas operacionais",
+						"Outras receitas operacionais", "valor");
+		Assert.assertNotNull("stats nulo!", stats);
+	}
+
 }

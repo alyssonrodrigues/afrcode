@@ -33,6 +33,17 @@ public class DemonstrativoConsolidado implements Serializable {
 		return gson.fromJson(jsonElement, DemonstrativoConsolidado.class);
 	}
 
+	public Conta getConta(String labelConta) {
+		Conta r = null;
+		for (Conta conta : getContas()) {
+			if (StringUtils.equals(labelConta, conta.getLabel())) {
+				r = conta;
+				break;
+			}
+		}
+		return r;
+	}
+
 	public List<Conta> getContas() {
 		if (contas == null) {
 			contas = new ArrayList<Conta>();

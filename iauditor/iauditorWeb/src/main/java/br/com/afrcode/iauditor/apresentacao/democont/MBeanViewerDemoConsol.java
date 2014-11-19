@@ -56,6 +56,10 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 
 	private List<BeanViewerConta> beansViewerSubcontas;
 
+	private BeanViewerConta beanViewerSubcontaADetalhar;
+
+	private List<BeanViewerConta> beansViewerSubSubcontas;
+
 	private String entidadeAExibir;
 	// maxStdDeviation a partir de avg
 	private BigDecimal maxStdDeviation;
@@ -85,6 +89,11 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 		beansViewerSubcontas = null;
 	}
 
+	public void cancelarDetalharSubSubcontas() {
+		beanViewerSubcontaADetalhar = null;
+		beansViewerSubSubcontas = null;
+	}
+
 	private void configurarChartModel(String title, LineChartModel chartModel) {
 		chartModel.setTitle(title);
 		chartModel.setAnimate(true);
@@ -104,6 +113,12 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 		iniciarBeansViewerSubcontas(subcontasChartSeries);
 	}
 
+	public void detalharSubSubcontas(BeanViewerConta beanViewerSubcontaADetalhar) {
+		this.beanViewerSubcontaADetalhar = beanViewerSubcontaADetalhar;
+		Map<Long, ChartSeries> subSubcontasChartSeries = iniciarSubSubcontasChartSeries();
+		iniciarBeansViewerSubSubcontas(subSubcontasChartSeries);
+	}
+
 	public List<BeanViewerConta> getBeansViewerContas() {
 		return beansViewerContas;
 	}
@@ -112,8 +127,16 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 		return beansViewerSubcontas;
 	}
 
+	public List<BeanViewerConta> getBeansViewerSubSubcontas() {
+		return beansViewerSubSubcontas;
+	}
+
 	public BeanViewerConta getBeanViewerContaADetalhar() {
 		return beanViewerContaADetalhar;
+	}
+
+	public BeanViewerConta getBeanViewerSubcontaADetalhar() {
+		return beanViewerSubcontaADetalhar;
 	}
 
 	public List<DemonstrativoConsolidado> getDemonstrativosConsol() {
@@ -177,10 +200,38 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 			String labelConta = beanViewerContaADetalhar.getLabel();
 			ExtendedStats extendedStats = recuperarSubcontaExtendedStats(
 					labelConta, labelSubconta);
+			alertarMaxStdDeviationViolation(labelSubconta, extendedStats);
 			BeanViewerConta beanViewerSubconta = new BeanViewerConta(
 					labelSubconta, subcontaChartModel, extendedStats);
 			beansViewerSubcontas.add(beanViewerSubconta);
 		}
+		beanViewerContaADetalhar.setBeansViewerSubcontas(beansViewerSubcontas);
+	}
+
+	private void iniciarBeansViewerSubSubcontas(
+			Map<Long, ChartSeries> subSubcontasChartSeries) {
+		beansViewerSubSubcontas = new ArrayList<BeanViewerConta>();
+
+		for (Entry<Long, ChartSeries> entry : subSubcontasChartSeries
+				.entrySet()) {
+			ChartSeries chartSeries = entry.getValue();
+			String labelSubSubconta = chartSeries.getLabel();
+
+			LineChartModel subSubcontaChartModel = new LineChartModel();
+			subSubcontaChartModel.addSeries(chartSeries);
+			configurarChartModel(labelSubSubconta, subSubcontaChartModel);
+
+			String labelConta = beanViewerContaADetalhar.getLabel();
+			String labelSubconta = beanViewerSubcontaADetalhar.getLabel();
+			ExtendedStats extendedStats = recuperarSubSubcontaExtendedStats(
+					labelConta, labelSubconta, labelSubSubconta);
+			alertarMaxStdDeviationViolation(labelSubSubconta, extendedStats);
+			BeanViewerConta beanViewerSubSubconta = new BeanViewerConta(
+					labelSubSubconta, subSubcontaChartModel, extendedStats);
+			beansViewerSubSubcontas.add(beanViewerSubSubconta);
+		}
+		beanViewerSubcontaADetalhar
+				.setBeansViewerSubcontas(beansViewerSubSubcontas);
 	}
 
 	private Map<Long, ChartSeries> iniciarContasChartSeries() {
@@ -207,6 +258,24 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 			}
 		}
 		return subcontasChartSeries;
+	}
+
+	private Map<Long, ChartSeries> iniciarSubSubcontasChartSeries() {
+		Map<Long, ChartSeries> subSubcontasChartSeries = new TreeMap<Long, ChartSeries>();
+		String labelContaADetalhar = beanViewerContaADetalhar.getLabel();
+		String labelSubcontaADetalhar = beanViewerSubcontaADetalhar.getLabel();
+		for (DemonstrativoConsolidado demoConsol : demonstrativosConsol) {
+			Date periodo = demoConsol.getPeriodo();
+			Conta contaADetalhar = demoConsol.getConta(labelContaADetalhar);
+			Conta subcontaADetalhar = contaADetalhar
+					.getSubconta(labelSubcontaADetalhar);
+			List<Conta> subSubcontas = subcontaADetalhar.getSubcontas();
+			for (Conta subSubconta : subSubcontas) {
+				preencherContaChartSeries(subSubcontasChartSeries, periodo,
+						subSubconta);
+			}
+		}
+		return subSubcontasChartSeries;
 	}
 
 	private void preencherContaChartSeries(
@@ -244,6 +313,16 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 		ExtendedStats extendedStats = daoDemonstrativoConsolidado
 				.getSubcontaExtendedStats(entidadeAExibir, dtMinAExibir,
 						dtMaxAExibir, labelConta, labelSubconta, field);
+		return extendedStats;
+	}
+
+	private ExtendedStats recuperarSubSubcontaExtendedStats(String labelConta,
+			String labelSubconta, String labelSubSubconta) {
+		final String field = "valor";
+		ExtendedStats extendedStats = daoDemonstrativoConsolidado
+				.getSubSubcontaExtendedStats(entidadeAExibir, dtMinAExibir,
+						dtMaxAExibir, labelConta, labelSubconta,
+						labelSubSubconta, field);
 		return extendedStats;
 	}
 
