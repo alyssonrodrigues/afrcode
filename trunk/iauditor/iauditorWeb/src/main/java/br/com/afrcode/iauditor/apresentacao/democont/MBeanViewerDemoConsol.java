@@ -22,6 +22,7 @@ import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.ChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.PieChartModel;
 
 import br.com.afrcode.arquitetura.apresentacao.managedbean.AbstractManagedBean;
 import br.com.afrcode.arquitetura.util.mensagem.alerta.MensagemAlertaNegocio;
@@ -135,6 +136,7 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 			BeanViewerConta<? extends ChartModel> beanViewerContaADetalhar) {
 		setTelaEmExibicaoSubcontas(true);
 		this.beanViewerContaADetalhar = beanViewerContaADetalhar;
+		beansViewerSubcontas = new ArrayList<BeanViewerConta<? extends ChartModel>>();
 		Map<Long, ChartSeries> subcontasChartSeries = iniciarSubcontasChartSeries();
 		iniciarBeansViewerSubcontas(subcontasChartSeries);
 	}
@@ -143,6 +145,7 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 			BeanViewerConta<? extends ChartModel> beanViewerSubcontaADetalhar) {
 		setTelaEmExibicaoSubSubcontas(true);
 		this.beanViewerSubcontaADetalhar = beanViewerSubcontaADetalhar;
+		beansViewerSubSubcontas = new ArrayList<BeanViewerConta<? extends ChartModel>>();
 		Map<Long, ChartSeries> subSubcontasChartSeries = iniciarSubSubcontasChartSeries();
 		iniciarBeansViewerSubSubcontas(subSubcontasChartSeries);
 	}
@@ -200,14 +203,16 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 		dtMinAExibir = new LocalDate(anoMin, 1, 1);
 		dtMaxAExibir = new LocalDate(anoMax, 12, 31);
 		demonstrativosConsol = recuperarDemonstrativosConsolidados();
+		beansViewerContas = new ArrayList<BeanViewerConta<? extends ChartModel>>();
 		Map<Long, ChartSeries> contasChartSeries = iniciarContasChartSeries();
 		iniciarBeansViewerContas(contasChartSeries);
 	}
 
 	private void iniciarBeansViewerContas(
 			Map<Long, ChartSeries> contasChartSeries) {
-		beansViewerContas = new ArrayList<BeanViewerConta<? extends ChartModel>>();
-
+		if (contasChartSeries.isEmpty()) {
+			return;
+		}
 		BeanViewerConta<LineChartModel> beanViewerContasConsol = new BeanViewerConta<LineChartModel>();
 		beanViewerContasConsol.setConsolidado(true);
 		beanViewerContasConsol
@@ -238,11 +243,12 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 
 	private void iniciarBeansViewerSubcontas(
 			Map<Long, ChartSeries> subcontasChartSeries) {
-		beansViewerSubcontas = new ArrayList<BeanViewerConta<? extends ChartModel>>();
-
+		if (subcontasChartSeries.isEmpty()) {
+			return;
+		}
 		BeanViewerConta<LineChartModel> beanViewerSubcontasConsol = new BeanViewerConta<LineChartModel>();
 		beanViewerSubcontasConsol.setConsolidado(true);
-		beanViewerSubcontasConsol.setLabel("Conta "
+		beanViewerSubcontasConsol.setLabel("Evolução de subcontas de "
 				+ beanViewerContaADetalhar.getLabel());
 		LineChartModel subcontasConsolChartModel = new LineChartModel();
 		beanViewerSubcontasConsol.setChartModel(subcontasConsolChartModel);
@@ -272,11 +278,12 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 
 	private void iniciarBeansViewerSubSubcontas(
 			Map<Long, ChartSeries> subSubcontasChartSeries) {
-		beansViewerSubSubcontas = new ArrayList<BeanViewerConta<? extends ChartModel>>();
-
+		if (subSubcontasChartSeries.isEmpty()) {
+			return;
+		}
 		BeanViewerConta<LineChartModel> beanViewerSubSubcontasConsol = new BeanViewerConta<LineChartModel>();
 		beanViewerSubSubcontasConsol.setConsolidado(true);
-		beanViewerSubSubcontasConsol.setLabel("Subconta "
+		beanViewerSubSubcontasConsol.setLabel("Evolução de subcontas de "
 				+ beanViewerSubcontaADetalhar.getLabel());
 		LineChartModel subSubcontasConsolChartModel = new LineChartModel();
 		beanViewerSubSubcontasConsol
@@ -326,12 +333,39 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 			Date periodo = demoConsol.getPeriodo();
 			List<Conta> subcontas = demoConsol
 					.getSubcontas(labelContaADetalhar);
+			iniciarSubcontasComposicaoChartSeries(subcontas, demoConsol);
 			for (Conta subconta : subcontas) {
 				preencherContaChartSeries(subcontasChartSeries, periodo,
 						subconta);
 			}
 		}
 		return subcontasChartSeries;
+	}
+
+	private void iniciarSubcontasComposicaoChartSeries(List<Conta> subcontas,
+			DemonstrativoConsolidado demoConsol) {
+		if (subcontas.isEmpty()) {
+			return;
+		}
+		String labelContaADetalhar = beanViewerContaADetalhar.getLabel();
+		BeanViewerConta<PieChartModel> beanViewerSubcontasComposicao = new BeanViewerConta<PieChartModel>();
+		LocalDate periodo = LocalDate.fromDateFields(demoConsol.getPeriodo());
+		beanViewerSubcontasComposicao.setLabel("Composição % de "
+				+ labelContaADetalhar + " em "
+				+ periodo.toString(PERIODO_PATTERN));
+		beanViewerSubcontasComposicao.setConsolidado(true);
+		PieChartModel subcontasComposicaoChartModel = new PieChartModel();
+		subcontasComposicaoChartModel.setTitle(beanViewerSubcontasComposicao
+				.getLabel());
+		subcontasComposicaoChartModel.setLegendPosition("e");
+		subcontasComposicaoChartModel.setShowDataLabels(true);
+		beanViewerSubcontasComposicao
+				.setChartModel(subcontasComposicaoChartModel);
+		for (Conta subconta : subcontas) {
+			subcontasComposicaoChartModel.set(subconta.getLabel(), subconta
+					.getValor().abs());
+		}
+		beansViewerSubcontas.add(beanViewerSubcontasComposicao);
 	}
 
 	private Map<Long, ChartSeries> iniciarSubSubcontasChartSeries() {
@@ -344,12 +378,39 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 			Conta subcontaADetalhar = contaADetalhar
 					.getSubconta(labelSubcontaADetalhar);
 			List<Conta> subSubcontas = subcontaADetalhar.getSubcontas();
+			iniciarSubSubcontasComposicaoChartSeries(subSubcontas, demoConsol);
 			for (Conta subSubconta : subSubcontas) {
 				preencherContaChartSeries(subSubcontasChartSeries, periodo,
 						subSubconta);
 			}
 		}
 		return subSubcontasChartSeries;
+	}
+
+	private void iniciarSubSubcontasComposicaoChartSeries(
+			List<Conta> subSubcontas, DemonstrativoConsolidado demoConsol) {
+		if (subSubcontas.isEmpty()) {
+			return;
+		}
+		String labelSubcontaADetalhar = beanViewerSubcontaADetalhar.getLabel();
+		BeanViewerConta<PieChartModel> beanViewerSubSubcontasComposicao = new BeanViewerConta<PieChartModel>();
+		LocalDate periodo = LocalDate.fromDateFields(demoConsol.getPeriodo());
+		beanViewerSubSubcontasComposicao.setLabel("Composição % de "
+				+ labelSubcontaADetalhar + " em "
+				+ periodo.toString(PERIODO_PATTERN));
+		beanViewerSubSubcontasComposicao.setConsolidado(true);
+		PieChartModel subSubcontasComposicaoChartModel = new PieChartModel();
+		subSubcontasComposicaoChartModel
+				.setTitle(beanViewerSubSubcontasComposicao.getLabel());
+		subSubcontasComposicaoChartModel.setLegendPosition("e");
+		subSubcontasComposicaoChartModel.setShowDataLabels(true);
+		beanViewerSubSubcontasComposicao
+				.setChartModel(subSubcontasComposicaoChartModel);
+		for (Conta subSubconta : subSubcontas) {
+			subSubcontasComposicaoChartModel.set(subSubconta.getLabel(),
+					subSubconta.getValor().abs());
+		}
+		beansViewerSubSubcontas.add(beanViewerSubSubcontasComposicao);
 	}
 
 	public boolean isTelaEmExibicaoSubcontas() {

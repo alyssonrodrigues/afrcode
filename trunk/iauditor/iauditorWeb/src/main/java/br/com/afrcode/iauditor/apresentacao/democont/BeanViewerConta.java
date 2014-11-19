@@ -6,6 +6,7 @@ import java.util.List;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartModel;
 import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.PieChartModel;
 
 import br.com.afrcode.arquitetura.util.mensagem.IMensagem;
 import br.com.afrcode.iauditor.dominio.elasticsearch.ExtendedStats;
@@ -52,6 +53,8 @@ public class BeanViewerConta<T extends ChartModel> implements Serializable {
 			chartType = "line";
 		} else if (chartModel instanceof BarChartModel) {
 			chartType = "bar";
+		} else if (chartModel instanceof PieChartModel) {
+			chartType = "pie";
 		} else {
 			throw new IllegalArgumentException("chartType não previsto!");
 		}
