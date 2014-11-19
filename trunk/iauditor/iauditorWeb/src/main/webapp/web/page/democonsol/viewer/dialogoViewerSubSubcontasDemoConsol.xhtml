@@ -43,6 +43,16 @@
 				                <p>Desvio padrão: <h:outputText value="#{beanViewerSubSubconta.extendedStats.stdDeviation}"><f:convertNumber locale="pt_BR" /></h:outputText></p> 
 				            </p:column>
 				        </p:row>
+				        <p:row rendered="#{!empty beanViewerSubSubconta.mensagem}">
+				            <p:column colspan="2">
+					            <div class="ui-messages-warn ui-corner-all" style="margin:0px auto;width:95%;font-weight:bold;">
+					                <span class="ui-messages-warn-icon"></span>
+					                <span class="ui-messages-warn-summary">
+					                    #{beanViewerSubSubconta.mensagem.mensagem}
+					                </span>
+					            </div>
+				            </p:column>
+				        </p:row>
 			        </p:panelGrid>
 			    </p:dataGrid>
 		    
