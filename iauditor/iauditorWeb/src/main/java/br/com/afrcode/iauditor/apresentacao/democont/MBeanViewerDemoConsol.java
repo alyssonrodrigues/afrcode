@@ -68,8 +68,9 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 	private LocalDate dtMinAExibir = new LocalDate(2010, 3, 31);
 	private LocalDate dtMaxAExibir = new LocalDate(2014, 3, 31);
 
-	private void alertarMaxStdDeviationViolation(String labelConta,
-			ExtendedStats extendedStats) {
+	private void alertarMaxStdDeviationViolation(BeanViewerConta beanViewerConta) {
+		ExtendedStats extendedStats = beanViewerConta.getExtendedStats();
+		String labelConta = beanViewerConta.getLabel();
 		BigDecimal limiteStdDeviation = extendedStats.getAvg().abs()
 				.multiply(maxStdDeviation);
 		BigDecimal stdDeviation = extendedStats.getStdDeviation().abs();
@@ -80,7 +81,7 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 					.multiply(BigDecimal.valueOf(100)).toPlainString()
 					.concat("%");
 			msg.setArgs(new Object[] { labelConta, maxStdDeviationStr });
-			adicionarMensagem(msg);
+			beanViewerConta.setMensagem(msg);
 		}
 	}
 
@@ -178,9 +179,9 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 			configurarChartModel(labelConta, contaChartModel);
 
 			ExtendedStats extendedStats = recuperarContaExtendedStats(labelConta);
-			alertarMaxStdDeviationViolation(labelConta, extendedStats);
 			BeanViewerConta beanViewerConta = new BeanViewerConta(labelConta,
 					contaChartModel, extendedStats);
+			alertarMaxStdDeviationViolation(beanViewerConta);
 			beansViewerContas.add(beanViewerConta);
 		}
 	}
@@ -200,9 +201,9 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 			String labelConta = beanViewerContaADetalhar.getLabel();
 			ExtendedStats extendedStats = recuperarSubcontaExtendedStats(
 					labelConta, labelSubconta);
-			alertarMaxStdDeviationViolation(labelSubconta, extendedStats);
 			BeanViewerConta beanViewerSubconta = new BeanViewerConta(
 					labelSubconta, subcontaChartModel, extendedStats);
+			alertarMaxStdDeviationViolation(beanViewerSubconta);
 			beansViewerSubcontas.add(beanViewerSubconta);
 		}
 		beanViewerContaADetalhar.setBeansViewerSubcontas(beansViewerSubcontas);
@@ -225,9 +226,9 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 			String labelSubconta = beanViewerSubcontaADetalhar.getLabel();
 			ExtendedStats extendedStats = recuperarSubSubcontaExtendedStats(
 					labelConta, labelSubconta, labelSubSubconta);
-			alertarMaxStdDeviationViolation(labelSubSubconta, extendedStats);
 			BeanViewerConta beanViewerSubSubconta = new BeanViewerConta(
 					labelSubSubconta, subSubcontaChartModel, extendedStats);
+			alertarMaxStdDeviationViolation(beanViewerSubSubconta);
 			beansViewerSubSubcontas.add(beanViewerSubSubconta);
 		}
 		beanViewerSubcontaADetalhar

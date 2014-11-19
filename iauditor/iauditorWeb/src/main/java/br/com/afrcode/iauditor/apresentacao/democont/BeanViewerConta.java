@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.primefaces.model.chart.LineChartModel;
 
+import br.com.afrcode.arquitetura.util.mensagem.IMensagem;
 import br.com.afrcode.iauditor.dominio.elasticsearch.ExtendedStats;
 
 public class BeanViewerConta implements Serializable {
@@ -18,6 +19,8 @@ public class BeanViewerConta implements Serializable {
 	private ExtendedStats extendedStats;
 
 	private List<BeanViewerConta> beansViewerSubcontas;
+
+	private IMensagem mensagem;
 
 	public BeanViewerConta(String label, LineChartModel chartModel,
 			ExtendedStats extendedStats) {
@@ -43,9 +46,17 @@ public class BeanViewerConta implements Serializable {
 		return label;
 	}
 
+	public IMensagem getMensagem() {
+		return mensagem;
+	}
+
 	public void setBeansViewerSubcontas(
 			List<BeanViewerConta> beansViewerSubcontas) {
 		this.beansViewerSubcontas = beansViewerSubcontas;
+	}
+
+	public void setMensagem(IMensagem mensagem) {
+		this.mensagem = mensagem;
 	}
 
 }
