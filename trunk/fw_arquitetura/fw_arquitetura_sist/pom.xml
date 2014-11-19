@@ -15,7 +15,7 @@
 	<properties>
 		<hibernateVersion>4.2.15.Final</hibernateVersion>
 		<hibernateValidatorVersion>4.3.2.Final</hibernateValidatorVersion>
-		<primefacesVersion>5.0</primefacesVersion>
+		<primefacesVersion>5.1</primefacesVersion>
 		<joda-time.version>2.2</joda-time.version>
 		<usertype.core.version>3.1.0.CR6</usertype.core.version>
 		<springMailVersion>4.0.0.RELEASE</springMailVersion>
