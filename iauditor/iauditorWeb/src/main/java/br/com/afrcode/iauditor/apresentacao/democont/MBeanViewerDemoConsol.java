@@ -200,12 +200,14 @@ public class MBeanViewerDemoConsol extends AbstractManagedBean {
 
 	@URLAction(mappingId = "viewer.democonsol.init", phaseId = PhaseId.RESTORE_VIEW, onPostback = true)
 	public void iniciar() {
-		dtMinAExibir = new LocalDate(anoMin, 1, 1);
-		dtMaxAExibir = new LocalDate(anoMax, 12, 31);
-		demonstrativosConsol = recuperarDemonstrativosConsolidados();
-		beansViewerContas = new ArrayList<BeanViewerConta<? extends ChartModel>>();
-		Map<Long, ChartSeries> contasChartSeries = iniciarContasChartSeries();
-		iniciarBeansViewerContas(contasChartSeries);
+		if (beansViewerContas == null) {
+			dtMinAExibir = new LocalDate(anoMin, 1, 1);
+			dtMaxAExibir = new LocalDate(anoMax, 12, 31);
+			demonstrativosConsol = recuperarDemonstrativosConsolidados();
+			beansViewerContas = new ArrayList<BeanViewerConta<? extends ChartModel>>();
+			Map<Long, ChartSeries> contasChartSeries = iniciarContasChartSeries();
+			iniciarBeansViewerContas(contasChartSeries);
+		}
 	}
 
 	private void iniciarBeansViewerContas(
