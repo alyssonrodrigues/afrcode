@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,9 +19,9 @@ import lombok.Setter;
 @Table(name = "USUARIO")
 @SequenceGenerator(name = "ID_GENERATOR", sequenceName = "SEQ_USUARIO")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode(of = { "id" })
 public class Usuario {
 
 	@Version
@@ -37,5 +37,10 @@ public class Usuario {
 
 	@Column(name = "LOGIN")
 	private String login;
+
+	public Usuario(String nome, String login) {
+		this.nome = nome;
+		this.login = login;
+	}
 
 }
