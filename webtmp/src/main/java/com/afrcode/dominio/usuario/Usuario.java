@@ -39,6 +39,7 @@ public class Usuario {
 	private String login;
 
 	public Usuario(String nome, String login) {
+		super();
 		this.nome = nome;
 		this.login = login;
 	}
