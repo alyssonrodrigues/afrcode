@@ -1,7 +1,13 @@
 package com.afrcode.dominio.usuario;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
-public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+
+	List<Usuario> findByNomeLikeIgnoreCase(String nome);
+
+	Usuario findByLoginIgnoreCase(String login);
 
 }
