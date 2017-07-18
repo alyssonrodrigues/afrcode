@@ -42,6 +42,10 @@ p {
 	background-color: #000;
 	color: #F2FFFC;
 	clear: both;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
 }
 
 main a {
@@ -112,15 +116,15 @@ nav a {
 }
 
 .github {
-	background-image: url(/webtmp/image/github.png);
+	background-image: url(github.png);
 }
 
 .twitter {
-	background-image: url(/webtmp/image/twitter.png);
+	background-image: url(twitter.png);
 }
 
 .linkedin {
-	background-image: url(/webtmp/image/linkedin.png);
+	background-image: url(linkedin.png);
 }
 
 .fiat {
@@ -134,11 +138,11 @@ nav a {
 main {
 	float: left;
 	width: 85%;
+	padding-bottom: 80px;
 }
 
 .minha-foto, .navegacao-site {
 	float: right;
-	width: 15%;
 	box-sizing: border-box;
 	border-left: 10px solid black;
 	border-bottom: 10px solid black;
@@ -147,4 +151,16 @@ main {
 cite {
 	font-style: italic;
 	float: right;
+}
+
+.minha-foto {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.navegacao-site {
+	width: 15%;
+	position: relative;
+	top: 310px;
 }
