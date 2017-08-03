@@ -25,7 +25,7 @@ class NegociacaoController {
 
 		let tr = document.createElement("tr");
 		
-		negociacao.toArray().forEach((prop) => {
+		negociacao.toArray().forEach(prop => {
 			let td = document.createElement("td");
 			td.textContent = prop;
 			tr.appendChild(td);
