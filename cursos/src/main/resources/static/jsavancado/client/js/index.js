@@ -1,31 +1,28 @@
-var campos = [
-	document.querySelector("#data"),
-	document.querySelector("#quantidade"),
-	document.querySelector("#valor")
-];
+let data = document.querySelector("#data");
+let quantidade = document.querySelector("#quantidade");
+let valor = document.querySelector("#valor");
 
-var form = document.querySelector("form");
-var tbody = document.querySelector("table tbody");
+let form = document.querySelector("form");
+let tbody = document.querySelector("table tbody");
 
 form.addEventListener("submit", function (event) {
 	event.preventDefault();
+
+	let negociacao = new Negociacao(
+			new Date(data.value), quantidade.value, valor.value);
+
+	let tr = document.createElement("tr");
 	
-	var tr = document.createElement("tr");
-	
-	campos.forEach(function(campo) {
-		var td = document.createElement("td");
-		td.textContent = campo.value;
+	negociacao.toArray().forEach(function(prop) {
+		let td = document.createElement("td");
+		td.textContent = prop;
 		tr.appendChild(td);
 	});
 	
-	var tdVolume = document.createElement("td");
-	tdVolume.textContent = campos[1].value * campos[2].value;
-	tr.appendChild(tdVolume);
-
 	tbody.appendChild(tr);
 	
-	campos[0].value = "";
-	campos[1].value = "1";
-	campos[2].value = "0";
-	campos[0].focus();
+	data.value = "";
+	quantidade.value = "1";
+	valor.value = "0";
+	data.focus();
 });
