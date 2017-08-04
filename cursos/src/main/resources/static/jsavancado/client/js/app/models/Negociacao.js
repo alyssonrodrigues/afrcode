@@ -24,7 +24,7 @@ class Negociacao {
 	
 	toArray() {
 		return [
-			this.data.toDateString(), 
+			DateHelper.dataParaTexto(this.data), 
 			this.quantidade, 
 			this.valor, 
 			this.volume
