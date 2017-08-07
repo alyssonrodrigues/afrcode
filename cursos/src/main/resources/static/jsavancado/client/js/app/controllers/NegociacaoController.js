@@ -1,35 +1,20 @@
 class NegociacaoController {
 	constructor() {
 		let $ = document.querySelector.bind(document);
-		
 		this._inputData = $("#data");
 		this._inputQuantidade = $("#quantidade");
 		this._inputValor = $("#valor");
 		this._negociacoesList = new NegociacoesList();
-		
-		this._tbody = $("table tbody");
+		this._negociacoesView = new NegociacoesView($("#negociacoesView"));
+		this._negociacoesView.update(this._negociacoesList);
 	}
 
 	adiciona(event) {
 		event.preventDefault();
-		
 		let negociacao = this._criaNegociacao();
 		this._negociacoesList.adiciona(negociacao);
-		this._exibeNegociacao(negociacao);
-		
+		this._negociacoesView.update(this._negociacoesList);
 		this._reset();
-	}
-	
-	_exibeNegociacao(negociacao) {
-		let tr = document.createElement("tr");
-		
-		negociacao.toArray().forEach(prop => {
-			let td = document.createElement("td");
-			td.textContent = prop;
-			tr.appendChild(td);
-		});
-		
-		this._tbody.appendChild(tr);
 	}
 	
 	_criaNegociacao() {

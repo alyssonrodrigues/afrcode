@@ -22,13 +22,4 @@ class Negociacao {
 		return this._quantidade * this._valor; 
 	}
 	
-	toArray() {
-		return [
-			DateHelper.dataParaTexto(this.data), 
-			this.quantidade, 
-			this.valor, 
-			this.volume
-		];
-	}
-	
 }
