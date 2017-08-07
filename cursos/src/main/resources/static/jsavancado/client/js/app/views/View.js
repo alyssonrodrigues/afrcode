@@ -8,6 +8,6 @@ class View {
 	}
 	
 	template(model) {
-		throw new Error("_template not implemented!");
+		throw new Error("template method not implemented!");
 	}
 }
