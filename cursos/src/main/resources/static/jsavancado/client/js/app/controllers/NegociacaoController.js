@@ -19,13 +19,13 @@ class NegociacaoController {
     adiciona(event) {
         event.preventDefault();
         this._negociacoesList.adiciona(this._criaNegociacao());
-        this._mensagem.texto = 'Negociação adicionada com sucesso'; 
+        this._mensagem.texto = 'Negociação adicionada com sucesso!'; 
         this._limpaFormulario();   
     }
     
     apaga() {
         this._negociacoesList.esvazia();
-        this._mensagem.texto = 'Negociações apagadas com sucesso';
+        this._mensagem.texto = 'Negociações apagadas com sucesso!';
     }
     
     _criaNegociacao() {
