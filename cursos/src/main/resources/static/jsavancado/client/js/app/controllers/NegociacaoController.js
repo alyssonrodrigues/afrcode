@@ -34,7 +34,7 @@ class NegociacaoController {
     }
     
     importaNegociacoes() {
-		this._negociacoesImport.getNegociacoesSemana((error, negociacoes) => {
+    	let callback = (error, negociacoes) => {
 			if (error) {
 				this._mensagem.texto = 
 					`Negociações NÃO importadas! ${error}`;
@@ -42,8 +42,12 @@ class NegociacaoController {
 			}
 			negociacoes.forEach(negociacao => 
 				this._negociacoesList.adiciona(negociacao));
-			this._mensagem.texto = "Negociações importadas com sucesso!";
-		});
+			this._mensagem.texto =  
+				"Negociações importadas com sucesso!";
+		}
+    	this._negociacoesImport.getNegociacoesRetrasada(callback);
+    	this._negociacoesImport.getNegociacoesAnterior(callback);
+		this._negociacoesImport.getNegociacoesSemana(callback);
     }
     
     _limpaFormulario() {

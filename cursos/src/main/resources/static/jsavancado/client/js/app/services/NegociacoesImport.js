@@ -1,7 +1,19 @@
 class NegociacoesImport {
+	getNegociacoesRetrasada(callback) {
+    	return this._getNegociacoes("negociacoes/retrasada", callback);
+	}
+
+	getNegociacoesAnterior(callback) {
+    	return this._getNegociacoes("negociacoes/anterior", callback);
+	}
+
 	getNegociacoesSemana(callback) {
+    	return this._getNegociacoes("negociacoes/semana", callback);
+	}
+	
+	_getNegociacoes(url, callback) {
     	let xhr = new XMLHttpRequest();
-    	xhr.open("GET", "negociacoes/semana");
+    	xhr.open("GET", url);
     	xhr.onreadystatechange = () => {
 	    	if(xhr.readyState == 4) {
 	    		if (xhr.status == 200) {
