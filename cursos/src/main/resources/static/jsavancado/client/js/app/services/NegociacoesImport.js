@@ -17,11 +17,13 @@ class NegociacoesImport {
 	
 	_getNegociacoes(url) {
 		return new Promise((resolve, reject) => 
-			this._httpService.get(url).then(negociacoesStr => 
-				resolve(negociacoesStr.map(obj => new Negociacao(
-					new Date(obj.data), 
-					obj.quantidade, 
-					obj.valor)))
-				).catch(error => reject(error)));
+			this._httpService.get(url).then(negociacoesStringArray => {
+				let negociacoesArray = negociacoesStringArray.map(obj => 
+					new Negociacao(
+						new Date(obj.data), 
+						obj.quantidade, 
+						obj.valor));
+				resolve(negociacoesArray);
+				}).catch(error => reject(error)));
 	}
 }
