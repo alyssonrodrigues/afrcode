@@ -20,4 +20,12 @@ class NegociacoesList {
         		(total, negociacao) => total + negociacao.volume, 
         		0.0);
 	}
+	
+    ordena(criterio) {
+        this._negociacoes.sort(criterio);
+    }
+    
+    inverteOrdem() {
+        this._negociacoes.reverse();
+    }
 }
