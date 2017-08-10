@@ -63,5 +63,59 @@
         var negociacaoController = new NegociacaoController();
     </script>
     
+    <script>
+        var dbName = "aluraframe";
+        var objStoreName = "negociacoes";
+        var connection;
+        var dbRequest = window.indexedDB.open("aluraframe", 1);
+        dbRequest.onupgradeneeded = event => {
+        	let connection = event.target.result;
+        	if (connection.objectStoreNames.contains(objStoreName)) {
+        		connection.deleteObjectStore(objStoreName);
+        	}
+        	connection.createObjectStore(objStoreName, 
+        			{autoIncrement: true});
+        };
+        dbRequest.onsuccess = event => {
+        	connection = event.target.result;
+        	console.log(event.target.result);
+        };
+        dbRequest.onerror = event => {
+        	console.log(event.target.error);
+        };
+        
+        function adiciona(data, quantidade, valor) {
+        	let tx = connection.transaction([objStoreName], "readwrite");
+        	let objStore = tx.objectStore(objStoreName);
+        	let addRequest = objStore.add(new Negociacao(
+        			new Date(data), quantidade, valor));
+        	addRequest.onsuccess = event => {
+        		console.log(event.target.result);
+        	};
+        	addRequest.onerror = event => {
+        		console.log(event.target.error);
+        	}
+        }
+        
+        function listaTodos() {
+            let tx = connection.transaction([objStoreName], "readwrite");
+            let objStore = tx.objectStore(objStoreName);
+            let negociacoes = [];
+            let cursorRequest = objStore.openCursor();
+            cursorRequest.onsuccess = event => {
+            	let pointer = event.target.result;
+            	if (pointer) {
+            		negociacoes.push(pointer.value);
+            		pointer.continue();
+            	} else {
+            		console.log(negociacoes);
+            	}
+            };
+            cursorRequest.onerror = event => {
+            	console.log(event.target.error);
+            };
+        }
+    </script>
+    
 </body>
 </html>
