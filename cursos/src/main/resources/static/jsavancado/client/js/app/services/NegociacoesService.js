@@ -1,4 +1,4 @@
-class NegociacoesImport {
+class NegociacoesService {
 	constructor() {
 		this._httpService = new HttpService();
 	}

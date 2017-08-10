@@ -15,7 +15,7 @@ class NegociacaoController {
             new Mensagem(), new MensagemView($("#mensagemView")),
             "texto"); 
         
-        this._negociacoesImport = new NegociacoesImport();
+        this._negociacoesService = new NegociacoesService();
         this._ordemAtual = "";
     }
     
@@ -39,7 +39,7 @@ class NegociacaoController {
     }
     
     importaNegociacoes() {
-    	this._negociacoesImport.getTodasNegociacoes()
+    	this._negociacoesService.getTodasNegociacoes()
     		.then(negociacoes => { 
     			negociacoes.forEach(negociacao => 
     				this._negociacoesList.adiciona(negociacao));
