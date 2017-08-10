@@ -53,6 +53,7 @@
     <script src="js/app/services/ProxyFactory.js"></script>
     <script src="js/app/models/Mensagem.js"></script>
     <script src="js/app/models/Negociacao.js"></script>
+    <script src="js/app/daos/NegociacaoDao.js"></script>
     <script src="js/app/services/HttpService.js"></script>
     <script src="js/app/services/NegociacoesService.js"></script>
     <script src="js/app/models/NegociacoesList.js"></script>
@@ -68,43 +69,10 @@
         const dbName = "aluraframe";
         const dbVersion = 3;
         const objStoreName = "negociacoes";
-        const connectionFactory = new ConnectionFactory(dbName, dbVersion, objStoreName);
-        
-        function adiciona(data, quantidade, valor) {
-        	connectionFactory.getConnection().then(connection => {
-        		let tx = connection.transaction([objStoreName], "readwrite");
-        		let objStore = tx.objectStore(objStoreName);
-        		let addRequest = objStore.add(new Negociacao(
-        			new Date(data), quantidade, valor));
-        		addRequest.onsuccess = event => {
-        	        console.log(event.target.result);
-        		};
-        	    addRequest.onerror = event => {
-        		    console.log(event.target.error);
-        	    };
-        	});
-        }
-        
-        function listaTodos() {
-            connectionFactory.getConnection().then(connection => {
-                let tx = connection.transaction([objStoreName], "readwrite");
-                let objStore = tx.objectStore(objStoreName);
-                let negociacoes = [];
-                let cursorRequest = objStore.openCursor();
-                cursorRequest.onsuccess = event => {
-            	    let pointer = event.target.result;
-            	    if (pointer) {
-            		    negociacoes.push(pointer.value);
-            		    pointer.continue();
-            	    } else {
-            		    console.log(negociacoes);
-            	    }
-                };
-                cursorRequest.onerror = event => {
-            	    console.log(event.target.error);
-                };
-            });
-        }
+        const connectionFactory = 
+        	new ConnectionFactory(dbName, dbVersion, objStoreName);
+        const negociacaoDao = 
+        	new NegociacaoDao(connectionFactory.getConnection(), objStoreName);
     </script>
     
 </body>
