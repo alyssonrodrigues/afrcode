@@ -30,7 +30,6 @@ class NegociacoesList {
     }
     
     contains(negociacao) {
-    	return this._negociacoes.some(n => 
-    		JSON.stringify(n) == JSON.stringify(negociacao));
+    	return this._negociacoes.some(n => n.equals(negociacao));
     }
 }
