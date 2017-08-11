@@ -9,12 +9,8 @@ class NegociacaoDao {
 			let tx = this._connection.transaction([this._objStoreName], "readwrite");
 			let objStore = tx.objectStore(this._objStoreName);
 			let addRequest = objStore.add(negociacao);
-			addRequest.onsuccess = event => {
-				resolve();
-			};
-			addRequest.onerror = event => {
-				reject(event.target.error);
-			};
+			addRequest.onsuccess = event => resolve();
+			addRequest.onerror = event => reject(event.target.error);
     	});
     }
     
@@ -30,12 +26,8 @@ class NegociacaoDao {
 			let tx = this._connection.transaction([this._objStoreName], "readwrite");
 			let objStore = tx.objectStore(this._objStoreName);
 			let removeRequest = objStore.clear();
-			removeRequest.onsuccess = event => {
-				resolve();
-			};
-			removeRequest.onerror = event => {
-				reject(event.target.error);
-			};
+			removeRequest.onsuccess = event => resolve();
+			removeRequest.onerror = event =>  reject(event.target.error);
     	});
     }
     
@@ -58,9 +50,7 @@ class NegociacaoDao {
 					resolve(negociacoes);
 				}
 			};
-			cursorRequest.onerror = event => {
-				resolve(event.target.error);
-			};
+			cursorRequest.onerror = event => resolve(event.target.error);
     	});
     }
 }

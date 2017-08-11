@@ -28,4 +28,9 @@ class NegociacoesList {
     inverteOrdem() {
         this._negociacoes.reverse();
     }
+    
+    contains(negociacao) {
+    	return this._negociacoes.some(n => 
+    		JSON.stringify(n) == JSON.stringify(negociacao));
+    }
 }
