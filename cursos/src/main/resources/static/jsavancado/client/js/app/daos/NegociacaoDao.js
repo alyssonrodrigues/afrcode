@@ -1,42 +1,73 @@
 class NegociacaoDao {
-	constructor(connection, objStoreName) {
+	constructor(connection, constants) {
 		this._connection = connection;
-		this._objStoreName = objStoreName;
+		this._objStoreName = constants.negociacaoStoreName;
 	}
 	
-    adiciona(data, quantidade, valor) {
-    	this._connection.then(connection => {
-    		let tx = connection.transaction([this._objStoreName], "readwrite");
-    		let objStore = tx.objectStore(this._objStoreName);
-    		let addRequest = objStore.add(new Negociacao(
-    			new Date(data), quantidade, valor));
-    		addRequest.onsuccess = event => {
-    	        console.log(event.target.result);
-    		};
-    	    addRequest.onerror = event => {
-    		    console.log(event.target.error);
-    	    };
+    adiciona(negociacao) {
+    	return new Promise((resolve, reject) => {
+			let tx = this._connection.transaction([this._objStoreName], "readwrite");
+			let objStore = tx.objectStore(this._objStoreName);
+			let addRequest = objStore.add(negociacao);
+			addRequest.onsuccess = event => {
+				resolve();
+			};
+			addRequest.onerror = event => {
+				reject(event.target.error);
+			};
     	});
     }
+    
+    adicionaNegociacoes(negociacoes) {
+    	let promises = [];
+    	negociacoes.forEach(negociacao => 
+    		promises.push(this.adiciona(negociacao)));
+    	return Promise.all(promises);
+    }
 
+    remove(negociacao) {
+    	return new Promise((resolve, reject) => {
+			let tx = this._connection.transaction([this._objStoreName], "readwrite");
+			let objStore = tx.objectStore(this._objStoreName);
+			let addRequest = objStore.delete(negociacao);
+			addRequest.onsuccess = event => {
+				resolve();
+			};
+			addRequest.onerror = event => {
+				reject(event.target.error);
+			};
+    	});
+    }
+    
+    removeNegociacoes(negociacoes) {
+    	let promises = [];
+    	negociacoes.forEach(negociacao => 
+    		promises.push(this.remove(negociacao)));
+    	return Promise.all(promises);
+    }
+    
     listaTodos() {
-    	this._connection.then(connection => {
-            let tx = connection.transaction([this._objStoreName], "readwrite");
-            let objStore = tx.objectStore(this._objStoreName);
-            let negociacoes = [];
-            let cursorRequest = objStore.openCursor();
-            cursorRequest.onsuccess = event => {
-        	    let pointer = event.target.result;
-        	    if (pointer) {
-        		    negociacoes.push(pointer.value);
-        		    pointer.continue();
-        	    } else {
-        		    console.log(negociacoes);
-        	    }
-            };
-            cursorRequest.onerror = event => {
-        	    console.log(event.target.error);
-            };
-        });
+    	return new Promise((resolve, reject) => {
+			let tx = this._connection.transaction([this._objStoreName], "readwrite");
+			let objStore = tx.objectStore(this._objStoreName);
+			let negociacoes = [];
+			let cursorRequest = objStore.openCursor();
+			cursorRequest.onsuccess = event => {
+				let pointer = event.target.result;
+				if (pointer) {
+					let negociacaoStr = pointer.value;
+					negociacoes.push(new Negociacao(
+							new Date(negociacaoStr._data), 
+							negociacaoStr._quantidade,
+							negociacaoStr._valor));
+					pointer.continue();
+				} else {
+					resolve(negociacoes);
+				}
+			};
+			cursorRequest.onerror = event => {
+				resolve(event.target.error);
+			};
+    	});
     }
 }

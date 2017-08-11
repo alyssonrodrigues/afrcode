@@ -16,7 +16,7 @@
         
         <div class="form-group">
             <label for="data">Data</label>
-            <input type="text" placeholder="dd/mm/yyyy" id="data" class="form-control" required autofocus/>        
+            <input type="text" placeholder="mm/dd/yyyy" id="data" class="form-control" required autofocus/>        
         </div>    
         
         <div class="form-group">
@@ -47,6 +47,7 @@
 
     <div id="negociacoesView"></div>    
     
+    <script src="js/app/helpers/Constants.js"></script>
     <script src="js/app/services/ConnectionFactory.js"></script>
     <script src="js/app/helpers/DateHelper.js"></script>
     <script src="js/app/helpers/Bind.js"></script>
@@ -63,16 +64,6 @@
     <script src="js/app/views/MensagemView.js"></script>
     <script type="text/javascript">
         const negociacaoController = new NegociacaoController();
-    </script>
-    
-    <script>
-        const dbName = "aluraframe";
-        const dbVersion = 3;
-        const objStoreName = "negociacoes";
-        const connectionFactory = 
-        	new ConnectionFactory(dbName, dbVersion, objStoreName);
-        const negociacaoDao = 
-        	new NegociacaoDao(connectionFactory.getConnection(), objStoreName);
     </script>
     
 </body>
