@@ -25,25 +25,18 @@ class NegociacaoDao {
     	return Promise.all(promises);
     }
 
-    remove(negociacao) {
+    removeTodos() {
     	return new Promise((resolve, reject) => {
 			let tx = this._connection.transaction([this._objStoreName], "readwrite");
 			let objStore = tx.objectStore(this._objStoreName);
-			let addRequest = objStore.delete(negociacao);
-			addRequest.onsuccess = event => {
+			let removeRequest = objStore.clear();
+			removeRequest.onsuccess = event => {
 				resolve();
 			};
-			addRequest.onerror = event => {
+			removeRequest.onerror = event => {
 				reject(event.target.error);
 			};
     	});
-    }
-    
-    removeNegociacoes(negociacoes) {
-    	let promises = [];
-    	negociacoes.forEach(negociacao => 
-    		promises.push(this.remove(negociacao)));
-    	return Promise.all(promises);
     }
     
     listaTodos() {

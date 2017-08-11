@@ -29,7 +29,8 @@ class NegociacaoController {
     		.then(connection => new NegociacaoDao(connection, this._constants))
     		.then(negociacaoDao => negociacaoDao.listaTodos())
     		.then(negociacoes => negociacoes.forEach(
-    			negociacao => this._negociacoesList.adiciona(negociacao)));
+    			negociacao => this._negociacoesList.adiciona(negociacao)))
+    		.catch(error => this._mensagem.texto = error);
     }
     
     adiciona(event) {
@@ -51,12 +52,11 @@ class NegociacaoController {
     apaga() {
     	this._connectionFactory.getConnection()
 			.then(connection => new NegociacaoDao(connection, this._constants))
-			.then(negociacaoDao => negociacaoDao.listaTodos()
-				.then(negociacoes => negociacaoDao.removeNegociacoes(negociacoes)
-					.then(() => {
+			.then(negociacaoDao => negociacaoDao.removeTodos())
+			.then(() => {
 						this._negociacoesList.esvazia();
 						this._mensagem.texto = "Negociações apagadas com sucesso!";
-					}).catch(error => this._mensagem.texto = error)));
+			}).catch(error => this._mensagem.texto = error);
     }
     
     importaNegociacoes() {
@@ -70,8 +70,8 @@ class NegociacaoController {
     							negociacoes.forEach(negociacao => 
     								this._negociacoesList.adiciona(negociacao));
     							this._mensagem.texto = "Negociações importadas com sucesso!";
-    						})
-    						.catch(error => this._mensagem.texto = error))); 
+    						}).catch(error => this._mensagem.texto = error)
+    				).catch(error => this._mensagem.texto = error)); 
     }
     
     ordena(coluna) {
