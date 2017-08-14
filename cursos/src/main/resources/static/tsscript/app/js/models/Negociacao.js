@@ -1,9 +1,8 @@
 class Negociacao {
-    constructor(data, quantidade, valor) {
-        this._data = new Date(data.getTime());
-        this._quantidade = quantidade;
-        this._valor = valor;
-        Object.freeze(this);
+    constructor(_data, _quantidade, _valor) {
+        this._data = _data;
+        this._quantidade = _quantidade;
+        this._valor = _valor;
     }
     get data() {
         return new Date(this._data.getTime());
