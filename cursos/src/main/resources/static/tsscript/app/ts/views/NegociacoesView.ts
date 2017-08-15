@@ -1,4 +1,4 @@
-class NegociacoesView extends View {
+class NegociacoesView extends View<NegociacoesList> {
 	template(model: NegociacoesList): string {
 		return `
 		    <table class="table table-hover table-bordered">
