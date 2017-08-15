@@ -1,4 +1,7 @@
-class NegociacoesView extends View<NegociacoesList> {
+import { View } from "./View";
+import { NegociacoesList } from "../models/NegociacoesList";
+import { DateHelper } from "../helpers/DateHelper";
+export class NegociacoesView extends View<NegociacoesList> {
 	template(model: NegociacoesList): string {
 		return `
 		    <table class="table table-hover table-bordered">

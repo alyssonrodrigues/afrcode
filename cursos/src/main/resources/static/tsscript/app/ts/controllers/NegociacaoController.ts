@@ -1,4 +1,10 @@
-class NegociacaoController {
+import { DateHelper } from "../helpers/DateHelper";
+import { Mensagem } from "../models/Mensagem";
+import { Negociacao } from "../models/Negociacao";
+import { NegociacoesList } from "../models/NegociacoesList";
+import { NegociacoesView} from "../views/NegociacoesView";
+import { MensagemView } from "../views/MensagemView";
+export class NegociacaoController {
     private _inputData: JQuery;
     private _inputQuantidade: JQuery;
     private _inputValor: JQuery;

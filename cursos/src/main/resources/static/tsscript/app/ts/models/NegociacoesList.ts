@@ -1,4 +1,5 @@
-class NegociacoesList {
+import { Negociacao } from "./Negociacao";
+export class NegociacoesList {
 	private _negociacoes: Negociacao[] = [];
 	constructor() {
 	}

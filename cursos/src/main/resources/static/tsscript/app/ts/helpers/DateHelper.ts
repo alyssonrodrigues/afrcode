@@ -1,4 +1,4 @@
-class DateHelper {
+export class DateHelper {
 
 	static textoParaData(texto: string) {
 		if (!/^\d{2}\/\d{2}\/\d{4}$/.test(texto)) {
