@@ -1,4 +1,4 @@
-class View<T> {
+abstract class View<T> {
 	constructor(private _elemento: Element) {
 	}
 	
@@ -6,7 +6,5 @@ class View<T> {
 		this._elemento.innerHTML = this.template(model);
 	}
 	
-	template(model: T): string {
-		throw new Error("template method not implemented!");
-	}
+	abstract template(model: T): string;
 }
