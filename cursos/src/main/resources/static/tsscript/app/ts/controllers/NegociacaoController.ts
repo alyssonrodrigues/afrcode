@@ -5,6 +5,8 @@ import { Negociacao } from "../models/Negociacao";
 import { NegociacoesList } from "../models/NegociacoesList";
 import { NegociacoesView} from "../views/NegociacoesView";
 import { MensagemView } from "../views/MensagemView";
+import { NegociacaoService } from "../services/NegociacaoService";
+import { FetchHandler } from "../services/NegociacaoService";
 import { dom } from "../helpers/dom";
 import { throttle } from "../helpers/throttle";
 export class NegociacaoController {
@@ -17,6 +19,7 @@ export class NegociacaoController {
     private _negociacoesList = new NegociacoesList();
     private _negociacoesView: NegociacoesView;
     private _mensagemView: MensagemView;
+    private _negociacaoService = new NegociacaoService();
     private _ordemAtual = "";
 
     constructor() {
@@ -44,14 +47,12 @@ export class NegociacaoController {
             if (!result.ok) throw new Error(result.statusText);
             return result;
         }
-        fetch("http://localhost:8080/dados")
-            .then(result => _handleError(result))
-            .then(result => result.json())
-            .then((dados: NegociacaoExt[]) => {
-                dados.map(dado => new Negociacao(new Date(), dado.vezes, dado.montante))
-                    .forEach(negociacao => this._negociacoesList.adiciona(negociacao))
+        this._negociacaoService.importaDados(_handleError)
+            .then(negociacoes => {
+                negociacoes.forEach(negociacao => this._negociacoesList.adiciona(negociacao));
                 this._negociacoesView.update(this._negociacoesList);
-            });
+            })
+            .catch(error => console.log(error));
     }
 
     private _reset() {

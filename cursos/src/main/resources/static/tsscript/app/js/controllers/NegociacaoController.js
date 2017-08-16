@@ -1,4 +1,4 @@
-System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negociacao", "../models/NegociacoesList", "../views/NegociacoesView", "../views/MensagemView", "../helpers/dom", "../helpers/throttle"], function (exports_1, context_1) {
+System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negociacao", "../models/NegociacoesList", "../views/NegociacoesView", "../views/MensagemView", "../services/NegociacaoService", "../helpers/dom", "../helpers/throttle"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negoc
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var DateHelper_1, Mensagem_1, Negociacao_1, NegociacoesList_1, NegociacoesView_1, MensagemView_1, dom_1, throttle_1, NegociacaoController;
+    var DateHelper_1, Mensagem_1, Negociacao_1, NegociacoesList_1, NegociacoesView_1, MensagemView_1, NegociacaoService_1, dom_1, throttle_1, NegociacaoController;
     return {
         setters: [
             function (DateHelper_1_1) {
@@ -28,6 +28,9 @@ System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negoc
             function (MensagemView_1_1) {
                 MensagemView_1 = MensagemView_1_1;
             },
+            function (NegociacaoService_1_1) {
+                NegociacaoService_1 = NegociacaoService_1_1;
+            },
             function (dom_1_1) {
                 dom_1 = dom_1_1;
             },
@@ -39,6 +42,7 @@ System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negoc
             NegociacaoController = class NegociacaoController {
                 constructor() {
                     this._negociacoesList = new NegociacoesList_1.NegociacoesList();
+                    this._negociacaoService = new NegociacaoService_1.NegociacaoService();
                     this._ordemAtual = "";
                     this._negociacoesView = new NegociacoesView_1.NegociacoesView($("#negociacoesView"));
                     this._negociacoesView.update(this._negociacoesList);
@@ -58,14 +62,12 @@ System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negoc
                             throw new Error(result.statusText);
                         return result;
                     }
-                    fetch("http://localhost:8080/dados")
-                        .then(result => _handleError(result))
-                        .then(result => result.json())
-                        .then((dados) => {
-                        dados.map(dado => new Negociacao_1.Negociacao(new Date(), dado.vezes, dado.montante))
-                            .forEach(negociacao => this._negociacoesList.adiciona(negociacao));
+                    this._negociacaoService.importaDados(_handleError)
+                        .then(negociacoes => {
+                        negociacoes.forEach(negociacao => this._negociacoesList.adiciona(negociacao));
                         this._negociacoesView.update(this._negociacoesList);
-                    });
+                    })
+                        .catch(error => console.log(error));
                 }
                 _reset() {
                     this._inputData.val("");
