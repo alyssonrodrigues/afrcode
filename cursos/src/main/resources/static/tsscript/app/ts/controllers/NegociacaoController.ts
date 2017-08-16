@@ -1,6 +1,5 @@
 import { DateHelper } from "../helpers/DateHelper";
 import { Mensagem } from "../models/Mensagem";
-import { NegociacaoExt } from "../models/NegociacaoExt";
 import { Negociacao } from "../models/Negociacao";
 import { NegociacoesList } from "../models/NegociacoesList";
 import { NegociacoesView} from "../views/NegociacoesView";
