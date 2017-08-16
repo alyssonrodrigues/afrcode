@@ -6,6 +6,14 @@ System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negoc
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
+    var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
     var __moduleName = context_1 && context_1.id;
     var DateHelper_1, Mensagem_1, Negociacao_1, NegociacoesList_1, NegociacoesView_1, MensagemView_1, NegociacaoService_1, dom_1, throttle_1, NegociacaoController;
     return {
@@ -57,17 +65,21 @@ System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negoc
                     this._reset();
                 }
                 importaDados() {
-                    function _handleError(result) {
-                        if (!result.ok)
-                            throw new Error(result.statusText);
-                        return result;
-                    }
-                    this._negociacaoService.importaDados(_handleError)
-                        .then(negociacoes => {
-                        negociacoes.forEach(negociacao => this._negociacoesList.adiciona(negociacao));
-                        this._negociacoesView.update(this._negociacoesList);
-                    })
-                        .catch(error => console.log(error));
+                    return __awaiter(this, void 0, void 0, function* () {
+                        function _handleError(result) {
+                            if (!result.ok)
+                                throw new Error(result.statusText);
+                            return result;
+                        }
+                        try {
+                            const negociacoes = yield this._negociacaoService.importaDados(_handleError);
+                            negociacoes.forEach(negociacao => this._negociacoesList.adiciona(negociacao));
+                            this._negociacoesView.update(this._negociacoesList);
+                        }
+                        catch (error) {
+                            this._mensagemView.update(new Mensagem_1.Mensagem(`Negociações NÃO importadas: ${error.message}`));
+                        }
+                    });
                 }
                 _reset() {
                     this._inputData.val("");

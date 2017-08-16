@@ -41,17 +41,18 @@ export class NegociacaoController {
     }
 
     @throttle()
-    importaDados() {
+    async importaDados() {
         function _handleError(result : Response) {
             if (!result.ok) throw new Error(result.statusText);
             return result;
         }
-        this._negociacaoService.importaDados(_handleError)
-            .then(negociacoes => {
-                negociacoes.forEach(negociacao => this._negociacoesList.adiciona(negociacao));
-                this._negociacoesView.update(this._negociacoesList);
-            })
-            .catch(error => console.log(error));
+        try {
+            const negociacoes = await this._negociacaoService.importaDados(_handleError);
+            negociacoes.forEach(negociacao => this._negociacoesList.adiciona(negociacao));
+            this._negociacoesView.update(this._negociacoesList);
+        } catch(error) {
+            this._mensagemView.update(new Mensagem(`Negociações NÃO importadas: ${error.message}`));
+        }
     }
 
     private _reset() {
