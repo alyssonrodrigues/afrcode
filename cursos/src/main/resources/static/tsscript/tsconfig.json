@@ -5,6 +5,7 @@
         "noEmitOnError": true,
         "noImplicitAny": true,
         "removeComments": true,
+        "experimentalDecorators": true,
         "module": "system"
     },
     "include": [

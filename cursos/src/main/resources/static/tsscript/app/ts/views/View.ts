@@ -1,3 +1,4 @@
+import { log } from "../helpers/log";
 export abstract class View<T> {
 	constructor(private _elemento: JQuery) {
 	}

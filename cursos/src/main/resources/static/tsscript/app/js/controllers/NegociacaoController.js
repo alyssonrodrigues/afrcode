@@ -1,7 +1,13 @@
-System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negociacao", "../models/NegociacoesList", "../views/NegociacoesView", "../views/MensagemView"], function (exports_1, context_1) {
+System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negociacao", "../models/NegociacoesList", "../views/NegociacoesView", "../views/MensagemView", "../helpers/dom"], function (exports_1, context_1) {
     "use strict";
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
     var __moduleName = context_1 && context_1.id;
-    var DateHelper_1, Mensagem_1, Negociacao_1, NegociacoesList_1, NegociacoesView_1, MensagemView_1, NegociacaoController;
+    var DateHelper_1, Mensagem_1, Negociacao_1, NegociacoesList_1, NegociacoesView_1, MensagemView_1, dom_1, NegociacaoController;
     return {
         setters: [
             function (DateHelper_1_1) {
@@ -21,6 +27,9 @@ System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negoc
             },
             function (MensagemView_1_1) {
                 MensagemView_1 = MensagemView_1_1;
+            },
+            function (dom_1_1) {
+                dom_1 = dom_1_1;
             }
         ],
         execute: function () {
@@ -28,9 +37,6 @@ System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negoc
                 constructor() {
                     this._negociacoesList = new NegociacoesList_1.NegociacoesList();
                     this._ordemAtual = "";
-                    this._inputData = $("#data");
-                    this._inputQuantidade = $("#quantidade");
-                    this._inputValor = $("#valor");
                     this._negociacoesView = new NegociacoesView_1.NegociacoesView($("#negociacoesView"));
                     this._negociacoesView.update(this._negociacoesList);
                     this._mensagemView = new MensagemView_1.MensagemView($("#mensagemView"));
@@ -50,6 +56,15 @@ System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negoc
                     this._inputData.focus();
                 }
             };
+            __decorate([
+                dom_1.dom("#data")
+            ], NegociacaoController.prototype, "_inputData", void 0);
+            __decorate([
+                dom_1.dom("#quantidade")
+            ], NegociacaoController.prototype, "_inputQuantidade", void 0);
+            __decorate([
+                dom_1.dom("#valor")
+            ], NegociacaoController.prototype, "_inputValor", void 0);
             exports_1("NegociacaoController", NegociacaoController);
         }
     };

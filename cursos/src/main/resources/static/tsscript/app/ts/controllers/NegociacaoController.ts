@@ -4,9 +4,13 @@ import { Negociacao } from "../models/Negociacao";
 import { NegociacoesList } from "../models/NegociacoesList";
 import { NegociacoesView} from "../views/NegociacoesView";
 import { MensagemView } from "../views/MensagemView";
+import { dom } from "../helpers/dom";
 export class NegociacaoController {
+    @dom("#data")
     private _inputData: JQuery;
+    @dom("#quantidade")
     private _inputQuantidade: JQuery;
+    @dom("#valor")
     private _inputValor: JQuery;
     private _negociacoesList = new NegociacoesList();
     private _negociacoesView: NegociacoesView;
@@ -14,9 +18,6 @@ export class NegociacaoController {
     private _ordemAtual = "";
 
     constructor() {
-        this._inputData = $("#data");
-        this._inputQuantidade = $("#quantidade");
-        this._inputValor = $("#valor");
         this._negociacoesView = new NegociacoesView($("#negociacoesView"));
         this._negociacoesView.update(this._negociacoesList);
         this._mensagemView = new MensagemView($("#mensagemView"));
