@@ -1,4 +1,4 @@
-System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negociacao", "../models/NegociacoesList", "../views/NegociacoesView", "../views/MensagemView", "../helpers/dom"], function (exports_1, context_1) {
+System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negociacao", "../models/NegociacoesList", "../views/NegociacoesView", "../views/MensagemView", "../helpers/dom", "../helpers/throttle"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negoc
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var DateHelper_1, Mensagem_1, Negociacao_1, NegociacoesList_1, NegociacoesView_1, MensagemView_1, dom_1, NegociacaoController;
+    var DateHelper_1, Mensagem_1, Negociacao_1, NegociacoesList_1, NegociacoesView_1, MensagemView_1, dom_1, throttle_1, NegociacaoController;
     return {
         setters: [
             function (DateHelper_1_1) {
@@ -30,6 +30,9 @@ System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negoc
             },
             function (dom_1_1) {
                 dom_1 = dom_1_1;
+            },
+            function (throttle_1_1) {
+                throttle_1 = throttle_1_1;
             }
         ],
         execute: function () {
@@ -49,6 +52,21 @@ System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negoc
                     this._mensagemView.update(new Mensagem_1.Mensagem("Negociação incluída com sucesso!"));
                     this._reset();
                 }
+                importaDados() {
+                    function _handleError(result) {
+                        if (!result.ok)
+                            throw new Error(result.statusText);
+                        return result;
+                    }
+                    fetch("http://localhost:8080/dados")
+                        .then(result => _handleError(result))
+                        .then(result => result.json())
+                        .then((dados) => {
+                        dados.map(dado => new Negociacao_1.Negociacao(new Date(), dado.vezes, dado.montante))
+                            .forEach(negociacao => this._negociacoesList.adiciona(negociacao));
+                        this._negociacoesView.update(this._negociacoesList);
+                    });
+                }
                 _reset() {
                     this._inputData.val("");
                     this._inputQuantidade.val("1");
@@ -65,6 +83,9 @@ System.register(["../helpers/DateHelper", "../models/Mensagem", "../models/Negoc
             __decorate([
                 dom_1.dom("#valor")
             ], NegociacaoController.prototype, "_inputValor", void 0);
+            __decorate([
+                throttle_1.throttle()
+            ], NegociacaoController.prototype, "importaDados", null);
             exports_1("NegociacaoController", NegociacaoController);
         }
     };

@@ -1,10 +1,12 @@
 import { DateHelper } from "../helpers/DateHelper";
 import { Mensagem } from "../models/Mensagem";
+import { NegociacaoExt } from "../models/NegociacaoExt";
 import { Negociacao } from "../models/Negociacao";
 import { NegociacoesList } from "../models/NegociacoesList";
 import { NegociacoesView} from "../views/NegociacoesView";
 import { MensagemView } from "../views/MensagemView";
 import { dom } from "../helpers/dom";
+import { throttle } from "../helpers/throttle";
 export class NegociacaoController {
     @dom("#data")
     private _inputData: JQuery;
@@ -34,6 +36,22 @@ export class NegociacaoController {
         this._negociacoesView.update(this._negociacoesList);
         this._mensagemView.update(new Mensagem("Negociação incluída com sucesso!"));
         this._reset();
+    }
+
+    @throttle()
+    importaDados() {
+        function _handleError(result : Response) {
+            if (!result.ok) throw new Error(result.statusText);
+            return result;
+        }
+        fetch("http://localhost:8080/dados")
+            .then(result => _handleError(result))
+            .then(result => result.json())
+            .then((dados: NegociacaoExt[]) => {
+                dados.map(dado => new Negociacao(new Date(), dado.vezes, dado.montante))
+                    .forEach(negociacao => this._negociacoesList.adiciona(negociacao))
+                this._negociacoesView.update(this._negociacoesList);
+            });
     }
 
     private _reset() {
