@@ -1,4 +1,5 @@
-export class Negociacao {
+import { Equals } from "./Equals";
+export class Negociacao implements Equals<Negociacao> {
 	constructor(readonly data: Date, readonly quantidade: number, readonly valor: number) {
 	}
 	
