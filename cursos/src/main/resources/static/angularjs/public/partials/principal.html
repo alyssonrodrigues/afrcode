@@ -25,6 +25,6 @@
         ng-repeat="foto in fotos | filter: {titulo: filterText}" titulo="{{foto.titulo}}">
         <custom-photo url="{{foto.url}}" titulo="{{foto.titulo}}"></custom-photo>
         <a href="fotos/editar/{{foto._id}}" class="btn btn-primary btn-block">Editar</a>
-        <button ng-click="remover(foto)" class="btn btn-danger btn-block">Remover</button>
+        <custom-remove acao="remover(foto)" nome="Remover"></custom-remove>
     </custom-panel>
 </div>

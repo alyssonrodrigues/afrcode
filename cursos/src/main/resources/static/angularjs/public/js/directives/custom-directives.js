@@ -18,4 +18,15 @@ angular.module("customDirectives", [])
     };
     ddo.templateUrl = "js/directives/custom-photo.html";
     return ddo;
+})
+.directive("customRemove", function() {
+    var ddo = {};
+    ddo.restrict = "E";
+    ddo.scope = {
+        acao: "&",
+        nome: "@"
+    };
+    ddo.template = 
+        '<button ng-click="acao()" class="btn btn-danger btn-block">{{nome}}</button>';
+    return ddo;
 });
