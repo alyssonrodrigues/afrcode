@@ -4,40 +4,20 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <title>Alurapic</title>
+        <base href="/">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/custom-efects.css">
         <script src="js/lib/angular.min.js"></script>
         <script src="js/lib/angular-animate.min.js"></script>
+        <script src="js/lib/angular-route.min.js"></script>
         <script src="js/main.js"></script>
         <script src="js/controllers/fotos-controller.js"></script>
         <script src="js/directives/custom-directives.js"></script>
     </head>
-    <body ng-controller="FotosController">
+    <body>
         <div class="container">
-            
-            <div class="jumbotron">
-                <h1 class="text-center">Alurapic</h1>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <form>
-                        <input ng-model="filterText" 
-                            ng-model-options="{debounce : 500}"
-                            class="form-control" 
-                            type="text" placeholder="Filtrar...">
-                    </form>
-                </div>
-            </div>
-
-            <div class="row">
-                <custom-panel class="col-md-2 custom-fade" 
-                    ng-repeat="foto in fotos | filter: {titulo: filterText}" titulo="{{foto.titulo}}">
-                    <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
-                </custom-panel>
-            </div>
-
-        </div> <!-- fim container -->        
+            <ng-view></ng-view>
+        </div>
     </body>
 </html>

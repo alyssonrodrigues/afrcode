@@ -1,0 +1,21 @@
+<div class="jumbotron">
+    <h1 class="text-center">Alurapic</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form>
+            <input ng-model="filterText" 
+                ng-model-options="{debounce : 500}"
+                class="form-control" 
+                type="text" placeholder="Filtrar...">
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <custom-panel class="col-md-2 custom-fade" 
+        ng-repeat="foto in fotos | filter: {titulo: filterText}" titulo="{{foto.titulo}}">
+        <custom-photo url="{{foto.url}}" titulo="{{foto.titulo}}"></custom-photo>
+    </custom-panel>
+</div>
