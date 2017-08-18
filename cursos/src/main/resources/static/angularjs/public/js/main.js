@@ -12,5 +12,10 @@ angular.module("alurapic", ["customDirectives", "ngAnimate", "ngRoute"])
         controller: "FotoController"
     });
 
+    $routeProvider.when("/fotos/editar/:idAEditar", {
+        templateUrl: "partials/incluir-foto.html",
+        controller: "FotoController"
+    });
+
     $routeProvider.otherwise({redirectTo: "/fotos"});
 });
