@@ -33,7 +33,7 @@
 
             <div class="row">
                 <custom-panel class="col-md-2 custom-fade" 
-                    ng-repeat="foto in fotos | filter: filterText" titulo="{{foto.titulo}}">
+                    ng-repeat="foto in fotos | filter: {titulo: filterText}" titulo="{{foto.titulo}}">
                     <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
                 </custom-panel>
             </div>
