@@ -14,6 +14,7 @@ angular.module("alurapic")
                 if (result.inclusao) {
                     $scope.foto = {};
                 }
+                $scope.$broadcast("getFocus");
             })
             .catch(error => $scope.mensagem = error.mensagem);
     };

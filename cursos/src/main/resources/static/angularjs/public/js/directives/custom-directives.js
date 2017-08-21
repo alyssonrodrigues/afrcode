@@ -29,4 +29,12 @@ angular.module("customDirectives", [])
     ddo.template = 
         '<button ng-click="acao()" class="btn btn-danger btn-block">{{nome}}</button>';
     return ddo;
+})
+.directive("customFocus", function() {
+    var ddo = {};
+    ddo.restrict = "A";
+    ddo.link = (scope, domElement) => {
+        scope.$on("getFocus", () => domElement[0].focus());
+    };
+    return ddo;
 });
