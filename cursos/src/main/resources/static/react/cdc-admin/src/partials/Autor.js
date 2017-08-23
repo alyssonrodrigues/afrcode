@@ -45,8 +45,8 @@ class AutorInput extends Component {
                 PubSub.publish("autorsListUpdated", result);
                 PubSub.publish("messages", [
                     {
-                        field: "Autor", 
-                        defaultMessage: "cadastrado com sucesso!"
+                        key: "autor", 
+                        textContent: "Autor cadastrado com sucesso!"
                     }
                 ]);
                 this.setState({
@@ -55,7 +55,10 @@ class AutorInput extends Component {
                     senha: ""
                 });
             },
-            error: error => PubSub.publish("messages", error.responseJSON.errors)});
+            error: error => PubSub.publish("messages", 
+                error.responseJSON.errors.map(message => {
+                    return {key: message.field, textContent: message.defaultMessage};
+                }))});
     }
 
     render() {

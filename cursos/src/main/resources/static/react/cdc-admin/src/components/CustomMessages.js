@@ -21,7 +21,7 @@ export default class CustomMessages extends Component {
     render() {
         return (
             <span className="error">{
-                this.state.messages.map(message => <p key={message.field}>{message.field} {message.defaultMessage}</p>)
+                this.state.messages.map(message => <p key={message.key}>{message.textContent}</p>)
             }
             </span>
         );
