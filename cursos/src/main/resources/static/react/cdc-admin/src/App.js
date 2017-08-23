@@ -1,8 +1,24 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 import './css/pure-min.css';
 import './css/side-menu.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = { 
+      autores : []
+    };
+  }
+
+  componentDidMount() {
+    $.ajax({
+      url: "http://cdc-react.herokuapp.com/api/autores",
+      dataType: "json",
+      success: result => this.setState({autores : result})
+    });
+  }
+
   render() {
     return (
       <div id="layout">
@@ -12,12 +28,12 @@ class App extends Component {
 
         <div id="menu">
           <div className="pure-menu">
-            <a className="pure-menu-heading" href="#">Company</a>
+            <a className="pure-menu-heading" href="/">Company</a>
 
             <ul className="pure-menu-list">
-              <li className="pure-menu-item"><a href="#" className="pure-menu-link">Home</a></li>
-              <li className="pure-menu-item"><a href="#" className="pure-menu-link">Autores</a></li>
-              <li className="pure-menu-item"><a href="#" className="pure-menu-link">Livros</a></li>
+              <li className="pure-menu-item"><a href="/" className="pure-menu-link">Home</a></li>
+              <li className="pure-menu-item"><a href="/" className="pure-menu-link">Autores</a></li>
+              <li className="pure-menu-item"><a href="/" className="pure-menu-link">Livros</a></li>
             </ul>
           </div>
         </div>
@@ -57,10 +73,10 @@ class App extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Alberto</td>
-                    <td>alberto.souza@caelum.com.br</td>
-                  </tr>
+                  {
+                    this.state.autores.map(autor => 
+                      <tr key={autor.id}><td>{autor.nome}</td><td>{autor.email}</td></tr>)
+                  }
                 </tbody>
               </table>
             </div>
