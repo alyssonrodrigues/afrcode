@@ -72,6 +72,7 @@ class BookInput extends Component {
                     <CustomInput id="titulo" type="text" name="titulo" label="Título"
                         value={this.state.titulo} onChange={this.setTitulo} />
                     <CustomInput id="preco" type="number" name="preco" label="Preço"
+                        min="0.01" step="0.01"
                         value={this.state.preco} onChange={this.setPreco} />
                     <div className="pure-control-group">
                         <label htmlFor="autorId">Autor</label>
