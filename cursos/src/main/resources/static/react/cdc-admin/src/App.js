@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./partials/Home";
 import AutorBox from "./partials/Autor";
+import BookBox from "./partials/Book";
 import { Link } from "react-router-dom";
 import "./css/pure-min.css"
 import "./css/side-menu.css";
@@ -34,6 +35,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/autores" component={AutorBox} />
+            <Route path="/livros" component={BookBox} />
           </Switch>
         </div>
       </BrowserRouter>
