@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./partials/Home";
 import AutorBox from "./partials/Autor";
 import { Link } from "react-router-dom";
@@ -31,8 +31,10 @@ class App extends Component {
               </ul>
             </div>
           </div>
-          <Route exact path="/" component={Home} />
-          <Route path="/autores" component={AutorBox} />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/autores" component={AutorBox} />
+          </Switch>
         </div>
       </BrowserRouter>
     );
