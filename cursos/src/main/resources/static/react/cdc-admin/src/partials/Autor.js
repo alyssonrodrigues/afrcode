@@ -107,7 +107,7 @@ export default class Autor extends Component {
             success: result => this.setState({ autors: result })
         });
         PubSub.subscribe("autorsListUpdated", 
-            (topic, object) => this.setState({autors: object}));
+            (topic, object) => this.setState({ autors: object }));
     }
 
     render() {
