@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Autor from "./partials/Autor";
+import AutorBox from "./partials/Autor";
 import "./css/pure-min.css"
 import "./css/side-menu.css";
 
@@ -27,7 +27,7 @@ class App extends Component {
             <h1>Autores</h1>
           </div>
           <div className="content" id="content">
-            <Autor />
+            <AutorBox />
           </div>
         </div>
       </div>
