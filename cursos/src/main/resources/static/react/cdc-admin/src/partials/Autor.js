@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import CustomInput from "../components/CustomInput";
+import CustomMessages from "../components/CustomMessages";
 import PubSub from "pubsub-js";
 
 class AutorInput extends Component {
@@ -129,9 +130,15 @@ export default class AutorBox extends Component {
 
     render() {
         return (
-            <div>
-                <AutorInput />
-                <AutorsList autorsList={this.state.autors} />
+            <div id="main">
+                <div className="header">
+                <h1>Autores</h1>
+                </div>
+                <CustomMessages />
+                <div className="content" id="content">
+                    <AutorInput />
+                    <AutorsList autorsList={this.state.autors} />
+                </div>
             </div>
         );
     }
