@@ -41,9 +41,21 @@ class AutorInput extends Component {
                 email: this.state.email,
                 senha: this.state.senha
             }),
-            success: result => PubSub.publish("autorsListUpdated", result),
-            error: error => console.log(error)
-        });
+            success: result => {
+                PubSub.publish("autorsListUpdated", result);
+                PubSub.publish("messages", [
+                    {
+                        field: "Autor", 
+                        defaultMessage: "cadastrado com sucesso!"
+                    }
+                ]);
+                this.setState({
+                    nome: "",
+                    email: "",
+                    senha: ""
+                });
+            },
+            error: error => PubSub.publish("messages", error.responseJSON.errors)});
     }
 
     render() {

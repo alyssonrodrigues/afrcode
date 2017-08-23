@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AutorBox from "./partials/Autor";
+import CustomMessages from "./components/CustomMessages";
 import "./css/pure-min.css"
 import "./css/side-menu.css";
 
@@ -26,6 +27,9 @@ class App extends Component {
           <div className="header">
             <h1>Autores</h1>
           </div>
+
+          <CustomMessages />
+
           <div className="content" id="content">
             <AutorBox />
           </div>
