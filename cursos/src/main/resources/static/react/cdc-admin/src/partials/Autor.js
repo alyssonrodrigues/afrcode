@@ -58,7 +58,9 @@ class AutorInput extends Component {
             error: error => PubSub.publish("messages", 
                 error.responseJSON.errors.map(message => {
                     return {key: message.field, textContent: message.defaultMessage};
-                }))});
+                })
+            )
+        });
     }
 
     render() {
