@@ -1,7 +1,9 @@
 var app = require('express')();
 
+app.set('view engine', 'ejs');
+
 app.get('/', (request, response) => {
-    response.sendFile('/home/alysson/cursosweb/nodejs/public/index.html');
+    response.render('index.ejs');
 });
 
 var serverPort = 4000;
