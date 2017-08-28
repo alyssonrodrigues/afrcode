@@ -14,21 +14,18 @@ module.exports = (app) => {
         connection.end();
     });
 
-    app.get('/produtos/inserir', (request, response) => response.render('cadastrar-produto'));
+    app.get('/inserir', (request, response) => response.render('cadastrar-produto'));
 
-    app.post('/produtos/salvar', (request, response) => {
+    app.post('/', (request, response) => {
         var connection = app.services.connectionFactory();
         var produtosService = new app.services.ProdutosService(connection);
         var produto = request.body;
-        console.log(produto);
-        produtosService.recuperarTodos((error, result) => {
+        produtosService.salvar(produto, (error, result) => {
             if (error) {
                 console.log(error);
             }
             console.log(result);
-            response.render('produtos', {
-                produtos: result
-            });
+            response.redirect('/');
         });
         connection.end();
     });
