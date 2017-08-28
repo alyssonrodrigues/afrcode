@@ -1,7 +1,8 @@
 module.exports = (app) => {
     app.get('/', (request, response) => {
         var connection = app.services.connectionFactory();
-        connection.query('select * from produtos', (error, result) => {
+        var produtosService = new app.services.ProdutosService(connection);
+        produtosService.recuperarTodos((error, result) => {
             if (error) {
                 console.log(error);
             }
