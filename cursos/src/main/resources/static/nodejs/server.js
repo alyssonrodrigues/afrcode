@@ -1,5 +1,4 @@
 var app = require('./config/express')();
-var routes = require('./app/routes/routes')(app);
 
 var serverPort = 3000;
 var serverHostname = 'localhost';
