@@ -7,7 +7,7 @@ module.exports = (app) => {
             password: 'M03y08s14',
             database: 'nodejsapp'
         });
-        connection.query('select * from livro', (error, result) => {
+        connection.query('select * from produtos', (error, result) => {
             if (error) {
                 console.log(error);
             }
