@@ -6,6 +6,24 @@
     <title>Hello World</title>
 </head>
 <body>
-    <h1>Hello World!</h1>
+    <h1>Produtos</h1>
+    <table>
+        <thead>
+            <tr>
+                <td>Título</td>
+                <td>Descrição</td>
+                <td>Preço</td>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (var i = 0; i < produtos.length; i++) {%>
+                <tr>
+                    <td><%=produtos[i].titulo%></td>
+                    <td><%=produtos[i].descricao%></td>
+                    <td><%=produtos[i].preco%></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
 </body>
 </html>

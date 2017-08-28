@@ -1,18 +1,16 @@
+var connectionFactory = require('../services/connection-factory.js');
 module.exports = (app) => {
     app.get('/', (request, response) => {
-        var mysql = require('mysql');
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: 'M03y08s14',
-            database: 'nodejsapp'
-        });
+        var connection = connectionFactory();
         connection.query('select * from produtos', (error, result) => {
             if (error) {
                 console.log(error);
             }
             console.log(result);
-        })
-        response.render('index.ejs');
+            response.render('index.ejs', {
+                produtos: result
+            });
+        });
+        connection.end();
     });
 };
