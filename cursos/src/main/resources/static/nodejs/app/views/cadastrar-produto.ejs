@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Produto</title>
+</head>
+<body>
+
+    <form action="/produtos/salvar" method="post">
+        <div>
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" name="titulo" />
+        </div>
+        <div>
+            <label for="descricao">Descrição</label>
+            <textarea name="descricao" id="descricao" cols="30" rows="10"></textarea>
+        </div>
+        <div>
+            <label for="preco">Preço</label>
+            <input type="number" name="preco" id="preco" />
+        </div>
+        <input type="submit" value="Salvar" />
+    </form>
+    
+</body>
+</html>
