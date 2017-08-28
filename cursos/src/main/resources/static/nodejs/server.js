@@ -1,10 +1,5 @@
-var app = require('express')();
-
-app.set('view engine', 'ejs');
-
-app.get('/', (request, response) => {
-    response.render('index.ejs');
-});
+var app = require('./config/express')();
+var routes = require('./app/routes/routes')(app);
 
 var serverPort = 3000;
 var serverHostname = 'localhost';
