@@ -6,7 +6,6 @@ module.exports = (app) => {
             if (error) {
                 console.log(error);
             }
-            console.log(result);
             response.render('produtos', {
                 produtos: result
             });
@@ -24,7 +23,18 @@ module.exports = (app) => {
             if (error) {
                 console.log(error);
             }
-            console.log(result);
+            response.redirect('/');
+        });
+        connection.end();
+    });
+
+    app.get('/remover/:produtoId', (request, response) => {
+        var connection = app.services.connectionFactory();
+        var produtosService = new app.services.ProdutosService(connection);
+        produtosService.remover(request.params.produtoId, (error, result) => {
+            if (error) {
+                console.log(error);
+            }
             response.redirect('/');
         });
         connection.end();
