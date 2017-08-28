@@ -13,6 +13,7 @@
                 <td>Título</td>
                 <td>Descrição</td>
                 <td>Preço</td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +22,11 @@
                     <td><%=produtos[i].titulo%></td>
                     <td><%=produtos[i].descricao%></td>
                     <td><%=produtos[i].preco%></td>
+                    <td>
+                        <a href="/remover/<%=produtos[i].id%>">
+                            <button>Remover</button>
+                        </a>
+                    </td>
                 </tr>
             <%}%>
         </tbody>
