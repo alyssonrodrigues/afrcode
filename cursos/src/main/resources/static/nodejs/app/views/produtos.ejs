@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,6 +24,9 @@
                     <td><%=produtos[i].descricao%></td>
                     <td><%=produtos[i].preco%></td>
                     <td>
+                        <a href="/editar/<%=produtos[i].id%>">
+                            <button>Editar</button>
+                        </a>
                         <a href="/remover/<%=produtos[i].id%>">
                             <button>Remover</button>
                         </a>

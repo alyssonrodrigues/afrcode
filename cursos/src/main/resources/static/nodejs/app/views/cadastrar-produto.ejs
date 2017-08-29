@@ -9,19 +9,23 @@
 <body>
 
     <form action="/" method="post">
+        <input type="hidden" name="id" id="id" value="<%=id%>" />
         <div>
             <label for="titulo">Título</label>
-            <input type="text" id="titulo" name="titulo" />
+            <input type="text" id="titulo" name="titulo" value="<%=titulo%>" required />
         </div>
         <div>
             <label for="descricao">Descrição</label>
-            <textarea name="descricao" id="descricao" cols="30" rows="10"></textarea>
+            <textarea name="descricao" id="descricao" 
+                cols="30" rows="10" required><%=descricao%></textarea>
         </div>
         <div>
             <label for="preco">Preço</label>
-            <input type="number" name="preco" id="preco" />
+            <input type="number" min="0.01" step="0.01" name="preco" 
+                id="preco" value="<%=preco%>" required />
         </div>
         <input type="submit" value="Salvar" />
+        <a href="/"><button type="button">Cancelar</button></a>
     </form>
     
 </body>

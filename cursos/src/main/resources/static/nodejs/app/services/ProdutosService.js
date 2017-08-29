@@ -8,7 +8,28 @@ class ProdutosService {
     }
 
     salvar(produto, callback) {
-        this._connection.query('insert into produtos set ?', produto, callback);
+        if (produto.id) {
+            this._connection.query('update produtos set ? where id = ?', 
+                [{
+                    titulo: produto.titulo,
+                    descricao: produto.descricao,
+                    preco: produto.preco
+                }, 
+                produto.id], 
+                callback);
+        } else {
+            this._connection.query('insert into produtos set ?', 
+            {
+                titulo: produto.titulo,
+                descricao: produto.descricao,
+                preco: produto.preco
+            }, 
+            callback);
+        }
+    }
+
+    recuperarPorId(produtoId, callback) {
+        this._connection.query('select * from produtos where id = ?', produtoId, callback);
     }
 
     remover(produtoId, callback) {
