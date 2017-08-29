@@ -22,8 +22,8 @@ class ProdutosController {
     }
 
     recuperarTodos(request, response) {
-        var connection = this._app.services.connectionFactory();
-        var produtosService = new this._app.services.ProdutosService(connection);
+        let connection = this._app.services.connectionFactory();
+        let produtosService = new this._app.services.ProdutosService(connection);
         produtosService.recuperarTodos((error, result) => {
             this._handleError(error);
             response.format({
@@ -37,9 +37,9 @@ class ProdutosController {
     }
 
     salvar(request, response) {
-        var connection = this._app.services.connectionFactory();
-        var produtosService = new this._app.services.ProdutosService(connection);
-        var produto = request.body;
+        let connection = this._app.services.connectionFactory();
+        let produtosService = new this._app.services.ProdutosService(connection);
+        let produto = request.body;
         produtosService.salvar(produto, (error, result) => {
             this._handleError(error);
             response.redirect('/');
@@ -48,8 +48,8 @@ class ProdutosController {
     }
 
     editar(request, response) {
-        var connection = this._app.services.connectionFactory();
-        var produtosService = new this._app.services.ProdutosService(connection);
+        let connection = this._app.services.connectionFactory();
+        let produtosService = new this._app.services.ProdutosService(connection);
         produtosService.recuperarPorId(request.params.produtoId, (error, result) => {
             this._handleError(error);
             response.render('cadastrar-produto', {
@@ -63,8 +63,8 @@ class ProdutosController {
     }
 
     remover(request, response) {
-        var connection = this._app.services.connectionFactory();
-        var produtosService = new this._app.services.ProdutosService(connection);
+        let connection = this._app.services.connectionFactory();
+        let produtosService = new this._app.services.ProdutosService(connection);
         produtosService.remover(request.params.produtoId, (error, result) => {
             this._handleError(error);
             response.redirect('/');
