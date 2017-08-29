@@ -11,8 +11,9 @@ module.exports = () => {
         extended: true
     }));
 
-    load('routes', {cwd: 'app'})
-        .then('services')
+    load('services', {cwd: 'app'})
+        .then('controllers')
+        .then('routes')
         .into(app);
     
     return app;
