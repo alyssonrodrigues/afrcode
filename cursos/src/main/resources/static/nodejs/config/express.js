@@ -1,6 +1,7 @@
 var express = require('express');
 var load = require('express-load');
 var bodyParser = require('body-parser');
+var expressValidator = require('express-validator');
 
 module.exports = () => {
     var app = express();
@@ -11,6 +12,7 @@ module.exports = () => {
         extended: true
     }));
     app.use(bodyParser.json());
+    app.use(expressValidator());
 
     load('services', {cwd: 'app'})
         .then('controllers')

@@ -16,7 +16,8 @@ class ProdutosController {
                 id: '',
                 titulo: '',
                 descricao: '',
-                preco: ''
+                preco: '',
+                errors: ''
             }
         );
     }
@@ -36,10 +37,31 @@ class ProdutosController {
         connection.end();
     }
 
+    _validar(request) {
+        request.assert('titulo', 'Título é obrigatório!').notEmpty();
+        request.assert('preco', 'Preço não é um número decimal válido (999.99)!')
+            .isFloat();
+        request.assert('descricao', 'Descrição é obrigatória!').notEmpty();
+        return request.validationErrors();
+    }
+
     salvar(request, response) {
+        let produto = request.body;
+        let errors = this._validar(request);
+        if (errors) {
+            response.render('cadastrar-produto',
+            {
+                id: produto.id,
+                titulo: produto.titulo,
+                descricao: produto.descricao,
+                preco: produto.preco,
+                errors: errors
+            });
+            return;
+        }
         let connection = this._app.services.connectionFactory();
         let produtosService = new this._app.services.ProdutosService(connection);
-        let produto = request.body;
+        
         produtosService.salvar(produto, (error, result) => {
             this._handleError(error);
             response.redirect('/');
@@ -56,7 +78,8 @@ class ProdutosController {
                 id: result[0].id,
                 titulo: result[0].titulo,
                 descricao: result[0].descricao,
-                preco: result[0].preco
+                preco: result[0].preco,
+                errors: ''
             });
         });
         connection.end();
