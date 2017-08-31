@@ -27,7 +27,8 @@ class ProdutosController {
         let produtosService = new this._app.services.ProdutosService(connection);
         produtosService.recuperarTodos((error, result) => {
             this._handleError(error);
-            response.format({
+            response.format(
+                {
                 html: () => response.render('produtos', {
                     produtos: result
                 }),
@@ -49,19 +50,25 @@ class ProdutosController {
         let produto = request.body;
         let errors = this._validar(request);
         if (errors) {
-            response.render('cadastrar-produto',
-            {
-                id: produto.id,
-                titulo: produto.titulo,
-                descricao: produto.descricao,
-                preco: produto.preco,
-                errors: errors
-            });
+            response.format(
+                {
+                    html: () => 
+                        response.status(400).render('cadastrar-produto',
+                        {
+                            id: produto.id,
+                            titulo: produto.titulo,
+                            descricao: produto.descricao,
+                            preco: produto.preco,
+                            errors: errors
+                        }),
+                    json: () => response.status(400).json(errors)
+                }
+            );
             return;
         }
+        
         let connection = this._app.services.connectionFactory();
         let produtosService = new this._app.services.ProdutosService(connection);
-        
         produtosService.salvar(produto, (error, result) => {
             this._handleError(error);
             response.redirect('/');
