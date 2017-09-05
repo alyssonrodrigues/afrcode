@@ -10,7 +10,7 @@ http.get(
         }
     },
     (response) => {
-        response.on('data', (body) => console.log(`${body}`))
+        response.on('data', (body) => console.log(`${body}`));
     }
 );
 
@@ -26,7 +26,7 @@ http.request(
         }
     },
     (response) => {
-        response.on('data', (body) => console.log(`${body}`))
+        response.on('data', (body) => console.log(`${body}`));
     }
 ).end(JSON.stringify(
     {
