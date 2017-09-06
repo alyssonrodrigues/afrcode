@@ -3,11 +3,12 @@ class ProdutosController {
         this._app = app;
     }
 
-    _handleError(error) {
+    _handleError(error, next) {
         if (error) {
             console.log(error);
-            throw new Error(JSON.stringify(error));
+            next(error);
         }
+        return error;
     }
 
     inserir(request, response) { 
@@ -22,11 +23,11 @@ class ProdutosController {
         );
     }
 
-    recuperarTodos(request, response) {
+    recuperarTodos(request, response, next) {
         let connection = this._app.services.connectionFactory();
         let produtosService = new this._app.services.ProdutosService(connection);
         produtosService.recuperarTodos((error, result) => {
-            this._handleError(error);
+            if (this._handleError(error, next)) return;
             response.format(
                 {
                 html: () => response.render('produtos', {
@@ -46,7 +47,7 @@ class ProdutosController {
         return request.validationErrors();
     }
 
-    salvar(request, response) {
+    salvar(request, response, next) {
         let produto = request.body;
         let errors = this._validar(request);
         if (errors) {
@@ -70,18 +71,18 @@ class ProdutosController {
         let connection = this._app.services.connectionFactory();
         let produtosService = new this._app.services.ProdutosService(connection);
         produtosService.salvar(produto, (error, result) => {
-            this._handleError(error);
+            if (this._handleError(error, next)) return;
             this._app.get('io').emit('reload', produto);
             response.redirect('/');
         });
         connection.end();
     }
 
-    editar(request, response) {
+    editar(request, response, next) {
         let connection = this._app.services.connectionFactory();
         let produtosService = new this._app.services.ProdutosService(connection);
         produtosService.recuperarPorId(request.params.produtoId, (error, result) => {
-            this._handleError(error);
+            if (this._handleError(error, next)) return;
             response.render('cadastrar-produto', {
                 id: result[0].id,
                 titulo: result[0].titulo,
@@ -93,11 +94,11 @@ class ProdutosController {
         connection.end();
     }
 
-    remover(request, response) {
+    remover(request, response, next) {
         let connection = this._app.services.connectionFactory();
         let produtosService = new this._app.services.ProdutosService(connection);
         produtosService.remover(request.params.produtoId, (error, result) => {
-            this._handleError(error);
+            if (this._handleError(error, next)) return;
             response.redirect('/');
         });
         connection.end();
