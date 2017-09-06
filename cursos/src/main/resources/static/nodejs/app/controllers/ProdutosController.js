@@ -71,6 +71,7 @@ class ProdutosController {
         let produtosService = new this._app.services.ProdutosService(connection);
         produtosService.salvar(produto, (error, result) => {
             this._handleError(error);
+            this._app.get('io').emit('reload', produto);
             response.redirect('/');
         });
         connection.end();
