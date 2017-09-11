@@ -13,7 +13,8 @@ module.exports = () => {
     app.use(expressValidator());
 
     consign()
-        .include('app/routes')
+        .include('app/services')
+        .then('app/routes')
         .into(app);
     return app;
 };
