@@ -16,16 +16,16 @@ class PagamentosController {
         let pagamentosService = new this._app.services.PagamentosService(connection);
         pagamentosService.recuperarTodos((error, result) => {
             if (this._handleError(error, next)) return;
-            json: () => response.json(result);
+            response.json(result);
         });
         connection.end();
     }
 
     _validar(request) {
-        request.assert('moeda', 'Moeda é obrigatório!').notEmpty();
         request.assert('valor', 'Valor não é um número decimal válido (999.99)!')
             .isFloat();
         request.assert('descricao', 'Descrição é obrigatória!').notEmpty();
+        request.assert('data', 'Data é obrigatória!').notEmpty();
         return request.validationErrors();
     }
 

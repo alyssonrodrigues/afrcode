@@ -12,7 +12,7 @@ class PagamentosService {
             this._connection.query('update pagamentos set ? where id = ?', 
                 [{
                     valor: pagamento.valor,
-                    moeda: pagamento.moeda,
+                    data: pagamento.data,
                     descricao: pagamento.descricao
                 }, 
                 pagamento.id], 
@@ -21,7 +21,7 @@ class PagamentosService {
             this._connection.query('insert into pagamentos set ?', 
             {
                 valor: pagamento.valor,
-                moeda: pagamento.moeda,
+                data: pagamento.data,
                 descricao: pagamento.descricao
             }, 
             callback);
