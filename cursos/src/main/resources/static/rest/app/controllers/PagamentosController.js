@@ -55,6 +55,16 @@ class PagamentosController {
         });
         connection.end();
     }
+
+    recuperarPorId(request, response, next) {
+        let connection = this._app.services.connectionFactory();
+        let pagamentosService = new this._app.services.PagamentosService(connection);
+        pagamentosService.recuperarPorId(request.params.pagamentoId, (error, result) => {
+            if (this._handleError(error, next)) return;
+            response.json(result);
+        });
+        connection.end();
+    }
 }
 
 module.exports = () => PagamentosController;
