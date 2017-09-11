@@ -30,11 +30,12 @@ class ProdutosController {
             if (this._handleError(error, next)) return;
             response.format(
                 {
-                html: () => response.render('produtos', {
-                    produtos: result
-                }),
-                json: () => response.json(result)
-            });
+                    html: () => response.render('produtos', {
+                        produtos: result
+                    }),
+                    json: () => response.json(result)
+                }
+            );
         });
         connection.end();
     }

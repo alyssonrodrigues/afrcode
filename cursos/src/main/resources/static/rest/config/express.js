@@ -12,9 +12,10 @@ module.exports = () => {
     app.use(bodyParser.json());
     app.use(expressValidator());
 
-    consign()
-        .include('app/services')
-        .then('app/routes')
+    consign({cwd: 'app'})
+        .include('services')
+        .then('controllers')
+        .then('routes')
         .into(app);
     return app;
 };
