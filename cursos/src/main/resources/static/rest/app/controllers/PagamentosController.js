@@ -35,7 +35,6 @@ class PagamentosController {
         pagamentosService.recuperarPorId(request.params.pagamentoId, (error, result) => {
             if (this._handleError(error, next)) return;
             let pagamento = result[0];
-            console.log(pagamento);
             pagamento.status = 1;
             pagamentosService.salvar(pagamento, (error, result) => {
                 if (this._handleError(error, next)) return;
