@@ -36,8 +36,8 @@ class PagamentosController {
             if (this._handleError(error, next)) return;
             let pagamento = result[0];
             pagamento.status = 1;
-            pagamentosService.salvar(pagamento, (error, result) => {
-                if (this._handleError(error, next)) return;
+            pagamentosService.salvar(pagamento, (exception, rs) => {
+                if (this._handleError(exception, next)) return;
                 response.json(pagamento);
             });
             connection.end();
