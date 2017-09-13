@@ -13,7 +13,8 @@ class PagamentosService {
                 [{
                     valor: pagamento.valor,
                     data: pagamento.data,
-                    descricao: pagamento.descricao
+                    descricao: pagamento.descricao,
+                    status: pagamento.status
                 }, 
                 pagamento.id], 
                 callback);
@@ -22,7 +23,8 @@ class PagamentosService {
             {
                 valor: pagamento.valor,
                 data: pagamento.data,
-                descricao: pagamento.descricao
+                descricao: pagamento.descricao,
+                status: 0
             }, 
             callback);
         }

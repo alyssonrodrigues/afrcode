@@ -29,6 +29,22 @@ class PagamentosController {
         return request.validationErrors();
     }
 
+    confirmar(request, response, next) {
+        let connection = this._app.services.connectionFactory();
+        let pagamentosService = new this._app.services.PagamentosService(connection);
+        pagamentosService.recuperarPorId(request.params.pagamentoId, (error, result) => {
+            if (this._handleError(error, next)) return;
+            let pagamento = result[0];
+            console.log(pagamento);
+            pagamento.status = 1;
+            pagamentosService.salvar(pagamento, (error, result) => {
+                if (this._handleError(error, next)) return;
+                response.json(pagamento);
+            });
+            connection.end();
+        });
+    }
+
     salvar(request, response, next) {
         let pagamento = request.body;
         let errors = this._validar(request);
@@ -49,9 +65,13 @@ class PagamentosController {
     remover(request, response, next) {
         let connection = this._app.services.connectionFactory();
         let pagamentosService = new this._app.services.PagamentosService(connection);
-        pagamentosService.remover(request.params.pagamentoId, (error, result) => {
+        let pagamentoId = request.params.pagamentoId;
+        pagamentosService.remover(pagamentoId, (error, result) => {
             if (this._handleError(error, next)) return;
-            response.json(request.params.pagamentoId);
+            response.json({
+                id: pagamentoId,
+                msg: `Pagamento id[${pagamentoId}] removido com sucesso!`
+            });
         });
         connection.end();
     }
@@ -61,7 +81,7 @@ class PagamentosController {
         let pagamentosService = new this._app.services.PagamentosService(connection);
         pagamentosService.recuperarPorId(request.params.pagamentoId, (error, result) => {
             if (this._handleError(error, next)) return;
-            response.json(result);
+            response.json(result[0]);
         });
         connection.end();
     }
