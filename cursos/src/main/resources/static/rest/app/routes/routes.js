@@ -5,4 +5,5 @@ module.exports = (app) => {
     app.get('/api/pagamento/:pagamentoId', pagamentosController.recuperarPorId.bind(pagamentosController));
     app.put('/api/pagamento/:pagamentoId', pagamentosController.confirmar.bind(pagamentosController));
     app.delete('/api/pagamento/:pagamentoId', pagamentosController.remover.bind(pagamentosController));
+    app.post('/api/upload', pagamentosController.handleUpload.bind(pagamentosController));
 };

@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 class PagamentosController {
     constructor(app) {
         this._app = app;
@@ -9,6 +11,17 @@ class PagamentosController {
             next(error);
         }
         return error;
+    }
+
+    handleUpload(request, response) {
+        let filename = request.headers.filename;
+        request.pipe(fs.createWriteStream(`files/${filename}`))
+            .on('finish', () => {
+                response.json({
+                    'filename': filename,
+                    status: 'Arquivo recebido com sucesso!'
+                });
+            });
     }
 
     recuperarTodos(request, response, next) {
