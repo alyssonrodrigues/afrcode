@@ -5,7 +5,9 @@ const logger = new (winston.Logger)({
             new (winston.transports.Console)(),
             new (winston.transports.File)({
                     name: 'server-log',
-                    filename: 'server.log'
+                    filename: 'server.log',
+                    maxsize: 1048576,
+                    maxFiles: 10
                 }
             )
         ]
