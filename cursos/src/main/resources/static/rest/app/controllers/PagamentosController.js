@@ -7,7 +7,7 @@ class PagamentosController {
 
     _handleError(error, next) {
         if (error) {
-            console.log(error);
+            this._app.services.logger.error(error);
             next(error);
         }
         return error;
