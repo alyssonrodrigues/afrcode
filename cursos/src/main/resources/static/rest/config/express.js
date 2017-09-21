@@ -11,7 +11,7 @@ module.exports = () => {
 
     app.use(morgan('common', {
             stream: {
-                write: (message) => app.services.logger.info(message)
+                write: message => app.services.logger.info(message)
             }
         })
     );
