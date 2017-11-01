@@ -1,14 +1,20 @@
 import React, {Component} from 'react';
 import Foto from './Foto';
+import {withRouter} from 'react-router-dom';
 
-export default class Timeline extends Component {
+export class Timeline extends Component {
     constructor() {
         super();
         this.state = {fotos: []};
     }
 
     componentDidMount() {
-        fetch('http://localhost:8080/api/public/fotos/vitor')
+        if (localStorage.getItem('auth-token') === null) {
+            this.props.history.push('/');
+            return;
+        }
+
+        fetch(`http://localhost:8080/api/fotos?X-AUTH-TOKEN=${localStorage.getItem('auth-token')}`)
             .then(response => response.json())
             .then(fotos => {
                 this.setState({fotos: fotos});
@@ -25,3 +31,5 @@ export default class Timeline extends Component {
         );
     }
 }
+
+export default withRouter(Timeline);
