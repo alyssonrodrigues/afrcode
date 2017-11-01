@@ -10,7 +10,7 @@ export class Timeline extends Component {
 
     componentDidMount() {
         if (localStorage.getItem('auth-token') === null) {
-            this.props.history.push('/');
+            this.props.history.push('/?msg=É necessário fazer o login...');
             return;
         }
 
@@ -25,7 +25,7 @@ export class Timeline extends Component {
         return (
             <div className="fotos container">
                 {
-                    this.state.fotos.map(foto => <Foto foto={foto}/>)
+                    this.state.fotos.map(foto => <Foto key={foto.id} foto={foto}/>)
                 }
             </div>
         );

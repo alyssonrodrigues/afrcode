@@ -35,7 +35,7 @@ class FotoInfo extends Component {
                 <ul className="foto-info-comentarios">
                     {
                         this.props.foto.comentarios.map(comentario => (
-                            <li className="comentario">
+                            <li className="comentario" key={comentario.id}>
                                 <a className="foto-info-autor">{comentario.login}</a>
                                 {comentario.texto}
                             </li>
