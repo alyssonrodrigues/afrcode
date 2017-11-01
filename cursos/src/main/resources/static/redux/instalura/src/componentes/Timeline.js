@@ -14,7 +14,11 @@ export class Timeline extends Component {
             return;
         }
 
-        fetch(`http://localhost:8080/api/fotos?X-AUTH-TOKEN=${localStorage.getItem('auth-token')}`)
+        let url = `http://localhost:8080/api/fotos?X-AUTH-TOKEN=${localStorage.getItem('auth-token')}`;
+        if (this.props.match.params.user) {
+            url = `http://localhost:8080/api/public/fotos/${this.props.match.params.user}`;
+        }
+        fetch(url)
             .then(response => response.json())
             .then(fotos => {
                 this.setState({fotos: fotos});

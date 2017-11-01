@@ -13,7 +13,7 @@ ReactDOM.render(
         <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={Login}/>
-                <Route path="/timeline" component={App}/>
+                <Route path="/timeline/:user?" component={App}/>
                 <Route path="/logout" component={Logout}/>
             </Switch>
         </BrowserRouter>
