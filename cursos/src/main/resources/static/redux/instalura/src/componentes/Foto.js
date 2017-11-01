@@ -21,7 +21,7 @@ class FotoInfo extends Component {
             <div className="foto-in fo">
                 <div className="foto-info-likes">
 
-                    {this.props.foto.likers.map(liker => (<a href="#">{liker.login},</a>))}
+                    {this.props.foto.likers.map(liker => (<a href={`/timeline/${liker.login}`}>{liker.login},</a>))}
 
                     curtiram
 
@@ -56,7 +56,7 @@ class FotoHeader extends Component {
                         src={this.props.foto.urlPerfil}
                         alt="foto do usuario"/>
                     <figcaption className="foto-usuario">
-                        <a href="#">
+                        <a href={`/timeline/${this.props.foto.loginUsuario}`}>
                             {this.props.foto.loginUsuario}
                         </a>
                     </figcaption>
