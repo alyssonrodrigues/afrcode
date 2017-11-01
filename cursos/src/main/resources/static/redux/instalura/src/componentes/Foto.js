@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 
 class FotoAtualizacoes extends Component {
     render() {
@@ -23,9 +22,9 @@ class FotoInfo extends Component {
                 <div className="foto-info-likes">
 
                     {this.props.foto.likers.map(liker => (
-                        <Link to={`/timeline/${liker.login}`}>
+                        <a href={`/timeline/${liker.login}`}>
                             {liker.login},
-                        </Link>
+                        </a>
                     ))}
 
                     curtiram
@@ -33,9 +32,9 @@ class FotoInfo extends Component {
                 </div>
 
                 <p className="foto-info-legenda">
-                    <Link className="foto-info-autor" to={`/timeline/${this.props.foto.loginUsuario}`}>
+                    <a className="foto-info-autor" href={`/timeline/${this.props.foto.loginUsuario}`}>
                         {this.props.foto.loginUsuario}
-                    </Link>
+                    </a>
                     {` ${this.props.foto.comentario}`}
                 </p>
 
@@ -43,9 +42,9 @@ class FotoInfo extends Component {
                     {
                         this.props.foto.comentarios.map(comentario => (
                             <li className="comentario" key={comentario.id}>
-                                <Link className="foto-info-autor" to={`/timeline/${comentario.login}`}>
+                                <a className="foto-info-autor" href={`/timeline/${comentario.login}`}>
                                     {comentario.login}
-                                </Link>
+                                </a>
                                 {comentario.texto}
                             </li>
                         ))
@@ -65,9 +64,9 @@ class FotoHeader extends Component {
                         src={this.props.foto.urlPerfil}
                         alt="foto do usuario"/>
                     <figcaption className="foto-usuario">
-                        <Link to={`/timeline/${this.props.foto.loginUsuario}`}>
+                        <a href={`/timeline/${this.props.foto.loginUsuario}`}>
                             {this.props.foto.loginUsuario}
-                        </Link>
+                        </a>
                     </figcaption>
                 </figure>
                 <time className="foto-data">{this.props.foto.horario}</time>
