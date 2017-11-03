@@ -1,11 +1,20 @@
 import React, {Component} from 'react';
 import Foto from './Foto';
 import {withRouter} from 'react-router-dom';
+import Pubsub from 'pubsub-js';
 
 export class Timeline extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {fotos: []};
+        this.login = this.props.login;
+    }
+
+    componentWillMount() {
+        Pubsub.subscribe('timeline', (topico, fotos) => {
+            console.log(fotos);
+            this.setState({fotos: fotos.fotos});
+        })
     }
 
     componentDidMount() {
