@@ -170,6 +170,9 @@ export default class Presentation extends React.Component {
           <Heading size={5} textColor="tertiary">Components</Heading>
         </Slide>
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
+          <Heading size={5} textColor="tertiary">JSX</Heading>
+        </Slide>
+        <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
           <Heading size={5} textColor="tertiary">Component LifeCycle</Heading>
         </Slide>
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
@@ -177,9 +180,6 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
           <Heading size={5} textColor="tertiary">State</Heading>
-        </Slide>
-        <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-          <Heading size={5} textColor="tertiary">JSX</Heading>
         </Slide>
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
           <Heading size={5} textColor="tertiary">Virtual DOM</Heading>
