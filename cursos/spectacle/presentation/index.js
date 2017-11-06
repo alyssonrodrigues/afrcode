@@ -7,6 +7,7 @@ import {
     CodePane,
     Deck,
     Heading,
+    Image,
     Link,
     ListItem,
     List,
@@ -34,7 +35,9 @@ const images = {
     city: require("../assets/city.jpg"),
     kat: require("../assets/kat.png"),
     logo: require("../assets/formidable-logo.svg"),
-    markdown: require("../assets/markdown.png")
+    markdown: require("../assets/markdown.png"),
+    flux: require("../assets/flux.png"),
+    mvc: require("../assets/mvc-scale.jpg")
 };
 
 preloader(images);
@@ -65,65 +68,9 @@ export default class Presentation extends React.Component {
                         </Quote>
                     </BlockQuote>
                 </Slide>
-                <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
-                    <Heading size={6} textColor="secondary" caps>Components</Heading>
-                    <CodePane lang="js" source={require("raw-loader!./component.example")}/>
-                </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <Heading size={4} textColor="tertiary">Prior knowledge</Heading>
                     <Text margin="30px 0 0" textColor="primary" caps bold>JavaScript - ES6</Text>
-                </Slide>
-                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-                    <Heading size={4} textColor="tertiary">Why React?</Heading>
-                    <List>
-                        <ListItem margin="20px 0 0" textSize="xx-large">Complexity of two-way data binding</ListItem>
-                        <ListItem margin="20px 0 0" textSize="xx-large">
-                            Bad UX from using "cascading updates" of DOM tree
-                        </ListItem>
-                        <ListItem margin="20px 0 0" textSize="xx-large">
-                            A lot of data on a page changing over time
-                        </ListItem>
-                        <ListItem margin="20px 0 0" textSize="xx-large" bold>
-                            Shift from MV* Frameworks mentality
-                        </ListItem>
-                    </List>
-                </Slide>
-                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-                    <BlockQuote>
-                        <Quote textSize="xx-large">
-                            Controller, ModelView, and View are coupled: when you change one, you often have to change
-                            the others
-                        </Quote>
-                    </BlockQuote>
-                </Slide>
-                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-                    <BlockQuote>
-                        <Quote textSize="xx-large">
-                            MVC did not scale well for Facebook’s huge codebase. The main problem for them was the
-                            bidirectional communication, where one change can loop back and have cascading effects
-                            across the codebase (making things very complicated to debug and understand)
-                        </Quote>
-                    </BlockQuote>
-                </Slide>
-                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-                    <BlockQuote>
-                        <Quote textSize="xx-large">
-                            In general the flow inside the MVC pattern is not well defined. A lot of the bigger
-                            implementations do it very differently
-                        </Quote>
-                    </BlockQuote>
-                </Slide>
-                <Slide transition={["fade"]} bgColor="tertiary" textColor="primary">
-                    <BlockQuote>
-                        <Quote textSize="xx-large">React challenges established best practices in tradicional MV* Frameworks</Quote>
-                    </BlockQuote>
-                </Slide>
-                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-                    <BlockQuote>
-                        <Quote textSize="xx-large">
-                            By forcing an unidirectional flow of data between a system’s components: Flux Pattern
-                        </Quote>
-                    </BlockQuote>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="primary" textColor="secondary">
                     <Heading size={5} textColor="tertiary">React usage statistics</Heading>
@@ -165,6 +112,79 @@ export default class Presentation extends React.Component {
                     <Heading size={1} fit caps lineHeight={1} textColor="secondary">Fundamentals</Heading>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
+                    <Heading size={4} textColor="tertiary">Why React?</Heading>
+                    <List>
+                        <ListItem margin="20px 0 0" textSize="xx-large">Complexity of two-way data binding</ListItem>
+                        <ListItem margin="20px 0 0" textSize="xx-large">
+                            Bad UX from using "cascading updates" of DOM tree
+                        </ListItem>
+                        <ListItem margin="20px 0 0" textSize="xx-large">
+                            A lot of data on a page changing over time
+                        </ListItem>
+                        <ListItem margin="20px 0 0" textSize="xx-large" bold>
+                            Shift from MV* Frameworks mentality
+                        </ListItem>
+                    </List>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
+                    <BlockQuote>
+                        <Quote textSize="xx-large">
+                            Controller, ModelView, and View are coupled: when you change one, you often have to change
+                            the others
+                        </Quote>
+                    </BlockQuote>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
+                    <BlockQuote>
+                        <Quote textSize="xx-large">
+                            MVC did not scale well for Facebook’s huge codebase. The main problem for them was the
+                            bidirectional communication, where one change can loop back and have cascading effects
+                            across the codebase (making things very complicated to debug and understand)
+                        </Quote>
+                    </BlockQuote>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="primary" textColor="secondary">
+                    <Heading size={4} textColor="tertiary">MVC scale</Heading>
+                    <Image src={images.mvc}/>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
+                    <BlockQuote>
+                        <Quote textSize="xx-large">
+                            In general the flow inside the MVC pattern is not well defined. A lot of the bigger
+                            implementations do it very differently
+                        </Quote>
+                    </BlockQuote>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="tertiary" textColor="primary">
+                    <BlockQuote>
+                        <Quote textSize="xx-large">React challenges established best practices in tradicional MV* Frameworks</Quote>
+                    </BlockQuote>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
+                    <BlockQuote>
+                        <Quote textSize="xx-large">
+                            By forcing an unidirectional flow of data between a system’s components: Flux Pattern
+                        </Quote>
+                    </BlockQuote>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="primary" textColor="secondary">
+                    <Heading size={4} textColor="tertiary">Flux Pattern</Heading>
+                    <Image src={images.flux}/>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
+                    <Heading size={5} textColor="tertiary">Build components, not templates</Heading>
+                    <List>
+                        <ListItem margin="20px 0 0" textSize="xx-large">UI Components are the cohesive units</ListItem>
+                        <ListItem margin="20px 0 0" textSize="xx-large">
+                            UI description and UI logic are tightly coupled and can be colocated - they shouldn't be
+                            arbitrarily decoupled
+                        </ListItem>
+                        <ListItem margin="20px 0 0" textSize="xx-large" bold>
+                            Full power of JavaScript to express UI
+                        </ListItem>
+                    </List>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <Table>
                         <TableRow>
                             <TableHeaderItem padding="10px" textSize="xx-large"/>
@@ -191,19 +211,6 @@ export default class Presentation extends React.Component {
                             <TableItem padding="10px" textSize="xx-large">Full power of JavaScript</TableItem>
                         </TableRow>
                     </Table>
-                </Slide>
-                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-                    <Heading size={5} textColor="tertiary">Build components, not templates</Heading>
-                    <List>
-                        <ListItem margin="20px 0 0" textSize="xx-large">UI Components are the cohesive units</ListItem>
-                        <ListItem margin="20px 0 0" textSize="xx-large">
-                            UI description and UI logic are tightly coupled and can be colocated - they shouldn't be
-                            arbitrarily decoupled
-                        </ListItem>
-                        <ListItem margin="20px 0 0" textSize="xx-large" bold>
-                            Full power of JavaScript to express UI
-                        </ListItem>
-                    </List>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <Heading size={5} textColor="tertiary">Components</Heading>
