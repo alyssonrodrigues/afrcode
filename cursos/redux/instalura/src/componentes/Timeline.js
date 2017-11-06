@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Foto from './Foto';
 import {withRouter} from 'react-router-dom';
-import Pubsub from 'pubsub-js';
+import TimelineApi from '../api/TimelineApi';
 
 export class Timeline extends Component {
     constructor(props) {
@@ -11,8 +11,8 @@ export class Timeline extends Component {
     }
 
     componentWillMount() {
-        this.props.store.subscribe(fotos => {
-            this.setState({fotos});
+        this.props.store.subscribe(() => {
+            this.setState({fotos: this.props.store.getState()});
         });
     }
 
@@ -26,15 +26,15 @@ export class Timeline extends Component {
         if (this.props.match.params.user) {
             url = `http://localhost:8080/api/public/fotos/${this.props.match.params.user}`;
         }
-        this.props.store.lista(url);
+        this.props.store.dispatch(TimelineApi.lista(url));
     }
 
     like(fotoId) {
-        this.props.store.like(fotoId);
+        this.props.store.dispatch(TimelineApi.like(fotoId));
     }
 
     comenta(fotoId, comentario) {
-        this.props.store.comenta(fotoId,comentario);
+        this.props.store.dispatch(TimelineApi.comenta(fotoId, comentario));
     }
 
     render() {
