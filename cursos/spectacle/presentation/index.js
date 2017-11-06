@@ -90,7 +90,7 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide transition={["fade"]} bgColor="tertiary" textColor="primary">
           <BlockQuote>
-            <Quote>React challenges established best practices in tradicional MV* Frameworks.</Quote>
+            <Quote>React challenges established best practices in tradicional MV* Frameworks</Quote>
           </BlockQuote>
         </Slide>
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
@@ -108,7 +108,7 @@ export default class Presentation extends React.Component {
             <TableRow>
               <TableHeaderItem padding="10px" textSize="8">Semantic</TableHeaderItem>
               <TableItem padding="10px" textSize="xx-large">New concepts and micro-languages (scope, directives, iterators)</TableItem>
-              <TableItem padding="10px" textSize="xx-large">HTML and JavaScript"</TableItem>
+              <TableItem padding="10px" textSize="xx-large">HTML and JavaScript</TableItem>
             </TableRow>
             <TableRow>
               <TableHeaderItem padding="10px" textSize="8">Expressiveness</TableHeaderItem>
