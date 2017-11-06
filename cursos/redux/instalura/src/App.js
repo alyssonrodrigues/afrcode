@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import Header from './componentes/Header';
 import Timeline from './componentes/Timeline';
+import TimelineStore from './stores/TimelineStore'
+
+const timelineStore = new TimelineStore([]);
 
 class App extends Component {
     render() {
@@ -8,7 +11,7 @@ class App extends Component {
             <div id="root">
                 <div className="main">
                     <Header/>
-                    <Timeline/>
+                    <Timeline store={timelineStore}/>
                 </div>
             </div>
         );
