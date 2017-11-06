@@ -168,6 +168,7 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
           <Heading size={5} textColor="tertiary">Components</Heading>
+          <CodePane lang="js" source={require("raw-loader!./component.example")} />
         </Slide>
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
           <Heading size={5} textColor="tertiary">JSX</Heading>
