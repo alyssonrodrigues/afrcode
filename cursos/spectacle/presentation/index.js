@@ -219,10 +219,10 @@ export default class Presentation extends React.Component {
                     </Table>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="tertiary" textColor="secondary">
-                    <CodePane lang="js" source={require("raw-loader!./component.example")}/>
+                    <CodePane lang="js" source={require("raw-loader!../assets/component.example")}/>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="tertiary" textColor="secondary">
-                    <CodePane lang="js" source={require("raw-loader!./component-with-no-jsx.example")}/>
+                    <CodePane lang="js" source={require("raw-loader!../assets/component-with-no-jsx.example")}/>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <Heading size={5} textColor="tertiary">Component Life Cycle</Heading>
@@ -291,7 +291,7 @@ export default class Presentation extends React.Component {
                     </List>
                 </Slide>
                 <Slide transition={["zoom"]} bgColor="tertiary">
-                    <CodePane lang="js" source={require("raw-loader!./mensagem-final.example")}/>
+                    <CodePane lang="js" source={require("raw-loader!../assets/mensagem-final.example")}/>
                 </Slide>
             </Deck>
         );
