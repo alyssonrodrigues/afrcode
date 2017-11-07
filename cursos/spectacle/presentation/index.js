@@ -12,6 +12,7 @@ import {
     ListItem,
     List,
     Quote,
+    S,
     Slide,
     Table,
     TableRow,
@@ -38,7 +39,8 @@ const images = {
     markdown: require("../assets/markdown.png"),
     flux: require("../assets/flux.png"),
     fluxComplex: require("../assets/flux-complex.jpg"),
-    mvc: require("../assets/mvc-scale.jpg")
+    mvc: require("../assets/mvc-scale.jpg"),
+    reactLifeCycle: require("../assets/react-life-cycle.png")
 };
 
 preloader(images);
@@ -223,18 +225,45 @@ export default class Presentation extends React.Component {
                     <CodePane lang="js" source={require("raw-loader!./component-with-no-jsx.example")}/>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-                    <Heading size={5} textColor="tertiary">Component LifeCycle</Heading>
+                    <Heading size={5} textColor="tertiary">Component Life Cycle</Heading>
+                    <Image src={images.reactLifeCycle}/>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <Heading size={5} textColor="tertiary">Props</Heading>
+                    <List>
+                        <ListItem margin="20px 0 0" textSize="x-large">
+                            Passed down from parent to child component
+                        </ListItem>
+                        <ListItem margin="20px 0 0" textSize="x-large">
+                            Represents data for the component
+                        </ListItem>
+                        <ListItem margin="20px 0 0" textSize="x-large">
+                            Accessed via <S type="bold">this.props</S>
+                        </ListItem>
+                        <ListItem margin="20px 0 0" textSize="x-large">
+                            Properties are immutable
+                        </ListItem>
+                    </List>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <Heading size={5} textColor="tertiary">State</Heading>
+                    <List>
+                        <ListItem margin="20px 0 0" textSize="x-large">
+                            Represents internal state of the component
+                        </ListItem>
+                        <ListItem margin="20px 0 0" textSize="x-large">
+                            Accessed via <S type="bold">this.state</S>
+                        </ListItem>
+                        <ListItem margin="20px 0 0" textSize="x-large">
+                            When a component's state data changes, the rendered markup 
+                            will be updated by re-invoking render() method
+                        </ListItem>
+                    </List>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-                    <Heading size={5} textColor="tertiary">Re-render</Heading>
+                    <Heading size={5} textColor="tertiary">React</Heading>
                     <Text margin="30px 0 0" textColor="primary" fit bold>
-                        React re-render everything on every update, how?
+                        Re-render everything on every update, sounds expensive?
                     </Text>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
@@ -249,6 +278,16 @@ export default class Presentation extends React.Component {
                         </ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large">and batch executes all updates</ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large">and it is fast</ListItem>
+                    </List>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
+                    <Heading size={5} textColor="tertiary">Live demos</Heading>
+                    <List>
+                        <ListItem margin="20px 0 0" textSize="x-large">
+                            <Link href="https://reactjs.org/" target="_blank" textColor="primary">
+                                https://reactjs.org/
+                            </Link>
+                        </ListItem>
                     </List>
                 </Slide>
                 <Slide transition={["zoom"]} bgColor="tertiary">
