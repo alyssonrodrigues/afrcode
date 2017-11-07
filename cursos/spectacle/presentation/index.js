@@ -37,6 +37,7 @@ const images = {
     logo: require("../assets/formidable-logo.svg"),
     markdown: require("../assets/markdown.png"),
     flux: require("../assets/flux.png"),
+    fluxComplex: require("../assets/flux-complex.jpg"),
     mvc: require("../assets/mvc-scale.jpg")
 };
 
@@ -56,8 +57,8 @@ export default class Presentation extends React.Component {
     render() {
         return (
             <Deck transition={["zoom", "slide"]} transitionDuration={500} theme={theme}>
-                <Slide transition={["zoom"]} bgColor="primary">
-                    <Heading size={1} fit caps lineHeight={1} textColor="secondary">React</Heading>
+                <Slide transition={["zoom"]} bgColor="secondary">
+                    <Heading size={1} fit caps lineHeight={1} textColor="primary">React</Heading>
                     <Text margin="10px 0 0" textColor="tertiary" fit bold>is it a worth?</Text>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="tertiary">
@@ -72,44 +73,46 @@ export default class Presentation extends React.Component {
                     <Heading size={4} textColor="tertiary">Prior knowledge</Heading>
                     <Text margin="30px 0 0" textColor="primary" caps bold>JavaScript - ES6</Text>
                 </Slide>
-                <Slide transition={["fade"]} bgColor="primary" textColor="secondary">
+                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <Heading size={5} textColor="tertiary">React usage statistics</Heading>
                     <List>
                         <ListItem margin="20px 0 0" textSize="x-large">
-                            <Link href="https://stackshare.io/react/in-stacks/" target="_blank">Who is using
-                                React?</Link>
+                            <Link href="https://stackshare.io/react/in-stacks/" target="_blank" textColor="primary">
+                                Who is using React?
+                            </Link>
                         </ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large">
-                            <Link href="https://github.com/facebook/react/wiki/Sites-Using-React" target="_blank">Sites
-                                using React</Link>
+                            <Link href="https://github.com/facebook/react/wiki/Sites-Using-React" target="_blank" textColor="primary">
+                                Sites using React
+                            </Link>
                         </ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large">
-                            <Link href="https://insights.stackoverflow.com/survey/2017#technology-most-loved-dreaded-and-wanted-frameworks-libraries-and-other-technologies" target="_blank">
+                            <Link href="https://insights.stackoverflow.com/survey/2017#technology-most-loved-dreaded-and-wanted-frameworks-libraries-and-other-technologies" target="_blank" textColor="primary">
                                 Most Loved Frameworks, Libraries and Other Technologies
                             </Link>
                         </ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large">
-                            <Link href="http://stateofjs.com/2016/frontend/" target="_blank">Front-end Frameworks</Link>
+                            <Link href="http://stateofjs.com/2016/frontend/" target="_blank" textColor="primary">Front-end Frameworks</Link>
                         </ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large">
-                            <Link href="https://insights.stackoverflow.com/survey/2017#technology-most-popular-languages-by-occupation" target="_blank">
+                            <Link href="https://insights.stackoverflow.com/survey/2017#technology-most-popular-languages-by-occupation" target="_blank" textColor="primary">
                                 Most Popular Languages by Occupation
                             </Link>
                         </ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large">
-                            <Link href="https://www.thoughtworks.com/de/radar/languages-and-frameworks" target="_blank">
+                            <Link href="https://www.thoughtworks.com/de/radar/languages-and-frameworks" target="_blank" textColor="primary">
                                 Languages and Frameworks
                             </Link>
                         </ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large">
-                            <Link href="https://medium.com/unicorn-supplies/angular-vs-react-vs-vue-a-2017-comparison-c5c52d620176" target="_blank">
+                            <Link href="https://medium.com/unicorn-supplies/angular-vs-react-vs-vue-a-2017-comparison-c5c52d620176" target="_blank" textColor="primary">
                                 Angular vs. React vs. Vue: A 2017 comparison
                             </Link>
                         </ListItem>
                     </List>
                 </Slide>
-                <Slide transition={["zoom"]} bgColor="primary">
-                    <Heading size={1} fit caps lineHeight={1} textColor="secondary">Fundamentals</Heading>
+                <Slide transition={["zoom"]} bgColor="tertiary">
+                    <Heading size={1} fit caps lineHeight={1} textColor="primary">Fundamentals</Heading>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <Heading size={4} textColor="tertiary">Why React?</Heading>
@@ -129,22 +132,13 @@ export default class Presentation extends React.Component {
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <BlockQuote>
                         <Quote textSize="xx-large">
-                            Controller, ModelView, and View are coupled: when you change one, you often have to change
-                            the others
-                        </Quote>
-                    </BlockQuote>
-                </Slide>
-                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-                    <BlockQuote>
-                        <Quote textSize="xx-large">
                             MVC did not scale well for Facebook’s huge codebase. The main problem for them was the
                             bidirectional communication, where one change can loop back and have cascading effects
                             across the codebase (making things very complicated to debug and understand)
                         </Quote>
                     </BlockQuote>
                 </Slide>
-                <Slide transition={["fade"]} bgColor="primary" textColor="secondary">
-                    <Heading size={4} textColor="tertiary">MVC scale</Heading>
+                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <Image src={images.mvc}/>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
@@ -163,13 +157,23 @@ export default class Presentation extends React.Component {
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <BlockQuote>
                         <Quote textSize="xx-large">
-                            By forcing an unidirectional flow of data between a system’s components: Flux Pattern
+                            Unidirectional flow of data between a system’s components: Flux Pattern
                         </Quote>
                     </BlockQuote>
                 </Slide>
-                <Slide transition={["fade"]} bgColor="primary" textColor="secondary">
-                    <Heading size={4} textColor="tertiary">Flux Pattern</Heading>
+                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <Image src={images.flux}/>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
+                    <Image src={images.fluxComplex}/>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
+                    <BlockQuote>
+                        <Quote textSize="xx-large">
+                            Controller, ModelView, and View are coupled: when you change one, you often have to change
+                            the others
+                        </Quote>
+                    </BlockQuote>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <Heading size={5} textColor="tertiary">Build components, not templates</Heading>
@@ -212,12 +216,11 @@ export default class Presentation extends React.Component {
                         </TableRow>
                     </Table>
                 </Slide>
-                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-                    <Heading size={5} textColor="tertiary">Components</Heading>
+                <Slide transition={["fade"]} bgColor="tertiary" textColor="secondary">
                     <CodePane lang="js" source={require("raw-loader!./component.example")}/>
                 </Slide>
-                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-                    <Heading size={5} textColor="tertiary">JSX</Heading>
+                <Slide transition={["fade"]} bgColor="tertiary" textColor="secondary">
+                    <CodePane lang="js" source={require("raw-loader!./component-with-no-jsx.example")}/>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <Heading size={5} textColor="tertiary">Component LifeCycle</Heading>
@@ -241,8 +244,8 @@ export default class Presentation extends React.Component {
                         <ListItem margin="20px 0 0" textSize="x-large">and batch executes all updates</ListItem>
                     </List>
                 </Slide>
-                <Slide transition={["zoom"]} bgColor="primary">
-                    <Heading size={1} fit caps lineHeight={1} textColor="secondary">Obrigado!</Heading>
+                <Slide transition={["zoom"]} bgColor="tertiary">
+                    <Heading size={1} fit caps lineHeight={1} textColor="primary">Obrigado!</Heading>
                     <CodePane lang="js" source={require("raw-loader!./email.example")}/>
                 </Slide>
             </Deck>
