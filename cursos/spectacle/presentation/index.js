@@ -245,8 +245,7 @@ export default class Presentation extends React.Component {
                     </List>
                 </Slide>
                 <Slide transition={["zoom"]} bgColor="tertiary">
-                    <Heading size={1} fit caps lineHeight={1} textColor="primary">Obrigado!</Heading>
-                    <CodePane lang="js" source={require("raw-loader!./email.example")}/>
+                    <CodePane lang="js" source={require("raw-loader!./mensagem-final.example")}/>
                 </Slide>
             </Deck>
         );
