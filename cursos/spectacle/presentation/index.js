@@ -232,6 +232,12 @@ export default class Presentation extends React.Component {
                     <Heading size={5} textColor="tertiary">State</Heading>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
+                    <Heading size={5} textColor="tertiary">Re-render</Heading>
+                    <Text margin="30px 0 0" textColor="primary" fit bold>
+                        React re-render everything on every update, how?
+                    </Text>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <Heading size={5} textColor="tertiary">Virtual DOM</Heading>
                     <Text margin="30px 0 0" textColor="primary" fit bold>
                         Whenever data changes, React builds a new virtual DOM subtree
@@ -242,6 +248,7 @@ export default class Presentation extends React.Component {
                             computes the minimal set of DOM mutations and puts them in a queue
                         </ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large">and batch executes all updates</ListItem>
+                        <ListItem margin="20px 0 0" textSize="x-large">and it is fast</ListItem>
                     </List>
                 </Slide>
                 <Slide transition={["zoom"]} bgColor="tertiary">
