@@ -63,18 +63,6 @@ export default class Presentation extends React.Component {
                     <Heading size={1} fit caps lineHeight={1} textColor="primary">React</Heading>
                     <Text margin="10px 0 0" textColor="tertiary" fit bold>is it a worth?</Text>
                 </Slide>
-                <Slide transition={["fade"]} bgColor="tertiary">
-                    <BlockQuote>
-                        <Quote textSize="xx-large">
-                            React is a declarative, efficient, and flexible JavaScript library for building user
-                            interfaces
-                        </Quote>
-                    </BlockQuote>
-                </Slide>
-                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-                    <Heading size={4} textColor="tertiary">Prior knowledge</Heading>
-                    <Text margin="30px 0 0" textColor="primary" caps bold>JavaScript - ES6</Text>
-                </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <Heading size={5} textColor="tertiary">React usage statistics</Heading>
                     <List>
@@ -113,6 +101,26 @@ export default class Presentation extends React.Component {
                         </ListItem>
                     </List>
                 </Slide>
+                <Slide transition={["fade"]} bgColor="secondary">
+                    <Text textColor="primary" fit bold>
+                        This presentation is using <Link href="http://formidable.com/open-source/spectacle/" target="_blank" textColor="primary">Spectacle</Link>
+                    </Text>
+                    <Text margin="30px 0 0" textColor="tertiary" fit bold>
+                        A React.js based library for creating sleek presentations
+                    </Text>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="tertiary">
+                    <BlockQuote>
+                        <Quote textSize="xx-large">
+                            React is a declarative, efficient, and flexible JavaScript library for building user
+                            interfaces
+                        </Quote>
+                    </BlockQuote>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
+                    <Heading size={4} textColor="tertiary">Prior knowledge</Heading>
+                    <Text margin="30px 0 0" textColor="primary" caps bold>JavaScript - ES6</Text>
+                </Slide>
                 <Slide transition={["zoom"]} bgColor="tertiary">
                     <Heading size={1} fit caps lineHeight={1} textColor="primary">Fundamentals</Heading>
                 </Slide>
@@ -134,8 +142,11 @@ export default class Presentation extends React.Component {
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <BlockQuote>
                         <Quote textSize="xx-large">
-                            MVC did not scale well for Facebook’s huge codebase. The main problem for them was the
-                            bidirectional communication, where one change can loop back and have cascading effects
+                            MV* did not scale well for Facebook’s huge codebase
+                        </Quote>
+                        <Quote margin="20px 0 0" textSize="xx-large">
+                            The main problem for Facebook was the bidirectional communication, 
+                            where one change can loop back and have cascading effects
                             across the codebase (making things very complicated to debug and understand)
                         </Quote>
                     </BlockQuote>
@@ -146,7 +157,7 @@ export default class Presentation extends React.Component {
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <BlockQuote>
                         <Quote textSize="xx-large">
-                            In general the flow inside the MVC pattern is not well defined. A lot of the bigger
+                            In general the flow inside the MV* pattern is not well defined. A lot of the bigger
                             implementations do it very differently
                         </Quote>
                     </BlockQuote>
@@ -159,7 +170,10 @@ export default class Presentation extends React.Component {
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <BlockQuote>
                         <Quote textSize="xx-large">
-                            Unidirectional flow of data between a system’s components: Flux Pattern
+                            Flux Pattern: unidirectional flow of data between a system’s components
+                        </Quote>
+                        <Quote margin="20px 0 0" textSize="xx-large" textColor="tertiary">
+                            Flux keeps things more predictable than MV*
                         </Quote>
                     </BlockQuote>
                 </Slide>
