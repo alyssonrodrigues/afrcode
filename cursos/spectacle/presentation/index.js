@@ -94,11 +94,6 @@ export default class Presentation extends React.Component {
                                 Languages and Frameworks
                             </Link>
                         </ListItem>
-                        <ListItem margin="20px 0 0" textSize="x-large">
-                            <Link href="https://medium.com/unicorn-supplies/angular-vs-react-vs-vue-a-2017-comparison-c5c52d620176" target="_blank" textColor="primary">
-                                Angular vs. React vs. Vue: A 2017 comparison
-                            </Link>
-                        </ListItem>
                     </List>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary">
@@ -106,10 +101,11 @@ export default class Presentation extends React.Component {
                         This presentation is using <Link href="http://formidable.com/open-source/spectacle/" target="_blank" textColor="primary">Spectacle</Link>
                     </Text>
                     <Text margin="30px 0 0" textColor="tertiary" fit bold>
-                        A React.js based library for creating sleek presentations
+                        A React based library for creating sleek presentations
                     </Text>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="tertiary">
+                    <Heading size={5} textColor="primary">What is React?</Heading>
                     <BlockQuote>
                         <Quote textSize="xx-large">
                             React is a declarative, efficient, and flexible JavaScript library for building user
