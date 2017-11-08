@@ -268,6 +268,12 @@ export default class Presentation extends React.Component {
                             When a component's state data changes, the rendered markup 
                             will be updated by re-invoking render() method
                         </ListItem>
+                        <ListItem margin="20px 0 0" textSize="x-large">
+                            Treat <S type="bold">this.state</S> as if it were immutable
+                        </ListItem>
+                        <ListItem margin="20px 0 0" textSize="x-large">
+                            Modify <S type="bold">this.state</S> using <S type="bold">this.setState</S>
+                        </ListItem>
                     </List>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
