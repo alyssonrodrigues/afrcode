@@ -265,14 +265,14 @@ export default class Presentation extends React.Component {
                             Accessed via <S type="bold">this.state</S>
                         </ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large">
-                            When a component's state data changes, the rendered markup 
-                            will be updated by re-invoking render() method
-                        </ListItem>
-                        <ListItem margin="20px 0 0" textSize="x-large">
                             Treat <S type="bold">this.state</S> as if it were immutable
                         </ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large">
                             Modify <S type="bold">this.state</S> using <S type="bold">this.setState</S>
+                        </ListItem>
+                        <ListItem margin="20px 0 0" textSize="x-large">
+                            When a component's state data changes, the rendered markup 
+                            will be updated by re-invoking render() method
                         </ListItem>
                     </List>
                 </Slide>
