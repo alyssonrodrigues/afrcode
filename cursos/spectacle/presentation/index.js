@@ -107,7 +107,7 @@ export default class Presentation extends React.Component {
                 <Slide transition={["fade"]} bgColor="tertiary">
                     <Heading size={5} textColor="primary">What is React?</Heading>
                     <BlockQuote>
-                        <Quote textSize="xx-large">
+                        <Quote textColor="primary" textSize="xx-large">
                             React is a declarative, efficient, and flexible JavaScript library for building user
                             interfaces
                         </Quote>
@@ -192,7 +192,7 @@ export default class Presentation extends React.Component {
                     <List>
                         <ListItem margin="20px 0 0" textSize="xx-large">UI Components are the cohesive units</ListItem>
                         <ListItem margin="20px 0 0" textSize="xx-large">
-                            UI description and UI logic are tightly coupled and can be colocated - they shouldn't be
+                            UI description and UI logic are tightly coupled and can be collocated - they shouldn't be
                             arbitrarily decoupled
                         </ListItem>
                         <ListItem margin="20px 0 0" textSize="xx-large" bold>
