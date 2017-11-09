@@ -99,16 +99,14 @@ export default class Presentation extends React.Component {
                     </List>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary">
-                    <Heading size={4} italic>
-                        <Link href="http://formidable.com/open-source/spectacle/" target="_blank" textColor="tertiary">
-                            Spectacle
-                        </Link>
-                    </Heading>
-                    <Text margin="30px 0 0" textColor="primary" textSize="x-large" bold>
+                    <Text textColor="primary" fit bold>
+                        This presentation is using <Link href="http://formidable.com/open-source/spectacle/" target="_blank" textColor="tertiary">Spectacle</Link>
+                    </Text>
+                    <Text margin="30px 0 0" textColor="tertiary" textSize="x-large" bold>
                         A React based library for creating sleek presentations
                     </Text>
-                    <Image src={images.nodeLogo} margin="30px 0 0" width="20%" height="20%"/>
-                    <Text margin="30px 0 0" textColor="primary" textSize="x-large" bold>
+                    <Image src={images.nodeLogo} margin="30px 0 0" width="25%" height="25%"/>
+                    <Text margin="30px 0 0" textColor="tertiary" textSize="x-large" bold>
                         Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine
                     </Text>
                     <Text margin="10px 0 0" textColor="primary" textSize="large" bold>
