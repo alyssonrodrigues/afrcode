@@ -42,7 +42,8 @@ const images = {
     mvc: require("../assets/mvc-scale.jpg"),
     reactLifeCycle: require("../assets/react-life-cycle.png"),
     nodeLogo: require("../assets/nodejs-logo.png"),
-    spectacleLogo: require("../assets/spectacle-logo.png")
+    spectacleLogo: require("../assets/spectacle-logo.png"),
+    reactDevTools: require("../assets/devtools-full.gif")
 };
 
 preloader(images);
@@ -304,6 +305,12 @@ export default class Presentation extends React.Component {
                         <ListItem margin="20px 0 0" textSize="x-large">and batch executes all updates</ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large">and it is fast</ListItem>
                     </List>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
+                    <Heading size={5} textColor="tertiary">React Dev Tools</Heading>
+                    <Link href="https://github.com/facebook/react-devtools" target="_blank">
+                        <Image src={images.reactDevTools}/>
+                    </Link>
                 </Slide>
                 <Slide transition={["zoom"]} bgColor="tertiary">
                     <Heading size={1} fit caps lineHeight={1} textColor="primary">Ready to React?</Heading>
