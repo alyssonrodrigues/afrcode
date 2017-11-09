@@ -40,7 +40,8 @@ const images = {
     flux: require("../assets/flux.png"),
     fluxComplex: require("../assets/flux-complex.jpg"),
     mvc: require("../assets/mvc-scale.jpg"),
-    reactLifeCycle: require("../assets/react-life-cycle.png")
+    reactLifeCycle: require("../assets/react-life-cycle.png"),
+    nodeLogo: require("../assets/nodejs-logo.png")
 };
 
 preloader(images);
@@ -103,6 +104,7 @@ export default class Presentation extends React.Component {
                     <Text margin="30px 0 0" textColor="tertiary" fit bold>
                         A React based library for creating sleek presentations
                     </Text>
+                    <Image src={images.nodeLogo} width="25%" height="25%"/>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="tertiary">
                     <Heading size={5} textColor="primary">What is React?</Heading>
