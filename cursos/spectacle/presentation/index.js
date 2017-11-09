@@ -41,7 +41,8 @@ const images = {
     fluxComplex: require("../assets/flux-complex.jpg"),
     mvc: require("../assets/mvc-scale.jpg"),
     reactLifeCycle: require("../assets/react-life-cycle.png"),
-    nodeLogo: require("../assets/nodejs-logo.png")
+    nodeLogo: require("../assets/nodejs-logo.png"),
+    spectacleLogo: require("../assets/spectacle-logo.png")
 };
 
 preloader(images);
@@ -98,13 +99,21 @@ export default class Presentation extends React.Component {
                     </List>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary">
-                    <Text textColor="primary" fit bold>
-                        This presentation is using <Link href="http://formidable.com/open-source/spectacle/" target="_blank" textColor="primary">Spectacle</Link>
-                    </Text>
-                    <Text margin="30px 0 0" textColor="tertiary" fit bold>
+                    <Heading size={4} italic>
+                        <Link href="http://formidable.com/open-source/spectacle/" target="_blank" textColor="tertiary">
+                            Spectacle
+                        </Link>
+                    </Heading>
+                    <Text margin="30px 0 0" textColor="primary" textSize="x-large" bold>
                         A React based library for creating sleek presentations
                     </Text>
-                    <Image src={images.nodeLogo} width="25%" height="25%"/>
+                    <Image src={images.nodeLogo} margin="30px 0 0" width="20%" height="20%"/>
+                    <Text margin="30px 0 0" textColor="primary" textSize="x-large" bold>
+                        Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine
+                    </Text>
+                    <Text margin="10px 0 0" textColor="primary" textSize="large" bold>
+                        Node.js' package ecosystem, npm, is the largest ecosystem of open source libraries in the world
+                    </Text>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="tertiary">
                     <Heading size={5} textColor="primary">What is React?</Heading>
