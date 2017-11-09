@@ -107,7 +107,9 @@ export default class Presentation extends React.Component {
                     <Text margin="30px 0 0" textColor="lightBlue" textSize="x-large" bold>
                         A React based library for creating sleek presentations
                     </Text>
-                    <Image src={images.nodeLogo} margin="30px 0 0" width="25%" height="25%"/>
+                    <Link href="https://nodejs.org" target="_blank">
+                        <Image src={images.nodeLogo} margin="30px 0 0" width="25%" height="25%"/>
+                    </Link>
                     <Text margin="30px 0 0" textColor="lightBlue" textSize="x-large" bold>
                         Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine
                     </Text>
