@@ -141,7 +141,7 @@ export default class Presentation extends React.Component {
                             MV* did not scale well for Facebook’s huge codebase
                         </Quote>
                         <Quote margin="20px 0 0" textSize="xx-large">
-                            The main problem for Facebook was the bidirectional communication, 
+                            The main problem for Facebook was the bidirectional communication,
                             where one change can loop back and have cascading effects
                             across the codebase (making things very complicated to debug and understand)
                         </Quote>
@@ -271,7 +271,7 @@ export default class Presentation extends React.Component {
                             Modify <S type="bold">this.state</S> using <S type="bold">this.setState</S>
                         </ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large">
-                            When a component's state data changes, the rendered markup 
+                            When a component's state data changes, the rendered markup
                             will be updated by re-invoking render() method
                         </ListItem>
                     </List>
@@ -295,6 +295,10 @@ export default class Presentation extends React.Component {
                         <ListItem margin="20px 0 0" textSize="x-large">and batch executes all updates</ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large">and it is fast</ListItem>
                     </List>
+                </Slide>
+                <Slide transition={["zoom"]} bgColor="tertiary">
+                    <Heading size={1} fit caps lineHeight={1} textColor="primary">Ready to React?</Heading>
+                    <CodePane lang="bash" source={require("raw-loader!../assets/create-react-app.example")}/>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
                     <Heading size={5} textColor="tertiary">Live demos</Heading>
