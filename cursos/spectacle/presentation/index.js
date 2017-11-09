@@ -307,10 +307,10 @@ export default class Presentation extends React.Component {
                     </List>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-                    <Heading size={5} textColor="tertiary">React Dev Tools</Heading>
                     <Link href="https://github.com/facebook/react-devtools" target="_blank">
-                        <Image src={images.reactDevTools}/>
+                        <Heading size={5} textColor="tertiary">React Dev Tools</Heading>
                     </Link>
+                    <Image src={images.reactDevTools}/>
                 </Slide>
                 <Slide transition={["zoom"]} bgColor="tertiary">
                     <Heading size={1} fit caps lineHeight={1} textColor="primary">Ready to React?</Heading>
