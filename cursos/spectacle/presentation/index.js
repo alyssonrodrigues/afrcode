@@ -310,10 +310,18 @@ export default class Presentation extends React.Component {
                     </List>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="black" textColor="primary">
-                    <Heading size={5} textColor="lightBlue">Server side rendering</Heading>
-                    <Text margin="30px 0 0" textColor="primary" fit bold>
-                        TODO...
-                    </Text>
+                    <Heading size={5} textColor="lightBlue">Server Side Rendering</Heading>
+                    <List>
+                        <ListItem margin="20px 0 0" textSize="x-large">
+                            React supports SSR
+                        </ListItem>
+                        <ListItem margin="20px 0 0" textSize="x-large">
+                            The most common use case for SSR is to handle the initial render
+                        </ListItem>
+                        <ListItem margin="20px 0 0" textSize="x-large">
+                            From that point on, the client takes over rendering duties
+                        </ListItem>
+                    </List>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="black" textColor="primary">
                     <Link href="https://github.com/facebook/react-devtools" target="_blank">
