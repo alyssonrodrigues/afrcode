@@ -307,7 +307,7 @@ export default class Presentation extends React.Component {
                     <Heading size={5} textColor="lightBlue">Re-render</Heading>
                     <List>
                         <ListItem margin="20px 0 0" textSize="x-large">
-                            When a component's state data changes, the rendered markup
+                            <S type="bold">When a component's state data changes</S>, the rendered markup
                             will be updated by re-invoking render() method
                         </ListItem>
                     </List>
