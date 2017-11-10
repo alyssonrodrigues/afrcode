@@ -278,8 +278,7 @@ export default class Presentation extends React.Component {
                             Accessed via <S type="bold">this.state</S>
                         </ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large" textColor="red">
-                            Treat <S type="bold">this.state</S> as if it were immutable -
-                            use <Link href="https://facebook.github.io/immutable-js/" textColor="red" target="_blank"><S type="bold">Immutable</S></Link> library
+                            Treat <S type="bold">this.state</S> as if it were immutable
                         </ListItem>
                         <ListItem margin="20px 0 0" textSize="x-large" textColor="red">
                             Modify <S type="bold">this.state</S> using <S type="bold">this.setState</S>
