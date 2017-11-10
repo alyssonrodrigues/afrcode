@@ -289,10 +289,6 @@ export default class Presentation extends React.Component {
                         <ListItem margin="20px 0 0" textSize="x-large" textColor="red">
                             Modify <S type="bold">this.state</S> using <S type="bold">this.setState</S>
                         </ListItem>
-                        <ListItem margin="20px 0 0" textSize="x-large">
-                            When a component's state data changes, the rendered markup
-                            will be updated by re-invoking render() method
-                        </ListItem>
                     </List>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="lightBlue" textColor="primary">
@@ -308,8 +304,14 @@ export default class Presentation extends React.Component {
                     <CodePane margin="20px 0 0" lang="js" source={require("raw-loader!../assets/merge-state.example")}/>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="black" textColor="primary">
-                    <Heading size={8} textColor="lightBlue">React</Heading>
-                    <Text margin="30px 0 0" textColor="primary" fit bold>
+                    <Heading size={5} textColor="lightBlue">Re-render</Heading>
+                    <List>
+                        <ListItem margin="20px 0 0" textSize="x-large">
+                            When a component's state data changes, the rendered markup
+                            will be updated by re-invoking render() method
+                        </ListItem>
+                    </List>
+                    <Text margin="30px 0 0" textColor="primary" textSize="x-large" bold>
                         Re-render everything on every update, sounds expensive?
                     </Text>
                 </Slide>
