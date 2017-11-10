@@ -242,14 +242,20 @@ export default class Presentation extends React.Component {
                     </Table>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="lightBlue" textColor="black">
-                    <CodePane lang="js" source={require("raw-loader!../assets/component.example")}/>
+                    <Link href="https://reactjs.org/" target="_blank" textColor="primary">
+                        <CodePane lang="js" source={require("raw-loader!../assets/component.example")}/>
+                    </Link>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="lightBlue" textColor="black">
-                    <CodePane lang="js" source={require("raw-loader!../assets/component-with-no-jsx.example")}/>
+                    <Link href="https://reactjs.org/" target="_blank" textColor="primary">
+                        <CodePane lang="js" source={require("raw-loader!../assets/component-with-no-jsx.example")}/>
+                    </Link>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="black" textColor="primary">
                     <Heading size={5} textColor="lightBlue">Component Life Cycle</Heading>
-                    <Image src={images.reactLifeCycle}/>
+                    <Link href="https://reactjs.org/docs/state-and-lifecycle.html" target="_blank" textColor="primary">
+                        <Image src={images.reactLifeCycle}/>
+                    </Link>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="black" textColor="primary">
                     <Heading size={5} textColor="lightBlue">Props</Heading>
@@ -289,8 +295,20 @@ export default class Presentation extends React.Component {
                         </ListItem>
                     </List>
                 </Slide>
+                <Slide transition={["fade"]} bgColor="lightBlue" textColor="primary">
+                    <Heading size={8} textColor="primary">Do Not Modify State Directly</Heading>
+                    <CodePane margin="20px 0 0" lang="js" source={require("raw-loader!../assets/modify-state.example")}/>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="lightBlue" textColor="primary">
+                    <Heading size={8} textColor="primary">State Updates May Be Asynchronous</Heading>
+                    <CodePane margin="20px 0 0" lang="js" source={require("raw-loader!../assets/async-state-updates.example")}/>
+                </Slide>
+                <Slide transition={["fade"]} bgColor="lightBlue" textColor="primary">
+                    <Heading size={8} textColor="primary">State Updates are Merged</Heading>
+                    <CodePane margin="20px 0 0" lang="js" source={require("raw-loader!../assets/merge-state.example")}/>
+                </Slide>
                 <Slide transition={["fade"]} bgColor="black" textColor="primary">
-                    <Heading size={5} textColor="lightBlue">React</Heading>
+                    <Heading size={8} textColor="lightBlue">React</Heading>
                     <Text margin="30px 0 0" textColor="primary" fit bold>
                         Re-render everything on every update, sounds expensive?
                     </Text>
