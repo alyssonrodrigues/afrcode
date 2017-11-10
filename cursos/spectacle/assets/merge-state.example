@@ -1,21 +1,21 @@
-  constructor(props) {
+constructor(props) {
     super(props);
     this.state = {
-      posts: [],
-      comments: []
+        posts: [],
+        comments: []
     };
-  }
+}
 
-    componentDidMount() {
-      fetchPosts().then(response => {
+componentDidMount() {
+    fetchPosts().then(response => {
         this.setState({
-          posts: response.posts
+            posts: response.posts
         });
-      });
+    });
 
-      fetchComments().then(response => {
+    fetchComments().then(response => {
         this.setState({
-          comments: response.comments
+            comments: response.comments
         });
-      });
-    }
+    });
+}
