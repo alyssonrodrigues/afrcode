@@ -24,7 +24,6 @@ export function timeline(state = [], action) {
     }
 
     if (action.type === 'LIKE') {
-
         return trocaFoto(state, action.fotoId, fotoEstadoAntigo => {
             const likeada = !fotoEstadoAntigo.likeada;
 

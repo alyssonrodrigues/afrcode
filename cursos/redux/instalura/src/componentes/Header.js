@@ -1,21 +1,11 @@
 import React, {Component} from 'react';
 import TimelineApi from '../api/TimelineApi';
+import {connect} from 'react-redux';
 
-export default class Header extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {msg: ''};
-    }
-
-    componentDidMount() {
-        this.props.store.subscribe(() => {
-            this.setState({msg: this.props.store.getState().notificacao});
-        });
-    }
-
+export class Header extends Component {
     pesquisa(event) {
         event.preventDefault();
-        this.props.store.dispatch(TimelineApi.pesquisa(this.loginPesquisado.value));
+        this.props.pesquisa(this.loginPesquisado.value);
     }
 
     render() {
@@ -30,12 +20,10 @@ export default class Header extends Component {
                            ref={input => this.loginPesquisado = input}/>
                     <input type="submit" value="Buscar" className="header-busca-submit"/>
                 </form>
-
-
                 <nav>
                     <ul className="header-nav">
                         <li className="header-nav-item">
-                            <span>{this.state.msg}</span>
+                            <span>{this.props.msg}</span>
                             <a href="#">
                                 ♡
                                 {/*                 ♥ */}
@@ -48,3 +36,19 @@ export default class Header extends Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {msg: state.notificacao};
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        pesquisa: (loginPesquisado) => {
+            dispatch(TimelineApi.pesquisa(loginPesquisado));
+        }
+    };
+};
+
+const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(Header);
+
+export default HeaderContainer;

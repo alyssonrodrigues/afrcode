@@ -2,9 +2,9 @@ import {listagem, comentario, like, notifica} from '../actions/actionCreator';
 
 export default class TimelineApi {
 
-    static lista(urlPerfil) {
+    static lista(url) {
         return dispatch => {
-            fetch(urlPerfil)
+            fetch(url)
                 .then(response => response.json())
                 .then(fotos => {
                     dispatch(listagem(fotos));
