@@ -64,7 +64,7 @@ export default class Presentation extends React.Component {
             <Deck transition={["zoom", "slide"]} transitionDuration={500} theme={theme}>
                 <Slide transition={["zoom"]} bgColor="black">
                     <Heading size={1} fit caps lineHeight={1} textColor="primary">React</Heading>
-                    <Text margin="10px 0 0" textColor="lightBlue" fit bold>is it a worth?</Text>
+                    <Text margin="10px 0 0" textColor="lightBlue" bold>JS®</Text>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="black" textColor="primary">
                     <Heading size={5} textColor="lightBlue">React usage statistics</Heading>
@@ -349,7 +349,7 @@ export default class Presentation extends React.Component {
                     <Image src={images.reactDevTools}/>
                 </Slide>
                 <Slide transition={["zoom"]} bgColor="lightBlue">
-                    <Heading size={1} fit caps lineHeight={1} textColor="primary">Ready to React?</Heading>
+                    <Heading size={5} textColor="primary">React CLI</Heading>
                     <CodePane lang="bash" source={require("raw-loader!../assets/create-react-app.example")}/>
                 </Slide>
                 <Slide transition={["fade"]} bgColor="black" textColor="primary">
