@@ -362,6 +362,25 @@ export default class Presentation extends React.Component {
                         </ListItem>
                     </List>
                 </Slide>
+                <Slide transition={["fade"]} bgColor="black" textColor="primary">
+                    <Link href="https://facebook.github.io/react-native/" target="_blank" textColor="primary">
+                        <Heading size={5} textColor="lightBlue">React Native</Heading>
+                    </Link>
+                    <List>
+                        <ListItem margin="20px 0 0" textSize="large">
+                            It lets you build mobile apps using only JavaScript
+                        </ListItem>
+                        <ListItem margin="20px 0 0" textSize="large">
+                            It lets you compose a rich mobile UI from declarative React components
+                        </ListItem>
+                        <ListItem margin="20px 0 0" textSize="large">
+                            It uses the same fundamental UI building blocks as regular iOS and Android apps
+                        </ListItem>
+                        <ListItem margin="20px 0 0" textSize="large">
+                            It combines smoothly with components written in Objective-C, Java, or Swift
+                        </ListItem>
+                    </List>
+                </Slide>
                 <Slide transition={["zoom"]} bgColor="lightBlue">
                     <CodePane lang="js" source={require("raw-loader!../assets/mensagem-final.example")}/>
                 </Slide>
