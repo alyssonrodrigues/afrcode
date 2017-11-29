@@ -50,22 +50,14 @@
                     this.newHobby = '';
                 },
                 removeHobby(hobby) {
-                    for (var i = 0; i < this.hobbies.length; i++) {
-                        if (this.hobbies[i] === hobby) {
-                            this.hobbies.splice(i, 1);
-                            this.deletedHobbies.push(hobby);
-                            break;
-                        }
-                    }
+                    var i = this.hobbies.indexOf(hobby);
+                    this.hobbies.splice(i, 1);
+                    this.deletedHobbies.push(hobby);
                 },
                 readdHobby(deletedHobby) {
                     this.hobbies.push(deletedHobby);
-                    for (var i = 0; i < this.deletedHobbies.length; i++) {
-                        if (this.deletedHobbies[i] === deletedHobby) {
-                            this.deletedHobbies.splice(i, 1);
-                            break;
-                        }
-                    }
+                    var i = this.deletedHobbies.indexOf(deletedHobby);
+                    this.deletedHobbies.splice(i, 1);
                 }
             }
         });
