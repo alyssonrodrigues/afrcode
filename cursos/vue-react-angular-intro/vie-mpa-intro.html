@@ -26,7 +26,7 @@
             <deleted-hobby 
                 v-for="deletedHobby in deletedHobbies"
                 v-bind:hobby="deletedHobby"
-                v-on:readdedhobby="readdHobby($event)"></deleted-hobby>
+                v-on:hobbyreadded="readdHobby($event)"></deleted-hobby>
         </ul>
     </div>
 
@@ -46,7 +46,7 @@
             template: '<li v-on:click="readdHobby" style="color: red;">{{ hobby }}</li>',
             methods: {
                 readdHobby() {
-                    this.$emit('readdedhobby', this.hobby);
+                    this.$emit('hobbyreadded', this.hobby);
                 }
             }
         });
