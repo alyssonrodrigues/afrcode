@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue intro</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+        .deletedHobby {
+            color: red
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <input type="text" v-model="newHobby">
+        <button v-on:click="addNewHobby">Add new hobby</button>
+
+        <p v-if="this.hobbies.length">New hobbies: {{ this.hobbies.length }}</p>
+        <ul>
+            <li v-for="hobby in hobbies"
+                v-on:click="removeHobby(hobby)">
+                {{ hobby }}
+            </li>
+        </ul>
+
+        <p v-if="this.deletedHobbies.length">Old hobbies: {{ this.deletedHobbies.length }}</p>
+        <ul>
+            <li v-for="deletedHobby in deletedHobbies"
+                v-on:click="readdHobby(deletedHobby)"
+                class="deletedHobby">
+                {{ deletedHobby }}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                hobbies: [],
+                deletedHobbies: [],
+                newHobby: ''
+            },
+            methods: {
+                addNewHobby() {
+                    this.hobbies.push(this.newHobby);
+                    this.newHobby = '';
+                },
+                removeHobby(hobby) {
+                    for (var i = 0; i < this.hobbies.length; i++) {
+                        if (this.hobbies[i] === hobby) {
+                            this.hobbies.splice(i, 1);
+                            this.deletedHobbies.push(hobby);
+                            break;
+                        }
+                    }
+                },
+                readdHobby(deletedHobby) {
+                    this.hobbies.push(deletedHobby);
+                    for (var i = 0; i < this.deletedHobbies.length; i++) {
+                        if (this.deletedHobbies[i] === deletedHobby) {
+                            this.deletedHobbies.splice(i, 1);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
