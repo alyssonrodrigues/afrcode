@@ -13,7 +13,7 @@
         <input type="text" v-model="newHobby">
         <button v-on:click="addNewHobby">Add new hobby</button>
 
-        <p v-if="this.hobbies.length">New hobbies: {{ hobbies.length }}</p>
+        <p v-if="hobbies.length">New hobbies: {{ hobbies.length }}</p>
         <ul>
             <added-hobby 
                 v-for="hobby in hobbies"
@@ -21,7 +21,7 @@
                 v-on:hobbydeleted="removeHobby($event)"/>
         </ul>
 
-        <p v-if="this.deletedHobbies.length">Old hobbies: {{ deletedHobbies.length }}</p>
+        <p v-if="deletedHobbies.length">Old hobbies: {{ deletedHobbies.length }}</p>
         <ul>
             <deleted-hobby 
                 v-for="deletedHobby in deletedHobbies"
@@ -54,7 +54,7 @@
         new Vue({
             el: '#app',
             data: {
-                hobbies: [],
+                hobbies: ['Running', 'Dancing', 'Singing'],
                 deletedHobbies: [],
                 newHobby: ''
             },
