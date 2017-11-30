@@ -5,7 +5,7 @@
 
     <p v-if="hobbies.length">New hobbies: {{ hobbies.length }}</p>
     <ul>
-      <AddedHobby 
+      <app-addedHobby 
         v-for="hobby in hobbies"
         v-bind:key="hobby"
         v-bind:hobby="hobby"
@@ -14,7 +14,7 @@
 
     <p v-if="deletedHobbies.length">Old hobbies: {{ deletedHobbies.length }}</p>
     <ul>
-      <DeletedHobby
+      <app-deletedhobby
         v-for="deletedHobby in deletedHobbies"
         v-bind:key="deletedHobby"
         v-bind:hobby="deletedHobby"
@@ -28,7 +28,6 @@ import AddedHobby from '@/components/AddedHobby'
 import DeletedHobby from '@/components/DeletedHobby'
 
 export default {
-  name: 'hobbies',
   data () {
     return {
       hobbies: ['Running', 'Dancing', 'Singing'],
@@ -53,8 +52,8 @@ export default {
     }
   },
   components: {
-    AddedHobby,
-    DeletedHobby
+    'app-addedHobby': AddedHobby,
+    'app-deletedHobby': DeletedHobby
   }
 }
 </script>

@@ -4,7 +4,6 @@
 
 <script>
 export default {
-  name: 'deletedhobby',
   props: ['hobby'],
   methods: {
     readdHobby () {
