@@ -8,7 +8,7 @@ export default {
   props: ['hobby'],
   methods: {
     readdHobby () {
-      this.$emit('hobbyreadded', this.hobby)
+      this.$emit('hobbyReadded', this.hobby)
     }
   }
 }

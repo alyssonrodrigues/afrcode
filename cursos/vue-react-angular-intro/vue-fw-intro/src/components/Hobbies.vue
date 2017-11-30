@@ -9,9 +9,7 @@
         v-for="hobby in hobbies"
         v-bind:key="hobby"
         v-bind:hobby="hobby"
-        v-on:hobbydeleted="removeHobby($event)">
-        {{ hobby }}
-    </AddedHobby>
+        v-on:hobbyDeleted="deleteHobby($event)"/>
     </ul>
 
     <p v-if="deletedHobbies.length">Old hobbies: {{ deletedHobbies.length }}</p>
@@ -20,9 +18,7 @@
         v-for="deletedHobby in deletedHobbies"
         v-bind:key="deletedHobby"
         v-bind:hobby="deletedHobby"
-        v-on:hobbyreadded="readdHobby($event)">
-        {{ deletedHobby }}
-    </DeletedHobby>
+        v-on:hobbyReadded="readdHobby($event)"/>
     </ul>
   </div>
 </template>
@@ -45,7 +41,7 @@ export default {
       this.hobbies.push(this.newHobby)
       this.newHobby = ''
     },
-    removeHobby (hobby) {
+    deleteHobby (hobby) {
       var i = this.hobbies.indexOf(hobby)
       this.hobbies.splice(i, 1)
       this.deletedHobbies.push(hobby)

@@ -24,7 +24,7 @@ class Hobbies extends Component {
     );
   }
 
-  removeHobby(hobby) {
+  deleteHobby(hobby) {
     this.setState(
       prevState => {
         return {
@@ -71,7 +71,7 @@ class Hobbies extends Component {
                 <AddedHobby 
                   key={hobby}
                   hobby={hobby} 
-                  removeHobby={this.removeHobby.bind(this)}/>
+                  deleteHobby={this.deleteHobby.bind(this)}/>
             )
           }
         </ul>
