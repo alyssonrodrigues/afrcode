@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'deletedhobby',
+  selector: 'app-deletedhobby',
   template: `<li (click)="onReaddHobby()" [ngStyle]="{color: 'red'}">{{ hobby }}</li>`
 })
 export class DeletedHobbyComponent {
