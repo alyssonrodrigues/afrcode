@@ -14,7 +14,7 @@
 
     <p v-if="deletedHobbies.length">Old hobbies: {{ deletedHobbies.length }}</p>
     <ul>
-      <app-deletedhobby
+      <app-deletedHobby
         v-for="deletedHobby in deletedHobbies"
         v-bind:key="deletedHobby"
         v-bind:hobby="deletedHobby"
