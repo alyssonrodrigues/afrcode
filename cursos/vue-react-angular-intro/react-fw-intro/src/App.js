@@ -14,30 +14,36 @@ class App extends Component {
 
   addNewHobby(event) {
     event.preventDefault();
-    this.setState(prevState => {
-      return {
-        hobbies: prevState.hobbies.concat(prevState.newHobby),
-        newHobby: ''
+    this.setState(
+      prevState => {
+        return {
+          hobbies: prevState.hobbies.concat(prevState.newHobby),
+          newHobby: ''
+        }
       }
-    });
+    );
   }
 
   removeHobby(hobby) {
-    this.setState(prevState => {
-      return {
-        hobbies: prevState.hobbies.filter(h => h !== hobby),
-        deletedHobbies: prevState.deletedHobbies.concat(hobby)
+    this.setState(
+      prevState => {
+        return {
+          hobbies: prevState.hobbies.filter(h => h !== hobby),
+          deletedHobbies: prevState.deletedHobbies.concat(hobby)
+        }
       }
-    });
+    );
   }
 
   readdHobby(deletedHobby) {
-    this.setState(prevState => {
-      return {
-        hobbies: prevState.hobbies.concat(deletedHobby),
-        deletedHobbies: prevState.deletedHobbies.filter(h => h !== deletedHobby)
+    this.setState(
+      prevState => {
+        return {
+          hobbies: prevState.hobbies.concat(deletedHobby),
+          deletedHobbies: prevState.deletedHobbies.filter(h => h !== deletedHobby)
+        }
       }
-    });
+    );
   }
 
   setNewHobby(event) {
@@ -60,11 +66,13 @@ class App extends Component {
 
         <ul>
           {
-            this.state.hobbies.map(hobby => 
-              <AddedHobby 
-                key={hobby}
-                hobby={hobby} 
-                removeHobby={this.removeHobby.bind(this)}/>)
+            this.state.hobbies.map(
+              hobby => 
+                <AddedHobby 
+                  key={hobby}
+                  hobby={hobby} 
+                  removeHobby={this.removeHobby.bind(this)}/>
+            )
           }
         </ul>
 
@@ -75,11 +83,13 @@ class App extends Component {
 
         <ul>
           {
-            this.state.deletedHobbies.map(deletedHobby => 
-              <DeletedHobby 
-                key={deletedHobby}
-                hobby={deletedHobby} 
-                readdHobby={this.readdHobby.bind(this)} />)
+            this.state.deletedHobbies.map(
+              deletedHobby => 
+                <DeletedHobby 
+                  key={deletedHobby}
+                  hobby={deletedHobby} 
+                  readdHobby={this.readdHobby.bind(this)} />
+            )
           }
         </ul>
       </div>
