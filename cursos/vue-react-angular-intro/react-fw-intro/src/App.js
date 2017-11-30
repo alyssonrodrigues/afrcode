@@ -12,8 +12,7 @@ class App extends Component {
     };
   }
 
-  addNewHobby(event) {
-    event.preventDefault();
+  addNewHobby() {
     this.setState(
       prevState => {
         return {
