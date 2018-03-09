@@ -1,0 +1,20 @@
+<input type="text" [(ngModel)]="newHobby">
+<button (click)="onAddNewHobby()">Add new hobby</button>
+
+<p *ngIf="hobbies.length">New hobbies: {{ hobbies.length }}</p>
+<ul>
+  <app-addedHobby 
+    *ngFor="let hobby of hobbies"
+    [hobby]="hobby"
+    (hobbyDeleted)="onHobbyDeleted($event)">
+  </app-addedHobby>
+</ul>
+
+<p *ngIf="deletedHobbies.length">Old hobbies: {{ deletedHobbies.length }}</p>
+<ul>
+  <app-deletedHobby
+    *ngFor="let deletedHobby of deletedHobbies"
+    [hobby]="deletedHobby"
+    (hobbyReadded)="onHobbyReadded($event)">
+  </app-deletedHobby>
+</ul>
