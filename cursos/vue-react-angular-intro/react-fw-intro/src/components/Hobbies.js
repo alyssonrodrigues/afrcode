@@ -46,9 +46,9 @@ class Hobbies extends Component {
     );
   }
 
-  setNewHobby(event) {
+  setNewHobby(newHobby) {
     this.setState({
-      newHobby: event.target.value
+      newHobby
     });
   }
 
@@ -56,7 +56,7 @@ class Hobbies extends Component {
     return (
       <div id="hobbies">
         <input type="text" value={this.state.newHobby} 
-          onChange={this.setNewHobby.bind(this)}/>
+          onChange={event => this.setNewHobby(event.target.value)}/>
         <button onClick={this.addNewHobby.bind(this)}>Add new hobby</button>
 
         {

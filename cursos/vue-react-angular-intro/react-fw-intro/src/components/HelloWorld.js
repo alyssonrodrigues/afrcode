@@ -8,9 +8,9 @@ class HelloWorld extends Component {
     };
   }
 
-  setName(event) {
+  setName(name) {
     this.setState({
-      name: event.target.value
+      name
     })
   }
 
@@ -20,7 +20,7 @@ class HelloWorld extends Component {
         <input type="text" 
           placeholder="input your name in here..."
           value={this.state.name}
-          onChange={this.setName.bind(this)} />
+          onChange={event => this.setName(event.target.value)} />
         <p>Hello "{this.state.name}"!</p>
       </div>
     );
