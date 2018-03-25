@@ -12,6 +12,7 @@ class GoogleMap extends Component {
   }
 
   render() {
+    // react "ref" injects "map" into this.refs
     return <div ref="map" />;
   }
 }
