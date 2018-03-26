@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// Redux-form manages form field's state and validation
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
