@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div>
         <h1>Move the mouse around!</h1>
-        <Mouse render={(mouse) => (<MouseTracker mouse={mouse} />)} />
+        <Mouse render={mouse => (<MouseTracker mouse={mouse} />)} />
       </div>
     );
   }
