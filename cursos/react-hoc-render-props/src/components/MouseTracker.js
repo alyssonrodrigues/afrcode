@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import withLogging from './withLogging';
+
 class MouseTracker extends Component {
   render() {
     const mouse = this.props.mouse;
@@ -9,4 +11,4 @@ class MouseTracker extends Component {
   }
 }
 
-export default MouseTracker;
+export default withLogging(MouseTracker);

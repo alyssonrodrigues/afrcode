@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import withLogging from './withLogging';
+
 class Mouse extends Component {
   constructor(props) {
     super(props);
@@ -27,4 +29,4 @@ class Mouse extends Component {
   }
 }
 
-export default Mouse;
+export default withLogging(Mouse);
