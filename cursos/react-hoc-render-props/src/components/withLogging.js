@@ -17,5 +17,5 @@ export default (WrappedComponent) => {
 }
 
 function getComponentDisplayName(WrappedComponent) {
-    return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
