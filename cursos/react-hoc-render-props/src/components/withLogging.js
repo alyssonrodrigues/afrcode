@@ -4,7 +4,7 @@ import React, { Component } from 'react';
  * HOC for cross-cutting concerns...
  */
 export default (WrappedComponent) => {
-  class WithLogging  extends Component {
+  class WithLogging extends Component {
     componentDidMount() {
       console.log(`${getComponentDisplayName(WrappedComponent)} did mount...`);
     }
