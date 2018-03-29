@@ -10,10 +10,15 @@ import PostsIndex from "./components/posts_index";
 import PostsNew from "./components/posts_new";
 import PostsShow from "./components/posts_show";
 
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+// Creates a Redux store that holds the complete state tree of your app.
+// There should only be a single store in your app.
+const store = createStore(
+  rootReducer,
+  applyMiddleware(promise)
+);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(rootReducer)}>
+  <Provider store={store}>
     <BrowserRouter>
       <div>
         <Switch>
