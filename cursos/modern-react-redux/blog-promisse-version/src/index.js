@@ -14,7 +14,8 @@ import PostsShow from "./components/posts_show";
 // There should only be a single store in your app.
 const store = createStore(
   rootReducer,
-  applyMiddleware(promise)
+  applyMiddleware(promise),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 
 ReactDOM.render(
