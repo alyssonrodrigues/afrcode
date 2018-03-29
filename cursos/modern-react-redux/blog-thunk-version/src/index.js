@@ -17,7 +17,8 @@ const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(thunk),
-    applyMiddleware(promise)
+    applyMiddleware(promise),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
   )
 );
 
