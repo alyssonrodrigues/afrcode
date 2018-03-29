@@ -16,9 +16,9 @@ export function fetchPosts() {
   // returns a function to redux-thunk middleware which will dispatch
   // an action after calling and waiting for this function execution
   return dispatch =>
-    request.then(data => dispatch({
+    request.then(response => dispatch({
       type: FETCH_POSTS,
-      payload: data
+      payload: response
     }));
 }
 
@@ -30,9 +30,9 @@ export function createPost(values, callback) {
   // returns a function to redux-thunk middleware which will dispatch
   // an action after calling and waiting for this function execution
   return dispatch =>
-    request.then(data => dispatch({
+    request.then(response => dispatch({
       type: CREATE_POST,
-      payload: data
+      payload: response
     }));
 }
 
@@ -42,9 +42,9 @@ export function fetchPost(id) {
   // returns a function to redux-thunk middleware which will dispatch
   // an action after calling and waiting for this function execution
   return dispatch =>
-    request.then(data => dispatch({
+    request.then(response => dispatch({
       type: FETCH_POST,
-      payload: data
+      payload: response
     }));
 }
 
