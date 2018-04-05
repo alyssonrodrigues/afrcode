@@ -22,7 +22,7 @@ export const removeSecurityToken = () => {
 
 export const getAuthentication = () => {
   try {
-    const item = localStorage.getItem(authTokenKey)
+    const item = localStorage.getItem(authTokenKey);
     return item ? JSON.parse(item) : item;
   } catch (err) {
     // TODO log err

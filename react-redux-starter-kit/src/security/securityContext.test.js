@@ -1,6 +1,6 @@
 import { saveSecurityToken,
   removeSecurityToken,
-  getAuthentication } from './securityContext'
+  getAuthentication } from './securityContext';
 
 it('O tokenJwt deveria ter sido salvo sem falhas!', () => {
   const authentication = {

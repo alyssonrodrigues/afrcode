@@ -31,7 +31,7 @@ class Login extends Component {
     const { isUserAuthenticated, err } = this.props.authentication;
 
     if (isUserAuthenticated) {
-      return <Redirect to={from} />;
+      return (<Redirect to={from} />);
     }
 
     const { handleSubmit } = this.props;
@@ -71,7 +71,7 @@ function validate(values) {
   }
 
   if (!values.password) {
-    errors.password = 'Informe a senha'
+    errors.password = 'Informe a senha';
   }
 
   return errors;

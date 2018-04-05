@@ -7,14 +7,12 @@ import configureStore from './store/configureStore';
 
 const store = configureStore();
 
-const Root = () => {
-  return (
-    <ErrorBoundary>
-      <Provider store={store}>
-        <AppRoutes />
-      </Provider>
-    </ErrorBoundary>
-  );
-}
+const Root = () => (
+  <ErrorBoundary>
+    <Provider store={store}>
+      <AppRoutes />
+    </Provider>
+  </ErrorBoundary>
+);
 
 export default Root;
