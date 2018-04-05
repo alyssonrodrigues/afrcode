@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { authenticateUser } from '../actions/authentication-jwt-actions';
+import { authenticateUser } from '../actions/authenticationJwtActions';
 import { createDataToAuthentication } from '../util/applicationContext';
 
 class Login extends Component {

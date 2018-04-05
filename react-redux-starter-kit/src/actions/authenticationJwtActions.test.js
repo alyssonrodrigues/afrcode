@@ -4,7 +4,7 @@ import { axiosWrapper,
   USER_AUTHENTICATED,
   USER_LOGOUT,
   authenticateUser,
-  logoutUser } from './authentication-jwt-actions';
+  logoutUser } from './authenticationJwtActions';
 import { getAuthentication } from '../security/securityContext';
 import { authenticationUrl, createDataToAuthentication } from '../util/applicationContext';
 
