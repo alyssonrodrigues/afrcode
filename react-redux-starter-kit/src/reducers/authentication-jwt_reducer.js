@@ -1,6 +1,6 @@
 import { AUTHENTICATION_FAILED,
   USER_AUTHENTICATED,
-  USER_LOGOUT } from '../actions/authentication-jwt_actions';
+  USER_LOGOUT } from '../actions/authentication-jwt-actions';
 import { getAuthentication } from '../security/securityContext';
 
 const INITIAL_STATE = getAuthentication() || { isUserAuthenticated: false };

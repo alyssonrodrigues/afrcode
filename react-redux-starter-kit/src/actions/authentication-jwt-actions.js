@@ -3,9 +3,9 @@ import axios from 'axios';
 import { saveSecurityToken, removeSecurityToken } from '../security/securityContext';
 import { authenticationUrl } from '../util/applicationContext';
 
-export const AUTHENTICATION_FAILED = '@authentication_actions/authentication_failed';
-export const USER_AUTHENTICATED = '@authentication_actions/user_authenticated';
-export const USER_LOGOUT = '@authentication_actions/user_logout';
+export const AUTHENTICATION_FAILED = '@authentication-jwt-actions/authentication_failed';
+export const USER_AUTHENTICATED = '@authentication-jwt-actions/user_authenticated';
+export const USER_LOGOUT = '@authentication-jwt-actions/user_logout';
 
 export const axiosWrapper = axios;
 
