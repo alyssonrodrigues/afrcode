@@ -36,7 +36,7 @@ class Login extends Component {
 
     const { handleSubmit } = this.props;
 
-    const msgClassName = `form-group ${err ? 'has-danger' : ''}`;
+    const msgClassName = `form-group ${err ? 'text-danger' : ''}`;
 
     return (
       <form className='container' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -54,7 +54,9 @@ class Login extends Component {
         />
         <div className={msgClassName}>
           <div className='text-help'>
-            {err ? err : ''}
+            {err ?
+              (err.response ? err.response.data : 'Erro ao efetuar login, tente novamente.') :
+              ''}
           </div>
         </div>
         <button type="submit" className="btn btn-primary">Entrar</button>

@@ -3,10 +3,26 @@ import MockAdapter from 'axios-mock-adapter';
 import { axiosWrapper,
   USER_AUTHENTICATED,
   USER_LOGOUT,
+  AUTHENTICATION_FAILED,
   authenticateUser,
   logoutUser } from './authenticationJwtActions';
 import { getAuthentication } from '../security/securityContext';
 import { authenticationUrl, createDataToAuthentication } from '../util/applicationContext';
+
+it('A autenticação deveria ter falhado!', () => {
+  const data = createDataToAuthentication('alyssonfr', '123456');
+  const responseData = '404 error message...';
+
+  const axiosMock = new MockAdapter(axiosWrapper);
+  axiosMock.onPost(authenticationUrl).reply(404, responseData);
+
+  const authFn = authenticateUser(data);
+  const dispatchFn = jest.fn(action => {
+    expect(action.type).toEqual(AUTHENTICATION_FAILED);
+    expect(action.payload.err.response.data).toEqual(responseData);
+  });
+  authFn(dispatchFn);
+});
 
 it('A autenticação deveria ter ocorrido sem falhas!', () => {
   const data = createDataToAuthentication('alyssonfr', 'teste');

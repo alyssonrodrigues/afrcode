@@ -28,7 +28,7 @@ export const authenticateUser = (data) => {
     }).catch(err =>
       dispatch({
         type: AUTHENTICATION_FAILED,
-        payload: err
+        payload: { err }
       })
     );
 };
