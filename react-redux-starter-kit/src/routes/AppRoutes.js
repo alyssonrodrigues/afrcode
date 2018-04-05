@@ -7,13 +7,13 @@ import Logout from '../components/Logout';
 import AppIndex from '../components/AppIndex';
 import NotFoundPage from '../components/NotFoundPage';
 
-const AppRoutes = props => (
+const AppRoutes = () => (
   <BrowserRouter>
     <Switch>
       {/* Defina as rotas por ordem de especificidade, das mais específicas para as mais genéricas... */}
       <Route path='/login' component={Login} />
       <Route path='/logout' component={Logout} />
-      <AuthenticatedRoute exact path='/' component={AppIndex} isUserAuthenticated={props.isUserAuthenticated} />
+      <AuthenticatedRoute exact path='/' component={AppIndex} />
       <Route component={NotFoundPage} />
     </Switch>
   </BrowserRouter>
