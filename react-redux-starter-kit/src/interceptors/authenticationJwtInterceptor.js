@@ -10,6 +10,6 @@ const onFulfilled = config => {
   return config;
 };
 
-const onRejected = error => Promise.reject(error);
+const onRejected = err => Promise.reject(err);
 
 axios.interceptors.request.use(onFulfilled, onRejected);
