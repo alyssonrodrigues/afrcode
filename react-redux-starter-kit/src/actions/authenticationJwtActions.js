@@ -10,10 +10,8 @@ export const USER_LOGOUT = '@authenticationJwtActions/USER_LOGOUT';
 export const axiosWrapper = axios;
 
 export const authenticateUser = (data) => {
-  const request = axios.post(authenticationUrl, data);
-
   return dispatch =>
-    request.then(response => {
+    axios.post(authenticationUrl, data).then(response => {
       const authentication = {
         tokenJwt: response.data.tokenJwt,
         username: data.username,
