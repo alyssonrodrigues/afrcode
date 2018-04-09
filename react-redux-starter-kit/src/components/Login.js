@@ -54,9 +54,7 @@ class Login extends Component {
         />
         <div className={msgClassName}>
           <div className='text-help'>
-            {err ?
-              (err.response ? err.response.data : 'Erro ao efetuar login, tente novamente.') :
-              ''}
+            {err ? (err.response ? err.response.data : 'Erro ao efetuar login, tente novamente.') : ''}
           </div>
         </div>
         <button type="submit" className="btn btn-primary">Entrar</button>
