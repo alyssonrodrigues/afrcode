@@ -3,7 +3,7 @@ import rootReducer from '../reducers';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
 
-const configureStoreProd = (initialState) => {
+const configureStoreProd = initialState => {
   const middlewares = [
     // Adicione ou remova middlewares aqui...
 
@@ -16,7 +16,7 @@ const configureStoreProd = (initialState) => {
   );
 };
 
-const configureStoreDev = (initialState) => {
+const configureStoreDev = initialState => {
   const middlewares = [
     // Adicione ou remova middlewares aqui...
 

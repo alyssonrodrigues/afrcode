@@ -1,6 +1,6 @@
 const authTokenKey = 'authTokenKey';
 
-export const saveSecurityToken = (authentication) => {
+export const saveSecurityToken = authentication => {
   try {
     localStorage.setItem(authTokenKey, JSON.stringify(authentication));
     return authentication;

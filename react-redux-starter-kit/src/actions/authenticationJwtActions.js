@@ -9,7 +9,7 @@ export const USER_LOGOUT = '@authenticationJwtActions/USER_LOGOUT';
 
 export const axiosWrapper = axios;
 
-export const authenticateUser = (data) => {
+export const authenticateUser = data => {
   return dispatch =>
     axios.post(authenticationUrl, data).then(response => {
       const authentication = {

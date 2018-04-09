@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import { logoutUser } from '../actions/authenticationJwtActions';
 
-const Logout = (props) => {
+const Logout = props => {
   props.logoutUser();
   return (<Redirect to='/' />);
 };
