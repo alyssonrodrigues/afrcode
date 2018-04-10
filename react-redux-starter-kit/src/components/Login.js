@@ -76,22 +76,8 @@ class Login extends Component {
   }
 }
 
-function validate (values) {
-  const errors = {}
-
-  if (!values.username) {
-    errors.username = 'Informe o login'
-  }
-
-  if (!values.password) {
-    errors.password = 'Informe a senha'
-  }
-
-  return errors
-}
-
 const mapStateToProps = ({ authentication }) => ({ authentication })
 
 const reduxConnectEnhance = connect(mapStateToProps, { authenticateUser })(Login)
 
-export default reduxForm({ validate, form: 'LoginForm' })(reduxConnectEnhance)
+export default reduxForm({ form: 'LoginForm' })(reduxConnectEnhance)
