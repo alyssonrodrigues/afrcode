@@ -6,7 +6,7 @@ const onFulfilled = response => response;
 const onRejected = err => {
   if (_.isUndefined(err.response)) {
     // TODO log err
-    console.log(JSON.stringify(err));
+    console.log(err.stack);
   }
   return Promise.reject(err);
 };
