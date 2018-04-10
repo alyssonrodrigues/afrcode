@@ -28,7 +28,7 @@ const devTips = process.env.NODE_ENV === 'production' ? '' : (
         <li>logout,</li>
         <li>application context config,</li>
         <li>security context holder/config,</li>
-        <li>redux store config, redux-form reducer config...</li>
+        <li>redux store config, redux-form reducer config,</li>
         <li>jest p/ TU,</li>
         <li>TODO...</li>
       </ul>
