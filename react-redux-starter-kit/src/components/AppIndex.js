@@ -17,6 +17,22 @@ const devTips = process.env.NODE_ENV === 'production' ? '' : (
     <p className="App-intro">
       Encontre em <code>src/interceptors</code> "interceptors" para aspectos comuns da aplicação.
     </p>
+    <p className="App-intro">
+      O que temos para hoje:
+      <ul>
+        <li>login, login redirect p/ authenticated routes,</li>
+        <li>routes, authenticated routes, not found page route,</li>
+        <li>axios p/ requests, request error interceptor,</li>
+        <li>authentication JWT, authentication JWT request interceptor,</li>
+        <li>central error boundary,</li>
+        <li>logout,</li>
+        <li>application context config,</li>
+        <li>security context holder/config,</li>
+        <li>redux store config, redux-form reducer config...</li>
+        <li>jest p/ TU,</li>
+        <li>TODO...</li>
+      </ul>
+    </p>
   </div>);
 
 const AppIndex = () => (
