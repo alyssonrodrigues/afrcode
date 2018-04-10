@@ -17,11 +17,22 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "lint": "standard --fix | snazzy",
+    "build": "lint && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "axios-mock-adapter": "^1.14.1"
+    "axios-mock-adapter": "^1.14.1",
+    "babel-eslint": "^8.2.2",
+    "snazzy": "^7.1.1",
+    "standard": "^11.0.1"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "/src/registerServiceWorker.js",
+      "/src/security/securityContext.js"
+    ]
   }
 }

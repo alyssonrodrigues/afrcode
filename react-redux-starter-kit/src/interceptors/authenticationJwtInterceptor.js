@@ -1,15 +1,15 @@
-import axios from 'axios';
-import { getAuthentication } from '../security/securityContext';
+import axios from 'axios'
+import { getAuthentication } from '../security/securityContext'
 
 const onFulfilled = config => {
-  let auth = getAuthentication();
+  let auth = getAuthentication()
   if (auth && auth.isUserAuthenticated) {
-    let { tokenJwt } = auth;
-    config.headers['Authorization'] = `Bearer ${tokenJwt}`;
+    let { tokenJwt } = auth
+    config.headers['Authorization'] = `Bearer ${tokenJwt}`
   }
-  return config;
-};
+  return config
+}
 
-const onRejected = err => Promise.reject(err);
+const onRejected = err => Promise.reject(err)
 
-axios.interceptors.request.use(onFulfilled, onRejected);
+axios.interceptors.request.use(onFulfilled, onRejected)

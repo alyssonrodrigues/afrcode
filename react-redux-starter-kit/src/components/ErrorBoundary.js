@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 /*
  * Note:
@@ -14,21 +14,21 @@ import React, { Component } from 'react';
  * Errors thrown in the error boundary itself (rather than its children)
  */
 class ErrorBoundary extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { error: null, info: null };
+  constructor (props) {
+    super(props)
+    this.state = { error: null, info: null }
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch (error, info) {
     // Catch errors in any components below and re-render with error message
     this.setState({
       error,
       info
-    });
+    })
     // TODO You can also log error messages to an error reporting service here
   }
 
-  render() {
+  render () {
     // TODO definir mensagens e informações exibidas aos usuários
     if (this.state.info) {
       // Error path
@@ -41,11 +41,11 @@ class ErrorBoundary extends Component {
             {this.state.info.componentStack}
           </details>
         </div>
-      );
+      )
     }
     // Normally, just render children
-    return this.props.children;
+    return this.props.children
   }
 }
 
-export default ErrorBoundary;
+export default ErrorBoundary

@@ -1,11 +1,11 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import AuthenticatedRoute from './AuthenticatedRoute';
-import Login from '../components/Login';
-import Logout from '../components/Logout';
-import AppIndex from '../components/AppIndex';
-import NotFoundPage from '../components/NotFoundPage';
+import AuthenticatedRoute from './AuthenticatedRoute'
+import Login from '../components/Login'
+import Logout from '../components/Logout'
+import AppIndex from '../components/AppIndex'
+import NotFoundPage from '../components/NotFoundPage'
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -17,6 +17,6 @@ const AppRoutes = () => (
       <Route component={NotFoundPage} />
     </Switch>
   </BrowserRouter>
-);
+)
 
-export default AppRoutes;
+export default AppRoutes
