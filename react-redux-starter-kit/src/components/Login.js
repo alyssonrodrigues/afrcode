@@ -5,22 +5,29 @@ import { Redirect } from 'react-router-dom'
 
 import { authenticateUser } from '../actions/authenticationJwtActions'
 import { createDataToAuthentication } from '../util/applicationContext'
+import { required, alphaNumeric } from '../util/fieldLevelValidations'
 
 class Login extends Component {
   onSubmit (values) {
     this.props.authenticateUser(createDataToAuthentication(values.username, values.password))
   }
 
-  renderField (field) {
-    const { meta: { touched, error } } = field
-    const className = `form-group ${touched && error ? 'text-danger' : ''}`
+  renderField ({
+    input,
+    label,
+    type,
+    meta: { touched, error, warning }
+  }) {
+    const className = `form-group ${touched ? error ? 'text-danger' : warning ? 'text-warning' : '' : ''}`
 
     return (
       <div className={className}>
-        <label>{field.label}</label>
-        <input className='form-control' type={field.type} {...field.input} />
+        <label>{label}</label>
+        <input className='form-control' type={type} placeholder={label} {...input} />
         <div>
-          {touched ? error : ''}
+          {touched &&
+          ((error && <span>{error}</span>) ||
+            (warning && <span>{warning}</span>))}
         </div>
       </div>
     )
@@ -34,7 +41,7 @@ class Login extends Component {
       return (<Redirect to={from} />)
     }
 
-    const { handleSubmit } = this.props
+    const { handleSubmit, submitting } = this.props
 
     const msgClassName = `form-group ${err ? 'text-danger' : ''}`
 
@@ -45,12 +52,15 @@ class Login extends Component {
           name='username'
           type='text'
           component={this.renderField}
+          validate={[required]}
+          warn={alphaNumeric}
         />
         <Field
           label='Senha'
           name='password'
           type='password'
           component={this.renderField}
+          validate={[required]}
         />
         <div className={msgClassName}>
           <div className='text-help'>
@@ -60,7 +70,7 @@ class Login extends Component {
               : 'Erro ao efetuar login, tente novamente.') : ''}
           </div>
         </div>
-        <button type='submit' className='btn btn-primary'>Entrar</button>
+        <button type='submit' className='btn btn-primary' disabled={submitting}>Entrar</button>
       </form>
     )
   }

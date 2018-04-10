@@ -19,21 +19,21 @@ const devTips = process.env.NODE_ENV === 'production' ? '' : (
     </p>
     <p className='App-intro'>
       O que temos para hoje:
-      <ul>
-        <li>standard e babel-eslint p/ JavaScript Standard Style,</li>
-        <li>login, login redirect p/ authenticated routes,</li>
-        <li>routes, authenticated routes, not found page route,</li>
-        <li>axios p/ requests, request error interceptor,</li>
-        <li>authentication JWT, authentication JWT request interceptor,</li>
-        <li>central error boundary,</li>
-        <li>logout,</li>
-        <li>application context config,</li>
-        <li>security context holder/config,</li>
-        <li>redux store config, redux-form reducer config,</li>
-        <li>jest p/ TU,</li>
-        <li>TODO...</li>
-      </ul>
     </p>
+    <ul className='App-intro'>
+      <li>standard e babel-eslint p/ JavaScript Standard Style,</li>
+      <li>login, login redirect p/ authenticated routes,</li>
+      <li>routes, authenticated routes, not found page route,</li>
+      <li>axios p/ requests, request error interceptor,</li>
+      <li>authentication JWT, authentication JWT request interceptor,</li>
+      <li>central error boundary,</li>
+      <li>logout,</li>
+      <li>application context config,</li>
+      <li>security context holder/config,</li>
+      <li>redux store config, redux-form reducer config,</li>
+      <li>jest p/ TU,</li>
+      <li>TODO...</li>
+    </ul>
   </div>)
 
 const AppIndex = () => (
