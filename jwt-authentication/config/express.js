@@ -1,9 +1,9 @@
-var express = require('express')
-var cors = require('cors')
-var consign = require('consign')
-var bodyParser = require('body-parser')
-var resourceNotFoundHandler = require('./resource-not-found-handler')
-var errorHandler = require('./error-handler')
+const express = require('express')
+const cors = require('cors')
+const consign = require('consign')
+const bodyParser = require('body-parser')
+const resourceNotFoundHandler = require('./resource-not-found-handler')
+const errorHandler = require('./error-handler')
 
 module.exports = () => {
   var app = express()
