@@ -6,7 +6,7 @@ const resourceNotFoundHandler = require('./resource-not-found-handler')
 const errorHandler = require('./error-handler')
 
 module.exports = () => {
-  var app = express()
+  const app = express()
 
   app.set('view engine', 'ejs')
   app.set('views', './src/views')
