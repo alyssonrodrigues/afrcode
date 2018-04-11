@@ -4,10 +4,13 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Grid, Button } from 'material-ui'
 import { TextField } from 'redux-form-material-ui'
+import { withStyles } from 'material-ui/styles'
 
 import { authenticateUser } from '../actions/authenticationJwtActions'
 import { createDataToAuthentication } from '../util/applicationContext'
 import { required, alphaNumeric } from '../util/fieldLevelValidations'
+
+const styles = {}
 
 class Login extends Component {
   onSubmit (values) {
@@ -69,6 +72,8 @@ class Login extends Component {
 
 const mapStateToProps = ({ authentication }) => ({ authentication })
 
-const reduxConnectEnhance = connect(mapStateToProps, { authenticateUser })(Login)
+const materialUIEnhance = withStyles(styles)(Login)
+
+const reduxConnectEnhance = connect(mapStateToProps, { authenticateUser })(materialUIEnhance)
 
 export default reduxForm({ form: 'LoginForm' })(reduxConnectEnhance)
