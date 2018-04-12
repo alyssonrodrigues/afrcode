@@ -86,9 +86,6 @@ const styles = theme => ({
   row: {
     display: 'flex',
     justifyContent: 'center'
-  },
-  logoutMenuItem: {
-    textDecoration: 'none'
   }
 })
 
