@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createBrowserHistory } from 'history'
-import { Router } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import _ from 'lodash'
 import classNames from 'classnames'
 import { withStyles } from 'material-ui/styles'
@@ -23,8 +22,6 @@ import { getMenuItems } from '../util/applicationContext'
 import { authenticateUser } from '../actions/authenticationJwtActions'
 
 import styles from './AppStyles'
-
-const history = createBrowserHistory()
 
 class App extends Component {
   constructor (props) {
@@ -57,6 +54,7 @@ class App extends Component {
   }
 
   handleLogoutMenuItemClick () {
+    const { history } = this.props
     history.push('/logout')
     this.handleUserMenuClose()
   }
@@ -194,15 +192,13 @@ class App extends Component {
   render () {
     const { classes } = this.props
     return (
-      <Router history={history}>
-        <div className={classes.root}>
-          <div className={classes.appFrame}>
-            {this.renderAppBar()}
-            {this.renderMainMenu()}
-            {this.renderMain()}
-          </div>
+      <div className={classes.root}>
+        <div className={classes.appFrame}>
+          {this.renderAppBar()}
+          {this.renderMainMenu()}
+          {this.renderMain()}
         </div>
-      </Router>
+      </div>
     )
   }
 }
@@ -211,4 +207,6 @@ const materialUIEnhance = withStyles(styles, { withTheme: true })(App)
 
 const mapStateToProps = ({ authentication }) => ({ authentication })
 
-export default connect(mapStateToProps, { authenticateUser })(materialUIEnhance)
+const reduxEnhance = connect(mapStateToProps, { authenticateUser })(materialUIEnhance)
+
+export default withRouter(reduxEnhance)

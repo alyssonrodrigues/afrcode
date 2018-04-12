@@ -1,5 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 import CssBaseline from 'material-ui/CssBaseline'
 import { withStyles } from 'material-ui/styles'
 
@@ -18,7 +19,9 @@ const Root = (props) => (
     <CssBaseline />
     <ErrorBoundary>
       <Provider store={store}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>
     </ErrorBoundary>
   </div>
