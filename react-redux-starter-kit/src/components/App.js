@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter, Link } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
+import { Router } from 'react-router-dom'
 import _ from 'lodash'
 import classNames from 'classnames'
 import { withStyles } from 'material-ui/styles'
@@ -23,6 +24,8 @@ import { authenticateUser } from '../actions/authenticationJwtActions'
 
 import styles from './AppStyles'
 
+const history = createBrowserHistory()
+
 class App extends Component {
   constructor (props) {
     super(props)
@@ -34,6 +37,7 @@ class App extends Component {
     this.handleMainMenuClose = this.handleMainMenuClose.bind(this)
     this.handleUserMenuOpen = this.handleUserMenuOpen.bind(this)
     this.handleUserMenuClose = this.handleUserMenuClose.bind(this)
+    this.handleLogoutMenuItemClick = this.handleLogoutMenuItemClick.bind(this)
   }
 
   handleUserMenuOpen (event) {
@@ -50,6 +54,11 @@ class App extends Component {
 
   handleMainMenuClose () {
     this.setState({ mainMenuOpen: false })
+  }
+
+  handleLogoutMenuItemClick () {
+    history.push('/logout')
+    this.handleUserMenuClose()
   }
 
   renderMainMenuItems () {
@@ -114,11 +123,8 @@ class App extends Component {
   }
 
   renderUserMenuItems () {
-    const { classes } = this.props
     return (
-      <MenuItem onClick={this.handleUserMenuClose}>
-        <Link className={classes.logoutMenuItem} to='/logout'>Sair</Link>
-      </MenuItem>
+      <MenuItem onClick={this.handleLogoutMenuItemClick}>Sair</MenuItem>
     )
   }
 
@@ -188,7 +194,7 @@ class App extends Component {
   render () {
     const { classes } = this.props
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <div className={classes.root}>
           <div className={classes.appFrame}>
             {this.renderAppBar()}
@@ -196,7 +202,7 @@ class App extends Component {
             {this.renderMain()}
           </div>
         </div>
-      </BrowserRouter>
+      </Router>
     )
   }
 }
