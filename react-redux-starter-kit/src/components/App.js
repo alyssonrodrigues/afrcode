@@ -17,8 +17,9 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
 import AppRoutes from '../routes/AppRoutes'
 import { getMenuItems } from '../util/applicationContext'
-import styles from './AppStyles'
 import { authenticateUser } from '../actions/authenticationJwtActions'
+
+import styles from './AppStyles'
 
 class App extends Component {
   constructor (props) {
