@@ -74,6 +74,6 @@ const materialUIEnhance = withStyles(styles)(Login)
 
 const mapStateToProps = ({ authentication }) => ({ authentication })
 
-const reduxConnectEnhance = connect(mapStateToProps, { authenticateUser })(materialUIEnhance)
+const reduxEnhance = connect(mapStateToProps, { authenticateUser })(materialUIEnhance)
 
-export default reduxForm({ form: 'LoginForm' })(reduxConnectEnhance)
+export default reduxForm({ form: 'LoginForm' })(reduxEnhance)
