@@ -56,7 +56,7 @@ class App extends Component {
         <div className={classes.menuList}>
           <List component='nav'>
             {getMenuItems().map(it =>
-              (<ListItem button key={it} onClick={this.handleClose}><ListItemText primary={it} /></ListItem>))}
+              (<ListItem button key={it} onClick={this.handleDrawerClose}><ListItemText primary={it} /></ListItem>))}
           </List>
         </div>
       </Drawer>
