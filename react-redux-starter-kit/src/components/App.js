@@ -207,8 +207,8 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ authentication }) => ({ authentication })
-
 const materialUIEnhance = withStyles(styles, { withTheme: true })(App)
+
+const mapStateToProps = ({ authentication }) => ({ authentication })
 
 export default connect(mapStateToProps, { authenticateUser })(materialUIEnhance)
