@@ -88,8 +88,7 @@ const styles = theme => ({
     justifyContent: 'center'
   },
   logoutMenuItem: {
-    textDecoration: 'none',
-    border: 'none'
+    textDecoration: 'none'
   }
 })
 
