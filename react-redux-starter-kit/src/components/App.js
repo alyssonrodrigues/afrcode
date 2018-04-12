@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { BrowserRouter, Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { withStyles } from 'material-ui/styles'
@@ -17,6 +18,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import AppRoutes from '../routes/AppRoutes'
 import { getMenuItems } from '../util/applicationContext'
 import styles from './AppStyles'
+import { authenticateUser } from '../actions/authenticationJwtActions'
 
 class App extends Component {
   constructor (props) {
@@ -61,9 +63,21 @@ class App extends Component {
   }
 
   render () {
-    const { classes } = this.props
+    const { classes, authentication } = this.props
     const { open } = this.state
 
+    const toolBarContents = (
+      <React.Fragment>
+        <IconButton color='inherit' aria-label='open drawer' onClick={this.handleDrawerOpen}
+          className={classNames(classes.menuButton, open && classes.hide)}>
+          <MenuIcon />
+        </IconButton>
+        <Typography variant='title' color='inherit' className={classes.flex}>App</Typography>
+        <Button color='inherit'>
+          <Link className={classes.logoutButton} to='/logout'>Sair</Link>
+        </Button>
+      </React.Fragment>
+    )
     return (
       <BrowserRouter>
         <div className={classes.root}>
@@ -72,16 +86,7 @@ class App extends Component {
               [classes.appBarShift]: open,
               [classes.appBarShiftLeft]: open})}>
               <Toolbar disableGutters={!open}>
-                <IconButton color='inherit'
-                  aria-label='open drawer'
-                  onClick={this.handleDrawerOpen}
-                  className={classNames(classes.menuButton, open && classes.hide)}>
-                  <MenuIcon />
-                </IconButton>
-                <Typography variant='title' color='inherit' className={classes.flex}>Menu</Typography>
-                <Button color='inherit'>
-                  <Link className={classes.logoutButton} to='/logout'>Sair</Link>
-                </Button>
+                {authentication && authentication.isUserAuthenticated && toolBarContents}
               </Toolbar>
             </AppBar>
             {this.renderMenu()}
@@ -99,4 +104,8 @@ class App extends Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(App)
+const mapStateToProps = ({ authentication }) => ({ authentication })
+
+const materialUIEnhance = withStyles(styles, { withTheme: true })(App)
+
+export default connect(mapStateToProps, { authenticateUser })(materialUIEnhance)
