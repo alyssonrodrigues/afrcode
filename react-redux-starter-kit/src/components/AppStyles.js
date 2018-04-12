@@ -1,3 +1,5 @@
+import indigo from 'material-ui/colors/indigo'
+
 const drawerWidth = 240
 
 const styles = theme => ({
@@ -76,9 +78,18 @@ const styles = theme => ({
   contentShiftLeft: {
     marginLeft: 0
   },
-  logoutButton: {
-    color: 'inherit',
-    textTransform: 'none'
+  avatar: {
+    margin: 0,
+    color: '#fff',
+    backgroundColor: indigo[400]
+  },
+  row: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  logoutMenuItem: {
+    textDecoration: 'none',
+    border: 'none'
   }
 })
 
