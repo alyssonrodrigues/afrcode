@@ -1,8 +1,6 @@
 import React from 'react'
 import { Grid } from 'material-ui'
 
-import AppMenu from './AppMenu'
-
 const devTips = process.env.NODE_ENV === 'production' ? '' : (
   <div>
     <p>
@@ -37,14 +35,11 @@ const devTips = process.env.NODE_ENV === 'production' ? '' : (
   </div>)
 
 const AppIndex = () => (
-  <React.Fragment>
-    <AppMenu />
-    <Grid container direction='column' alignItems='stretch' spacing={16}>
-      <Grid item xs>
-        {devTips}
-      </Grid>
+  <Grid container direction='column' alignItems='stretch' spacing={16}>
+    <Grid item xs>
+      {devTips}
     </Grid>
-  </React.Fragment>
+  </Grid>
 )
 
 export default AppIndex

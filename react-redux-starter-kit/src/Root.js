@@ -4,7 +4,7 @@ import CssBaseline from 'material-ui/CssBaseline'
 import { withStyles } from 'material-ui/styles'
 
 import ErrorBoundary from './components/ErrorBoundary'
-import AppRoutes from './routes/AppRoutes'
+import App from './components/App'
 import configureStore from './store/configureStore'
 
 const store = configureStore()
@@ -18,7 +18,7 @@ const Root = (props) => (
     <CssBaseline />
     <ErrorBoundary>
       <Provider store={store}>
-        <AppRoutes />
+        <App />
       </Provider>
     </ErrorBoundary>
   </div>
