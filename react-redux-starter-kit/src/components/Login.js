@@ -70,9 +70,9 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = ({ authentication }) => ({ authentication })
-
 const materialUIEnhance = withStyles(styles)(Login)
+
+const mapStateToProps = ({ authentication }) => ({ authentication })
 
 const reduxConnectEnhance = connect(mapStateToProps, { authenticateUser })(materialUIEnhance)
 
