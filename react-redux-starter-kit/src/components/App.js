@@ -148,7 +148,7 @@ class App extends Component {
         onClose={this.handleUserMenuClose}>
         <Card>
           <CardContent>
-            <Typography variant='body2' color="textSecondary">{authentication && authentication.username}</Typography>
+            <Typography variant='body2' color='textSecondary'>{authentication && authentication.username}</Typography>
           </CardContent>
           <CardActions>
             {this.renderUserMenuItems()}
