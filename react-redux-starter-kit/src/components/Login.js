@@ -3,14 +3,20 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Grid, Button } from 'material-ui'
+import Typography from 'material-ui/Typography'
 import { TextField } from 'redux-form-material-ui'
 import { withStyles } from 'material-ui/styles'
+import red from 'material-ui/colors/red'
 
 import { authenticateUser } from '../actions/authenticationJwtActions'
 import { createDataToAuthentication } from '../util/applicationContext'
 import { required, alphaNumeric } from '../util/fieldLevelValidations'
 
-const styles = {}
+const styles = {
+  loginError: {
+    color: red[500]
+  }
+}
 
 class Login extends Component {
   onSubmit (values) {
@@ -25,9 +31,7 @@ class Login extends Component {
       return (<Redirect to={from} />)
     }
 
-    const { handleSubmit, submitting } = this.props
-
-    const msgClassName = `form-group ${err ? 'text-danger' : ''}`
+    const { handleSubmit, submitting, classes } = this.props
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -52,14 +56,12 @@ class Login extends Component {
             />
           </Grid>
           <Grid item xs>
-            <div className={msgClassName}>
-              <div className='text-help'>
-                {/* TODO rever err */}
-                {err ? (err.response
-                  ? `${err.response.data} ${err.response.status} ${err.response.statusText}`
-                  : 'Erro ao efetuar login, tente novamente.') : ''}
-              </div>
-            </div>
+            <Typography variant='body2' className={classes.loginError}>
+              {/* TODO rever err */}
+              {err ? (err.response
+                ? `${err.response.data} ${err.response.status} ${err.response.statusText}`
+                : 'Erro ao efetuar login, tente novamente.') : ''}
+             </Typography>
           </Grid>
           <Grid item xs>
             <Button variant='raised' color='primary' type='submit' disabled={submitting}>Entrar</Button>
