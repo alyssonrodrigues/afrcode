@@ -54,9 +54,8 @@ class App extends Component {
   }
 
   handleLogoutMenuItemClick () {
-    const { history } = this.props
-    history.push('/logout')
     this.handleUserMenuClose()
+    this.props.history.push('/logout')
   }
 
   renderMainMenuItems () {
