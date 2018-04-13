@@ -35,7 +35,7 @@ const styles = theme => ({
     marginLeft: drawerWidth
   },
   menuButton: {
-    marginLeft: 12,
+    marginLeft: 0,
     marginRight: 20
   },
   menuList: {

@@ -16,6 +16,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import Avatar from 'material-ui/Avatar'
 import Menu, { MenuItem } from 'material-ui/Menu'
+import Card, { CardActions, CardContent } from 'material-ui/Card'
 
 import AppRoutes from '../routes/AppRoutes'
 import { getMenuItems } from '../util/applicationContext'
@@ -138,13 +139,21 @@ class App extends Component {
 
   renderUserMenu (userMenuId) {
     const { userMenuAnchorEl } = this.state
+    const { authentication } = this.props
     return (
       <Menu
         id={userMenuId}
         anchorEl={userMenuAnchorEl}
         open={Boolean(userMenuAnchorEl)}
         onClose={this.handleUserMenuClose}>
-        {this.renderUserMenuItems()}
+        <Card>
+          <CardContent>
+            <Typography variant='body2' color="textSecondary">{authentication && authentication.username}</Typography>
+          </CardContent>
+          <CardActions>
+            {this.renderUserMenuItems()}
+          </CardActions>
+        </Card>
       </Menu>
     )
   }
@@ -178,7 +187,7 @@ class App extends Component {
       <AppBar className={classNames(classes.appBar, {
         [classes.appBarShift]: mainMenuOpen,
         [classes.appBarShiftLeft]: mainMenuOpen})}>
-        <Toolbar disableGutters={!mainMenuOpen}>
+        <Toolbar>
           {this.renderToolbarContents()}
         </Toolbar>
       </AppBar>
