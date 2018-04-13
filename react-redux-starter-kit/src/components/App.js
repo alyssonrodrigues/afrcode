@@ -30,32 +30,33 @@ class App extends Component {
       mainMenuOpen: false,
       userMenuAnchorEl: null
     }
+    this.redirect = this.redirect.bind(this)
     this.handleMainMenuOpen = this.handleMainMenuOpen.bind(this)
     this.handleMainMenuClose = this.handleMainMenuClose.bind(this)
     this.handleUserMenuOpen = this.handleUserMenuOpen.bind(this)
     this.handleUserMenuClose = this.handleUserMenuClose.bind(this)
-    this.handleLogoutMenuItemClick = this.handleLogoutMenuItemClick.bind(this)
+  }
+
+  redirect (path) {
+    if (path) this.props.history.push(path)
   }
 
   handleUserMenuOpen (event) {
     this.setState({ userMenuAnchorEl: event.currentTarget })
   }
 
-  handleUserMenuClose () {
+  handleUserMenuClose (path) {
     this.setState({ userMenuAnchorEl: null })
+    this.redirect(path)
   }
 
   handleMainMenuOpen () {
     this.setState({ mainMenuOpen: true })
   }
 
-  handleMainMenuClose () {
+  handleMainMenuClose (path) {
     this.setState({ mainMenuOpen: false })
-  }
-
-  handleLogoutMenuItemClick () {
-    this.handleUserMenuClose()
-    this.props.history.push('/logout')
+    this.redirect(path)
   }
 
   renderMainMenuItems () {
@@ -64,7 +65,17 @@ class App extends Component {
       <div className={classes.menuList}>
         <List component='nav'>
           {getMenuItems().map(it =>
-            (<ListItem button key={it} onClick={this.handleMainMenuClose}><ListItemText primary={it} /></ListItem>))}
+            (
+              <ListItem button key={it.label} onClick={() => this.handleMainMenuClose(it.path)}>
+                <ListItemText primary={it.label} />
+               </ListItem>
+              )
+            )
+          }
+          <Divider />
+          <ListItem button key='Logout' onClick={() => this.handleMainMenuClose('/logout')}>
+            <ListItemText primary='Logout' />
+          </ListItem>
         </List>
       </div>
     )
@@ -121,7 +132,7 @@ class App extends Component {
 
   renderUserMenuItems () {
     return (
-      <MenuItem onClick={this.handleLogoutMenuItemClick}>Sair</MenuItem>
+      <MenuItem onClick={() => this.handleUserMenuClose('/logout')}>Sair</MenuItem>
     )
   }
 

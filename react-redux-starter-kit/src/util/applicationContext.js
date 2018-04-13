@@ -5,4 +5,8 @@ export const createDataToAuthentication = (username, password) => ({
   password
 })
 
-export const getMenuItems = () => ['Menu item 1', 'Menu item 2', 'Menu item N']
+export const getMenuItems = () => [
+  { label: 'Menu item 1', path: '/' },
+  { label: 'Menu item 2', path: '/' },
+  { label: 'Menu item N', path: '/' }
+]
