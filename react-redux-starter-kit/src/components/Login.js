@@ -61,7 +61,7 @@ class Login extends Component {
               {err ? (err.response
                 ? `${err.response.data} ${err.response.status} ${err.response.statusText}`
                 : 'Erro ao efetuar login, tente novamente.') : ''}
-             </Typography>
+            </Typography>
           </Grid>
           <Grid item xs>
             <Button variant='raised' color='primary' type='submit' disabled={submitting}>Entrar</Button>
