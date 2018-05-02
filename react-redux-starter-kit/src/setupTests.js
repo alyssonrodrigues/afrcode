@@ -5,9 +5,9 @@ import configureStore from 'redux-mock-store'
 Enzyme.configure({ adapter: new Adapter() })
 
 const middlewares = []
-const mockStore = configureStore(middlewares)
+const mockReduxStore = configureStore(middlewares)
 
-global.mockStore = mockStore
+global.mockReduxStore = mockReduxStore
 
 class LocalStorageMock {
   constructor () {

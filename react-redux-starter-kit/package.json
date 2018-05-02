@@ -42,7 +42,7 @@
     ],
     "globals": [
       "localStorage",
-      "mockStore"
+      "mockReduxStore"
     ]
   }
 }

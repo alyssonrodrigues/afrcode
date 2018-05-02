@@ -5,7 +5,7 @@ import Logout, { Logout as LogoutUnitTest } from './Logout'
 import { MemoryRouter, Redirect } from 'react-router-dom'
 
 it('Action @authenticationJwtActions/USER_LOGOUT deveria ter ocorrido sem falhas!', () => {
-  const store = mockStore({})
+  const store = mockReduxStore({})
   const logoutWrapper = mount(
     <MemoryRouter>
       <Logout store={store} />
