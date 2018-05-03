@@ -1,4 +1,4 @@
-import indigo from 'material-ui/colors/indigo'
+import blue from 'material-ui/colors/blue'
 
 const drawerWidth = 240
 
@@ -81,7 +81,7 @@ const styles = theme => ({
   avatar: {
     margin: 0,
     color: '#fff',
-    backgroundColor: indigo[400]
+    backgroundColor: blue[400]
   },
   row: {
     display: 'flex',

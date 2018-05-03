@@ -7,7 +7,7 @@ import { TextField } from 'redux-form-material-ui'
 import { withStyles } from 'material-ui/styles'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
-import indigo from 'material-ui/colors/indigo'
+import blue from 'material-ui/colors/blue'
 import Icon from 'material-ui/Icon'
 import red from 'material-ui/colors/red'
 
@@ -31,7 +31,7 @@ const styles = {
     marginTop: 20
   },
   titleBar: {
-    backgroundColor: indigo[500],
+    backgroundColor: blue[500],
     color: 'white',
     padding: 10
   },
