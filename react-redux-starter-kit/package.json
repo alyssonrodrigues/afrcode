@@ -22,8 +22,8 @@
   "scripts": {
     "start": "react-scripts start",
     "lint": "standard --fix | snazzy",
-    "build": "lint && react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "build": "react-scripts build",
+    "test": "npm run lint && react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
