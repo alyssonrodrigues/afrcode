@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import Root from './Root'
 
 describe('<Root />', () => {
-  it('renders without crashing', () => {
+  it('Root render deveria ocorrer sem falhas!', () => {
     const div = document.createElement('div')
     ReactDOM.render(<Root />, div)
     ReactDOM.unmountComponentAtNode(div)

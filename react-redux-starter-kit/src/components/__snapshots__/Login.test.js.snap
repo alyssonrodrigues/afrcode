@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Login /> Login snapshot deveria ocorrer sem falhas! 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <div
+    className="MuiGrid-typeContainer-7 MuiGrid-spacing-xs-16-29 MuiGrid-direction-xs-column-10 MuiGrid-align-items-xs-center-15"
+  >
+    <div
+      className="MuiGrid-typeItem-8 MuiGrid-grid-xs-32"
+    >
+      <aside
+        className="MuiTypography-root-97 MuiTypography-body2-105 Login-loginError-6"
+      >
+        
+      </aside>
+    </div>
+    <div
+      className="MuiPaper-root-121 MuiPaper-elevation2-125 MuiPaper-rounded-122 Login-card-1"
+    >
+      <div
+        className="MuiGrid-typeContainer-7 MuiGrid-justify-xs-center-24 Login-titleBar-4"
+      >
+        <span
+          aria-hidden="true"
+          className="material-icons MuiIcon-root-148 Login-icon-5"
+        >
+          account_circle
+        </span>
+      </div>
+      <div
+        className="MuiCardContent-root-154"
+      >
+        <div
+          aria-describedby={undefined}
+          className="MuiFormControl-root-155 MuiFormControl-fullWidth-158 Login-loginForm-3"
+          onBlur={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          onFocus={[Function]}
+        >
+          <label
+            className="MuiFormLabel-root-164 MuiInputLabel-root-159 MuiInputLabel-formControl-160 MuiInputLabel-animated-163"
+            data-shrink={false}
+            htmlFor={undefined}
+          >
+            Login
+          </label>
+          <div
+            className="MuiInput-root-170 MuiInput-fullWidth-177 MuiInput-formControl-171 MuiInput-underline-174"
+          >
+            <input
+              aria-invalid={false}
+              aria-required={false}
+              autoComplete={undefined}
+              autoFocus={true}
+              className="MuiInput-input-178"
+              defaultValue={undefined}
+              disabled={false}
+              id={undefined}
+              name="username"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyDown={undefined}
+              onKeyUp={undefined}
+              placeholder={undefined}
+              readOnly={undefined}
+              required={undefined}
+              rows={undefined}
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          aria-describedby={undefined}
+          className="MuiFormControl-root-155 MuiFormControl-fullWidth-158 Login-loginForm-3"
+          onBlur={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          onFocus={[Function]}
+        >
+          <label
+            className="MuiFormLabel-root-164 MuiInputLabel-root-159 MuiInputLabel-formControl-160 MuiInputLabel-animated-163"
+            data-shrink={false}
+            htmlFor={undefined}
+          >
+            Senha
+          </label>
+          <div
+            className="MuiInput-root-170 MuiInput-fullWidth-177 MuiInput-formControl-171 MuiInput-underline-174"
+          >
+            <input
+              aria-invalid={false}
+              aria-required={false}
+              autoComplete={undefined}
+              autoFocus={undefined}
+              className="MuiInput-input-178 MuiInput-inputType-182"
+              defaultValue={undefined}
+              disabled={false}
+              id={undefined}
+              name="password"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyDown={undefined}
+              onKeyUp={undefined}
+              placeholder={undefined}
+              readOnly={undefined}
+              required={undefined}
+              rows={undefined}
+              type="password"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="MuiCardActions-root-184"
+      >
+        <button
+          className="MuiButtonBase-root-201 MuiButton-root-186 MuiButton-flatPrimary-188 MuiButton-fullWidth-200 MuiCardActions-action-185"
+          disabled={false}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex="0"
+          type="submit"
+        >
+          <span
+            className="MuiButton-label-187"
+          >
+            Entrar
+          </span>
+          <span
+            className="MuiTouchRipple-root-204"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+`;
