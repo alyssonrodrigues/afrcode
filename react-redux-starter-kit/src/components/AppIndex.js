@@ -30,6 +30,10 @@ const devTips = process.env.NODE_ENV === 'production' ? '' : (
       <li>security context holder/config,</li>
       <li>redux store config, redux-form reducer config,</li>
       <li>jest p/ TU,</li>
+      <li>axios-mock-adapter p/ testes,</li>
+      <li>enzyme p/ shallow testing,</li>
+      <li>redux-mock-store p/ testes,</li>
+      <li>jest, react-test-renderer p/ snapshot testing,</li>
       <li>TODO...</li>
     </ul>
   </div>)
