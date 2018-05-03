@@ -20,7 +20,7 @@ const devTips = process.env.NODE_ENV === 'production' ? '' : (
     </p>
     <ul>
       <li>standard e babel-eslint p/ JavaScript Standard Style,</li>
-      <li>componentes react material-ui p/ Google's Material Design</li>
+      <li>componentes react material-ui p/ Google's Material Design,</li>
       <li>login, login redirect p/ authenticated routes,</li>
       <li>routes, authenticated routes, not found page route,</li>
       <li>axios p/ requests, request error interceptor,</li>
