@@ -86,6 +86,12 @@ const styles = theme => ({
   row: {
     display: 'flex',
     justifyContent: 'center'
+  },
+  userMenu: {
+    '& ul': {
+      width: 200,
+      padding: 0
+    }
   }
 })
 

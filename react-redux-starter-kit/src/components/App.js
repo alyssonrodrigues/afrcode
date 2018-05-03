@@ -15,8 +15,9 @@ import List, { ListItem, ListItemText } from 'material-ui/List'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import Avatar from 'material-ui/Avatar'
-import Menu, { MenuItem } from 'material-ui/Menu'
+import Menu from 'material-ui/Menu'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
+import Button from 'material-ui/Button'
 
 import AppRoutes from '../routes/AppRoutes'
 import { getMenuItems } from '../util/applicationContext'
@@ -133,24 +134,25 @@ class App extends Component {
 
   renderUserMenuItems () {
     return (
-      <MenuItem onClick={() => this.handleUserMenuClose('/logout')}>Sair</MenuItem>
+      <Button fullWidth color='secondary' onClick={() => this.handleUserMenuClose('/logout')}>Sair</Button>
     )
   }
 
   renderUserMenu (userMenuId) {
     const { userMenuAnchorEl } = this.state
-    const { authentication } = this.props
+    const { authentication, classes } = this.props
     return (
       <Menu
         id={userMenuId}
         anchorEl={userMenuAnchorEl}
         open={Boolean(userMenuAnchorEl)}
-        onClose={this.handleUserMenuClose}>
-        <Card>
+        onClose={this.handleUserMenuClose}
+        className={classes.userMenu}>
+        <Card elevation={0}>
           <CardContent>
             <Typography variant='body2' color='textSecondary'>{authentication && authentication.username}</Typography>
           </CardContent>
-          <CardActions>
+          <CardActions className={classes.row}>
             {this.renderUserMenuItems()}
           </CardActions>
         </Card>
