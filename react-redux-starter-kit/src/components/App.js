@@ -75,7 +75,7 @@ class App extends Component {
           }
           <Divider />
           <ListItem button key='Logout' onClick={() => this.handleMainMenuClose('/logout')}>
-            <ListItemText primary='Logout' />
+            <ListItemText primary='Sair' />
           </ListItem>
         </List>
       </div>
@@ -133,7 +133,7 @@ class App extends Component {
 
   renderUserMenuItems () {
     return (
-      <MenuItem onClick={() => this.handleUserMenuClose('/logout')}>Logout</MenuItem>
+      <MenuItem onClick={() => this.handleUserMenuClose('/logout')}>Sair</MenuItem>
     )
   }
 
