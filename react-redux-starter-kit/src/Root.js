@@ -11,7 +11,7 @@ import styles, { theme } from './RootStyles'
 
 const store = configureStore()
 
-const Root = (props) => (
+const Root = props => (
   <MuiThemeProvider theme={theme}>
     <div className={props.classes.root}>
       <CssBaseline />
