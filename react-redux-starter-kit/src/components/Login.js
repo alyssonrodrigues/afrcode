@@ -7,50 +7,12 @@ import { TextField } from 'redux-form-material-ui'
 import { withStyles } from 'material-ui/styles'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
-import blue from 'material-ui/colors/blue'
 import Icon from 'material-ui/Icon'
-import red from 'material-ui/colors/red'
 
 import { authenticateUser } from '../actions/authenticationJwtActions'
 import { createDataToAuthentication } from '../util/applicationContext'
 import { required, alphaNumeric } from '../util/fieldLevelValidations'
-
-const styles = {
-  card: {
-    minWidth: 500,
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%)'
-  },
-  title: {
-    marginBottom: 16,
-    fontSize: 14
-  },
-  loginForm: {
-    marginBottom: 12,
-    marginTop: 20
-  },
-  titleBar: {
-    backgroundColor: blue[500],
-    color: 'white',
-    padding: 10
-  },
-  icon: {
-    fontFamily: 'Material Icons',
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    fontSize: 60,
-    lineHeight: 1,
-    letterSpacing: 'normal',
-    textTransform: 'none',
-    display: 'inline-block',
-    whiteSpace: 'nowrap',
-    wordWrap: 'normal'
-  },
-  loginError: {
-    color: red[500]
-  }
-}
+import styles from './LoginStyles'
 
 class Login extends Component {
   onSubmit (values) {
