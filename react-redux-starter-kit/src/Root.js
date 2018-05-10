@@ -2,24 +2,14 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import CssBaseline from 'material-ui/CssBaseline'
-import { MuiThemeProvider, createMuiTheme, withStyles } from 'material-ui/styles'
-import blue from 'material-ui/colors/blue'
+import { MuiThemeProvider, withStyles } from 'material-ui/styles'
 
 import ErrorBoundary from './components/ErrorBoundary'
 import App from './components/App'
 import configureStore from './store/configureStore'
+import styles, { theme } from './RootStyles'
 
 const store = configureStore()
-
-const theme = createMuiTheme({
-  palette: {
-    primary: blue
-  }
-})
-
-const styles = theme => ({
-  root: theme.typography.body1
-})
 
 const Root = (props) => (
   <MuiThemeProvider theme={theme}>
