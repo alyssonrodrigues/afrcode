@@ -122,12 +122,12 @@ class App extends Component {
   }
 
   renderUserMenuIconButton (userMenuId) {
-    const { classes, authentication } = this.props
+    const { classes, authentication: { username } } = this.props
     const { userMenuAnchorEl } = this.state
     return (
       <IconButton aria-owns={userMenuAnchorEl ? userMenuId : null} aria-haspopup='true' color='inherit'
         onClick={this.handleUserMenuOpen}>
-        <Avatar className={classes.avatar}>{_.toUpper(authentication.username[0])}</Avatar>
+        <Avatar className={classes.avatar}>{_.toUpper(username[0])}</Avatar>
       </IconButton>
     )
   }
@@ -140,7 +140,7 @@ class App extends Component {
 
   renderUserMenu (userMenuId) {
     const { userMenuAnchorEl } = this.state
-    const { authentication, classes } = this.props
+    const { classes, authentication: { username } } = this.props
     return (
       <Menu
         id={userMenuId}
@@ -150,7 +150,7 @@ class App extends Component {
         className={classes.userMenu}>
         <Card elevation={0}>
           <CardContent>
-            <Typography variant='body2' color='textSecondary'>{authentication && authentication.username}</Typography>
+            <Typography variant='body2' color='textSecondary'>{username}</Typography>
           </CardContent>
           <CardActions className={classes.row}>
             {this.renderUserMenuItems()}
