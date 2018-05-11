@@ -26,6 +26,7 @@ const devTips = process.env.NODE_ENV === 'production' ? '' : (
       <li>axios p/ requests, request error interceptor,</li>
       <li>authentication JWT, authentication JWT request interceptor,</li>
       <li>central error boundary,</li>
+      <li>central messages bar,</li>
       <li>logout,</li>
       <li>application context config,</li>
       <li>security context holder/config,</li>
