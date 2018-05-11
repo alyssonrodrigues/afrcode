@@ -1,9 +1,7 @@
 import axios from 'axios'
 import _ from 'lodash'
 
-import { store } from '../Root'
-import { showMessage } from '../actions/messagesActions'
-import { ERROR } from '../util/messagesUtil'
+import { showErrorMsg } from '../util/messagesUtil'
 
 const onFulfilled = response => response
 
@@ -20,7 +18,7 @@ const onRejected = err => {
     msgText = `${err.response.data} ${err.response.status} ${err.response.statusText}`
   }
   // TODO rever
-  store.dispatch(showMessage({ type: ERROR, msgText }))
+  showErrorMsg(msgText)
   return Promise.reject(err)
 }
 
