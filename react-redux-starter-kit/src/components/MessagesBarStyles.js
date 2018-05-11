@@ -9,29 +9,19 @@ const styles = theme => ({
     height: theme.spacing.unit * 4
   },
   error: {
-    '& span': {
-      color: red[500]
-    }
+    color: red[500]
   },
   info: {
-    '& span': {
-      color: blue[400]
-    }
+    color: blue[400]
   },
   alert: {
-    '& span': {
-      color: yellow[500]
-    }
+    color: yellow[500]
   },
   success: {
-    '& span': {
-      color: green[500]
-    }
+    color: green[500]
   },
   'default': {
-    '& span': {
-      color: blue[400]
-    }
+    color: blue[400]
   }
 })
 

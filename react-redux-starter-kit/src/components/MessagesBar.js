@@ -16,7 +16,6 @@ const MessagesBar = props => {
   const msgText = open ? message.msgText : null
   return (
     <Snackbar
-      className={className}
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'center'
@@ -24,7 +23,7 @@ const MessagesBar = props => {
       open={open}
       autoHideDuration={6000}
       onClose={props.dismissMessage}
-      message={<span id='message-id'>{msgText}</span>}
+      message={<span id='message-id' className={className}>{msgText}</span>}
       action={[
         <IconButton
           key='close'
