@@ -19,10 +19,10 @@ import Menu from 'material-ui/Menu'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Button from 'material-ui/Button'
 
+import MessagesBar from './MessagesBar'
 import AppRoutes from '../routes/AppRoutes'
 import { getMenuItems } from '../util/applicationContext'
 import { authenticateUser } from '../actions/authenticationJwtActions'
-
 import styles from './AppStyles'
 
 class App extends Component {
@@ -206,6 +206,7 @@ class App extends Component {
           [classes.contentShiftLeft]: mainMenuOpen})}>
         <div className={classes.drawerHeader} />
         <AppRoutes />
+        <MessagesBar />
       </main>
     )
   }

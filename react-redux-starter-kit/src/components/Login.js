@@ -6,7 +6,6 @@ import { Grid, Button } from 'material-ui'
 import { TextField } from 'redux-form-material-ui'
 import { withStyles } from 'material-ui/styles'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
-import Typography from 'material-ui/Typography'
 import Icon from 'material-ui/Icon'
 
 import { authenticateUser } from '../actions/authenticationJwtActions'
@@ -21,7 +20,7 @@ class Login extends Component {
 
   render () {
     const { from } = this.props.location.state || { from: { pathname: '/' } }
-    const { isUserAuthenticated, err } = this.props.authentication
+    const { isUserAuthenticated } = this.props.authentication
     const { classes } = this.props
 
     if (isUserAuthenticated) {
@@ -33,14 +32,6 @@ class Login extends Component {
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Grid container direction='column' alignItems='center' spacing={16}>
-          <Grid item xs>
-            <Typography variant='body2' className={classes.loginError}>
-              {/* TODO rever err */}
-              {err ? (err.response
-                ? `${err.response.data} ${err.response.status} ${err.response.statusText}`
-                : 'Erro ao efetuar login, tente novamente.') : ''}
-            </Typography>
-          </Grid>
           <Card className={classes.card}>
             <Grid className={classes.titleBar} container justify='center' >
               <Icon className={classes.icon}>account_circle</Icon>

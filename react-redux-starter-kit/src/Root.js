@@ -9,7 +9,7 @@ import App from './components/App'
 import configureStore from './store/configureStore'
 import styles, { theme } from './RootStyles'
 
-const store = configureStore()
+export const store = configureStore()
 
 const Root = props => (
   <MuiThemeProvider theme={theme}>

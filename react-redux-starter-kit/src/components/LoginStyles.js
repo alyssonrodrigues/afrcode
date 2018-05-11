@@ -1,5 +1,4 @@
 import blue from 'material-ui/colors/blue'
-import red from 'material-ui/colors/red'
 
 const styles = {
   card: {
@@ -32,9 +31,6 @@ const styles = {
     display: 'inline-block',
     whiteSpace: 'nowrap',
     wordWrap: 'normal'
-  },
-  loginError: {
-    color: red[500]
   }
 }
 
