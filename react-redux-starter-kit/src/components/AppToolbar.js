@@ -9,6 +9,7 @@ import IconButton from 'material-ui/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 
 import styles from './AppToolbarStyles'
+import AppMenu from './AppMenu'
 import UserMenu from './UserMenu'
 
 class AppToolbar extends Component {
@@ -49,15 +50,26 @@ class AppToolbar extends Component {
   }
 
   render () {
-    const { classes, mainMenuOpen } = this.props
+    const {
+      classes,
+      mainMenuOpen,
+      handleMainMenuOpen,
+      handleMainMenuClose
+    } = this.props
     return (
-      <AppBar className={classNames(classes.appBar, {
-        [classes.appBarShift]: mainMenuOpen,
-        [classes.appBarShiftLeft]: mainMenuOpen})}>
-        <Toolbar>
-          {this.renderToolbarContents()}
-        </Toolbar>
-      </AppBar>
+      <React.Fragment>
+        <AppBar className={classNames(classes.appBar, {
+          [classes.appBarShift]: mainMenuOpen,
+          [classes.appBarShiftLeft]: mainMenuOpen})}>
+          <Toolbar>
+            {this.renderToolbarContents()}
+          </Toolbar>
+        </AppBar>
+        <AppMenu
+          mainMenuOpen={mainMenuOpen}
+          handleMainMenuOpen={handleMainMenuOpen}
+          handleMainMenuClose={handleMainMenuClose} />
+      </React.Fragment>
     )
   }
 }

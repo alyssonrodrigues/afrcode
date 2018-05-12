@@ -5,7 +5,6 @@ import { withStyles } from 'material-ui/styles'
 
 import styles from './AppStyles'
 import AppToolbar from './AppToolbar'
-import AppMenu from './AppMenu'
 import AppRoutes from '../routes/AppRoutes'
 import MessagesBar from './MessagesBar'
 
@@ -53,13 +52,10 @@ class App extends Component {
         <AppToolbar
           mainMenuOpen={mainMenuOpen}
           handleMainMenuOpen={this.handleMainMenuOpen}
+          handleMainMenuClose={this.handleMainMenuClose}
           userMenuAnchorEl={userMenuAnchorEl}
           handleUserMenuOpen={this.handleUserMenuOpen}
           handleUserMenuClose={this.handleUserMenuClose} />
-        <AppMenu
-          mainMenuOpen={mainMenuOpen}
-          handleMainMenuOpen={this.handleMainMenuOpen}
-          handleMainMenuClose={this.handleMainMenuClose} />
         <main
           className={classNames(classes.content, classes.contentLeft, {
             [classes.contentShift]: mainMenuOpen,
