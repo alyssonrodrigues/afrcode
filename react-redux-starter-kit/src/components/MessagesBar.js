@@ -21,7 +21,7 @@ const MessagesBar = props => {
         horizontal: 'center'
       }}
       open={open}
-      autoHideDuration={6000}
+      autoHideDuration={10000}
       onClose={props.dismissMessage}
       message={<span id='message-id' className={className}>{msgText}</span>}
       action={[
