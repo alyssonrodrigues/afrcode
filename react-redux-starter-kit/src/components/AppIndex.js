@@ -21,7 +21,7 @@ const devTips = process.env.NODE_ENV === 'production' ? '' : (
     <p>
       O que temos para hoje:
     </p>
-    <ul>
+    <ol>
       <li>standard e babel-eslint p/ JavaScript Standard Style,</li>
       <li>componentes react material-ui p/ Google's Material Design,</li>
       <li>login, login redirect p/ authenticated routes,</li>
@@ -41,7 +41,7 @@ const devTips = process.env.NODE_ENV === 'production' ? '' : (
       <li>redux-mock-store p/ testes,</li>
       <li>jest, react-test-renderer p/ snapshot testing,</li>
       <li>TODO...</li>
-    </ul>
+    </ol>
   </div>)
 
 class AppIndex extends Component {
