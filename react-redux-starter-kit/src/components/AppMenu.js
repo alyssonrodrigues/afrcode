@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withStyles } from 'material-ui/styles'
+import { connect } from 'react-redux'
 import IconButton from 'material-ui/IconButton'
 import Drawer from 'material-ui/Drawer'
 import Divider from 'material-ui/Divider'
@@ -12,8 +13,8 @@ import { getMenuItems } from '../util/applicationContext'
 
 class AppMenu extends Component {
   renderMainMenuItems () {
-    const { classes, handleMainMenuClose } = this.props
-    return (
+    const { classes, authentication, handleMainMenuClose } = this.props
+    return authentication && authentication.isUserAuthenticated && (
       <div className={classes.menuList}>
         <List component='nav'>
           {getMenuItems().map(it => (
@@ -31,7 +32,8 @@ class AppMenu extends Component {
   }
 
   render () {
-    const { classes,
+    const {
+      classes,
       theme,
       mainMenuOpen,
       handleMainMenuClose
@@ -54,4 +56,8 @@ class AppMenu extends Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(AppMenu)
+const materialUIEnhanced = withStyles(styles, { withTheme: true })(AppMenu)
+
+const mapStateToProps = ({ authentication }) => ({ authentication })
+
+export default connect(mapStateToProps)(materialUIEnhanced)

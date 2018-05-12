@@ -13,7 +13,8 @@ import styles from './UserMenuStyles'
 
 class UserMenu extends Component {
   renderUserMenuIconButton (userMenuId) {
-    const { classes,
+    const {
+      classes,
       authentication: { username },
       userMenuAnchorEl,
       handleUserMenuOpen
@@ -34,7 +35,8 @@ class UserMenu extends Component {
   }
 
   renderUserMenu (userMenuId) {
-    const { classes,
+    const {
+      classes,
       authentication: { username },
       userMenuAnchorEl,
       handleUserMenuClose
@@ -60,8 +62,8 @@ class UserMenu extends Component {
 
   render () {
     const userMenuId = 'user-menu'
-    const { classes } = this.props
-    return (
+    const { classes, authentication } = this.props
+    return authentication && authentication.isUserAuthenticated && (
       <div className={classes.row}>
         {this.renderUserMenuIconButton(userMenuId)}
         {this.renderUserMenu(userMenuId)}
