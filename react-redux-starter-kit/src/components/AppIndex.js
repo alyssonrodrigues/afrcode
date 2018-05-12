@@ -1,8 +1,21 @@
 import React, { Component } from 'react'
-import { Grid } from 'material-ui'
+import { withStyles } from 'material-ui/styles'
+import Grid from 'material-ui/Grid'
+import Paper from 'material-ui/Paper'
 
 import { getAuthentication } from '../security/securityContext'
 import { showSuccessMsg } from '../util/messagesUtil'
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'left',
+    height: '100%'
+  }
+})
 
 const devTips = process.env.NODE_ENV === 'production' ? '' : (
   <div>
@@ -18,6 +31,11 @@ const devTips = process.env.NODE_ENV === 'production' ? '' : (
     <p>
       Encontre em <code>src/interceptors</code> "interceptors" para aspectos comuns da aplicação.
     </p>
+  </div>
+)
+
+const devStatus = process.env.NODE_ENV === 'production' ? '' : (
+  <div>
     <p>
       O que temos para hoje:
     </p>
@@ -42,7 +60,8 @@ const devTips = process.env.NODE_ENV === 'production' ? '' : (
       <li>jest, react-test-renderer p/ snapshot testing,</li>
       <li>TODO...</li>
     </ol>
-  </div>)
+  </div>
+)
 
 class AppIndex extends Component {
   componentDidMount () {
@@ -51,14 +70,20 @@ class AppIndex extends Component {
   }
 
   render () {
+    const { classes } = this.props
     return (
-      <Grid container direction='column' alignItems='stretch' spacing={16}>
-        <Grid item xs>
-          {devTips}
+      <div className={classes.root}>
+        <Grid container spacing={16}>
+          <Grid item xs={12} sm={6}>
+            <Paper className={classes.paper}>{devTips}</Paper>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Paper className={classes.paper}>{devStatus}</Paper>
+          </Grid>
         </Grid>
-      </Grid>
+      </div>
     )
   }
 }
 
-export default AppIndex
+export default withStyles(styles, { withTheme: true })(AppIndex)
