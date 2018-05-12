@@ -16,14 +16,11 @@ class AppMenu extends Component {
     return (
       <div className={classes.menuList}>
         <List component='nav'>
-          {getMenuItems().map(it =>
-            (
-              <ListItem button key={it.label} onClick={() => handleMainMenuClose(it.path)}>
-                <ListItemText primary={it.label} />
-              </ListItem>
-            )
-          )
-          }
+          {getMenuItems().map(it => (
+            <ListItem button key={it.label} onClick={() => handleMainMenuClose(it.path)}>
+              <ListItemText primary={it.label} />
+            </ListItem>
+          ))}
           <Divider />
           <ListItem button key='Logout' onClick={() => handleMainMenuClose('/logout')}>
             <ListItemText primary='Sair' />
