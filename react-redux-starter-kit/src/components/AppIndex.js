@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Grid } from 'material-ui'
+
+import { showSuccessMsg } from '../util/messagesUtil'
 
 const devTips = process.env.NODE_ENV === 'production' ? '' : (
   <div>
@@ -41,12 +44,23 @@ const devTips = process.env.NODE_ENV === 'production' ? '' : (
     </ul>
   </div>)
 
-const AppIndex = () => (
-  <Grid container direction='column' alignItems='stretch' spacing={16}>
-    <Grid item xs>
-      {devTips}
-    </Grid>
-  </Grid>
-)
+class AppIndex extends Component {
+  componentDidMount () {
+    const { authentication: { username } } = this.props
+    showSuccessMsg(`Seja bem-vindo(a) ${username}!`)
+  }
 
-export default AppIndex
+  render () {
+    return (
+      <Grid container direction='column' alignItems='stretch' spacing={16}>
+        <Grid item xs>
+          {devTips}
+        </Grid>
+      </Grid>
+    )
+  }
+}
+
+const mapStateToProps = ({ authentication }) => ({ authentication })
+
+export default connect(mapStateToProps)(AppIndex)
