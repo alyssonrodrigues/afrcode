@@ -11,12 +11,15 @@ import MenuIcon from '@material-ui/icons/Menu'
 import styles from './AppToolbarStyles'
 import AppMenu from './AppMenu'
 import UserMenu from './UserMenu'
+import { getAppTitle } from '../util/applicationContext'
 
 class AppToolbar extends Component {
   renderToobalTitle () {
     const { classes } = this.props
     return (
-      <Typography variant='title' color='inherit' className={classes.flex}>App</Typography>
+      <Typography variant='title' color='inherit' className={classes.flex}>
+        {getAppTitle()}
+      </Typography>
     )
   }
 

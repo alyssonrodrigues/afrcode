@@ -5,6 +5,8 @@ export const createDataToAuthentication = (username, password) => ({
   password
 })
 
+export const getAppTitle = () => 'App'
+
 export const getMenuItems = () => [
   { label: 'Menu item 1', path: '/' },
   { label: 'Menu item 2', path: '/' },
