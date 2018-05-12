@@ -1,7 +1,7 @@
 import red from 'material-ui/colors/red'
 import yellow from 'material-ui/colors/yellow'
 import blue from 'material-ui/colors/blue'
-import green from 'material-ui/colors/green'
+import lightGreen from 'material-ui/colors/lightGreen'
 
 const styles = theme => ({
   close: {
@@ -18,7 +18,7 @@ const styles = theme => ({
     color: yellow[500]
   },
   success: {
-    color: green[500]
+    color: lightGreen['A400']
   },
   'default': {
     color: blue[400]
