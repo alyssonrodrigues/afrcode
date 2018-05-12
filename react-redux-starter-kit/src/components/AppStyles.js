@@ -1,54 +1,14 @@
-import blue from 'material-ui/colors/blue'
-
 const drawerWidth = 240
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
-  flex: {
-    flex: 1
-  },
   appFrame: {
+    flexGrow: 1,
     height: '100%',
     zIndex: 1,
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
     width: '100%'
-  },
-  appBar: {
-    position: 'absolute',
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  appBarShiftLeft: {
-    marginLeft: drawerWidth
-  },
-  menuButton: {
-    marginLeft: 0,
-    marginRight: 20
-  },
-  menuList: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
-  },
-  hide: {
-    display: 'none'
-  },
-  drawerPaper: {
-    position: 'relative',
-    width: drawerWidth
   },
   drawerHeader: {
     display: 'flex',
@@ -77,21 +37,6 @@ const styles = theme => ({
   },
   contentShiftLeft: {
     marginLeft: 0
-  },
-  avatar: {
-    margin: 0,
-    color: '#fff',
-    backgroundColor: blue[400]
-  },
-  row: {
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  userMenu: {
-    '& ul': {
-      width: 200,
-      padding: 0
-    }
   }
 })
 
