@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Grid } from 'material-ui'
 
+import { getAuthentication } from '../security/securityContext'
 import { showSuccessMsg } from '../util/messagesUtil'
 
 const devTips = process.env.NODE_ENV === 'production' ? '' : (
@@ -46,7 +46,7 @@ const devTips = process.env.NODE_ENV === 'production' ? '' : (
 
 class AppIndex extends Component {
   componentDidMount () {
-    const { authentication: { username } } = this.props
+    const { username } = getAuthentication()
     showSuccessMsg(`Seja bem-vindo(a) ${username}!`)
   }
 
@@ -61,6 +61,4 @@ class AppIndex extends Component {
   }
 }
 
-const mapStateToProps = ({ authentication }) => ({ authentication })
-
-export default connect(mapStateToProps)(AppIndex)
+export default AppIndex
