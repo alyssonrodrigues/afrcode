@@ -17,7 +17,7 @@ const styles = theme => ({
   }
 })
 
-const devTips = process.env.NODE_ENV === 'production' ? '' : (
+const devTips = (
   <div>
     <p>
       Para iniciar, edite o <code>src/AppIndex.js</code> e salve para recarregar.
@@ -34,7 +34,7 @@ const devTips = process.env.NODE_ENV === 'production' ? '' : (
   </div>
 )
 
-const devStatus = process.env.NODE_ENV === 'production' ? '' : (
+const devStatus = (
   <div>
     <p>
       O que temos para hoje:
