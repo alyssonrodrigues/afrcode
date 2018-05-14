@@ -12,10 +12,10 @@ export class Logout extends Component {
     if (authentication && authentication.isUserAuthenticated) {
       showSuccessMsg(`Até breve ${authentication.username}!`)
     }
+    this.props.logoutUser()
   }
 
   render () {
-    this.props.logoutUser()
     return (<Redirect to='/' />)
   }
 }
