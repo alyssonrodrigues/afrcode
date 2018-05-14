@@ -71,7 +71,7 @@ class AppIndex extends Component {
 
   render () {
     const { classes } = this.props
-    return (
+    return process.env.NODE_ENV !== 'production' && (
       <div className={classes.root}>
         <Grid container spacing={16}>
           <Grid item xs={12} sm={6}>
