@@ -86,4 +86,4 @@ class AppIndex extends Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(AppIndex)
+export default withStyles(styles)(AppIndex)

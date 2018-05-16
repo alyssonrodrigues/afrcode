@@ -77,7 +77,7 @@ class AppToolbar extends Component {
   }
 }
 
-const materialUIEnhanced = withStyles(styles, { withTheme: true })(AppToolbar)
+const materialUIEnhanced = withStyles(styles)(AppToolbar)
 
 const mapStateToProps = ({ authentication }) => ({ authentication })
 

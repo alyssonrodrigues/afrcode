@@ -69,6 +69,6 @@ class App extends Component {
   }
 }
 
-const materialUIEnhance = withStyles(styles, { withTheme: true })(App)
+const materialUIEnhance = withStyles(styles)(App)
 
 export default withRouter(materialUIEnhance)
