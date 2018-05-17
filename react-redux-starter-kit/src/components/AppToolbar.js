@@ -55,6 +55,7 @@ class AppToolbar extends Component {
   render () {
     const {
       classes,
+      authentication,
       mainMenuOpen,
       handleMainMenuOpen,
       handleMainMenuClose
@@ -64,9 +65,11 @@ class AppToolbar extends Component {
         <AppBar className={classNames(classes.appBar, {
           [classes.appBarShift]: mainMenuOpen,
           [classes.appBarShiftLeft]: mainMenuOpen})}>
-          <Toolbar>
-            {this.renderToolbarContents()}
-          </Toolbar>
+          {authentication && authentication.isUserAuthenticated && (
+            <Toolbar>
+              {this.renderToolbarContents()}
+            </Toolbar>
+          )}
         </AppBar>
         <AppMenu
           mainMenuOpen={mainMenuOpen}
