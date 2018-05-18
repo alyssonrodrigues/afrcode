@@ -3,7 +3,7 @@ import { showProgressDialog, closeProgressDialog } from '../util/operationProgre
 
 const onRejected = err => {
   closeProgressDialog()
-  Promise.reject(err)
+  return Promise.reject(err)
 }
 
 axios.interceptors.request.use(
