@@ -7,6 +7,7 @@ import styles from './AppStyles'
 import AppToolbar from './AppToolbar'
 import AppRoutes from '../routes/AppRoutes'
 import MessagesBar from './MessagesBar'
+import ProgressDialog from './ProgressDialog'
 
 class App extends Component {
   constructor (props) {
@@ -63,6 +64,7 @@ class App extends Component {
           <div className={classes.drawerHeader} />
           <AppRoutes />
           <MessagesBar />
+          <ProgressDialog />
         </main>
       </div>
     )

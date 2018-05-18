@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid'
 import Paper from 'material-ui/Paper'
+import Button from 'material-ui/Button'
+import _ from 'lodash'
 
 import { getAuthentication } from '../security/securityContext'
 import { showSuccessMsg } from '../util/messagesUtil'
+import { showProgressDialog, closeProgressDialog } from '../util/operationProgressUtil'
 
 const styles = theme => ({
   root: {
@@ -49,6 +52,12 @@ const devStatus = (
       <li>central error boundary,</li>
       <li>app toolbar com app menu e authenticated user menu,</li>
       <li>messages bar e messages util p/ exibição de mensagens,</li>
+      <li>
+        <Button size='small' onClick={() => {
+          showProgressDialog()
+          _.delay(closeProgressDialog, 3000)
+        }}>progress dialog</Button> para operações demoradas,
+      </li>
       <li>logout,</li>
       <li>application context config,</li>
       <li>security context holder/config,</li>
