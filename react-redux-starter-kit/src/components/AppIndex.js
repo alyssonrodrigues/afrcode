@@ -57,7 +57,7 @@ const devStatus = (
         <Button size='small' onClick={() => {
           showProgressDialog()
           _.delay(closeProgressDialog, 3000)
-        }}>progress dialog</Button> para operações demoradas,
+        }}>progress dialog</Button> e operations util para operações demoradas,
       </li>
       <li>logout,</li>
       <li>application context config,</li>
