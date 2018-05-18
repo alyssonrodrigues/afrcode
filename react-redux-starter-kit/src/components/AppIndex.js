@@ -47,7 +47,8 @@ const devStatus = (
       <li>componentes react material-ui p/ Google's Material Design,</li>
       <li>login, login redirect p/ authenticated routes,</li>
       <li>routes, authenticated routes, not found page route,</li>
-      <li>axios p/ requests, request error interceptor,</li>
+      <li>axios p/ requests,</li>
+      <li>request/response error/progress interceptors,</li>
       <li>authentication JWT, authentication JWT request interceptor,</li>
       <li>central error boundary,</li>
       <li>app toolbar com app menu e authenticated user menu,</li>
