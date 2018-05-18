@@ -12,6 +12,12 @@ import Typography from 'material-ui/Typography'
 import styles from './UserMenuStyles'
 
 class UserMenu extends Component {
+  handleUserLogout () {
+    const { handleUserMenuClose, handleMainMenuClose } = this.props
+    handleMainMenuClose()
+    handleUserMenuClose('/logout')
+  }
+
   renderUserMenuIconButton (userMenuId) {
     const {
       classes,
@@ -28,9 +34,8 @@ class UserMenu extends Component {
   }
 
   renderUserMenuItems () {
-    const { handleUserMenuClose } = this.props
     return (
-      <Button fullWidth color='secondary' onClick={() => handleUserMenuClose('/logout')}>Sair</Button>
+      <Button fullWidth color='primary' variant='raised' onClick={this.handleUserLogout.bind(this)}>Sair</Button>
     )
   }
 

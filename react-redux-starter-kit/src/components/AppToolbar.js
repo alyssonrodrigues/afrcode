@@ -38,7 +38,8 @@ class AppToolbar extends Component {
       authentication,
       userMenuAnchorEl,
       handleUserMenuOpen,
-      handleUserMenuClose
+      handleUserMenuClose,
+      handleMainMenuClose
     } = this.props
     return authentication && authentication.isUserAuthenticated && (
       <React.Fragment>
@@ -47,7 +48,8 @@ class AppToolbar extends Component {
         <UserMenu
           userMenuAnchorEl={userMenuAnchorEl}
           handleUserMenuOpen={handleUserMenuOpen}
-          handleUserMenuClose={handleUserMenuClose} />
+          handleUserMenuClose={handleUserMenuClose}
+          handleMainMenuClose={handleMainMenuClose} />
       </React.Fragment>
     )
   }
@@ -57,7 +59,6 @@ class AppToolbar extends Component {
       classes,
       authentication,
       mainMenuOpen,
-      handleMainMenuOpen,
       handleMainMenuClose
     } = this.props
     return (
@@ -73,7 +74,6 @@ class AppToolbar extends Component {
         </AppBar>
         <AppMenu
           mainMenuOpen={mainMenuOpen}
-          handleMainMenuOpen={handleMainMenuOpen}
           handleMainMenuClose={handleMainMenuClose} />
       </React.Fragment>
     )
