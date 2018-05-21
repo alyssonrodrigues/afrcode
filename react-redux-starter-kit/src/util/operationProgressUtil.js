@@ -1,4 +1,4 @@
-import { store } from '../Root'
+import store from '../store/configureStore'
 import { startOperationProgress, endOperationProgress } from '../actions/operationProgressActions'
 
 export const SLOW_REQUEST_HEADER = 'X-Slow-Request'

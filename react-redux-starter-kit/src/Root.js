@@ -6,10 +6,8 @@ import { MuiThemeProvider, withStyles } from 'material-ui/styles'
 
 import ErrorBoundary from './components/ErrorBoundary'
 import App from './components/App'
-import configureStore from './store/configureStore'
+import store from './store/configureStore'
 import styles, { theme } from './RootStyles'
-
-export const store = configureStore()
 
 const Root = props => (
   <MuiThemeProvider theme={theme}>

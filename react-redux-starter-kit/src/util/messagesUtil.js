@@ -1,4 +1,4 @@
-import { store } from '../Root'
+import store from '../store/configureStore'
 import { showMessage } from '../actions/messagesActions'
 
 export const ERROR = 'error'
