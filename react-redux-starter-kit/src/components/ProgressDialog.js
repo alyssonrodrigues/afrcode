@@ -8,9 +8,10 @@ import styles from './ProgressDialogStyles'
 
 class ProgressDialog extends Component {
   render () {
-    const { operationProgress: { operationInProgress } } = this.props
+    const { classes, operationProgress: { operationInProgress } } = this.props
     return (
-      <Dialog
+      <Dialog PaperProps={{className: classes.paperClassName}}
+        BackdropProps={{className: classes.backdropClassName}}
         open={operationInProgress}>
         <DialogContent>
           <CircularProgress />
