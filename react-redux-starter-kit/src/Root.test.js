@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import React from 'react'
-import Root from './Root'
+import { Root } from './Root'
 import { shallow } from 'enzyme'
 import { MuiThemeProvider } from 'material-ui/styles'
 import CssBaseline from 'material-ui/CssBaseline'
@@ -9,10 +9,10 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
 it('renders without crashing', () => {
-  const rootWrapper = shallow(<Root />)
-  expect(rootWrapper.find(MuiThemeProvider))
-  expect(rootWrapper.find(CssBaseline))
-  expect(rootWrapper.find(ErrorBoundary))
-  expect(rootWrapper.find(Provider))
-  expect(rootWrapper.find(BrowserRouter))
+  const rootWrapper = shallow(<Root classes={{root: {}}} />)
+  expect(rootWrapper.find(MuiThemeProvider)).toHaveLength(1)
+  expect(rootWrapper.find(CssBaseline)).toHaveLength(1)
+  expect(rootWrapper.find(ErrorBoundary)).toHaveLength(1)
+  expect(rootWrapper.find(Provider)).toHaveLength(1)
+  expect(rootWrapper.find(BrowserRouter)).toHaveLength(1)
 })
