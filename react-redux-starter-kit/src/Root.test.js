@@ -1,12 +1,18 @@
 /* eslint-env jest */
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Root from './Root'
+import { shallow } from 'enzyme'
+import { MuiThemeProvider } from 'material-ui/styles'
+import CssBaseline from 'material-ui/CssBaseline'
+import ErrorBoundary from './components/ErrorBoundary'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 
-describe('<Root />', () => {
-  it('Root render deveria ocorrer sem falhas!', () => {
-    const div = document.createElement('div')
-    ReactDOM.render(<Root />, div)
-    ReactDOM.unmountComponentAtNode(div)
-  })
+it('renders without crashing', () => {
+  const rootWrapper = shallow(<Root />)
+  expect(rootWrapper.find(MuiThemeProvider))
+  expect(rootWrapper.find(CssBaseline))
+  expect(rootWrapper.find(ErrorBoundary))
+  expect(rootWrapper.find(Provider))
+  expect(rootWrapper.find(BrowserRouter))
 })
