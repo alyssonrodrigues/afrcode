@@ -1,7 +1,7 @@
-import red from 'material-ui/colors/red'
-import yellow from 'material-ui/colors/yellow'
-import blue from 'material-ui/colors/blue'
-import lightGreen from 'material-ui/colors/lightGreen'
+import red from '@material-ui/core/colors/red'
+import yellow from '@material-ui/core/colors/yellow'
+import blue from '@material-ui/core/colors/blue'
+import lightGreen from '@material-ui/core/colors/lightGreen'
 
 const styles = theme => ({
   close: {

@@ -5,48 +5,48 @@ exports[`<Login /> Login snapshot deveria ocorrer sem falhas! 1`] = `
   onSubmit={[Function]}
 >
   <div
-    className="MuiGrid-typeContainer-6 MuiGrid-spacing-xs-16-28 MuiGrid-direction-xs-column-9 MuiGrid-align-items-xs-center-14"
+    className="MuiGrid-container-6 MuiGrid-spacing-xs-16-28 MuiGrid-direction-xs-column-9 MuiGrid-align-items-xs-center-14"
   >
     <div
-      className="MuiPaper-root-96 MuiPaper-elevation2-100 MuiPaper-rounded-97 Login-card-1"
+      className="MuiPaper-root-98 MuiPaper-elevation2-102 MuiPaper-rounded-99 MuiCard-root-97 Login-card-1"
     >
       <div
-        className="MuiGrid-typeContainer-6 MuiGrid-justify-xs-center-23 Login-titleBar-4"
+        className="MuiGrid-container-6 MuiGrid-justify-xs-center-23 Login-titleBar-4"
       >
         <span
           aria-hidden="true"
-          className="material-icons MuiIcon-root-123 Login-icon-5"
+          className="material-icons MuiIcon-root-125 Login-icon-5"
         >
           account_circle
         </span>
       </div>
       <div
-        className="MuiCardContent-root-129"
+        className="MuiCardContent-root-131"
       >
         <div
           aria-describedby={undefined}
-          className="MuiFormControl-root-130 MuiFormControl-fullWidth-133 Login-loginForm-3"
+          className="MuiFormControl-root-132 MuiFormControl-fullWidth-135 Login-loginForm-3"
           onBlur={[Function]}
           onDragStart={[Function]}
           onDrop={[Function]}
           onFocus={[Function]}
         >
           <label
-            className="MuiFormLabel-root-139 MuiInputLabel-root-134 MuiInputLabel-formControl-135 MuiInputLabel-animated-138"
+            className="MuiFormLabel-root-141 MuiInputLabel-root-136 MuiInputLabel-formControl-137 MuiInputLabel-animated-140"
             data-shrink={false}
             htmlFor={undefined}
           >
             Login
           </label>
           <div
-            className="MuiInput-root-145 MuiInput-fullWidth-152 MuiInput-formControl-146 MuiInput-underline-149"
+            className="MuiInput-root-146 MuiInput-fullWidth-153 MuiInput-formControl-147 MuiInput-underline-150"
           >
             <input
               aria-invalid={false}
               aria-required={false}
               autoComplete={undefined}
               autoFocus={true}
-              className="MuiInput-input-153"
+              className="MuiInput-input-154"
               defaultValue={undefined}
               disabled={false}
               id={undefined}
@@ -67,28 +67,28 @@ exports[`<Login /> Login snapshot deveria ocorrer sem falhas! 1`] = `
         </div>
         <div
           aria-describedby={undefined}
-          className="MuiFormControl-root-130 MuiFormControl-fullWidth-133 Login-loginForm-3"
+          className="MuiFormControl-root-132 MuiFormControl-fullWidth-135 Login-loginForm-3"
           onBlur={[Function]}
           onDragStart={[Function]}
           onDrop={[Function]}
           onFocus={[Function]}
         >
           <label
-            className="MuiFormLabel-root-139 MuiInputLabel-root-134 MuiInputLabel-formControl-135 MuiInputLabel-animated-138"
+            className="MuiFormLabel-root-141 MuiInputLabel-root-136 MuiInputLabel-formControl-137 MuiInputLabel-animated-140"
             data-shrink={false}
             htmlFor={undefined}
           >
             Senha
           </label>
           <div
-            className="MuiInput-root-145 MuiInput-fullWidth-152 MuiInput-formControl-146 MuiInput-underline-149"
+            className="MuiInput-root-146 MuiInput-fullWidth-153 MuiInput-formControl-147 MuiInput-underline-150"
           >
             <input
               aria-invalid={false}
               aria-required={false}
               autoComplete={undefined}
               autoFocus={undefined}
-              className="MuiInput-input-153 MuiInput-inputType-157"
+              className="MuiInput-input-154 MuiInput-inputType-157"
               defaultValue={undefined}
               disabled={false}
               id={undefined}
@@ -112,7 +112,7 @@ exports[`<Login /> Login snapshot deveria ocorrer sem falhas! 1`] = `
         className="MuiCardActions-root-159"
       >
         <button
-          className="MuiButtonBase-root-176 MuiButton-root-161 MuiButton-flatPrimary-163 MuiButton-fullWidth-175 MuiCardActions-action-160"
+          className="MuiButtonBase-root-177 MuiButton-root-161 MuiButton-flatPrimary-163 MuiButton-fullWidth-176 MuiCardActions-action-160"
           disabled={false}
           onBlur={[Function]}
           onFocus={[Function]}
@@ -133,7 +133,7 @@ exports[`<Login /> Login snapshot deveria ocorrer sem falhas! 1`] = `
             Entrar
           </span>
           <span
-            className="MuiTouchRipple-root-179"
+            className="MuiTouchRipple-root-180"
           />
         </button>
       </div>

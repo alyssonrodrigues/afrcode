@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { withStyles } from 'material-ui/styles'
+import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
-import Dialog, { DialogContent } from 'material-ui/Dialog'
-import CircularProgress from 'material-ui/Progress/CircularProgress'
+import Dialog from '@material-ui/core/Dialog'
+import DialogContent from '@material-ui/core/DialogContent'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 import styles from './ProgressDialogStyles'
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import CssBaseline from 'material-ui/CssBaseline'
-import { MuiThemeProvider, withStyles } from 'material-ui/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { MuiThemeProvider, withStyles } from '@material-ui/core/styles'
 
 import ErrorBoundary from './components/ErrorBoundary'
 import App from './components/App'
