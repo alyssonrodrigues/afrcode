@@ -1,6 +1,6 @@
 import blue from '@material-ui/core/colors/blue'
 
-const styles = {
+export default {
   card: {
     minWidth: 500,
     position: 'absolute',
@@ -33,5 +33,3 @@ const styles = {
     wordWrap: 'normal'
   }
 }
-
-export default styles

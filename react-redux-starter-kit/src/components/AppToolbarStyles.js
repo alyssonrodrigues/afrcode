@@ -1,6 +1,6 @@
 const drawerWidth = 240
 
-const styles = theme => ({
+export default theme => ({
   flex: {
     flex: 1
   },
@@ -29,5 +29,3 @@ const styles = theme => ({
     marginLeft: drawerWidth
   }
 })
-
-export default styles

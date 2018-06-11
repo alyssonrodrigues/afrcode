@@ -35,6 +35,4 @@ const configureStoreDev = initialState => {
 
 const configureStore = process.env.NODE_ENV === 'production' ? configureStoreProd : configureStoreDev
 
-const store = configureStore()
-
-export default store
+export default configureStore()

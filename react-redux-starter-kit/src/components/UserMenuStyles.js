@@ -1,6 +1,6 @@
 import blue from '@material-ui/core/colors/blue'
 
-const styles = {
+export default {
   avatar: {
     margin: 0,
     color: '#fff',
@@ -17,5 +17,3 @@ const styles = {
     justifyContent: 'center'
   }
 }
-
-export default styles

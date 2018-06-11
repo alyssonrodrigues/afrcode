@@ -1,6 +1,6 @@
 const drawerWidth = 240
 
-const styles = theme => ({
+export default theme => ({
   menuList: {
     width: '100%',
     maxWidth: 360,
@@ -11,5 +11,3 @@ const styles = theme => ({
     width: drawerWidth
   }
 })
-
-export default styles

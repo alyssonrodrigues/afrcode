@@ -1,6 +1,6 @@
 const drawerWidth = 240
 
-const styles = theme => ({
+export default theme => ({
   appFrame: {
     flexGrow: 1,
     height: '100%',
@@ -39,5 +39,3 @@ const styles = theme => ({
     marginLeft: 0
   }
 })
-
-export default styles
