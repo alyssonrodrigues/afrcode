@@ -45,5 +45,13 @@
       "localStorage",
       "mockReduxStore"
     ]
+  },
+  "proxy": {
+    "/bff": {
+      "target": "http://localhost:8100",
+      "pathRewrite": {
+        "^/bff/(.*)": "/$1"
+      }
+    }
   }
 }
