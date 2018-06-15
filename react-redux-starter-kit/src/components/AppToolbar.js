@@ -66,11 +66,11 @@ class AppToolbar extends Component {
         <AppBar className={classNames(classes.appBar, {
           [classes.appBarShift]: mainMenuOpen,
           [classes.appBarShiftLeft]: mainMenuOpen})}>
-          {authentication && authentication.isUserAuthenticated && (
+          {(authentication && authentication.isUserAuthenticated && (
             <Toolbar>
               {this.renderToolbarContents()}
             </Toolbar>
-          )}
+          )) || (<div />)}
         </AppBar>
         <AppMenu
           mainMenuOpen={mainMenuOpen}
