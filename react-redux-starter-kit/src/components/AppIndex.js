@@ -52,7 +52,7 @@ const devStatus = (
       <li>request/response error/progress interceptors,</li>
       <li>authentication JWT, authentication JWT request interceptor,</li>
       <li>central error boundary,</li>
-      <li>app com/sem app toolbar (app props noAppToolbar)</li>
+      <li>app com/sem app toolbar (app props noAppToolbar),</li>
       <li>app toolbar com app menu e authenticated user menu,</li>
       <li>messages bar e messages util p/ exibição de mensagens,</li>
       <li>
