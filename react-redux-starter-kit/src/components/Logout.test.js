@@ -2,15 +2,21 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
 import Logout, { Logout as LogoutUnitTest } from './Logout'
+import { Provider } from 'react-redux'
 import { MemoryRouter, Redirect } from 'react-router-dom'
 
 describe('<Logout />', () => {
   it('Action @authenticationJwtActions/USER_LOGOUT deveria ter ocorrido sem falhas!', () => {
-    const store = mockReduxStore({})
+    const store = mockReduxStore({
+      operationProgress: { operationInProgress: false },
+      messages: {}
+    })
     const logoutWrapper = mount(
-      <MemoryRouter>
-        <Logout store={store} />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <Logout />
+        </MemoryRouter>
+      </Provider>
     )
     const redirect = logoutWrapper.find(Redirect)
     expect(redirect).toHaveLength(1)

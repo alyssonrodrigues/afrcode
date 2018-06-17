@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom'
 import { logoutUser } from '../actions/authenticationJwtActions'
 import { getAuthentication } from '../security/securityContext'
 import { showSuccessMsg } from '../util/messagesUtil'
+import App from './App'
 
 export class Logout extends Component {
   componentWillMount () {
@@ -16,7 +17,11 @@ export class Logout extends Component {
   }
 
   render () {
-    return (<Redirect to='/' />)
+    return (
+      <App>
+        <Redirect to='/' />
+      </App>
+    )
   }
 }
 

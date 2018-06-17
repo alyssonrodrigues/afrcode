@@ -15,6 +15,7 @@ import { authenticateUser } from '../actions/authenticationJwtActions'
 import { createDataToAuthentication } from '../util/applicationContext'
 import { required, alphaNumeric } from '../util/fieldLevelValidations'
 import styles from './LoginStyles'
+import App from './App'
 
 class Login extends Component {
   onSubmit (values) {
@@ -33,39 +34,41 @@ class Login extends Component {
     const { handleSubmit, submitting } = this.props
 
     return (
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <Grid container direction='column' alignItems='center' spacing={16}>
-          <Card className={classes.card}>
-            <Grid className={classes.titleBar} container justify='center' >
-              <Icon className={classes.icon}>account_circle</Icon>
-            </Grid>
-            <CardContent>
-              <Field
-                className={classes.loginForm}
-                label='Login'
-                name='username'
-                type='text'
-                autoFocus
-                component={TextField}
-                fullWidth
-                validate={[required, alphaNumeric]}
-              />
-              <Field
-                className={classes.loginForm}
-                label='Senha'
-                name='password'
-                type='password'
-                component={TextField}
-                validate={[required]}
-                fullWidth
-              />
-            </CardContent>
-            <CardActions>
-              <Button fullWidth color='primary' type='submit' disabled={submitting}>Entrar</Button>
-            </CardActions>
-          </Card>
-        </Grid>
-      </form>
+      <App>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <Grid container direction='column' alignItems='center' spacing={16}>
+            <Card className={classes.card}>
+              <Grid className={classes.titleBar} container justify='center' >
+                <Icon className={classes.icon}>account_circle</Icon>
+              </Grid>
+              <CardContent>
+                <Field
+                  className={classes.loginForm}
+                  label='Login'
+                  name='username'
+                  type='text'
+                  autoFocus
+                  component={TextField}
+                  fullWidth
+                  validate={[required, alphaNumeric]}
+                />
+                <Field
+                  className={classes.loginForm}
+                  label='Senha'
+                  name='password'
+                  type='password'
+                  component={TextField}
+                  validate={[required]}
+                  fullWidth
+                />
+              </CardContent>
+              <CardActions>
+                <Button fullWidth color='primary' type='submit' disabled={submitting}>Entrar</Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        </form>
+      </App>
     )
   }
 }

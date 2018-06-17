@@ -5,7 +5,6 @@ import { withStyles } from '@material-ui/core/styles'
 
 import styles from './AppStyles'
 import AppToolbar from './AppToolbar'
-import AppRoutes from '../routes/AppRoutes'
 import MessagesBar from './MessagesBar'
 import ProgressDialog from './ProgressDialog'
 
@@ -46,23 +45,24 @@ class App extends Component {
   }
 
   render () {
-    const { classes } = this.props
+    const { classes, children, noAppToolbar } = this.props
     const { mainMenuOpen, userMenuAnchorEl } = this.state
     return (
       <div className={classes.appFrame}>
-        <AppToolbar
+        {!noAppToolbar && (<AppToolbar
           mainMenuOpen={mainMenuOpen}
           handleMainMenuOpen={this.handleMainMenuOpen}
           handleMainMenuClose={this.handleMainMenuClose}
           userMenuAnchorEl={userMenuAnchorEl}
           handleUserMenuOpen={this.handleUserMenuOpen}
-          handleUserMenuClose={this.handleUserMenuClose} />
+          handleUserMenuClose={this.handleUserMenuClose} />)}
         <main
-          className={classNames(classes.content, classes.contentLeft, {
-            [classes.contentShift]: mainMenuOpen,
-            [classes.contentShiftLeft]: mainMenuOpen})}>
-          <div className={classes.drawerHeader} />
-          <AppRoutes />
+          className={classNames(classes.content, {
+            [classes.contentLeft]: !noAppToolbar,
+            [classes.contentShift]: !noAppToolbar && mainMenuOpen,
+            [classes.contentShiftLeft]: !noAppToolbar && mainMenuOpen})}>
+          {!noAppToolbar && (<div className={classes.drawerHeader} />)}
+          {children}
           <MessagesBar />
           <ProgressDialog />
         </main>

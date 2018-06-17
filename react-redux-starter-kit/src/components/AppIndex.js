@@ -8,6 +8,7 @@ import _ from 'lodash'
 import { getAuthentication } from '../security/securityContext'
 import { showSuccessMsg } from '../util/messagesUtil'
 import { showProgressDialog, closeProgressDialog } from '../util/operationProgressUtil'
+import App from './App'
 
 const styles = theme => ({
   root: {
@@ -51,6 +52,7 @@ const devStatus = (
       <li>request/response error/progress interceptors,</li>
       <li>authentication JWT, authentication JWT request interceptor,</li>
       <li>central error boundary,</li>
+      <li>app com/sem app toolbar (app props noAppToolbar)</li>
       <li>app toolbar com app menu e authenticated user menu,</li>
       <li>messages bar e messages util p/ exibição de mensagens,</li>
       <li>
@@ -81,17 +83,21 @@ class AppIndex extends Component {
 
   render () {
     const { classes } = this.props
-    return process.env.NODE_ENV !== 'production' && (
-      <div className={classes.root}>
-        <Grid container spacing={16}>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>{devTips}</Paper>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>{devStatus}</Paper>
-          </Grid>
-        </Grid>
-      </div>
+    return (
+      <App noAppToolbar={false}>
+        {process.env.NODE_ENV !== 'production' && (
+          <div className={classes.root}>
+            <Grid container spacing={16}>
+              <Grid item xs={12} sm={6}>
+                <Paper className={classes.paper}>{devTips}</Paper>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Paper className={classes.paper}>{devStatus}</Paper>
+              </Grid>
+            </Grid>
+          </div>
+        )}
+      </App>
     )
   }
 }

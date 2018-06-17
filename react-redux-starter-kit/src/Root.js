@@ -4,8 +4,8 @@ import { BrowserRouter } from 'react-router-dom'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { MuiThemeProvider, withStyles } from '@material-ui/core/styles'
 
+import AppRoutes from './routes/AppRoutes'
 import ErrorBoundary from './components/ErrorBoundary'
-import App from './components/App'
 import store from './store/configureStore'
 import styles, { theme } from './RootStyles'
 
@@ -16,7 +16,7 @@ export const Root = props => (
       <ErrorBoundary>
         <Provider store={store}>
           <BrowserRouter>
-            <App />
+            <AppRoutes />
           </BrowserRouter>
         </Provider>
       </ErrorBoundary>
