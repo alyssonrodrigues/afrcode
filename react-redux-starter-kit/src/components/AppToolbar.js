@@ -7,6 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
+import Grid from '@material-ui/core/Grid'
 
 import styles from './AppToolbarStyles'
 import AppMenu from './AppMenu'
@@ -42,15 +43,30 @@ class AppToolbar extends Component {
       handleMainMenuClose
     } = this.props
     return authentication && authentication.isUserAuthenticated && (
-      <React.Fragment>
-        {this.renderMainMenuIconButton()}
-        {this.renderToobalTitle()}
-        <UserMenu
-          userMenuAnchorEl={userMenuAnchorEl}
-          handleUserMenuOpen={handleUserMenuOpen}
-          handleUserMenuClose={handleUserMenuClose}
-          handleMainMenuClose={handleMainMenuClose} />
-      </React.Fragment>
+      <Grid container justify='space-between' alignItems='center'>
+        <Grid item>
+          <Grid container justify='space-between' alignItems='center'>
+            <Grid item>
+              {this.renderMainMenuIconButton()}
+            </Grid>
+            <Grid item>
+              {this.renderToobalTitle()}
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item />
+        <Grid item>
+          <Grid container justify='space-between' alignItems='center'>
+            <Grid item>
+              <UserMenu
+                userMenuAnchorEl={userMenuAnchorEl}
+                handleUserMenuOpen={handleUserMenuOpen}
+                handleUserMenuClose={handleUserMenuClose}
+                handleMainMenuClose={handleMainMenuClose} />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
     )
   }
 
