@@ -11,7 +11,7 @@ const errorHandlers = {
     handleError: () => {
       store.dispatch(logoutUser())
       getBrowserHistory().push('/login')
-      return 'Usuário não autenticado, faça o login primeiro, por favor.'
+      return 'Usuário não autenticado. Informe usuário e senha corretos e tente novamente.'
     }
   },
   403: {
@@ -40,7 +40,8 @@ const onRejected = err => {
   } else {
     const code = err.response.status
     const statusText = err.response.statusText
-    const errorHandler = errorHandlers[code] || code > 400 ? errorHandlers.default : null
+    const errorHandler = !_.isUndefined(errorHandlers[code]) ? errorHandlers[code]
+      : code >= 400 ? errorHandlers.default : null
     if (errorHandler) {
       msgText = errorHandler.handleError(statusText)
     } else {
