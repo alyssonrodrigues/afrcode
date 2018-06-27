@@ -3,10 +3,13 @@ import _ from 'lodash'
 
 import { showErrorMsg } from '../util/messagesUtil'
 import { getBrowserHistory } from '../util/applicationContext'
+import store from '../store/configureStore'
+import { logoutUser } from '../actions/authenticationJwtActions'
 
 const errorHandlers = {
   401: {
     handleError: () => {
+      store.dispatch(logoutUser())
       getBrowserHistory().push('/login')
       return 'Usuário não autenticado, faça o login primeiro, por favor.'
     }
