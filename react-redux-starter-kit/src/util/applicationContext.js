@@ -12,3 +12,9 @@ export const getMenuItems = () => [
   { label: 'Menu item 2', path: '/' },
   { label: 'Menu item N', path: '/' }
 ]
+
+let browserHistory
+
+export const setBrowserHistory = history => { browserHistory = history }
+
+export const getBrowserHistory = () => browserHistory
