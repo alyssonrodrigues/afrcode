@@ -38,6 +38,9 @@
   },
   "standard": {
     "parser": "babel-eslint",
+    "env": {
+      "jest": true
+    },
     "ignore": [
       "/src/registerServiceWorker.js"
     ],

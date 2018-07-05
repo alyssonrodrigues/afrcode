@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { saveSecurityToken,
   removeSecurityToken,
   getAuthentication } from './securityContext'

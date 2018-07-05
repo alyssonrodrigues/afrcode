@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import React from 'react'
 import { mount, shallow } from 'enzyme'
 import Logout, { Logout as LogoutUnitTest } from './Logout'

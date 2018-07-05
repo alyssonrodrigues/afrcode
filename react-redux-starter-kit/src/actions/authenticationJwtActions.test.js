@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import MockAdapter from 'axios-mock-adapter'
 
 import { axiosWrapper,

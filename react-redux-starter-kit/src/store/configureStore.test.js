@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import store from './configureStore'
 
 describe('configureStore', () => {
