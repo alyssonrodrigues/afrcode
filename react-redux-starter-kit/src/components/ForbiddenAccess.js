@@ -28,7 +28,7 @@ const styles = {
   }
 }
 
-class ForbiddenAccess extends Component {
+export class ForbiddenAccess extends Component {
   componentWillUnmount () {
     this.props.dismissMessage()
   }

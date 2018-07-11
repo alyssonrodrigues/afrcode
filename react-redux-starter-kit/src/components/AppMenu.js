@@ -13,7 +13,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import styles from './AppMenuStyles'
 import { getMenuItems } from '../util/applicationContext'
 
-class AppMenu extends Component {
+export class AppMenu extends Component {
   renderMainMenuItems () {
     const { classes, authentication, handleMainMenuClose } = this.props
     return authentication && authentication.isUserAuthenticated && (

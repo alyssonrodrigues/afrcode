@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography'
 
 import styles from './UserMenuStyles'
 
-class UserMenu extends Component {
+export class UserMenu extends Component {
   handleUserLogout () {
     const { handleUserMenuClose, handleMainMenuClose } = this.props
     handleMainMenuClose()

@@ -28,7 +28,7 @@ const styles = {
   }
 }
 
-class HttpErrorView extends Component {
+export class HttpErrorView extends Component {
   componentWillUnmount () {
     this.props.dismissMessage()
   }

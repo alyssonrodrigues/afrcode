@@ -7,7 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 
 import styles from './ProgressDialogStyles'
 
-class ProgressDialog extends Component {
+export class ProgressDialog extends Component {
   render () {
     const { classes, operationProgress: { operationInProgress } } = this.props
     return (

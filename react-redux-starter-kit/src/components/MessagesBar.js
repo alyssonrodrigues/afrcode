@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import styles from './MessagesBarStyles'
 import { dismissMessage } from '../actions/messagesActions'
 
-const MessagesBar = props => {
+export const MessagesBar = props => {
   const { classes } = props
   const { message } = props.messages
   const open = Boolean(message)
