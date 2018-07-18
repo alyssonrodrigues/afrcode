@@ -45,6 +45,7 @@ export class AppMenu extends Component {
         variant='persistent'
         anchor='left'
         open={mainMenuOpen}
+        PaperProps={{style: {minHeight: '100%'}}}
         classes={{ paper: classes.drawerPaper }}>
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleMainMenuClose}>
