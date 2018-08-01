@@ -46,18 +46,18 @@ export class HttpErrorView extends Component {
             </Typography>
           </DialogTitle>
           <DialogContent>
-            <DialogContenText>
+            <DialogContenText component='div'>
               <Typography variant='title'>
                 Aguarde alguns instantes e tente novamente.
               </Typography>
             </DialogContenText>
-            <DialogContenText>
+            <DialogContenText component='div'>
               <Typography variant='subheading' className={classes.item}>
                 Entre em contato através do 0800 644 1500 se o problema persistir.
               </Typography>
             </DialogContenText>
             {message ? (
-              <DialogContenText>
+              <DialogContenText component='div'>
                 <Typography variant='body1' className={classes.item} style={{ maxWidth: 800 }}>
                   Mensagem: {`"${message.msgText}"`}
                 </Typography>

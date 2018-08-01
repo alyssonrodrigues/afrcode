@@ -46,12 +46,12 @@ export class ForbiddenAccess extends Component {
             </Typography>
           </DialogTitle>
           <DialogContent>
-            <DialogContenText>
+            <DialogContenText component='div'>
               <Typography variant='title' style={{ maxWidth: 500 }}>
                 Você não tem permissão para acessar este recurso, solicite ao responsável, por favor.
               </Typography>
             </DialogContenText>
-            <DialogContenText>
+            <DialogContenText component='div'>
               <Typography variant='subheading' className={classes.item}>
                 Entre em contato através do 0800 644 1500 se o problema persistir.
               </Typography>
