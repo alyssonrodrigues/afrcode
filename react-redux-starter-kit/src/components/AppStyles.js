@@ -18,6 +18,7 @@ export default theme => ({
     ...theme.mixins.toolbar
   },
   content: {
+    maxWidth: '100vw',
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
