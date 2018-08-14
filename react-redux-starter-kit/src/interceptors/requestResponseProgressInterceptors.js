@@ -5,7 +5,7 @@ import { SLOW_REQUEST_HEADER,
   closeProgressDialog } from '../util/operationProgressUtil'
 
 const onRejected = err => {
-  if (err.config.headers[SLOW_REQUEST_HEADER]) {
+  if (err.config && err.config.headers[SLOW_REQUEST_HEADER]) {
     closeProgressDialog()
   }
   return Promise.reject(err)
