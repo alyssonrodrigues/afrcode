@@ -55,6 +55,8 @@ const devStatus = (
       <li>app com/sem app toolbar (app props noAppToolbar),</li>
       <li>app toolbar com app menu e authenticated user menu,</li>
       <li>messages bar e messages util p/ exibição de mensagens,</li>
+      <li>componente p/ autocompleteselect,</li>
+      <li>componente p/ tablepaginationfooter,</li>
       <li>
         <Button size='small' onClick={() => {
           showProgressDialog()
