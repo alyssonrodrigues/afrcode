@@ -24,7 +24,7 @@ const styles = theme => ({
 const devTips = (
   <div>
     <p>
-      Para iniciar, edite o <code>src/AppIndex.js</code> e salve para recarregar.
+      Para iniciar, edite o <code>src/components/AppIndex.js</code> e salve para recarregar.
     </p>
     <p>
       Veja também o <code>src/routes/AppRoutes.js</code> para definições de "routes".
