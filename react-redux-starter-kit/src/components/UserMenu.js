@@ -57,7 +57,7 @@ export class UserMenu extends Component {
         className={classes.userMenu}>
         <Card elevation={0}>
           <CardContent>
-            <Typography variant='body2' color='textSecondary'>{username}</Typography>
+            <Typography variant='subtitle2' color='textSecondary'>{username}</Typography>
           </CardContent>
           <CardActions className={classes.row}>
             {this.renderUserMenuItems()}

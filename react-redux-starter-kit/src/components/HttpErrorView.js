@@ -41,24 +41,24 @@ export class HttpErrorView extends Component {
           BackdropProps={{className: classes.backdropClassName}}
           PaperProps={{className: classes.paperClassName, elevation: 2}}>
           <DialogTitle disableTypography>
-            <Typography variant='display1' color='error'>
+            <Typography variant='h4' color='error'>
               Ocorreu um erro inesperado
             </Typography>
           </DialogTitle>
           <DialogContent>
             <DialogContenText component='div'>
-              <Typography variant='title'>
+              <Typography variant='h6'>
                 Aguarde alguns instantes e tente novamente.
               </Typography>
             </DialogContenText>
             <DialogContenText component='div'>
-              <Typography variant='subheading' className={classes.item}>
+              <Typography variant='subtitle1' className={classes.item}>
                 Entre em contato através do 0800 644 1500 se o problema persistir.
               </Typography>
             </DialogContenText>
             {message ? (
               <DialogContenText component='div'>
-                <Typography variant='body1' className={classes.item} style={{ maxWidth: 800 }}>
+                <Typography variant='body2' className={classes.item} style={{ maxWidth: 800 }}>
                   Mensagem: {`"${message.msgText}"`}
                 </Typography>
               </DialogContenText>

@@ -18,7 +18,7 @@ class AppToolbar extends Component {
   renderToobalTitle () {
     const { classes } = this.props
     return (
-      <Typography variant='title' color='inherit' className={classes.flex}>
+      <Typography variant='h6' color='inherit' className={classes.flex}>
         {getAppTitle()}
       </Typography>
     )

@@ -41,18 +41,18 @@ export class ForbiddenAccess extends Component {
           BackdropProps={{className: classes.backdropClassName}}
           PaperProps={{className: classes.paperClassName, elevation: 2}}>
           <DialogTitle disableTypography>
-            <Typography variant='display1' color='error'>
+            <Typography variant='h4' color='error'>
               Acesso negado
             </Typography>
           </DialogTitle>
           <DialogContent>
             <DialogContenText component='div'>
-              <Typography variant='title' style={{ maxWidth: 500 }}>
+              <Typography variant='h6' style={{ maxWidth: 500 }}>
                 Você não tem permissão para acessar este recurso, solicite ao responsável, por favor.
               </Typography>
             </DialogContenText>
             <DialogContenText component='div'>
-              <Typography variant='subheading' className={classes.item}>
+              <Typography variant='subtitle1' className={classes.item}>
                 Entre em contato através do 0800 644 1500 se o problema persistir.
               </Typography>
             </DialogContenText>
