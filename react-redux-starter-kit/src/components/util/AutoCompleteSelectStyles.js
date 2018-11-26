@@ -28,12 +28,12 @@ export default theme => ({
     padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
   },
   singleValue: {
-    fontSize: theme.typography.body1.fontSize
+    fontSize: theme.typography.body2Next.fontSize
   },
   placeholder: {
     position: 'absolute',
     left: 2,
-    fontSize: theme.typography.body1.fontSize
+    fontSize: theme.typography.body2Next.fontSize
   },
   paper: {
     marginTop: theme.spacing.unit
