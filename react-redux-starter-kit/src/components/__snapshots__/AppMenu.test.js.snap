@@ -2,7 +2,6 @@
 
 exports[`AppMenu AppMenu render deveria ocorrer sem falhas! 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <AppMenu
     authentication={
@@ -19,6 +18,7 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -27,6 +27,11 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
+      "PaperProps": Object {
+        "style": Object {
+          "minHeight": "100%",
+        },
+      },
       "anchor": "left",
       "children": Array [
         <div
@@ -35,7 +40,7 @@ ShallowWrapper {
           <WithStyles(IconButton)
                     onClick={[Function]}
           >
-                    <pure(ChevronLeft) />
+                    <pure(ChevronLeftIcon) />
           </WithStyles(IconButton)>
 </div>,
         <WithStyles(Divider) />,
@@ -97,7 +102,7 @@ ShallowWrapper {
           "children": <WithStyles(IconButton)
             onClick={[Function]}
 >
-            <pure(ChevronLeft) />
+            <pure(ChevronLeftIcon) />
 </WithStyles(IconButton)>,
           "className": undefined,
         },
@@ -107,7 +112,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "children": <pure(ChevronLeft) />,
+            "children": <pure(ChevronLeftIcon) />,
             "onClick": [Function],
           },
           "ref": null,
@@ -347,6 +352,11 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
+        "PaperProps": Object {
+          "style": Object {
+            "minHeight": "100%",
+          },
+        },
         "anchor": "left",
         "children": Array [
           <div
@@ -355,7 +365,7 @@ ShallowWrapper {
             <WithStyles(IconButton)
                         onClick={[Function]}
             >
-                        <pure(ChevronLeft) />
+                        <pure(ChevronLeftIcon) />
             </WithStyles(IconButton)>
 </div>,
           <WithStyles(Divider) />,
@@ -417,7 +427,7 @@ ShallowWrapper {
             "children": <WithStyles(IconButton)
               onClick={[Function]}
 >
-              <pure(ChevronLeft) />
+              <pure(ChevronLeftIcon) />
 </WithStyles(IconButton)>,
             "className": undefined,
           },
@@ -427,7 +437,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "children": <pure(ChevronLeft) />,
+              "children": <pure(ChevronLeftIcon) />,
               "onClick": [Function],
             },
             "ref": null,
@@ -666,6 +676,16 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
   },

@@ -37,7 +37,7 @@ export class UserMenu extends Component {
 
   renderUserMenuItems () {
     return (
-      <Button fullWidth color='primary' variant='raised' onClick={this.handleUserLogout.bind(this)}>Sair</Button>
+      <Button fullWidth color='primary' variant='contained' onClick={this.handleUserLogout.bind(this)}>Sair</Button>
     )
   }
 

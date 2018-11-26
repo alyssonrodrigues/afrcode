@@ -3,6 +3,8 @@ import { mount, shallow } from 'enzyme'
 import Logout, { Logout as LogoutUnitTest } from './Logout'
 import { Provider } from 'react-redux'
 import { MemoryRouter, Redirect } from 'react-router-dom'
+import { theme } from '../RootStyles'
+import { MuiThemeProvider } from '@material-ui/core'
 
 describe('<Logout />', () => {
   it('Action @authenticationJwtActions/USER_LOGOUT deveria ter ocorrido sem falhas!', () => {
@@ -11,11 +13,13 @@ describe('<Logout />', () => {
       messages: {}
     })
     const logoutWrapper = mount(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Logout />
-        </MemoryRouter>
-      </Provider>
+      <MuiThemeProvider theme={theme}>
+        <Provider store={store}>
+          <MemoryRouter>
+            <Logout />
+          </MemoryRouter>
+        </Provider>
+      </MuiThemeProvider>
     )
     const redirect = logoutWrapper.find(Redirect)
     expect(redirect).toHaveLength(1)

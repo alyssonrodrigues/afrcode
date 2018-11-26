@@ -2,7 +2,6 @@
 
 exports[`ForbiddenAccess ForbiddenAccess render deveria ocorrer sem falhas! 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <ForbiddenAccess
     classes={Object {}}
@@ -12,6 +11,7 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -39,28 +39,32 @@ ShallowWrapper {
         >
                 <WithStyles(Typography)
                         color="error"
-                        variant="display1"
+                        variant="h4"
                 >
                         Acesso negado
                 </WithStyles(Typography)>
         </WithStyles(DialogTitle)>
         <WithStyles(DialogContent)>
-                <WithStyles(DialogContentText)>
+                <WithStyles(DialogContentText)
+                        component="div"
+                >
                         <WithStyles(Typography)
                                 style={
                                         Object {
                                                 "maxWidth": 500,
                                               }
                                 }
-                                variant="title"
+                                variant="h6"
                         >
                                 Você não tem permissão para acessar este recurso, solicite ao responsável, por favor.
                         </WithStyles(Typography)>
                 </WithStyles(DialogContentText)>
-                <WithStyles(DialogContentText)>
+                <WithStyles(DialogContentText)
+                        component="div"
+                >
                         <WithStyles(Typography)
                                 className={undefined}
-                                variant="subheading"
+                                variant="subtitle1"
                         >
                                 Entre em contato através do 0800 644 1500 se o problema persistir.
                         </WithStyles(Typography)>
@@ -96,28 +100,32 @@ ShallowWrapper {
 >
             <WithStyles(Typography)
                         color="error"
-                        variant="display1"
+                        variant="h4"
             >
                         Acesso negado
             </WithStyles(Typography)>
 </WithStyles(DialogTitle)>,
           <WithStyles(DialogContent)>
-            <WithStyles(DialogContentText)>
+            <WithStyles(DialogContentText)
+                        component="div"
+            >
                         <WithStyles(Typography)
                                     style={
                                                 Object {
                                                             "maxWidth": 500,
                                                           }
                                     }
-                                    variant="title"
+                                    variant="h6"
                         >
                                     Você não tem permissão para acessar este recurso, solicite ao responsável, por favor.
                         </WithStyles(Typography)>
             </WithStyles(DialogContentText)>
-            <WithStyles(DialogContentText)>
+            <WithStyles(DialogContentText)
+                        component="div"
+            >
                         <WithStyles(Typography)
                                     className={undefined}
-                                    variant="subheading"
+                                    variant="subtitle1"
                         >
                                     Entre em contato através do 0800 644 1500 se o problema persistir.
                         </WithStyles(Typography)>
@@ -144,7 +152,7 @@ ShallowWrapper {
           "props": Object {
             "children": <WithStyles(Typography)
               color="error"
-              variant="display1"
+              variant="h4"
 >
               Acesso negado
 </WithStyles(Typography)>,
@@ -158,7 +166,7 @@ ShallowWrapper {
             "props": Object {
               "children": "Acesso negado",
               "color": "error",
-              "variant": "display1",
+              "variant": "h4",
             },
             "ref": null,
             "rendered": "Acesso negado",
@@ -172,22 +180,26 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <WithStyles(DialogContentText)>
+              <WithStyles(DialogContentText)
+                component="div"
+>
                 <WithStyles(Typography)
                                 style={
                                                 Object {
                                                                 "maxWidth": 500,
                                                               }
                                 }
-                                variant="title"
+                                variant="h6"
                 >
                                 Você não tem permissão para acessar este recurso, solicite ao responsável, por favor.
                 </WithStyles(Typography)>
 </WithStyles(DialogContentText)>,
-              <WithStyles(DialogContentText)>
+              <WithStyles(DialogContentText)
+                component="div"
+>
                 <WithStyles(Typography)
                                 className={undefined}
-                                variant="subheading"
+                                variant="subtitle1"
                 >
                                 Entre em contato através do 0800 644 1500 se o problema persistir.
                 </WithStyles(Typography)>
@@ -207,10 +219,11 @@ ShallowWrapper {
                                                       "maxWidth": 500,
                                                     }
                   }
-                  variant="title"
+                  variant="h6"
 >
                   Você não tem permissão para acessar este recurso, solicite ao responsável, por favor.
 </WithStyles(Typography)>,
+                "component": "div",
               },
               "ref": null,
               "rendered": Object {
@@ -222,7 +235,7 @@ ShallowWrapper {
                   "style": Object {
                     "maxWidth": 500,
                   },
-                  "variant": "title",
+                  "variant": "h6",
                 },
                 "ref": null,
                 "rendered": "Você não tem permissão para acessar este recurso, solicite ao responsável, por favor.",
@@ -237,10 +250,11 @@ ShallowWrapper {
               "props": Object {
                 "children": <WithStyles(Typography)
                   className={undefined}
-                  variant="subheading"
+                  variant="subtitle1"
 >
                   Entre em contato através do 0800 644 1500 se o problema persistir.
 </WithStyles(Typography)>,
+                "component": "div",
               },
               "ref": null,
               "rendered": Object {
@@ -250,7 +264,7 @@ ShallowWrapper {
                 "props": Object {
                   "children": "Entre em contato através do 0800 644 1500 se o problema persistir.",
                   "className": undefined,
-                  "variant": "subheading",
+                  "variant": "subtitle1",
                 },
                 "ref": null,
                 "rendered": "Entre em contato através do 0800 644 1500 se o problema persistir.",
@@ -321,28 +335,32 @@ ShallowWrapper {
           >
                     <WithStyles(Typography)
                               color="error"
-                              variant="display1"
+                              variant="h4"
                     >
                               Acesso negado
                     </WithStyles(Typography)>
           </WithStyles(DialogTitle)>
           <WithStyles(DialogContent)>
-                    <WithStyles(DialogContentText)>
+                    <WithStyles(DialogContentText)
+                              component="div"
+                    >
                               <WithStyles(Typography)
                                         style={
                                                   Object {
                                                             "maxWidth": 500,
                                                           }
                                         }
-                                        variant="title"
+                                        variant="h6"
                               >
                                         Você não tem permissão para acessar este recurso, solicite ao responsável, por favor.
                               </WithStyles(Typography)>
                     </WithStyles(DialogContentText)>
-                    <WithStyles(DialogContentText)>
+                    <WithStyles(DialogContentText)
+                              component="div"
+                    >
                               <WithStyles(Typography)
                                         className={undefined}
-                                        variant="subheading"
+                                        variant="subtitle1"
                               >
                                         Entre em contato através do 0800 644 1500 se o problema persistir.
                               </WithStyles(Typography)>
@@ -378,28 +396,32 @@ ShallowWrapper {
 >
               <WithStyles(Typography)
                             color="error"
-                            variant="display1"
+                            variant="h4"
               >
                             Acesso negado
               </WithStyles(Typography)>
 </WithStyles(DialogTitle)>,
             <WithStyles(DialogContent)>
-              <WithStyles(DialogContentText)>
+              <WithStyles(DialogContentText)
+                            component="div"
+              >
                             <WithStyles(Typography)
                                           style={
                                                         Object {
                                                                       "maxWidth": 500,
                                                                     }
                                           }
-                                          variant="title"
+                                          variant="h6"
                             >
                                           Você não tem permissão para acessar este recurso, solicite ao responsável, por favor.
                             </WithStyles(Typography)>
               </WithStyles(DialogContentText)>
-              <WithStyles(DialogContentText)>
+              <WithStyles(DialogContentText)
+                            component="div"
+              >
                             <WithStyles(Typography)
                                           className={undefined}
-                                          variant="subheading"
+                                          variant="subtitle1"
                             >
                                           Entre em contato através do 0800 644 1500 se o problema persistir.
                             </WithStyles(Typography)>
@@ -426,7 +448,7 @@ ShallowWrapper {
             "props": Object {
               "children": <WithStyles(Typography)
                 color="error"
-                variant="display1"
+                variant="h4"
 >
                 Acesso negado
 </WithStyles(Typography)>,
@@ -440,7 +462,7 @@ ShallowWrapper {
               "props": Object {
                 "children": "Acesso negado",
                 "color": "error",
-                "variant": "display1",
+                "variant": "h4",
               },
               "ref": null,
               "rendered": "Acesso negado",
@@ -454,22 +476,26 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "children": Array [
-                <WithStyles(DialogContentText)>
+                <WithStyles(DialogContentText)
+                  component="div"
+>
                   <WithStyles(Typography)
                                     style={
                                                       Object {
                                                                         "maxWidth": 500,
                                                                       }
                                     }
-                                    variant="title"
+                                    variant="h6"
                   >
                                     Você não tem permissão para acessar este recurso, solicite ao responsável, por favor.
                   </WithStyles(Typography)>
 </WithStyles(DialogContentText)>,
-                <WithStyles(DialogContentText)>
+                <WithStyles(DialogContentText)
+                  component="div"
+>
                   <WithStyles(Typography)
                                     className={undefined}
-                                    variant="subheading"
+                                    variant="subtitle1"
                   >
                                     Entre em contato através do 0800 644 1500 se o problema persistir.
                   </WithStyles(Typography)>
@@ -489,10 +515,11 @@ ShallowWrapper {
                                                             "maxWidth": 500,
                                                           }
                     }
-                    variant="title"
+                    variant="h6"
 >
                     Você não tem permissão para acessar este recurso, solicite ao responsável, por favor.
 </WithStyles(Typography)>,
+                  "component": "div",
                 },
                 "ref": null,
                 "rendered": Object {
@@ -504,7 +531,7 @@ ShallowWrapper {
                     "style": Object {
                       "maxWidth": 500,
                     },
-                    "variant": "title",
+                    "variant": "h6",
                   },
                   "ref": null,
                   "rendered": "Você não tem permissão para acessar este recurso, solicite ao responsável, por favor.",
@@ -519,10 +546,11 @@ ShallowWrapper {
                 "props": Object {
                   "children": <WithStyles(Typography)
                     className={undefined}
-                    variant="subheading"
+                    variant="subtitle1"
 >
                     Entre em contato através do 0800 644 1500 se o problema persistir.
 </WithStyles(Typography)>,
+                  "component": "div",
                 },
                 "ref": null,
                 "rendered": Object {
@@ -532,7 +560,7 @@ ShallowWrapper {
                   "props": Object {
                     "children": "Entre em contato através do 0800 644 1500 se o problema persistir.",
                     "className": undefined,
-                    "variant": "subheading",
+                    "variant": "subtitle1",
                   },
                   "ref": null,
                   "rendered": "Entre em contato através do 0800 644 1500 se o problema persistir.",
@@ -583,6 +611,16 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
   },

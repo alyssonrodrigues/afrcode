@@ -2,7 +2,6 @@
 
 exports[`UserMenu UserMenu render deveria ocorrer sem falhas! 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <UserMenu
     authentication={
@@ -21,6 +20,7 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -55,7 +55,7 @@ ShallowWrapper {
                     <WithStyles(CardContent)>
                               <WithStyles(Typography)
                                         color="textSecondary"
-                                        variant="body2"
+                                        variant="subtitle2"
                               >
                                         josejoao
                               </WithStyles(Typography)>
@@ -67,7 +67,7 @@ ShallowWrapper {
                                         color="primary"
                                         fullWidth={true}
                                         onClick={[Function]}
-                                        variant="raised"
+                                        variant="contained"
                               >
                                         Sair
                               </WithStyles(Button)>
@@ -121,7 +121,7 @@ ShallowWrapper {
             <WithStyles(CardContent)>
                         <WithStyles(Typography)
                                     color="textSecondary"
-                                    variant="body2"
+                                    variant="subtitle2"
                         >
                                     josejoao
                         </WithStyles(Typography)>
@@ -133,7 +133,7 @@ ShallowWrapper {
                                     color="primary"
                                     fullWidth={true}
                                     onClick={[Function]}
-                                    variant="raised"
+                                    variant="contained"
                         >
                                     Sair
                         </WithStyles(Button)>
@@ -154,7 +154,7 @@ ShallowWrapper {
               <WithStyles(CardContent)>
                 <WithStyles(Typography)
                                 color="textSecondary"
-                                variant="body2"
+                                variant="subtitle2"
                 >
                                 josejoao
                 </WithStyles(Typography)>
@@ -166,7 +166,7 @@ ShallowWrapper {
                                 color="primary"
                                 fullWidth={true}
                                 onClick={[Function]}
-                                variant="raised"
+                                variant="contained"
                 >
                                 Sair
                 </WithStyles(Button)>
@@ -183,7 +183,7 @@ ShallowWrapper {
               "props": Object {
                 "children": <WithStyles(Typography)
                   color="textSecondary"
-                  variant="body2"
+                  variant="subtitle2"
 >
                   josejoao
 </WithStyles(Typography)>,
@@ -196,7 +196,7 @@ ShallowWrapper {
                 "props": Object {
                   "children": "josejoao",
                   "color": "textSecondary",
-                  "variant": "body2",
+                  "variant": "subtitle2",
                 },
                 "ref": null,
                 "rendered": "josejoao",
@@ -213,7 +213,7 @@ ShallowWrapper {
                   color="primary"
                   fullWidth={true}
                   onClick={[Function]}
-                  variant="raised"
+                  variant="contained"
 >
                   Sair
 </WithStyles(Button)>,
@@ -229,7 +229,7 @@ ShallowWrapper {
                   "color": "primary",
                   "fullWidth": true,
                   "onClick": [Function],
-                  "variant": "raised",
+                  "variant": "contained",
                 },
                 "ref": null,
                 "rendered": "Sair",
@@ -277,7 +277,7 @@ ShallowWrapper {
                         <WithStyles(CardContent)>
                                     <WithStyles(Typography)
                                                 color="textSecondary"
-                                                variant="body2"
+                                                variant="subtitle2"
                                     >
                                                 josejoao
                                     </WithStyles(Typography)>
@@ -289,7 +289,7 @@ ShallowWrapper {
                                                 color="primary"
                                                 fullWidth={true}
                                                 onClick={[Function]}
-                                                variant="raised"
+                                                variant="contained"
                                     >
                                                 Sair
                                     </WithStyles(Button)>
@@ -343,7 +343,7 @@ ShallowWrapper {
               <WithStyles(CardContent)>
                             <WithStyles(Typography)
                                           color="textSecondary"
-                                          variant="body2"
+                                          variant="subtitle2"
                             >
                                           josejoao
                             </WithStyles(Typography)>
@@ -355,7 +355,7 @@ ShallowWrapper {
                                           color="primary"
                                           fullWidth={true}
                                           onClick={[Function]}
-                                          variant="raised"
+                                          variant="contained"
                             >
                                           Sair
                             </WithStyles(Button)>
@@ -376,7 +376,7 @@ ShallowWrapper {
                 <WithStyles(CardContent)>
                   <WithStyles(Typography)
                                     color="textSecondary"
-                                    variant="body2"
+                                    variant="subtitle2"
                   >
                                     josejoao
                   </WithStyles(Typography)>
@@ -388,7 +388,7 @@ ShallowWrapper {
                                     color="primary"
                                     fullWidth={true}
                                     onClick={[Function]}
-                                    variant="raised"
+                                    variant="contained"
                   >
                                     Sair
                   </WithStyles(Button)>
@@ -405,7 +405,7 @@ ShallowWrapper {
                 "props": Object {
                   "children": <WithStyles(Typography)
                     color="textSecondary"
-                    variant="body2"
+                    variant="subtitle2"
 >
                     josejoao
 </WithStyles(Typography)>,
@@ -418,7 +418,7 @@ ShallowWrapper {
                   "props": Object {
                     "children": "josejoao",
                     "color": "textSecondary",
-                    "variant": "body2",
+                    "variant": "subtitle2",
                   },
                   "ref": null,
                   "rendered": "josejoao",
@@ -435,7 +435,7 @@ ShallowWrapper {
                     color="primary"
                     fullWidth={true}
                     onClick={[Function]}
-                    variant="raised"
+                    variant="contained"
 >
                     Sair
 </WithStyles(Button)>,
@@ -451,7 +451,7 @@ ShallowWrapper {
                     "color": "primary",
                     "fullWidth": true,
                     "onClick": [Function],
-                    "variant": "raised",
+                    "variant": "contained",
                   },
                   "ref": null,
                   "rendered": "Sair",
@@ -472,6 +472,16 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
   },

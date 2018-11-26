@@ -2,7 +2,6 @@
 
 exports[`MessagesBar MessagesBar render deveria ocorrer sem falhas! 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Unknown
     classes={Object {}}
@@ -17,6 +16,7 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -32,7 +32,7 @@ ShallowWrapper {
           color="inherit"
           onClick={[Function]}
 >
-          <pure(Close) />
+          <pure(CloseIcon) />
 </WithStyles(IconButton)>,
       ],
       "anchorOrigin": Object {
@@ -64,7 +64,7 @@ ShallowWrapper {
             color="inherit"
             onClick={[Function]}
 >
-            <pure(Close) />
+            <pure(CloseIcon) />
 </WithStyles(IconButton)>,
         ],
         "anchorOrigin": Object {
@@ -88,6 +88,16 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
   },

@@ -2,7 +2,6 @@
 
 exports[`HttpErrorView HttpErrorView render deveria ocorrer sem falhas! 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <HttpErrorView
     classes={Object {}}
@@ -13,6 +12,7 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -40,23 +40,27 @@ ShallowWrapper {
         >
                 <WithStyles(Typography)
                         color="error"
-                        variant="display1"
+                        variant="h4"
                 >
                         Ocorreu um erro inesperado
                 </WithStyles(Typography)>
         </WithStyles(DialogTitle)>
         <WithStyles(DialogContent)>
-                <WithStyles(DialogContentText)>
+                <WithStyles(DialogContentText)
+                        component="div"
+                >
                         <WithStyles(Typography)
-                                variant="title"
+                                variant="h6"
                         >
                                 Aguarde alguns instantes e tente novamente.
                         </WithStyles(Typography)>
                 </WithStyles(DialogContentText)>
-                <WithStyles(DialogContentText)>
+                <WithStyles(DialogContentText)
+                        component="div"
+                >
                         <WithStyles(Typography)
                                 className={undefined}
-                                variant="subheading"
+                                variant="subtitle1"
                         >
                                 Entre em contato através do 0800 644 1500 se o problema persistir.
                         </WithStyles(Typography)>
@@ -92,23 +96,27 @@ ShallowWrapper {
 >
             <WithStyles(Typography)
                         color="error"
-                        variant="display1"
+                        variant="h4"
             >
                         Ocorreu um erro inesperado
             </WithStyles(Typography)>
 </WithStyles(DialogTitle)>,
           <WithStyles(DialogContent)>
-            <WithStyles(DialogContentText)>
+            <WithStyles(DialogContentText)
+                        component="div"
+            >
                         <WithStyles(Typography)
-                                    variant="title"
+                                    variant="h6"
                         >
                                     Aguarde alguns instantes e tente novamente.
                         </WithStyles(Typography)>
             </WithStyles(DialogContentText)>
-            <WithStyles(DialogContentText)>
+            <WithStyles(DialogContentText)
+                        component="div"
+            >
                         <WithStyles(Typography)
                                     className={undefined}
-                                    variant="subheading"
+                                    variant="subtitle1"
                         >
                                     Entre em contato através do 0800 644 1500 se o problema persistir.
                         </WithStyles(Typography)>
@@ -135,7 +143,7 @@ ShallowWrapper {
           "props": Object {
             "children": <WithStyles(Typography)
               color="error"
-              variant="display1"
+              variant="h4"
 >
               Ocorreu um erro inesperado
 </WithStyles(Typography)>,
@@ -149,7 +157,7 @@ ShallowWrapper {
             "props": Object {
               "children": "Ocorreu um erro inesperado",
               "color": "error",
-              "variant": "display1",
+              "variant": "h4",
             },
             "ref": null,
             "rendered": "Ocorreu um erro inesperado",
@@ -163,17 +171,21 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <WithStyles(DialogContentText)>
+              <WithStyles(DialogContentText)
+                component="div"
+>
                 <WithStyles(Typography)
-                                variant="title"
+                                variant="h6"
                 >
                                 Aguarde alguns instantes e tente novamente.
                 </WithStyles(Typography)>
 </WithStyles(DialogContentText)>,
-              <WithStyles(DialogContentText)>
+              <WithStyles(DialogContentText)
+                component="div"
+>
                 <WithStyles(Typography)
                                 className={undefined}
-                                variant="subheading"
+                                variant="subtitle1"
                 >
                                 Entre em contato através do 0800 644 1500 se o problema persistir.
                 </WithStyles(Typography)>
@@ -189,10 +201,11 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "children": <WithStyles(Typography)
-                  variant="title"
+                  variant="h6"
 >
                   Aguarde alguns instantes e tente novamente.
 </WithStyles(Typography)>,
+                "component": "div",
               },
               "ref": null,
               "rendered": Object {
@@ -201,7 +214,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "children": "Aguarde alguns instantes e tente novamente.",
-                  "variant": "title",
+                  "variant": "h6",
                 },
                 "ref": null,
                 "rendered": "Aguarde alguns instantes e tente novamente.",
@@ -216,10 +229,11 @@ ShallowWrapper {
               "props": Object {
                 "children": <WithStyles(Typography)
                   className={undefined}
-                  variant="subheading"
+                  variant="subtitle1"
 >
                   Entre em contato através do 0800 644 1500 se o problema persistir.
 </WithStyles(Typography)>,
+                "component": "div",
               },
               "ref": null,
               "rendered": Object {
@@ -229,7 +243,7 @@ ShallowWrapper {
                 "props": Object {
                   "children": "Entre em contato através do 0800 644 1500 se o problema persistir.",
                   "className": undefined,
-                  "variant": "subheading",
+                  "variant": "subtitle1",
                 },
                 "ref": null,
                 "rendered": "Entre em contato através do 0800 644 1500 se o problema persistir.",
@@ -301,23 +315,27 @@ ShallowWrapper {
           >
                     <WithStyles(Typography)
                               color="error"
-                              variant="display1"
+                              variant="h4"
                     >
                               Ocorreu um erro inesperado
                     </WithStyles(Typography)>
           </WithStyles(DialogTitle)>
           <WithStyles(DialogContent)>
-                    <WithStyles(DialogContentText)>
+                    <WithStyles(DialogContentText)
+                              component="div"
+                    >
                               <WithStyles(Typography)
-                                        variant="title"
+                                        variant="h6"
                               >
                                         Aguarde alguns instantes e tente novamente.
                               </WithStyles(Typography)>
                     </WithStyles(DialogContentText)>
-                    <WithStyles(DialogContentText)>
+                    <WithStyles(DialogContentText)
+                              component="div"
+                    >
                               <WithStyles(Typography)
                                         className={undefined}
-                                        variant="subheading"
+                                        variant="subtitle1"
                               >
                                         Entre em contato através do 0800 644 1500 se o problema persistir.
                               </WithStyles(Typography)>
@@ -353,23 +371,27 @@ ShallowWrapper {
 >
               <WithStyles(Typography)
                             color="error"
-                            variant="display1"
+                            variant="h4"
               >
                             Ocorreu um erro inesperado
               </WithStyles(Typography)>
 </WithStyles(DialogTitle)>,
             <WithStyles(DialogContent)>
-              <WithStyles(DialogContentText)>
+              <WithStyles(DialogContentText)
+                            component="div"
+              >
                             <WithStyles(Typography)
-                                          variant="title"
+                                          variant="h6"
                             >
                                           Aguarde alguns instantes e tente novamente.
                             </WithStyles(Typography)>
               </WithStyles(DialogContentText)>
-              <WithStyles(DialogContentText)>
+              <WithStyles(DialogContentText)
+                            component="div"
+              >
                             <WithStyles(Typography)
                                           className={undefined}
-                                          variant="subheading"
+                                          variant="subtitle1"
                             >
                                           Entre em contato através do 0800 644 1500 se o problema persistir.
                             </WithStyles(Typography)>
@@ -396,7 +418,7 @@ ShallowWrapper {
             "props": Object {
               "children": <WithStyles(Typography)
                 color="error"
-                variant="display1"
+                variant="h4"
 >
                 Ocorreu um erro inesperado
 </WithStyles(Typography)>,
@@ -410,7 +432,7 @@ ShallowWrapper {
               "props": Object {
                 "children": "Ocorreu um erro inesperado",
                 "color": "error",
-                "variant": "display1",
+                "variant": "h4",
               },
               "ref": null,
               "rendered": "Ocorreu um erro inesperado",
@@ -424,17 +446,21 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "children": Array [
-                <WithStyles(DialogContentText)>
+                <WithStyles(DialogContentText)
+                  component="div"
+>
                   <WithStyles(Typography)
-                                    variant="title"
+                                    variant="h6"
                   >
                                     Aguarde alguns instantes e tente novamente.
                   </WithStyles(Typography)>
 </WithStyles(DialogContentText)>,
-                <WithStyles(DialogContentText)>
+                <WithStyles(DialogContentText)
+                  component="div"
+>
                   <WithStyles(Typography)
                                     className={undefined}
-                                    variant="subheading"
+                                    variant="subtitle1"
                   >
                                     Entre em contato através do 0800 644 1500 se o problema persistir.
                   </WithStyles(Typography)>
@@ -450,10 +476,11 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "children": <WithStyles(Typography)
-                    variant="title"
+                    variant="h6"
 >
                     Aguarde alguns instantes e tente novamente.
 </WithStyles(Typography)>,
+                  "component": "div",
                 },
                 "ref": null,
                 "rendered": Object {
@@ -462,7 +489,7 @@ ShallowWrapper {
                   "nodeType": "class",
                   "props": Object {
                     "children": "Aguarde alguns instantes e tente novamente.",
-                    "variant": "title",
+                    "variant": "h6",
                   },
                   "ref": null,
                   "rendered": "Aguarde alguns instantes e tente novamente.",
@@ -477,10 +504,11 @@ ShallowWrapper {
                 "props": Object {
                   "children": <WithStyles(Typography)
                     className={undefined}
-                    variant="subheading"
+                    variant="subtitle1"
 >
                     Entre em contato através do 0800 644 1500 se o problema persistir.
 </WithStyles(Typography)>,
+                  "component": "div",
                 },
                 "ref": null,
                 "rendered": Object {
@@ -490,7 +518,7 @@ ShallowWrapper {
                   "props": Object {
                     "children": "Entre em contato através do 0800 644 1500 se o problema persistir.",
                     "className": undefined,
-                    "variant": "subheading",
+                    "variant": "subtitle1",
                   },
                   "ref": null,
                   "rendered": "Entre em contato através do 0800 644 1500 se o problema persistir.",
@@ -542,6 +570,16 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
   },
