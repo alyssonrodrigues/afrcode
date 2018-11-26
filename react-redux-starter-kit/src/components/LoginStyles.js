@@ -2,10 +2,7 @@ import blue from '@material-ui/core/colors/blue'
 
 export default {
   card: {
-    minWidth: 500,
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%)'
+    minWidth: 500
   },
   title: {
     marginBottom: 16,
