@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
+import Portal from '@material-ui/core/Portal'
 
 import styles from './AppStyles'
 import AppToolbar from './AppToolbar'
@@ -63,7 +64,9 @@ class App extends Component {
             [classes.contentShiftLeft]: !noAppToolbar && mainMenuOpen})}>
           {!noAppToolbar && (<div className={classes.drawerHeader} />)}
           {children}
-          <MessagesBar />
+          <Portal>
+            <MessagesBar />
+          </Portal>
           <ProgressDialog />
         </main>
       </div>
