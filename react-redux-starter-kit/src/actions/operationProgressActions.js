@@ -3,18 +3,12 @@ export const OPERATION_ENDED = '@operationProgressActions/OPERATION_ENDED'
 
 export const startOperationProgress = () => {
   return {
-    type: OPERATION_STARTED,
-    payload: {
-      operationInProgress: true
-    }
+    type: OPERATION_STARTED
   }
 }
 
 export const endOperationProgress = () => {
   return {
-    type: OPERATION_ENDED,
-    payload: {
-      operationInProgress: false
-    }
+    type: OPERATION_ENDED
   }
 }
