@@ -1,4 +1,5 @@
 import { OPERATION_STARTED, OPERATION_ENDED } from '../actions/operationProgressActions'
+import { USER_LOGOUT } from '../actions/authenticationJwtActions'
 
 const INITIAL_STATE = { numOperationsInProgress: 0, operationInProgress: false }
 
@@ -18,6 +19,8 @@ export default (state = INITIAL_STATE, action) => {
         operationInProgress: Boolean(numOperationsInProgress)
       }
     }
+    case USER_LOGOUT:
+      return INITIAL_STATE
     default:
       return state
   }
