@@ -75,8 +75,8 @@ class Login extends Component {
 
 const materialUIEnhance = withStyles(styles)(Login)
 
+const reduxFormEnhance = reduxForm({ form: 'LoginForm' })(materialUIEnhance)
+
 const mapStateToProps = ({ authentication }) => ({ authentication })
 
-const reduxEnhance = connect(mapStateToProps, { authenticateUser })(materialUIEnhance)
-
-export default reduxForm({ form: 'LoginForm' })(reduxEnhance)
+export default connect(mapStateToProps, { authenticateUser })(reduxFormEnhance)
