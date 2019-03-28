@@ -29,9 +29,9 @@ export const MessagesBar = props => {
           key='close'
           aria-label='Close'
           color='inherit'
-          className={classes.close}
+          style={{padding: 8}}
           onClick={props.dismissMessage}>
-          <CloseIcon />
+          <CloseIcon className={classes.close} />
         </IconButton>
       ]}
     />

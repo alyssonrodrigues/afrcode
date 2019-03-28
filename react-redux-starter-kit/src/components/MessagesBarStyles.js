@@ -5,8 +5,8 @@ import lightGreen from '@material-ui/core/colors/lightGreen'
 
 export default theme => ({
   close: {
-    width: theme.spacing.unit * 4,
-    height: theme.spacing.unit * 4
+    width: theme.spacing.unit * 2.5,
+    height: theme.spacing.unit * 2.5
   },
   error: {
     color: red[500]
