@@ -25,14 +25,26 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
+      "ContentProps": Object {
+        "elevation": 6,
+        "style": Object {
+          "backgroundColor": "#42a5f5",
+        },
+      },
       "action": Array [
         <WithStyles(IconButton)
           aria-label="Close"
-          className={undefined}
           color="inherit"
           onClick={[Function]}
+          style={
+                    Object {
+                              "padding": 8,
+                            }
+          }
 >
-          <pure(CloseIcon) />
+          <pure(CloseIcon)
+                    className={undefined}
+          />
 </WithStyles(IconButton)>,
       ],
       "anchorOrigin": Object {
@@ -41,7 +53,6 @@ ShallowWrapper {
       },
       "autoHideDuration": 6000,
       "message": <span
-        className={undefined}
         id="message-id"
 />,
       "onClose": [Function],
@@ -57,14 +68,26 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
+        "ContentProps": Object {
+          "elevation": 6,
+          "style": Object {
+            "backgroundColor": "#42a5f5",
+          },
+        },
         "action": Array [
           <WithStyles(IconButton)
             aria-label="Close"
-            className={undefined}
             color="inherit"
             onClick={[Function]}
+            style={
+                        Object {
+                                    "padding": 8,
+                                  }
+            }
 >
-            <pure(CloseIcon) />
+            <pure(CloseIcon)
+                        className={undefined}
+            />
 </WithStyles(IconButton)>,
         ],
         "anchorOrigin": Object {
@@ -73,7 +96,6 @@ ShallowWrapper {
         },
         "autoHideDuration": 6000,
         "message": <span
-          className={undefined}
           id="message-id"
 />,
         "onClose": [Function],
