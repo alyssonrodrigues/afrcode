@@ -13,7 +13,7 @@ export default (state = INITIAL_STATE, action) => {
       }
     }
     case OPERATION_ENDED: {
-      const numOperationsInProgress = state.numOperationsInProgress - 1
+      const numOperationsInProgress = state.numOperationsInProgress > 0 ? state.numOperationsInProgress - 1 : state.numOperationsInProgress
       return {
         numOperationsInProgress,
         operationInProgress: Boolean(numOperationsInProgress)
