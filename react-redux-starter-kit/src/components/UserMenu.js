@@ -15,8 +15,7 @@ import styles from './UserMenuStyles'
 
 export class UserMenu extends Component {
   handleUserLogout () {
-    const { handleUserMenuClose, handleMainMenuClose } = this.props
-    handleMainMenuClose()
+    const { handleUserMenuClose } = this.props
     handleUserMenuClose('/logout')
   }
 

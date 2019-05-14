@@ -37,7 +37,7 @@ export class AppMenu extends Component {
     const {
       classes,
       theme,
-      mainMenuOpen,
+      mainMenu: { mainMenuOpen },
       handleMainMenuClose
     } = this.props
     return (
@@ -61,6 +61,6 @@ export class AppMenu extends Component {
 
 const materialUIEnhanced = withStyles(styles, { withTheme: true })(AppMenu)
 
-const mapStateToProps = ({ authentication }) => ({ authentication })
+const mapStateToProps = ({ authentication, mainMenu }) => ({ authentication, mainMenu })
 
 export default connect(mapStateToProps)(materialUIEnhanced)

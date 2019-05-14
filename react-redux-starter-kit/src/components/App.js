@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
@@ -8,12 +9,12 @@ import styles from './AppStyles'
 import AppToolbar from './AppToolbar'
 import MessagesBar from './MessagesBar'
 import ProgressDialog from './ProgressDialog'
+import { openMenu, closeMenu } from '../actions/mainMenuActions'
 
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      mainMenuOpen: false,
       userMenuAnchorEl: null
     }
     this.redirect = this.redirect.bind(this)
@@ -37,21 +38,22 @@ class App extends Component {
   }
 
   handleMainMenuOpen () {
+    this.props.openMenu()
     this.setState({ mainMenuOpen: true })
   }
 
   handleMainMenuClose (path) {
+    this.props.closeMenu()
     this.setState({ mainMenuOpen: false })
     this.redirect(path)
   }
 
   render () {
-    const { classes, children, noAppToolbar } = this.props
-    const { mainMenuOpen, userMenuAnchorEl } = this.state
+    const { classes, children, noAppToolbar, mainMenu: { mainMenuOpen } } = this.props
+    const { userMenuAnchorEl } = this.state
     return (
       <div className={classes.appFrame}>
         {!noAppToolbar && (<AppToolbar
-          mainMenuOpen={mainMenuOpen}
           handleMainMenuOpen={this.handleMainMenuOpen}
           handleMainMenuClose={this.handleMainMenuClose}
           userMenuAnchorEl={userMenuAnchorEl}
@@ -74,6 +76,10 @@ class App extends Component {
   }
 }
 
-const materialUIEnhance = withStyles(styles)(App)
+const materialUIEnhanced = withStyles(styles)(App)
 
-export default withRouter(materialUIEnhance)
+const mapStateToProps = ({ mainMenu }) => ({ mainMenu })
+
+const reduxEnhanced = connect(mapStateToProps, { openMenu, closeMenu })(materialUIEnhanced)
+
+export default withRouter(reduxEnhanced)

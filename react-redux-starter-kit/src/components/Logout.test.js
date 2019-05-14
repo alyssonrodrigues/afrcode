@@ -10,6 +10,7 @@ describe('<Logout />', () => {
   it('Action @authenticationJwtActions/USER_LOGOUT deveria ter ocorrido sem falhas!', () => {
     const store = mockReduxStore({
       operationProgress: { operationInProgress: false },
+      mainMenu: {},
       messages: {}
     })
     const logoutWrapper = mount(

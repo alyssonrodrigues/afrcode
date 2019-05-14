@@ -25,7 +25,7 @@ class AppToolbar extends Component {
   }
 
   renderMainMenuIconButton () {
-    const { classes, mainMenuOpen, handleMainMenuOpen } = this.props
+    const { classes, mainMenu: { mainMenuOpen }, handleMainMenuOpen } = this.props
     return (
       <IconButton color='inherit' aria-label='open drawer' onClick={handleMainMenuOpen}
         className={classNames(classes.menuButton, mainMenuOpen && classes.hide)}>
@@ -39,8 +39,7 @@ class AppToolbar extends Component {
       authentication,
       userMenuAnchorEl,
       handleUserMenuOpen,
-      handleUserMenuClose,
-      handleMainMenuClose
+      handleUserMenuClose
     } = this.props
     return authentication && authentication.isUserAuthenticated && (
       <Grid container justify='space-between' alignItems='center'>
@@ -61,8 +60,7 @@ class AppToolbar extends Component {
               <UserMenu
                 userMenuAnchorEl={userMenuAnchorEl}
                 handleUserMenuOpen={handleUserMenuOpen}
-                handleUserMenuClose={handleUserMenuClose}
-                handleMainMenuClose={handleMainMenuClose} />
+                handleUserMenuClose={handleUserMenuClose} />
             </Grid>
           </Grid>
         </Grid>
@@ -74,7 +72,7 @@ class AppToolbar extends Component {
     const {
       classes,
       authentication,
-      mainMenuOpen,
+      mainMenu: { mainMenuOpen },
       handleMainMenuClose
     } = this.props
     return (
@@ -88,9 +86,7 @@ class AppToolbar extends Component {
             </Toolbar>
           )) || (<div />)}
         </AppBar>
-        <AppMenu
-          mainMenuOpen={mainMenuOpen}
-          handleMainMenuClose={handleMainMenuClose} />
+        <AppMenu handleMainMenuClose={handleMainMenuClose} />
       </React.Fragment>
     )
   }
@@ -98,6 +94,6 @@ class AppToolbar extends Component {
 
 const materialUIEnhanced = withStyles(styles)(AppToolbar)
 
-const mapStateToProps = ({ authentication }) => ({ authentication })
+const mapStateToProps = ({ authentication, mainMenu }) => ({ authentication, mainMenu })
 
 export default connect(mapStateToProps)(materialUIEnhanced)

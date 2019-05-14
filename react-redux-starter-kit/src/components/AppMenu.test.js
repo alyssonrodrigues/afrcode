@@ -8,7 +8,7 @@ describe('AppMenu', () => {
     const componentWrapper = shallow(
       <AppMenu classes={{}} theme={{}}
         authentication={{isUserAuthenticated: true}}
-        mainMenuOpen={jest.fn()} handleMainMenuClose={jest.fn()} />
+        mainMenu={{}} handleMainMenuClose={jest.fn()} />
     )
     expect(componentWrapper).toMatchSnapshot()
   })

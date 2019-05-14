@@ -11,7 +11,7 @@ ShallowWrapper {
     }
     classes={Object {}}
     handleMainMenuClose={[Function]}
-    mainMenuOpen={[Function]}
+    mainMenu={Object {}}
     theme={Object {}}
 />,
   Symbol(enzyme.__renderer__): Object {
@@ -90,7 +90,7 @@ ShallowWrapper {
       "classes": Object {
         "paper": undefined,
       },
-      "open": [Function],
+      "open": undefined,
       "variant": "persistent",
     },
     "ref": null,
@@ -415,7 +415,7 @@ ShallowWrapper {
         "classes": Object {
           "paper": undefined,
         },
-        "open": [Function],
+        "open": undefined,
         "variant": "persistent",
       },
       "ref": null,

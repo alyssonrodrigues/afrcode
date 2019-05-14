@@ -14,6 +14,7 @@ describe('<Login />', () => {
     const store = mockReduxStore({
       authentication: { isUserAuthenticated: false },
       operationProgress: { operationInProgress: false },
+      mainMenu: {},
       messages: {}
     })
     const tree = mount(
