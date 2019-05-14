@@ -7,7 +7,7 @@ import { Field } from 'redux-form'
 import { MuiThemeProvider } from '@material-ui/core'
 
 import Login from './Login'
-import { theme } from '../RootStyles'
+import { configTheme } from '../RootStyles'
 
 describe('<Login />', () => {
   it('Login snapshot deveria ocorrer sem falhas!', () => {
@@ -18,7 +18,7 @@ describe('<Login />', () => {
       messages: {}
     })
     const tree = mount(
-      <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={configTheme({})}>
         <Provider store={store}>
           <MemoryRouter>
             <Login location={{}} />

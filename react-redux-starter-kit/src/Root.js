@@ -7,10 +7,10 @@ import { MuiThemeProvider, withStyles } from '@material-ui/core/styles'
 import AppRoutes from './routes/AppRoutes'
 import ErrorBoundary from './components/ErrorBoundary'
 import store from './store/configureStore'
-import styles, { theme } from './RootStyles'
+import styles, { configTheme } from './RootStyles'
 
 export const Root = props => (
-  <MuiThemeProvider theme={theme}>
+  <MuiThemeProvider theme={configTheme(props.theme)}>
     <div className={props.classes.root}>
       <CssBaseline />
       <ErrorBoundary>
@@ -24,4 +24,4 @@ export const Root = props => (
   </MuiThemeProvider>
 )
 
-export default withStyles(styles)(Root)
+export default withStyles(styles, { withTheme: true })(Root)

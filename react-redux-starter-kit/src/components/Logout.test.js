@@ -3,7 +3,7 @@ import { mount, shallow } from 'enzyme'
 import Logout, { Logout as LogoutUnitTest } from './Logout'
 import { Provider } from 'react-redux'
 import { MemoryRouter, Redirect } from 'react-router-dom'
-import { theme } from '../RootStyles'
+import { configTheme } from '../RootStyles'
 import { MuiThemeProvider } from '@material-ui/core'
 
 describe('<Logout />', () => {
@@ -14,7 +14,7 @@ describe('<Logout />', () => {
       messages: {}
     })
     const logoutWrapper = mount(
-      <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={configTheme()}>
         <Provider store={store}>
           <MemoryRouter>
             <Logout />
