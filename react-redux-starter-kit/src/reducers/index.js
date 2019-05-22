@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-import { reducer as formReducer } from 'redux-form'
 
 import messages from './messagesReducer'
 import authentication from './authenticationJwtReducer'
@@ -11,8 +10,7 @@ const rootReducer = combineReducers({
   messages,
   authentication,
   operationProgress,
-  mainMenu,
-  form: formReducer // forms reducer, necessário para integração com o Redux form...
+  mainMenu
 })
 
 export default rootReducer

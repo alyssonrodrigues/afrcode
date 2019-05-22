@@ -3,11 +3,11 @@ import { mount } from 'enzyme'
 import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 import Card from '@material-ui/core/Card'
-import { Field } from 'redux-form'
+import { Field } from 'react-final-form'
 import { MuiThemeProvider } from '@material-ui/core'
 
-import Login from './Login'
 import { configTheme } from '../RootStyles'
+import Login from './Login'
 
 describe('<Login />', () => {
   it('Login snapshot deveria ocorrer sem falhas!', () => {
