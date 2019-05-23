@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Form } from 'react-final-form'
+import { Form, Field } from 'react-final-form'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
+import { TextField } from 'final-form-material-ui'
 import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -16,7 +16,6 @@ import { createDataToAuthentication } from '../util/applicationContext'
 import { required } from '../util/fieldLevelValidations'
 import styles from './LoginStyles'
 import App from './App'
-import InputField from './util/InputField'
 
 class Login extends Component {
   onSubmit (values) {
@@ -33,22 +32,18 @@ class Login extends Component {
               <Icon className={classes.icon}>account_circle</Icon>
             </Grid>
             <CardContent>
-              <InputField
-                fieldProps={{
-                  name: 'username',
-                  validate: required
-                }}
+              <Field
+                name='username'
+                validate={required}
                 component={TextField}
                 className={classes.loginForm}
                 label='Usuário'
                 type='text'
                 autoFocus
                 fullWidth />
-              <InputField
-                fieldProps={{
-                  name: 'password',
-                  validate: required
-                }}
+              <Field
+                name='password'
+                validate={required}
                 component={TextField}
                 className={classes.loginForm}
                 label='Senha'
