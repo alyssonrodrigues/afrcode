@@ -1,9 +1,11 @@
 import axios from 'axios'
 import { getAuthentication } from '../security/securityContext'
 
+export const BYPASS_AUTH_INTERCEPTOR_HEADER = { 'X-Bypass-Auth-Interceptor': true }
+
 const onFulfilled = config => {
   let auth = getAuthentication()
-  if (auth && auth.isUserAuthenticated) {
+  if (!config.headers[BYPASS_AUTH_INTERCEPTOR_HEADER] && auth && auth.isUserAuthenticated) {
     let { tokenJwt } = auth
     config.headers['Authorization'] = `Bearer ${tokenJwt}`
   }
