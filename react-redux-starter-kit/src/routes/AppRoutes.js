@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
 
 import { setBrowserHistory } from '../util/applicationContext'
@@ -31,4 +32,8 @@ class AppRoutes extends Component {
   }
 }
 
-export default withRouter(AppRoutes)
+const mapStateToProps = ({ authentication }) => ({ authentication })
+
+const reduxEnhanced = connect(mapStateToProps)(AppRoutes)
+
+export default withRouter(reduxEnhanced)
