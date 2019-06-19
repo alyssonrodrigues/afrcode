@@ -26,7 +26,7 @@ class Login extends Component {
     const { classes } = this.props
     return (
       <form onSubmit={handleSubmit}>
-        <Grid container direction='column' alignItems='center' spacing={16}>
+        <Grid container direction='column' alignItems='center' spacing={2}>
           <Card className={classes.card}>
             <Grid className={classes.titleBar} container justify='center' >
               <Icon className={classes.icon}>account_circle</Icon>

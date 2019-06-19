@@ -40,7 +40,7 @@ export default theme => ({
   ajusteBadge: {
     top: '50%',
     right: '-25%',
-    fontSize: theme.typography.body2Next.fontSize
+    fontSize: theme.typography.body1.fontSize
   },
   badgePosition: {
     transform: 'translate(-50%)'

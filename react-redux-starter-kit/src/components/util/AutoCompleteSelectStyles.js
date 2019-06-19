@@ -16,7 +16,7 @@ export default theme => ({
     alignItems: 'center'
   },
   chip: {
-    margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
+    margin: `${theme.spacing(0.5)}px ${theme.spacing(0.25)}px`
   },
   chipFocused: {
     backgroundColor: emphasize(
@@ -25,17 +25,17 @@ export default theme => ({
     )
   },
   noOptionsMessage: {
-    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
+    padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`
   },
   singleValue: {
-    fontSize: theme.typography.body2Next.fontSize
+    fontSize: theme.typography.body1.fontSize
   },
   placeholder: {
     position: 'absolute',
     left: 2,
-    fontSize: theme.typography.body2Next.fontSize
+    fontSize: theme.typography.body1.fontSize
   },
   paper: {
-    marginTop: theme.spacing.unit
+    marginTop: theme.spacing(1)
   }
 })

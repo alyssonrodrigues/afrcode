@@ -4,14 +4,11 @@ import { createMuiTheme } from '@material-ui/core/styles'
 export const configTheme = theme => createMuiTheme({
   palette: {
     primary: blue
-  },
-  typography: {
-    useNextVariants: true
   }
 })
 
 const styles = theme => ({
-  root: theme.typography.body2Next
+  root: theme.typography.body1
 })
 
 export default styles

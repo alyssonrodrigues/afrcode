@@ -1,6 +1,5 @@
 export default {
   paperClassName: {
-    borderRadius: '50%',
     outline: 'none'
   },
   backdropClassName: {
