@@ -11,7 +11,7 @@ export const USER_LOGOUT = '@authenticationJwtActions/USER_LOGOUT'
 
 export const axiosWrapper = axios
 
-const AUTH_CONFIG_HEADERS = { headers: { ...SLOW_REQUEST_HEADER, ...BYPASS_AUTH_INTERCEPTOR_HEADER } }
+const AUTH_CONFIG_HEADERS = { headers: { [SLOW_REQUEST_HEADER]: true, [BYPASS_AUTH_INTERCEPTOR_HEADER]: true } }
 
 export const authenticateUser = data => {
   return dispatch =>

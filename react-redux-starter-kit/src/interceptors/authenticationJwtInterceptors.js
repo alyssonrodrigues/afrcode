@@ -1,7 +1,13 @@
 import axios from 'axios'
 import { getAuthentication } from '../security/securityContext'
 
-export const BYPASS_AUTH_INTERCEPTOR_HEADER = { 'X-Bypass-Auth-Interceptor': true }
+export const BYPASS_AUTH_INTERCEPTOR_HEADER = 'X-Bypass-Auth-Interceptor'
+
+export const BYPASS_AUTH_INTERCEPTOR_CONFIG = {
+  headers: {
+    [BYPASS_AUTH_INTERCEPTOR_HEADER]: true
+  }
+}
 
 const onFulfilled = config => {
   let auth = getAuthentication()
