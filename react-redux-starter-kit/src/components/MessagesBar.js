@@ -33,7 +33,7 @@ export const MessagesBar = props => {
         vertical: 'bottom',
         horizontal: 'center'
       }}
-      ContentProps={{style: { backgroundColor }, elevation: open ? 6 : 0}}
+      ContentProps={{style: { backgroundColor, color: '#fff', flexWrap: 'noWrap' }, elevation: open ? 6 : 0}}
       open={open}
       autoHideDuration={6000}
       onClose={props.dismissMessage}
