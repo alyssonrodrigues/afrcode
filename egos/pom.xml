@@ -17,7 +17,7 @@
 		<springVersion>3.2.4.RELEASE</springVersion>
 		<springSecurityVersion>3.1.4.RELEASE</springSecurityVersion>
 		<hibernateVersion>4.2.5.Final</hibernateVersion>
-		<hibernateValidatorVersion>4.3.1.Final</hibernateValidatorVersion>
+		<hibernateValidatorVersion>5.3.5.Final</hibernateValidatorVersion>
 	</properties>
 
 	<dependencies>
