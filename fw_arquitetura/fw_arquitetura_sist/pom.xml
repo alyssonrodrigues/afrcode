@@ -14,7 +14,7 @@
 
 	<properties>
 		<hibernateVersion>4.2.15.Final</hibernateVersion>
-		<hibernateValidatorVersion>4.3.2.Final</hibernateValidatorVersion>
+		<hibernateValidatorVersion>5.3.5.Final</hibernateValidatorVersion>
 		<primefacesVersion>5.1</primefacesVersion>
 		<joda-time.version>2.2</joda-time.version>
 		<usertype.core.version>3.1.0.CR6</usertype.core.version>
